@@ -2,7 +2,11 @@ package com.barut.unterkontenverwaltung
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewAdapterMain
+import com.barut.unterkontenverwaltung.recyclerview.RecylcerViewModel
+import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 
 
 class MainActivity : AppCompatActivity() {
@@ -10,8 +14,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       val test = AlertDialogMain(this,R.layout.activity_main)
-        test.createDialog()
+
+        val inhalt = arrayListOf<RecylcerViewModel>(RecylcerViewModel("Hallo","Test"))
+        StartRecyclerView(this,findViewById(R.id.recyclerView),
+        inhalt, R.layout.test_layout)
+
 
 
     }
