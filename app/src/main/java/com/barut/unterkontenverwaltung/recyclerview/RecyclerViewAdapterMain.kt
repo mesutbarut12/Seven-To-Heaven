@@ -10,7 +10,8 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.R
 
-class RecyclerViewAdapterMain(val inhalt : ArrayList<RecylcerViewModel>,val layout : Int,val holderId : String)
+class RecyclerViewAdapterMain(val inhalt : ArrayList<RecylcerViewModel>,val layout : Int,val holderId : String,
+val recylcerView : RecyclerView)
     : RecyclerView.Adapter<RecyclerViewHolderMain>() {
 
 
@@ -23,7 +24,7 @@ class RecyclerViewAdapterMain(val inhalt : ArrayList<RecylcerViewModel>,val layo
 
     override fun onBindViewHolder(holder: RecyclerViewHolderMain, position: Int) {
 
-        RecyclerViewBinder(holder,holderId,inhalt).onStart()
+        RecyclerViewBinder(holder,holderId,inhalt,recylcerView).onStart()
 
     }
 

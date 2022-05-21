@@ -10,7 +10,7 @@ class StartRecyclerView(val context : Context,val recylcerView : RecyclerView
 
 
     init {
-        recylcerView.adapter =RecyclerViewAdapterMain(inhaltArrayList,layout,holderId)
+        recylcerView.adapter =RecyclerViewAdapterMain(inhaltArrayList,layout,holderId,recylcerView)
         recylcerView.layoutManager = LinearLayoutManager(context)
 
     }

@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         //wird seine eingaben im unterkonto oder im Einkommen sqlite datenbank gespeichert!
 
         popUpAlertDialogForSetDataInSQLite()
-        showItemsInRecyclerView()
+        showItemsInRecyclerViewClickListener()
 
 
 
@@ -74,16 +74,24 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
-    fun showItemsInRecyclerView(){
+    fun showItemsInRecyclerViewClickListener(){
         showItems.setOnClickListener {
+            showItemsInRecyclerView()
+        }
+    }
+    fun showItemsInRecyclerView(){
+
             val dataEinkommen = sqLiteMainEinkommen.readData()
             val dataUnterkonto = sqLiteMainUnterkonto.readData()
             val arraylist : ArrayList<SQLiteModel> = arrayListOf()
 
-            for((i,y) in dataEinkommen.zip(dataUnterkonto)){
-                arraylist.add(y)
+            for(i in dataEinkommen){
                 arraylist.add(i)
         }
+         for(i in dataUnterkonto){
+                arraylist.add(i)
+        }
+
 
             val showItems = ShowItems(this, recyclerView, arraylist)
             showItems.transformSqlToRecyclerModel()
@@ -91,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        }
+
     }
     fun initAllViews(){
         add  =  findViewById(R.id.addItem)
@@ -103,6 +111,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
 
     }
+
 
 
 }

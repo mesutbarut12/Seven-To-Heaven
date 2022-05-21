@@ -14,10 +14,12 @@ class RecyclerViewHolderMain(itemView : View,val id : String) : RecyclerView.Vie
 
         if(id == "ShowItems"){
             val image : ImageView = itemView.findViewById(R.id.iVShowList)
+            val ivDelete : ImageView = itemView.findViewById(R.id.ivDelete)
             val tvspaltenname1 : TextView = itemView.findViewById(R.id.tvShowListSpaltenName1)
             val tvspaltenname2 : TextView = itemView.findViewById(R.id.tvShowListSpaltenName2)
             val tvEchtzeitDatum : TextView = itemView.findViewById(R.id.tvShowListEchtzeitDatum)
             arraylistView.add(image)
+            arraylistView.add(ivDelete)
             arraylistView.add(tvspaltenname1)
             arraylistView.add(tvspaltenname2)
             arraylistView.add(tvEchtzeitDatum)
