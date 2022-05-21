@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         showItemsInRecyclerView()
 
 
+        
 
     }
 
@@ -97,9 +98,9 @@ class MainActivity : AppCompatActivity() {
         add  =  findViewById(R.id.addItem)
         showItems  =  findViewById(R.id.showList)
         sqLiteMainEinkommen = SQLiteMain(this@MainActivity,"Einkommen","Einkommen",
-            "unterkonto","datum","EchtZeitDatum","id")
+            "unterkonto","datum","echtZeitDatum","databaseType","id")
         sqLiteMainUnterkonto = SQLiteMain(this@MainActivity,"Unterkonto","Unterkonto",
-            "name","prozent","Datum","id")
+            "name","prozent","datum","databaseType","id")
         recyclerView = findViewById(R.id.recyclerView)
 
     }

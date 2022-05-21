@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
 
 class SQLiteMain(val context : Context,val DATABASENAME : String,
-                 val TABLENAME : String, val spaltenName1 : String, val spaltenName2 : String,val echtZeitDatum : String,val id : String) : SQLiteOpenHelper(context,DATABASENAME,null,2) {
+                 val TABLENAME : String, val spaltenName1 : String, val spaltenName2 : String,
+                 val echtZeitDatum : String,val databaseType : String,val id : String)
+    : SQLiteOpenHelper(context,DATABASENAME,null,2) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         val createTable = "CREATE TABLE " + TABLENAME +
@@ -16,7 +18,8 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
                 id + " INTEGER PRIMARY KEY," +
                 spaltenName1 + " VARCHAR "  + "," +
                 spaltenName2 + " VARCHAR " + "," +
-                echtZeitDatum + " VARCHAR" +
+                echtZeitDatum + " VARCHAR " + "," +
+                databaseType + " VARCHAR" +
                 ")"
         db?.execSQL(createTable)
     }
@@ -33,6 +36,7 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
         contenValue.put(spaltenName1, model.spaltenName1)
         contenValue.put(spaltenName2, model.spaltenName2)
         contenValue.put(echtZeitDatum,model.echtZeitDatum)
+        contenValue.put(databaseType,model.databaseTyp)
         db.insert(TABLENAME,null,contenValue)
     }
 
@@ -49,7 +53,9 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
         if(cursor.moveToFirst()){
             do {
                 model = SQLiteModel(cursor.getString(cursor.getColumnIndex(spaltenName1)),
-                    cursor.getString(cursor.getColumnIndex(spaltenName2)),cursor.getString(cursor.getColumnIndex(echtZeitDatum)),"")
+                    cursor.getString(cursor.getColumnIndex(spaltenName2)),
+                    cursor.getString(cursor.getColumnIndex(echtZeitDatum)),
+                    cursor.getString(cursor.getColumnIndex(databaseType)))
                 arraylist.add(model)
             }while (cursor.moveToNext())
         }
