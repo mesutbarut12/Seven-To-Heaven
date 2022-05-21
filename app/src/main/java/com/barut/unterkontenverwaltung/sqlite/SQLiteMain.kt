@@ -47,7 +47,7 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
         if(cursor.moveToFirst()){
             do {
                 model = SQLiteModel(cursor.getString(cursor.getColumnIndex(spaltenName1)),
-                    cursor.getString(cursor.getColumnIndex(spaltenName2)))
+                    cursor.getString(cursor.getColumnIndex(spaltenName2)),"")
                 arraylist.add(model)
             }while (cursor.moveToNext())
         }

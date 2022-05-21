@@ -15,7 +15,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class MainActivity : AppCompatActivity() {
 
     private lateinit var add : FloatingActionButton
-    private lateinit var sqLiteMain: SQLiteMain
+    private lateinit var sqLiteMainEinkommen: SQLiteMain
+    private lateinit var sqLiteMainUnterkonto: SQLiteMain
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +31,12 @@ class MainActivity : AppCompatActivity() {
            override fun getClick(klick: Int, view: View) {
                 SetItem(klick,this@MainActivity,view).getData(object : GetData{
                     override fun getData(model: SQLiteModel) {
-                        
+                        if(model.databaseTyp == "Unterkonto"){
+                            sqLiteMainUnterkonto.setData(model)
+                        } else {
+                            sqLiteMainEinkommen.setData(model)
+                        }
+
                     }
                 })
 
@@ -43,8 +49,10 @@ class MainActivity : AppCompatActivity() {
 
     fun initAllViews(){
         add  =  findViewById(R.id.addItem)
-        sqLiteMain = SQLiteMain(this@MainActivity,"des","test",
-            "unterkonto","einnahme","id")
+        sqLiteMainEinkommen = SQLiteMain(this@MainActivity,"Einkommen","Einkommen",
+            "unterkonto","datum","id")
+        sqLiteMainUnterkonto = SQLiteMain(this@MainActivity,"Unterkonto","Unterkonto",
+            "name","prozent","id")
 
     }
 

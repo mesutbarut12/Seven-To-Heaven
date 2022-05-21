@@ -20,7 +20,7 @@ class SetItem(val klick : Int,val context : Context,val view : View)
 
 
     fun getData(getData: GetData) {
-
+        var databaseTyp = ""
 
 
         if(klick == 1){
@@ -29,6 +29,7 @@ class SetItem(val klick : Int,val context : Context,val view : View)
             input1.setHint("bitte Einnahme eingeben!")
             tvDescription2.setText("Datum : ")
             input2.setHint("bitte Datum eingeben!")
+            databaseTyp = "Einnahme"
 
         } else if(klick == 2){
 
@@ -36,6 +37,7 @@ class SetItem(val klick : Int,val context : Context,val view : View)
             input1.setHint("bitte Unterkonto eingeben!")
             tvDescription2.setText("Prozent : ")
             input2.setHint("bitte Prozent eingeben!")
+            databaseTyp = "Unterkonto"
 
         }else {
             Toast.makeText(context,"Fehler beim Laden",Toast.LENGTH_LONG).show()
@@ -46,7 +48,8 @@ class SetItem(val klick : Int,val context : Context,val view : View)
             if(input1.text.isEmpty() || input2.text.isEmpty()){
                 Toast.makeText(context,"Lasse kein Feld leer stehen",Toast.LENGTH_LONG).show()
             } else {
-                model = SQLiteModel(input1.text.toString(),input2.text.toString())
+                model = SQLiteModel(input1.text.toString(),input2.text.toString(),databaseTyp)
+                Toast.makeText(context,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
                 getData.getData(model)
             }
         }
