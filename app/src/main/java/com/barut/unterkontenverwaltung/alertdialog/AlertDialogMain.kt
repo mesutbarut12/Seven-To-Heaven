@@ -10,14 +10,14 @@ class AlertDialogMain(val context: Context, val layout : Int) {
     private lateinit var build : AlertDialog.Builder
     private lateinit var created : AlertDialog
 
-    private fun setLayout() : View {
+     fun setLayout() : View {
         val view = LayoutInflater.from(context).inflate(layout,null)
         build = AlertDialog.Builder(context)
         build.setView(view)
         return view
     }
     fun createDialog(){
-        setLayout()
+
         created = build.create()
         created.show()
     }

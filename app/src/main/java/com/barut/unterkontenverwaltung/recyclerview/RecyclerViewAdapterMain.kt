@@ -18,7 +18,8 @@ class RecyclerViewAdapterMain(val inhalt : ArrayList<RecylcerViewModel>,val layo
     }
 
     override fun onBindViewHolder(holder: RecyclerViewHolderMain, position: Int) {
-
+        val test = holder.differntHolder()!!.get(0) as TextView
+        test.setText(inhalt.get(position).spaltenName1Inhalt)
     }
 
     override fun getItemCount(): Int {
