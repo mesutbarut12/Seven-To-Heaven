@@ -75,10 +75,22 @@ class MainActivity : AppCompatActivity() {
     }
     fun showItemsInRecyclerView(){
         showItems.setOnClickListener {
-            val data = sqLiteMainEinkommen.readData()
-            val showItems = ShowItems(this, recyclerView, data)
+            val dataEinkommen = sqLiteMainEinkommen.readData()
+            val dataUnterkonto = sqLiteMainUnterkonto.readData()
+            val arraylist : ArrayList<SQLiteModel> = arrayListOf()
+
+            for((i,y) in dataEinkommen.zip(dataUnterkonto)){
+                arraylist.add(y)
+                println(y.databaseTyp == "")
+                arraylist.add(i)
+        }
+
+            val showItems = ShowItems(this, recyclerView, arraylist)
             showItems.transformSqlToRecyclerModel()
             showItems.showItems()
+
+
+
         }
     }
     fun initAllViews(){
