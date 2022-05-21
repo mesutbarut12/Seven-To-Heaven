@@ -15,7 +15,11 @@ class RecyclerViewBinder(val holder : RecyclerViewHolderMain,val id : String,val
                 val tvspaltenname1 = showlist!!.get(1) as TextView
                 val tvspaltenname2 = showlist!!.get(2) as TextView
                 val echtzeitDatum = showlist!!.get(3) as TextView
-                image.setImageResource(R.drawable.ic_money)
+                if(inhalt.get(holder.adapterPosition).databaseType == "Unterkonto"){
+                    image.setImageResource(R.drawable.ic_unterkonto)
+                } else {
+                    image.setImageResource(R.drawable.ic_money)
+                }
                 tvspaltenname1.setText(inhalt.get(holder.adapterPosition).spaltenName1Inhalt)
                 tvspaltenname2.setText(inhalt.get(holder.adapterPosition).spaltenName2Inhalt)
                 echtzeitDatum.setText(inhalt.get(holder.adapterPosition).date)

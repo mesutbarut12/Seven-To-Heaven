@@ -17,7 +17,7 @@ class ShowItems(private val context : Context,private val recylcerView : Recycle
          inhalt = arrayListOf()
 
         for(i in inhaltSql){
-            model = RecylcerViewModel(i.spaltenName1,i.spaltenName2,i.echtZeitDatum)
+            model = RecylcerViewModel(i.spaltenName1,i.spaltenName2,i.echtZeitDatum,i.databaseTyp)
             inhalt.add(model)
         }
     }

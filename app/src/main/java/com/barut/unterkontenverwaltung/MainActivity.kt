@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         showItemsInRecyclerView()
 
 
-        
+
 
     }
 
@@ -82,7 +82,6 @@ class MainActivity : AppCompatActivity() {
 
             for((i,y) in dataEinkommen.zip(dataUnterkonto)){
                 arraylist.add(y)
-                println(y.databaseTyp == "")
                 arraylist.add(i)
         }
 
