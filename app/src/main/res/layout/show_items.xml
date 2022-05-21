@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iVShowList"
+        android:layout_width="67dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_unterkonto" />
+
+    <TextView
+        android:id="@+id/tvShowListSpaltenName1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Unterkontenname  : "
+        app:layout_constraintBottom_toBottomOf="@+id/iVShowList"
+        app:layout_constraintStart_toEndOf="@+id/iVShowList"
+        app:layout_constraintTop_toTopOf="@+id/iVShowList"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvShowListSpaltenName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Unterkontenprozent : "
+        app:layout_constraintBottom_toBottomOf="@+id/iVShowList"
+        app:layout_constraintStart_toEndOf="@+id/iVShowList"
+        app:layout_constraintTop_toTopOf="@+id/iVShowList"
+        app:layout_constraintVertical_bias="0.40" />
+
+    <TextView
+        android:id="@+id/tvShowListEchtzeitDatum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="TextView"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iVShowList"
+        app:layout_constraintStart_toEndOf="@+id/iVShowList"
+        app:layout_constraintTop_toTopOf="@+id/iVShowList"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iVShowList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvShowListSpaltenName2"
+        app:layout_constraintTop_toTopOf="@+id/iVShowList"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_delete" />
+</androidx.constraintlayout.widget.ConstraintLayout>

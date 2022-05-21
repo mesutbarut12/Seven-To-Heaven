@@ -45,13 +45,13 @@ class PopupAlertDialogForCreateItem(private val context : Context, val add : Flo
             val addItem = AlertDialogMain(context,R.layout.add_item)
             val view = addItem.setLayout()
             addItem.createDialog()
-            getclick.getClick(1, view)
+            getclick.getClick(1, view,addItem)
         }
         btUnterkonto.setOnClickListener {
             val addItem = AlertDialogMain(context,R.layout.add_item)
             val view = addItem.setLayout()
             addItem.createDialog()
-            getclick.getClick(2,view)
+            getclick.getClick(2,view,addItem)
         }
 
     }

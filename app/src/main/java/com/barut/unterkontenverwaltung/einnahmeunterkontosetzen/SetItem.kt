@@ -8,6 +8,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.sqlite.SQLiteModel
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SetItem(val klick : Int,val context : Context,val view : View)
 {
@@ -17,6 +20,7 @@ class SetItem(val klick : Int,val context : Context,val view : View)
     private val input2 : EditText = view.findViewById(R.id.etInput2)
     private val safe : Button = view.findViewById(R.id.btSaveItems)
     private lateinit var model : SQLiteModel
+
 
 
     fun getData(getData: GetData) {
@@ -43,13 +47,14 @@ class SetItem(val klick : Int,val context : Context,val view : View)
             Toast.makeText(context,"Fehler beim Laden",Toast.LENGTH_LONG).show()
         }
 
+        val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd ")
+        val date = Date()
 
         safe.setOnClickListener{
             if(input1.text.isEmpty() || input2.text.isEmpty()){
                 Toast.makeText(context,"Lasse kein Feld leer stehen",Toast.LENGTH_LONG).show()
             } else {
-                model = SQLiteModel(input1.text.toString(),input2.text.toString(),databaseTyp)
-                Toast.makeText(context,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
+                model = SQLiteModel(input1.text.toString(),input2.text.toString(),"Tag der erstellung ${dateFormat.format(date)}",databaseTyp)
                 getData.getData(model)
             }
         }
