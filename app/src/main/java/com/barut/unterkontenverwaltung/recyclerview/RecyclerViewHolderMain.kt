@@ -24,6 +24,10 @@ class RecyclerViewHolderMain(itemView : View,val id : String) : RecyclerView.Vie
             arraylistView.add(tvspaltenname2)
             arraylistView.add(tvEchtzeitDatum)
             return arraylistView
+        } else if (id == "ShowExistingUnterkontenItems") {
+            val tv : TextView = itemView.findViewById(R.id.tv)
+            arraylistView.add(tv)
+            return arraylistView
         } else {
             Toast.makeText(itemView.context,"Fehler beim Laden", Toast.LENGTH_LONG).show()
             return null

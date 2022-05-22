@@ -13,6 +13,7 @@ import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.TransferDataFrom
 import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.PopupAlertDialogForCreateItem
 import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.SetItem
 import com.barut.unterkontenverwaltung.recyclerview.RecylcerViewModel
+import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerView
 import com.barut.unterkontenverwaltung.showitems.ShowItems
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 import com.barut.unterkontenverwaltung.sqlite.SQLiteModel
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         popUpAlertDialogForSetDataInSQLite()
         showItemsInRecyclerViewClickListener()
+
 
 
 
@@ -122,6 +124,7 @@ class MainActivity : AppCompatActivity() {
             "unterkonto","ausgabe","datum","databaseType","id")
 
         recyclerView = findViewById(R.id.recyclerView)
+
 
     }
 

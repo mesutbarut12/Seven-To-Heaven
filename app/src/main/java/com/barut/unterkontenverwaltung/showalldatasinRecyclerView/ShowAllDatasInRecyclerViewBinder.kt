@@ -1,18 +1,19 @@
-package com.barut.unterkontenverwaltung.recyclerview
+package com.barut.unterkontenverwaltung.showalldatasinRecyclerView
 
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.barut.unterkontenverwaltung.MainActivity
 import com.barut.unterkontenverwaltung.R
+import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
+import com.barut.unterkontenverwaltung.recyclerview.RecylcerViewModel
 import com.barut.unterkontenverwaltung.showitems.ShowItems
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 import com.barut.unterkontenverwaltung.sqlite.SQLiteModel
 
-class RecyclerViewBinder(val holder : RecyclerViewHolderMain,val id : String,
-                         val inhalt : ArrayList<RecylcerViewModel>,
-                        val recyclerView : RecyclerView) {
+class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val id : String,
+                                       val inhalt : ArrayList<RecylcerViewModel>,
+                                       val recyclerView : RecyclerView) {
     val sqLiteMainEinkommen = SQLiteMain(holder.itemView.context,"Einkommen","Einkommen",
     "unterkonto","datum","echtZeitDatum","databaseType","id")
     val sqLiteMainUnterkonto = SQLiteMain(holder.itemView.context,"Unterkonto","Unterkonto",

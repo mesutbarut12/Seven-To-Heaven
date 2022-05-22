@@ -1,14 +1,10 @@
 package com.barut.unterkontenverwaltung.recyclerview
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.barut.unterkontenverwaltung.R
+import com.barut.unterkontenverwaltung.showalldatasinRecyclerView.ShowAllDatasInRecyclerViewBinder
+import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerViewBinder
 
 class RecyclerViewAdapterMain(val inhalt : ArrayList<RecylcerViewModel>,val layout : Int,val holderId : String,
 val recylcerView : RecyclerView)
@@ -24,8 +20,8 @@ val recylcerView : RecyclerView)
 
     override fun onBindViewHolder(holder: RecyclerViewHolderMain, position: Int) {
 
-        RecyclerViewBinder(holder,holderId,inhalt,recylcerView).onStart()
-
+        ShowAllDatasInRecyclerViewBinder(holder,holderId,inhalt,recylcerView).onStart()
+        ShowExistingUnterkontenInRecyclerViewBinder(holder,holderId,inhalt,recylcerView).onStart()
     }
 
     override fun getItemCount(): Int {

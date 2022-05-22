@@ -6,7 +6,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.R
+import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
+import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerView
 import com.barut.unterkontenverwaltung.sqlite.SQLiteModel
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -49,6 +52,7 @@ class SetItem(val klick : Int,val context : Context,val view : View)
             tvDescription2.setText("Unterkonto : ")
             input2.setHint("bitte Unterkonto eingeben!")
             databaseTyp = "Ausgabe"
+            popUpNewAlertDialogForShowAllUnterkonten()
         } else {
             Toast.makeText(context,"Fehler beim Laden",Toast.LENGTH_LONG).show()
         }
@@ -60,14 +64,30 @@ class SetItem(val klick : Int,val context : Context,val view : View)
             if(input1.text.isEmpty() || input2.text.isEmpty()){
                 Toast.makeText(context,"Lasse kein Feld leer stehen",Toast.LENGTH_LONG).show()
             } else {
+
                 model = SQLiteModel(input1.text.toString(),input2.text.toString(),"Tag der erstellung ${dateFormat.format(date)}",databaseTyp)
                 getData.getData(model)
             }
         }
 
     }
+    fun popUpNewAlertDialogForShowAllUnterkonten(){
+        if(klick == 3){
+        input2.setOnClickListener {
+            val alert = AlertDialogMain(context,R.layout.recyclerview_showallexistsunterkonten)
+            val view = alert.setLayout()
+            val recyclerView : RecyclerView = view.findViewById(R.id.rvShowAllExistingUnterkonten)
+            alert.createDialog()
+            ShowExistingUnterkontenInRecyclerView(context,recyclerView).onStart()
+
+
+        }
+    }
+    }
 
     }
+
+
 
 interface GetData{
     fun getData(model: SQLiteModel)
