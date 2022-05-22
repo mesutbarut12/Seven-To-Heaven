@@ -17,6 +17,9 @@ class RecyclerViewBinder(val holder : RecyclerViewHolderMain,val id : String,
     "unterkonto","datum","echtZeitDatum","databaseType","id")
     val sqLiteMainUnterkonto = SQLiteMain(holder.itemView.context,"Unterkonto","Unterkonto",
     "name","prozent","datum","databaseType","id")
+    val sqLiteMainAusgabe = SQLiteMain(holder.itemView.context,"Ausgabe","Ausgabe",
+    "unterkonto","ausgabe","datum","databaseType","id")
+
     fun onStart() {
         if (holder.differntHolder() != null) {
             if (id == "ShowItems") {
@@ -28,8 +31,10 @@ class RecyclerViewBinder(val holder : RecyclerViewHolderMain,val id : String,
                 val echtzeitDatum = showlist!!.get(4) as TextView
                 if(inhalt.get(holder.adapterPosition).databaseType == "Unterkonto"){
                     image.setImageResource(R.drawable.ic_unterkonto)
+                } else if(inhalt.get(holder.adapterPosition).databaseType == "Einnahme") {
+                    image.setImageResource(R.drawable.ic_input)
                 } else {
-                    image.setImageResource(R.drawable.ic_money)
+                    image.setImageResource(R.drawable.ic_output)
                 }
                 tvspaltenname1.setText(inhalt.get(holder.adapterPosition).spaltenName1Inhalt)
                 tvspaltenname2.setText(inhalt.get(holder.adapterPosition).spaltenName2Inhalt)
@@ -45,8 +50,11 @@ class RecyclerViewBinder(val holder : RecyclerViewHolderMain,val id : String,
             if(inhalt.get(holder.adapterPosition).databaseType == "Unterkonto"){
                 sqLiteMainUnterkonto.deleateItem(inhalt.get(holder.adapterPosition)
                     .spaltenName1Inhalt,inhalt.get(holder.adapterPosition).spaltenName2Inhalt)
-            } else {
+            } else if(inhalt.get(holder.adapterPosition).databaseType == "Einnahme"){
                 sqLiteMainEinkommen.deleateItem(inhalt.get(holder.adapterPosition)
+                    .spaltenName1Inhalt,inhalt.get(holder.adapterPosition).spaltenName2Inhalt)
+            } else {
+                sqLiteMainAusgabe.deleateItem(inhalt.get(holder.adapterPosition)
                     .spaltenName1Inhalt,inhalt.get(holder.adapterPosition).spaltenName2Inhalt)
             }
             val updateData = updateData()
@@ -64,6 +72,10 @@ class RecyclerViewBinder(val holder : RecyclerViewHolderMain,val id : String,
         for(i in sqLiteMainUnterkonto.readData()){
             arrayList.add(i)
         }
+        for(i in sqLiteMainAusgabe.readData()){
+            arrayList.add(i)
+        }
+        arrayList.sortBy {it.echtZeitDatum}
         return arrayList
     }
 }

@@ -51,10 +51,9 @@ class SetItem(val klick : Int,val context : Context,val view : View)
             databaseTyp = "Ausgabe"
         } else {
             Toast.makeText(context,"Fehler beim Laden",Toast.LENGTH_LONG).show()
-
         }
 
-        val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd ")
+        val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
         val date = Date()
 
         safe.setOnClickListener{

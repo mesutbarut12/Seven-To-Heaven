@@ -89,16 +89,20 @@ class MainActivity : AppCompatActivity() {
 
             val dataEinkommen = sqLiteMainEinkommen.readData()
             val dataUnterkonto = sqLiteMainUnterkonto.readData()
+            val dataAusgabe = sqLiteMainAusgabe.readData()
             val arraylist : ArrayList<SQLiteModel> = arrayListOf()
 
-            for(i in dataEinkommen){
-                arraylist.add(i)
+        for(i in dataEinkommen){
+            arraylist.add(i)
         }
          for(i in dataUnterkonto){
                 arraylist.add(i)
         }
+        for(i in dataAusgabe){
+                arraylist.add(i)
+        }
 
-
+            arraylist.sortWith(compareBy({ it.databaseTyp },{it.echtZeitDatum}))
             val showItems = ShowItems(this, recyclerView, arraylist)
             showItems.transformSqlToRecyclerModel()
             showItems.showItems()
