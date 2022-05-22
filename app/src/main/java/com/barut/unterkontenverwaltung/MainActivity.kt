@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var add : FloatingActionButton
     private lateinit var showItems : FloatingActionButton
+    private lateinit var showCalculateBetter : FloatingActionButton
+    private lateinit var showCalculate: FloatingActionButton
     private lateinit var sqLiteMainEinkommen: SQLiteMain
     private lateinit var sqLiteMainUnterkonto: SQLiteMain
     private lateinit var sqLiteMainAusgabe: SQLiteMain
@@ -48,7 +50,10 @@ class MainActivity : AppCompatActivity() {
         popUpAlertDialogForSetDataInSQLite()
         showItemsInRecyclerViewClickListener()
         Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe).calculate()
-        showCalCulateData()
+
+        showCalCulateDataClickListener()
+        showCalCulateDataBetter()
+        showCalCulateDataBetterClickListener()
 
 
 
@@ -57,9 +62,24 @@ class MainActivity : AppCompatActivity() {
     fun showCalCulateData(){
         val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
         val rechner1 = rechner.calculate()
-
-
         StartRecyclerView(this,recyclerView,rechner1,R.layout.show_calculate,"ShowCalculateData",
+        null)
+    }
+    fun showCalCulateDataClickListener(){
+        showCalculate.setOnClickListener {
+            showCalCulateData()
+        }
+    }
+    fun showCalCulateDataBetterClickListener(){
+        showCalculateBetter.setOnClickListener {
+            showCalCulateDataBetter()
+        }
+    }
+    fun showCalCulateDataBetter(){
+        val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
+        val rechner1 = rechner.calculate()
+        val rechner2 = rechner.calculateBetter(rechner1)
+        StartRecyclerView(this,recyclerView,rechner2,R.layout.show_calculate,"ShowCalculateData",
         null)
     }
     fun popUpAlertDialogForSetDataInSQLite(){
@@ -126,6 +146,8 @@ class MainActivity : AppCompatActivity() {
     fun initAllViews(){
         add  =  findViewById(R.id.addItem)
         showItems  =  findViewById(R.id.showList)
+        showCalculateBetter  =  findViewById(R.id.showCalculateBetter)
+        showCalculate  =  findViewById(R.id.showCalculate)
         sqLiteMainEinkommen = SQLiteMain(this@MainActivity,"Einkommen","Einkommen",
             "unterkonto","datum","echtZeitDatum","databaseType","id")
         sqLiteMainUnterkonto = SQLiteMain(this@MainActivity,"Unterkonto","Unterkonto",
