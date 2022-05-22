@@ -43,8 +43,15 @@ class SetItem(val klick : Int,val context : Context,val view : View)
             input2.setHint("bitte Prozent eingeben!")
             databaseTyp = "Unterkonto"
 
-        }else {
+        }else if(klick == 3){
+            tvDescription1.setText("Ausgabe : ")
+            input1.setHint("bitte Ausgabe eingeben!")
+            tvDescription2.setText("Unterkonto : ")
+            input2.setHint("bitte Unterkonto eingeben!")
+            databaseTyp = "Ausgabe"
+        } else {
             Toast.makeText(context,"Fehler beim Laden",Toast.LENGTH_LONG).show()
+
         }
 
         val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd ")

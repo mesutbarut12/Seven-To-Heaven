@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var showItems : FloatingActionButton
     private lateinit var sqLiteMainEinkommen: SQLiteMain
     private lateinit var sqLiteMainUnterkonto: SQLiteMain
+    private lateinit var sqLiteMainAusgabe: SQLiteMain
     private lateinit var recyclerView : RecyclerView
 
 
@@ -58,9 +59,14 @@ class MainActivity : AppCompatActivity() {
                             alertdialog.cancelDialog()
                             sqLiteMainUnterkonto.setData(model)
                             Toast.makeText(this@MainActivity,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
-                        } else {
+                        } else if (model.databaseTyp == "Einnahme") {
                             alertdialog.cancelDialog()
                             sqLiteMainEinkommen.setData(model)
+                            Toast.makeText(this@MainActivity,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
+
+                        } else if(model.databaseTyp == "Ausgabe"){
+                            alertdialog.cancelDialog()
+                            sqLiteMainAusgabe.setData(model)
                             Toast.makeText(this@MainActivity,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
 
                         }
@@ -108,6 +114,9 @@ class MainActivity : AppCompatActivity() {
             "unterkonto","datum","echtZeitDatum","databaseType","id")
         sqLiteMainUnterkonto = SQLiteMain(this@MainActivity,"Unterkonto","Unterkonto",
             "name","prozent","datum","databaseType","id")
+        sqLiteMainAusgabe = SQLiteMain(this@MainActivity,"Ausgabe","Ausgabe",
+            "unterkonto","ausgabe","datum","databaseType","id")
+
         recyclerView = findViewById(R.id.recyclerView)
 
     }

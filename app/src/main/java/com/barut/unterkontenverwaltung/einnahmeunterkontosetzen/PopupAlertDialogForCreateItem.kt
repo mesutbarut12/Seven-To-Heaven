@@ -23,6 +23,7 @@ class PopupAlertDialogForCreateItem(private val context : Context, val add : Flo
 
     private lateinit var btUnterkonto : Button
     private lateinit var btEinnahme : Button
+    private lateinit var btAusgabe : Button
 
     fun setAlertDialogForSetUnterkontoOrEinnahme(getclick : TransferDataFromPopupToSetItem){
         add.setOnClickListener  {
@@ -53,11 +54,18 @@ class PopupAlertDialogForCreateItem(private val context : Context, val add : Flo
             addItem.createDialog()
             getclick.getClick(2,view,addItem)
         }
+        btAusgabe.setOnClickListener {
+            val addItem = AlertDialogMain(context,R.layout.add_item)
+            val view = addItem.setLayout()
+            addItem.createDialog()
+            getclick.getClick(3,view,addItem)
+        }
 
     }
     private fun initViews(view : View){
         btUnterkonto = view.findViewById(R.id.btsetUnterkonto)
         btEinnahme = view.findViewById(R.id.btsetGeld)
+        btAusgabe = view.findViewById(R.id.btAusgabeHinzufugen)
 
     }
 }

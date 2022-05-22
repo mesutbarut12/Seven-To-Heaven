@@ -56,7 +56,7 @@ class RecyclerViewBinder(val holder : RecyclerViewHolderMain,val id : String,
 
         }
     }
-    fun updateData() : ArrayList<SQLiteModel>{
+    private fun updateData() : ArrayList<SQLiteModel>{
         val arrayList : ArrayList<SQLiteModel> = arrayListOf()
         for(i in sqLiteMainEinkommen.readData()){
             arrayList.add(i)
