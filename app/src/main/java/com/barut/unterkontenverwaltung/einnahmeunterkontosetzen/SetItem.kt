@@ -10,12 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerView
+import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerViewBinder
+import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontoInterface
+import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 import com.barut.unterkontenverwaltung.sqlite.SQLiteModel
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SetItem(val klick : Int,val context : Context,val view : View)
+class SetItem(private val klick : Int,private val context : Context,private val view : View)
 {
     private val tvDescription1 : TextView = view.findViewById(R.id.tvdescription1)
     private val tvDescription2 : TextView = view.findViewById(R.id.tvdescription2)
@@ -24,6 +27,8 @@ class SetItem(val klick : Int,val context : Context,val view : View)
     private val safe : Button = view.findViewById(R.id.btSaveItems)
     private lateinit var model : SQLiteModel
 
+    val sqliteShowExistingUnterkontenInRecyclerView = SQLiteMain(context,"ShowExistingUnterkonto","ShowExistingUnterkonto",
+        "name","prozent","datum","databaseType","id")
 
 
     fun getData(getData: GetData) {
@@ -78,7 +83,16 @@ class SetItem(val klick : Int,val context : Context,val view : View)
             val view = alert.setLayout()
             val recyclerView : RecyclerView = view.findViewById(R.id.rvShowAllExistingUnterkonten)
             alert.createDialog()
-            ShowExistingUnterkontenInRecyclerView(context,recyclerView).onStart()
+            ShowExistingUnterkontenInRecyclerView(context,recyclerView,object : ShowExistingUnterkontoInterface{
+                override fun showExistingUnterkonto(boolean: Boolean, data: String) {
+                    if(boolean == true){
+                        alert.cancelDialog()
+                        input2.setText(data)
+
+                    }
+                }
+
+            }).onStart()
 
 
         }

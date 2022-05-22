@@ -8,9 +8,12 @@ import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 
 class ShowExistingUnterkontenInRecyclerView(val context : Context,
-                                            val recyclerView: RecyclerView) {
+                                            val recyclerView: RecyclerView,
+                                            val showExistingUnterkontoInterface:
+                                            ShowExistingUnterkontoInterface) {
     val sqLiteMainUnterkonto = SQLiteMain(context,"Unterkonto","Unterkonto",
-    "name","prozent","datum","databaseType","id")
+    "name","prozent","datum","databaseType","id",)
+
 
     fun onStart(){
         val data = sqLiteMainUnterkonto.readData()
@@ -21,7 +24,7 @@ class ShowExistingUnterkontenInRecyclerView(val context : Context,
             arrayList.add(model)
         }
         StartRecyclerView(context,recyclerView,arrayList, R.layout.show_existing_unterkonten,
-            "ShowExistingUnterkontenItems")
+            "ShowExistingUnterkontenItems",showExistingUnterkontoInterface)
     }
 
 }
