@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.showalldatasinRecyclerView.ShowAllDatasInRecyclerViewBinder
+import com.barut.unterkontenverwaltung.showcalculatedata.ShowCalculateDataBinding
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerViewBinder
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontoInterface
 
@@ -21,9 +22,15 @@ val showExistingUnterkontoInterface: ShowExistingUnterkontoInterface?)
     }
 
     override fun onBindViewHolder(holder: RecyclerViewHolderMain, position: Int) {
-
-        ShowAllDatasInRecyclerViewBinder(holder,holderId,inhalt,recylcerView).onStart()
-        ShowExistingUnterkontenInRecyclerViewBinder(holder,holderId,inhalt,recylcerView,showExistingUnterkontoInterface!!).onStart()
+        if(holderId == "ShowItems") {
+            ShowAllDatasInRecyclerViewBinder(holder, holderId, inhalt, recylcerView).onStart()
+        } else if(holderId == "ShowExistingUnterkontenItems") {
+            ShowExistingUnterkontenInRecyclerViewBinder(holder, holderId, inhalt, recylcerView,
+                showExistingUnterkontoInterface!!).onStart()
+        } else if(holderId == "ShowCalculateData"){
+            ShowCalculateDataBinding(holder,holderId,inhalt,recylcerView,null)
+                .onStart()
+        }
     }
 
     override fun getItemCount(): Int {

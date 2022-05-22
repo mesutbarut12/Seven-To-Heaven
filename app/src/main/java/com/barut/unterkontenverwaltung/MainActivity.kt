@@ -8,11 +8,13 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
+import com.barut.unterkontenverwaltung.calculate.Calculate
 import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.GetData
 import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.TransferDataFromPopupToSetItem
 import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.PopupAlertDialogForCreateItem
 import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.SetItem
 import com.barut.unterkontenverwaltung.recyclerview.RecylcerViewModel
+import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerView
 import com.barut.unterkontenverwaltung.showitems.ShowItems
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
@@ -45,13 +47,21 @@ class MainActivity : AppCompatActivity() {
 
         popUpAlertDialogForSetDataInSQLite()
         showItemsInRecyclerViewClickListener()
-
+        Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe).calculate()
+        showCalCulateData()
 
 
 
 
     }
+    fun showCalCulateData(){
+        val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
+        val rechner1 = rechner.calculate()
 
+
+        StartRecyclerView(this,recyclerView,rechner1,R.layout.show_calculate,"ShowCalculateData",
+        null)
+    }
     fun popUpAlertDialogForSetDataInSQLite(){
         val popUp = PopupAlertDialogForCreateItem(this,add).setAlertDialogForSetUnterkontoOrEinnahme(object : TransferDataFromPopupToSetItem{
             override fun getClick(klick: Int, view: View, alertdialog: AlertDialogMain) {

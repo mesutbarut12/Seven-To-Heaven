@@ -15,8 +15,6 @@ class ShowExistingUnterkontenInRecyclerViewBinder(val holder : RecyclerViewHolde
     val showlist = holder.differntHolder()
     val tv = showlist!!.get(0) as TextView
 
-    val sqliteShowExistingUnterkontenInRecyclerView = SQLiteMain(holder.itemView.context,"ShowExistingUnterkonto","ShowExistingUnterkonto",
-        "name","prozent","datum","databaseType","id")
 
     fun onStart(){
         if(holder.differntHolder() != null){
@@ -31,8 +29,6 @@ class ShowExistingUnterkontenInRecyclerViewBinder(val holder : RecyclerViewHolde
     fun currentUnterkontoClick(){
 
         tv.setOnClickListener {
-            val model = SQLiteModel(tv.text.toString(),"","","ShowExistingUnterkonto")
-            sqliteShowExistingUnterkontenInRecyclerView.setData(model)
             showExistingUnterkontenInterface.showExistingUnterkonto(true,tv.text.toString())
         }
 

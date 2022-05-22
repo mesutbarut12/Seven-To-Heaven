@@ -27,8 +27,6 @@ class SetItem(private val klick : Int,private val context : Context,private val 
     private val safe : Button = view.findViewById(R.id.btSaveItems)
     private lateinit var model : SQLiteModel
 
-    val sqliteShowExistingUnterkontenInRecyclerView = SQLiteMain(context,"ShowExistingUnterkonto","ShowExistingUnterkonto",
-        "name","prozent","datum","databaseType","id")
 
 
     fun getData(getData: GetData) {

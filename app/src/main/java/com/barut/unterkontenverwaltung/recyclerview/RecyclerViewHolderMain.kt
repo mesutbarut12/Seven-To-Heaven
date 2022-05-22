@@ -28,6 +28,10 @@ class RecyclerViewHolderMain(itemView : View,val id : String) : RecyclerView.Vie
             val tv : TextView = itemView.findViewById(R.id.tv)
             arraylistView.add(tv)
             return arraylistView
+        } else if(id == "ShowCalculateData") {
+            val tv : TextView = itemView.findViewById(R.id.tvShowCalculateUnterkonto)
+            arraylistView.add(tv)
+            return arraylistView
         } else {
             Toast.makeText(itemView.context,"Fehler beim Laden", Toast.LENGTH_LONG).show()
             return null

@@ -1,3 +1,4 @@
 package com.barut.unterkontenverwaltung.calculate
 
-data class CalculateModel(var spaltenName1 : String, var spaltenName2 : String)
+data class CalculateModel(val spaltenName1Inhalt : String, val spaltenName2Inhalt : String,
+                          val date : String,val databaseType : String)
