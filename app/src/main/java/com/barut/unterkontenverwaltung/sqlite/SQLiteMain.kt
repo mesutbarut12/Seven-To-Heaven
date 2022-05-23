@@ -65,12 +65,19 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
 
     fun deleateItem(spaltenName1 : String, spaltenName2 : String){
         val db = this.writableDatabase
-        for ((unterkontoNameForSchleife,unterkontoProzentForSchleife) in readData()) {
+        for (unterkontoNameForSchleife in readData()) {
 
-            if(spaltenName1 in unterkontoNameForSchleife && spaltenName2 in unterkontoProzentForSchleife){
+            println("Kommt vom SqliteDatabase : spaltenname1 = ${unterkontoNameForSchleife.spaltenName1} " +
+                    "spaltenname2 = ${unterkontoNameForSchleife.spaltenName2}")
+            println("------------------------------------------------")
+            println("Kommt vom User Input : spaltenname1 = $spaltenName1 " +
+                    "spaltenname2 =$spaltenName2")
+            if(spaltenName1 == unterkontoNameForSchleife.spaltenName1 && spaltenName2 == unterkontoNameForSchleife.spaltenName2){
 
                 //db.delete(TABLE_NAME, unterkontoName+"="+unterkontoNameForSchleife,null)
-                db.execSQL(" DELETE FROM $TABLENAME  WHERE ${this.spaltenName1}" + "=\"" + unterkontoNameForSchleife + "\";")
+                //db.execSQL(" DELETE FROM $TABLENAME  WHERE ${this.spaltenName1}" + "=\"" + unterkontoNameForSchleife + "\";")
+                println(this.spaltenName2)
+                db.delete(TABLENAME,this.spaltenName2 + "=" + unterkontoNameForSchleife.spaltenName2,null)
 
             }
         }

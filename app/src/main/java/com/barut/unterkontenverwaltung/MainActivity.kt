@@ -58,7 +58,22 @@ class MainActivity : AppCompatActivity() {
         showCalCulateDataBetterClickListener()
         showCalculateWithAusgaben()
 
+        //updates
+        updateGesamtSaldo()
 
+    }
+    fun updateGesamtSaldo(){
+        val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
+        val rechner1 = rechner.calculate()
+        val rechner2 = rechner.calculateBetter(rechner1)
+        val rechner3 = rechner.calculateWithAusgaben(rechner2)
+        if(rechner3.isNotEmpty()) {
+            val tvGesamtSaldo: TextView = findViewById(R.id.tvGesamtSaldo2)
+            val gesamtSaldo = rechner3.get(0).date
+            val gesamtSaldoSplitted = gesamtSaldo.split(",")
+            val f =  DecimalFormat("#0.00")
+            tvGesamtSaldo.setText("Gesamt Saldo : ${f.format(gesamtSaldoSplitted[1].toDouble())}")
+        }
     }
     fun showCalculateWithAusgaben(){
         val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
@@ -84,12 +99,14 @@ class MainActivity : AppCompatActivity() {
     fun showCalCulateDataClickListener(){
         showCalculate.setOnClickListener {
             showCalCulateData()
+            updateGesamtSaldo()
         }
     }
     fun showCalCulateDataBetterClickListener(){
         showCalculateBetter.setOnClickListener {
             //showCalCulateDataBetter()
             showCalculateWithAusgaben()
+            updateGesamtSaldo()
         }
     }
     fun showCalCulateDataBetter(){
@@ -119,7 +136,7 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(this@MainActivity,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
 
                         }
-
+                        updateGesamtSaldo()
                     }
                 })
 
