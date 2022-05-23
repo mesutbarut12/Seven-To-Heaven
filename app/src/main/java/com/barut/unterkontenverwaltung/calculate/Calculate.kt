@@ -10,7 +10,7 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
         var arrayList : ArrayList<RecylcerViewModel> = arrayListOf()
         for(x in unterkonto.readData()){
             for(y in geld.readData()){
-                val ergebnis = (x.spaltenName2.toFloat()/100) * y.spaltenName1.toInt()
+                val ergebnis = (x.spaltenName2.toDouble()/100) * y.spaltenName1.toDouble()
                 val model = RecylcerViewModel(x.spaltenName1,y.spaltenName1,ergebnis.toString(),x.spaltenName2)
                 arrayList.add(model)
             }
@@ -42,26 +42,23 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
     fun calculateWithAusgaben(arraylist : ArrayList<RecylcerViewModel>) : ArrayList<RecylcerViewModel>{
         val arraylistNew : ArrayList<RecylcerViewModel> = arrayListOf()
         var model : RecylcerViewModel
-        for (i in ausgaben.readData()){
-            for(y in arraylist){
-                println(i.spaltenName1 + " " + i.spaltenName2 + " " + i.databaseTyp + " " +
-                i.echtZeitDatum)
-                println("-----------------------------------------------")
-                println(y.spaltenName1Inhalt + " " + y.spaltenName2Inhalt + " " + y.date + " " +
-                y.databaseType)
-                println("-----------------------------------------------")
+        for(y in arraylist){
+            var ergebnis = y.date.toDouble()
+            for (i in ausgaben.readData()){
+
+
+
 
                 if(y.spaltenName1Inhalt == i.spaltenName2){
-                    println(y.date.toDouble() - i.spaltenName1.toDouble())
-                    var ergebnis = y.date.toDouble() - i.spaltenName1.toDouble()
-                    model = RecylcerViewModel(y.spaltenName1Inhalt,y.date,ergebnis.toString(),y.databaseType)
-
-                } else {
-                    model = RecylcerViewModel(y.spaltenName1Inhalt,y.spaltenName2Inhalt,y.date,y.databaseType)
+                    ergebnis -= i.spaltenName1.toDouble()
                 }
-                arraylistNew.add(model)
+
+                }
+            model = RecylcerViewModel(y.spaltenName1Inhalt,y.databaseType,y.date+","+y.spaltenName2Inhalt,ergebnis.toString())
+
+            arraylistNew.add(model)
             }
-        }
         return arraylistNew
+        }
+
     }
-}

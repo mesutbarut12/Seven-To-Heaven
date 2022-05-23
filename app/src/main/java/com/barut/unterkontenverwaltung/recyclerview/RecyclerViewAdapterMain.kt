@@ -30,6 +30,9 @@ val showExistingUnterkontoInterface: ShowExistingUnterkontoInterface?)
         } else if(holderId == "ShowCalculateData"){
             ShowCalculateDataBinding(holder,holderId,inhalt,recylcerView,null)
                 .onStart()
+        } else if(holderId == "EndShowDataCalculate"){
+            ShowCalculateDataBinding(holder,holderId,inhalt,recylcerView,null)
+                .onStart()
         }
     }
 

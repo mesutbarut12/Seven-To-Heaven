@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
@@ -64,7 +65,13 @@ class MainActivity : AppCompatActivity() {
         val rechner1 = rechner.calculate()
         val rechner2 = rechner.calculateBetter(rechner1)
         val rechner3 = rechner.calculateWithAusgaben(rechner2)
-        StartRecyclerView(this,recyclerView,rechner3,R.layout.show_calculate,"ShowCalculateData",
+        if(rechner3.isNotEmpty()) {
+            val tvGesamtSaldo: TextView = findViewById(R.id.tvGesamtSaldo2)
+            val gesamtSaldo = rechner3.get(0).date
+            val gesamtSaldoSplitted = gesamtSaldo.split(",")
+            tvGesamtSaldo.setText("Gesamt Saldo : ${gesamtSaldoSplitted[1]}")
+        }
+        StartRecyclerView(this,recyclerView,rechner3,R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
             null)
     }
     fun showCalCulateData(){
@@ -80,7 +87,8 @@ class MainActivity : AppCompatActivity() {
     }
     fun showCalCulateDataBetterClickListener(){
         showCalculateBetter.setOnClickListener {
-            showCalCulateDataBetter()
+            //showCalCulateDataBetter()
+            showCalculateWithAusgaben()
         }
     }
     fun showCalCulateDataBetter(){

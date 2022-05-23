@@ -1,6 +1,7 @@
 package com.barut.unterkontenverwaltung.einnahmeunterkontosetzen
 
 import android.content.Context
+import android.text.InputType
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -36,8 +37,10 @@ class SetItem(private val klick : Int,private val context : Context,private val 
         if(klick == 1){
 
             tvDescription1.setText("Einnahme : ")
+            input1.inputType = InputType.TYPE_CLASS_NUMBER
             input1.setHint("bitte Einnahme eingeben!")
             tvDescription2.setText("Datum : ")
+            input2.inputType = InputType.TYPE_CLASS_DATETIME
             input2.setHint("bitte Datum eingeben!")
             databaseTyp = "Einnahme"
 
@@ -46,16 +49,32 @@ class SetItem(private val klick : Int,private val context : Context,private val 
             tvDescription1.setText("Unterkonto : ")
             input1.setHint("bitte Unterkonto eingeben!")
             tvDescription2.setText("Prozent : ")
+            input2.inputType = InputType.TYPE_CLASS_NUMBER
             input2.setHint("bitte Prozent eingeben!")
             databaseTyp = "Unterkonto"
 
         }else if(klick == 3){
             tvDescription1.setText("Ausgabe : ")
+            input1.inputType = InputType.TYPE_CLASS_NUMBER
             input1.setHint("bitte Ausgabe eingeben!")
             tvDescription2.setText("Unterkonto : ")
             input2.setHint("bitte Unterkonto eingeben!")
+            input2
             databaseTyp = "Ausgabe"
-            popUpNewAlertDialogForShowAllUnterkonten()
+            val alert = AlertDialogMain(context,R.layout.recyclerview_showallexistsunterkonten)
+            val view = alert.setLayout()
+            val recyclerView : RecyclerView = view.findViewById(R.id.rvShowAllExistingUnterkonten)
+            alert.createDialog()
+            ShowExistingUnterkontenInRecyclerView(context,recyclerView,object : ShowExistingUnterkontoInterface{
+                override fun showExistingUnterkonto(boolean: Boolean, data: String) {
+                    if(boolean == true){
+                        alert.cancelDialog()
+                        input2.setText(data)
+
+                    }
+                }
+
+            }).onStart()
         } else {
             Toast.makeText(context,"Fehler beim Laden",Toast.LENGTH_LONG).show()
         }
@@ -74,30 +93,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
         }
 
     }
-    fun popUpNewAlertDialogForShowAllUnterkonten(){
-        if(klick == 3){
-        input2.setOnClickListener {
-            val alert = AlertDialogMain(context,R.layout.recyclerview_showallexistsunterkonten)
-            val view = alert.setLayout()
-            val recyclerView : RecyclerView = view.findViewById(R.id.rvShowAllExistingUnterkonten)
-            alert.createDialog()
-            ShowExistingUnterkontenInRecyclerView(context,recyclerView,object : ShowExistingUnterkontoInterface{
-                override fun showExistingUnterkonto(boolean: Boolean, data: String) {
-                    if(boolean == true){
-                        alert.cancelDialog()
-                        input2.setText(data)
-
-                    }
-                }
-
-            }).onStart()
-
-
-        }
-    }
-    }
-
-    }
+}
 
 
 
