@@ -52,12 +52,20 @@ class MainActivity : AppCompatActivity() {
         Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe).calculate()
 
         showCalCulateDataClickListener()
-        showCalCulateDataBetter()
+        //showCalCulateDataBetter()
         showCalCulateDataBetterClickListener()
+        showCalculateWithAusgaben()
 
 
 
-
+    }
+    fun showCalculateWithAusgaben(){
+        val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
+        val rechner1 = rechner.calculate()
+        val rechner2 = rechner.calculateBetter(rechner1)
+        val rechner3 = rechner.calculateWithAusgaben(rechner2)
+        StartRecyclerView(this,recyclerView,rechner3,R.layout.show_calculate,"ShowCalculateData",
+            null)
     }
     fun showCalCulateData(){
         val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
