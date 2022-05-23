@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.barut.unterkontenverwaltung.EinigeChecksFürBessereSicherheit
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerView
@@ -37,10 +38,10 @@ class SetItem(private val klick : Int,private val context : Context,private val 
         if(klick == 1){
 
             tvDescription1.setText("Einnahme : ")
-            input1.inputType = InputType.TYPE_CLASS_NUMBER
+            input1.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             input1.setHint("bitte Einnahme eingeben!")
             tvDescription2.setText("Datum : ")
-            input2.inputType = InputType.TYPE_CLASS_DATETIME
+            input2.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             input2.setHint("bitte Datum eingeben!")
             databaseTyp = "Einnahme"
 
@@ -49,13 +50,13 @@ class SetItem(private val klick : Int,private val context : Context,private val 
             tvDescription1.setText("Unterkonto : ")
             input1.setHint("bitte Unterkonto eingeben!")
             tvDescription2.setText("Prozent : ")
-            input2.inputType = InputType.TYPE_CLASS_NUMBER
+            input2.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             input2.setHint("bitte Prozent eingeben!")
             databaseTyp = "Unterkonto"
 
         }else if(klick == 3){
             tvDescription1.setText("Ausgabe : ")
-            input1.inputType = InputType.TYPE_CLASS_NUMBER
+            input1.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             input1.setHint("bitte Ausgabe eingeben!")
             tvDescription2.setText("Unterkonto : ")
             input2.setHint("bitte Unterkonto eingeben!")
@@ -82,18 +83,46 @@ class SetItem(private val klick : Int,private val context : Context,private val 
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
         val date = Date()
 
-        safe.setOnClickListener{
-            if(input1.text.isEmpty() || input2.text.isEmpty()){
-                Toast.makeText(context,"Lasse kein Feld leer stehen",Toast.LENGTH_LONG).show()
-            } else {
+        safe.setOnClickListener {
+            if (input1.text.isEmpty() || input2.text.isEmpty()) {
+                Toast.makeText(context, "Lasse kein Feld leer stehen", Toast.LENGTH_LONG).show()
+            } else if (input1.text.contains(",")) {
+                val newInput1 =
+                    EinigeChecksFürBessereSicherheit().checkUserPutKommaOrPunkt(input1.text.toString())
+                model = SQLiteModel(
+                    newInput1,
+                    input2.text.toString(),
+                    "Tag der erstellung ${dateFormat.format(date)}",
+                    databaseTyp
+                )
+                getData.getData(model)
+            } else if (input2.text.contains(",")) {
+                val newInput1 =
+                    EinigeChecksFürBessereSicherheit().checkUserPutKommaOrPunkt(input2.text.toString())
 
-                model = SQLiteModel(input1.text.toString(),input2.text.toString(),"Tag der erstellung ${dateFormat.format(date)}",databaseTyp)
+                model = SQLiteModel(
+                    input1.text.toString(),
+                    newInput1,
+                    "Tag der erstellung ${dateFormat.format(date)}",
+                    databaseTyp
+                )
+                getData.getData(model)
+
+
+            } else {
+                model = SQLiteModel(
+                    input1.text.toString(),
+                    input2.text.toString(),
+                    "Tag der erstellung ${dateFormat.format(date)}",
+                    databaseTyp
+                )
                 getData.getData(model)
             }
         }
-
     }
+
 }
+
 
 
 

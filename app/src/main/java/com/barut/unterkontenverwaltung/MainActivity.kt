@@ -22,6 +22,7 @@ import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 import com.barut.unterkontenverwaltung.sqlite.SQLiteModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import java.text.DecimalFormat
 import java.time.LocalDate
 
 
@@ -58,7 +59,6 @@ class MainActivity : AppCompatActivity() {
         showCalculateWithAusgaben()
 
 
-
     }
     fun showCalculateWithAusgaben(){
         val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
@@ -69,7 +69,8 @@ class MainActivity : AppCompatActivity() {
             val tvGesamtSaldo: TextView = findViewById(R.id.tvGesamtSaldo2)
             val gesamtSaldo = rechner3.get(0).date
             val gesamtSaldoSplitted = gesamtSaldo.split(",")
-            tvGesamtSaldo.setText("Gesamt Saldo : ${gesamtSaldoSplitted[1]}")
+            val f =  DecimalFormat("#0.00")
+            tvGesamtSaldo.setText("Gesamt Saldo : ${f.format(gesamtSaldoSplitted[1].toDouble())}")
         }
         StartRecyclerView(this,recyclerView,rechner3,R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
             null)
