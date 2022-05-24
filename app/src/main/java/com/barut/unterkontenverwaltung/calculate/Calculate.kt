@@ -60,5 +60,18 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
             }
         return arraylistNew
         }
+    fun returnAusgaben() : String{
+        var ergebnis = 0.0
 
+            for(i in ausgaben.readData()){
+
+                    ergebnis += i.spaltenName1.toDouble()
+                println(i.spaltenName1)
+
+
+        }
+
+
+        return ergebnis.toString()
+    }
     }
