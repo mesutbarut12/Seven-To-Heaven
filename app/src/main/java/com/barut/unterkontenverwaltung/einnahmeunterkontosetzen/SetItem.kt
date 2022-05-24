@@ -93,8 +93,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
                     newInput1,
                     input2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
-                    databaseTyp
-                )
+                    databaseTyp, "")
                 getData.getData(model)
             } else if (input2.text.contains(",")) {
                 val newInput1 =
@@ -104,8 +103,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
                     input1.text.toString(),
                     newInput1,
                     "Tag der erstellung ${dateFormat.format(date)}",
-                    databaseTyp
-                )
+                    databaseTyp,"")
                 getData.getData(model)
 
 
@@ -114,8 +112,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
                     input1.text.toString(),
                     input2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
-                    databaseTyp
-                )
+                    databaseTyp, "")
                 getData.getData(model)
             }
         }

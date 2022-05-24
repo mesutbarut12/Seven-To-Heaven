@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var add : FloatingActionButton
     private lateinit var showItems : FloatingActionButton
     private lateinit var showCalculateBetter : FloatingActionButton
-    private lateinit var showCalculate: FloatingActionButton
     private lateinit var sqLiteMainEinkommen: SQLiteMain
     private lateinit var sqLiteMainUnterkonto: SQLiteMain
     private lateinit var sqLiteMainAusgabe: SQLiteMain
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         showItemsInRecyclerViewClickListener()
         Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe).calculate()
 
-        showCalCulateDataClickListener()
+        //showCalCulateDataClickListener()
         //showCalCulateDataBetter()
         showCalCulateDataBetterClickListener()
         showCalculateWithAusgaben()
@@ -97,10 +96,10 @@ class MainActivity : AppCompatActivity() {
         null)
     }
     fun showCalCulateDataClickListener(){
-        showCalculate.setOnClickListener {
+
             showCalCulateData()
             updateGesamtSaldo()
-        }
+
     }
     fun showCalCulateDataBetterClickListener(){
         showCalculateBetter.setOnClickListener {
@@ -181,7 +180,6 @@ class MainActivity : AppCompatActivity() {
         add  =  findViewById(R.id.addItem)
         showItems  =  findViewById(R.id.showList)
         showCalculateBetter  =  findViewById(R.id.showCalculateBetter)
-        showCalculate  =  findViewById(R.id.showCalculate)
         sqLiteMainEinkommen = SQLiteMain(this@MainActivity,"Einkommen","Einkommen",
             "unterkonto","datum","echtZeitDatum","databaseType","id")
         sqLiteMainUnterkonto = SQLiteMain(this@MainActivity,"Unterkonto","Unterkonto",

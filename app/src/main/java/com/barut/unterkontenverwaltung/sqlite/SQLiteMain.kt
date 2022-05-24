@@ -55,7 +55,8 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
                 model = SQLiteModel(cursor.getString(cursor.getColumnIndex(spaltenName1)),
                     cursor.getString(cursor.getColumnIndex(spaltenName2)),
                     cursor.getString(cursor.getColumnIndex(echtZeitDatum)),
-                    cursor.getString(cursor.getColumnIndex(databaseType)))
+                    cursor.getString(cursor.getColumnIndex(databaseType)),
+                    cursor.getString(cursor.getColumnIndex(id)))
                 arraylist.add(model)
             }while (cursor.moveToNext())
         }
@@ -68,7 +69,8 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
         for (unterkontoNameForSchleife in readData()) {
 
             println("Kommt vom SqliteDatabase : spaltenname1 = ${unterkontoNameForSchleife.spaltenName1} " +
-                    "spaltenname2 = ${unterkontoNameForSchleife.spaltenName2}")
+                    "spaltenname2 = ${unterkontoNameForSchleife.spaltenName2}" +
+                    "Id = ${unterkontoNameForSchleife.id}")
             println("------------------------------------------------")
             println("Kommt vom User Input : spaltenname1 = $spaltenName1 " +
                     "spaltenname2 =$spaltenName2")
@@ -77,7 +79,7 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
                 //db.delete(TABLE_NAME, unterkontoName+"="+unterkontoNameForSchleife,null)
                 //db.execSQL(" DELETE FROM $TABLENAME  WHERE ${this.spaltenName1}" + "=\"" + unterkontoNameForSchleife + "\";")
                 println(this.spaltenName2)
-                db.delete(TABLENAME,this.spaltenName2 + "=" + unterkontoNameForSchleife.spaltenName2,null)
+                db.delete(TABLENAME,this.id + "=" + unterkontoNameForSchleife.id,null)
 
             }
         }

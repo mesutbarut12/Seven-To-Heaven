@@ -5,6 +5,7 @@
     android:id="@+id/addNewItem"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/decoration"
     tools:context=".MainActivity">
 
     <TextView
@@ -40,7 +41,7 @@
         android:id="@+id/showList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
         android:contentDescription="Zum erstellen von Items"
         app:backgroundTint="@color/purple_200"
@@ -53,33 +54,20 @@
         android:id="@+id/showCalculateBetter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
         android:contentDescription="Zum erstellen von Items"
         app:backgroundTint="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/showList"
-        app:layout_constraintStart_toEndOf="@+id/showCalculate"
-        app:srcCompat="@drawable/ic_home" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/showCalculate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:clickable="true"
-        android:contentDescription="Zum erstellen von Items"
-        app:backgroundTint="@color/purple_200"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/showCalculateBetter"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_home2" />
+        app:srcCompat="@drawable/ic_home" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
         android:contentDescription="Zum erstellen von Items"
         app:backgroundTint="@color/purple_200"
