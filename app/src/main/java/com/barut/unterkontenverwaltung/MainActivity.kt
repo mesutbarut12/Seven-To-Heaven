@@ -84,11 +84,14 @@ class MainActivity : AppCompatActivity() {
         if(rechner3.isNotEmpty()) {
             val tvGesamtSaldo: TextView = findViewById(R.id.tvGesamtSaldo2)
             val tvGesamtAusgaben : TextView = findViewById(R.id.tvgesamtAusgaben)
+            val tvVerfugbarerSaldo : TextView = findViewById(R.id.tvVerfugbaererSaldo)
             val gesamtSaldo = rechner3.get(0).date
             val gesamtSaldoSplitted = gesamtSaldo.split(",")
             val f =  DecimalFormat("#0.00")
+            val ergebnis = gesamtSaldoSplitted[1].toDouble() - getAusgabenAll.toDouble()
             tvGesamtSaldo.setText("Gesamt Saldo : ${f.format(gesamtSaldoSplitted[1].toDouble())}")
             tvGesamtAusgaben.setText("Gesamt Ausgaben : ${f.format(getAusgabenAll.toDouble())}")
+            tvVerfugbarerSaldo.setText("Verfügbarer Saldo : ${f.format(ergebnis)}")
         }
         StartRecyclerView(this,recyclerView,rechner3,R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
             null)
