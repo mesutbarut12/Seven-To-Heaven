@@ -1,4 +1,4 @@
-package com.barut.unterkontenverwaltung.einnahmeunterkontosetzen
+package com.barut.unterkontenverwaltung.action
 
 import android.view.View
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain

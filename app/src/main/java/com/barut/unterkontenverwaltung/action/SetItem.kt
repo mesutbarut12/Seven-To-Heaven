@@ -1,4 +1,4 @@
-package com.barut.unterkontenverwaltung.einnahmeunterkontosetzen
+package com.barut.unterkontenverwaltung.action
 
 import android.content.Context
 import android.text.InputType
@@ -8,7 +8,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.barut.unterkontenverwaltung.EinigeChecksFürBessereSicherheit
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.recyclerview.Model
@@ -17,8 +16,10 @@ import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnter
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
-class SetItem(private val klick : Int,private val context : Context,private val view : View)
+class SetItem(private val klick : Int,private val context : Context,private val view : View,
+              val dataUnterkonto : ArrayList<Model>)
 {
     private val tvDescription1 : TextView = view.findViewById(R.id.tvdescription1)
     private val tvDescription2 : TextView = view.findViewById(R.id.tvdescription2)
@@ -75,10 +76,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
         val recyclerView : RecyclerView = view.findViewById(R.id.rvShowAllExistingUnterkonten)
         alert.createDialog()
 
-        StartRecyclerView(context,recyclerView, arrayListOf(
-            Model("hallo",
-                "","","","")
-        ),R.layout.show_existing_unterkonten
+        StartRecyclerView(context,recyclerView, dataUnterkonto,R.layout.show_existing_unterkonten
             ,"ShowExistingUnterkontenItems",object : ShowExistingUnterkontoInterface{
                 override fun showExistingUnterkonto(boolean: Boolean, data: String) {
                     if(boolean == true) {

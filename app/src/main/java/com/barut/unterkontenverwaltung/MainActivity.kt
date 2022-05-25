@@ -10,10 +10,10 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.calculate.Calculate
-import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.GetData
-import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.TransferDataFromPopupToSetItem
-import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.PopupAlertDialogForCreateItem
-import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.SetItem
+import com.barut.unterkontenverwaltung.action.GetData
+import com.barut.unterkontenverwaltung.action.TransferDataFromPopupToSetItem
+import com.barut.unterkontenverwaltung.action.PopupAlertDialogForCreateItem
+import com.barut.unterkontenverwaltung.action.SetItem
 import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     fun popUpAlertDialogForSetDataInSQLite(){
         val popUp = PopupAlertDialogForCreateItem(this,add).setAlertDialogForSetUnterkontoOrEinnahme(object : TransferDataFromPopupToSetItem{
             override fun getClick(klick: Int, view: View, alertdialog: AlertDialogMain) {
-                SetItem(klick,this@MainActivity,view).getData(object : GetData{
+                SetItem(klick,this@MainActivity,view,sqLiteMainUnterkonto.readData()).getData(object : GetData{
                     override fun getData(model: Model) {
                         if(model.databaseType == "Unterkonto"){
                             alertdialog.cancelDialog()

@@ -1,4 +1,4 @@
-package com.barut.unterkontenverwaltung.binder
+package com.barut.unterkontenverwaltung.recyclerview.binder
 
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView

@@ -1,4 +1,4 @@
-package com.barut.unterkontenverwaltung
+package com.barut.unterkontenverwaltung.action
 
 class EinigeChecksFürBessereSicherheit {
 
