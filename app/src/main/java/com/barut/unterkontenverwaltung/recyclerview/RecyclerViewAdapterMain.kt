@@ -28,7 +28,7 @@ class RecyclerViewAdapterMain(val inhalt : ArrayList<Model>, val layout : Int, v
             ShowExistingUnterkontenInRecyclerViewBinder(holder, holderId, inhalt, recylcerView,
                 showExistingUnterkontoInterface!!).onStart()
         } else if(holderId == "EndShowDataCalculate"){
-            ShowCalculateDataBinding(holder,holderId,inhalt,recylcerView,null)
+            ShowCalculateDataBinding(holder,holderId,inhalt,recylcerView)
                 .onStart()
         }
     }

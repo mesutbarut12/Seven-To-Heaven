@@ -10,7 +10,7 @@ import java.text.DecimalFormat
 class ShowCalculateDataBinding(val holder : RecyclerViewHolderMain, val id : String,
                                val inhalt : ArrayList<Model>,
                                val recyclerView : RecyclerView,
-                               val showExistingUnterkontenInterface: ShowExistingUnterkontoInterface?) {
+                               ) {
     fun onStart() {
         if (holder.differntHolder() != null) {
              if(id == "EndShowDataCalculate"){
