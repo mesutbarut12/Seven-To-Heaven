@@ -12,10 +12,8 @@ import com.barut.unterkontenverwaltung.EinigeChecksFürBessereSicherheit
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.recyclerview.Model
-import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerView
-import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerViewBinder
+import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontoInterface
-import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,11 +26,11 @@ class SetItem(private val klick : Int,private val context : Context,private val 
     private val input2 : EditText = view.findViewById(R.id.etInput2)
     private val safe : Button = view.findViewById(R.id.btSaveItems)
     private lateinit var model : Model
-
+    var databaseTyp = ""
 
 
     fun getData(getData: GetData) {
-        var databaseTyp = ""
+
 
 
         if(klick == 1){
@@ -60,25 +58,39 @@ class SetItem(private val klick : Int,private val context : Context,private val 
             input1.setHint("bitte Ausgabe eingeben!")
             tvDescription2.setText("Unterkonto : ")
             input2.setHint("bitte Unterkonto eingeben!")
-            input2
-            databaseTyp = "Ausgabe"
-            val alert = AlertDialogMain(context,R.layout.recyclerview_showallexistsunterkonten)
-            val view = alert.setLayout()
-            val recyclerView : RecyclerView = view.findViewById(R.id.rvShowAllExistingUnterkonten)
-            alert.createDialog()
-            ShowExistingUnterkontenInRecyclerView(context,recyclerView,object : ShowExistingUnterkontoInterface{
-                override fun showExistingUnterkonto(boolean: Boolean, data: String) {
-                    if(boolean == true){
-                        alert.cancelDialog()
-                        input2.setText(data)
 
-                    }
-                }
+            createNewAlterDialogForShowUnterkontenWhenKlickAusgabenHinzufugen()
 
-            }).onStart()
         } else {
             Toast.makeText(context,"Fehler beim Laden",Toast.LENGTH_LONG).show()
         }
+        whenUserKlickSafeButton(getData)
+    }
+
+    fun createNewAlterDialogForShowUnterkontenWhenKlickAusgabenHinzufugen(){
+
+        databaseTyp = "Ausgabe"
+        val alert = AlertDialogMain(context,R.layout.recyclerview_showallexistsunterkonten)
+        val view = alert.setLayout()
+        val recyclerView : RecyclerView = view.findViewById(R.id.rvShowAllExistingUnterkonten)
+        alert.createDialog()
+
+        StartRecyclerView(context,recyclerView, arrayListOf(
+            Model("hallo",
+                "","","","")
+        ),R.layout.show_existing_unterkonten
+            ,"ShowExistingUnterkontenItems",object : ShowExistingUnterkontoInterface{
+                override fun showExistingUnterkonto(boolean: Boolean, data: String) {
+                    if(boolean == true) {
+                        input2.setText(data)
+                        alert.cancelDialog()
+                    }
+                }
+
+            })
+
+    }
+    fun whenUserKlickSafeButton(getData: GetData) {
 
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
         val date = Date()
@@ -117,7 +129,6 @@ class SetItem(private val klick : Int,private val context : Context,private val 
             }
         }
     }
-
 }
 
 
