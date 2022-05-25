@@ -48,29 +48,15 @@ class MainActivity : AppCompatActivity() {
         showItemsInRecyclerViewClickListener()
         Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe).calculate()
 
-        //showCalCulateDataClickListener()
-        //showCalCulateDataBetter()
+
         showCalCulateDataBetterClickListener()
-        showCalculateWithAusgaben()
+        showCalculateDataInRecyclerView()
 
-        //updates
-        updateGesamtSaldo()
+
 
     }
-    fun updateGesamtSaldo(){
-        val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
-        val rechner1 = rechner.calculate()
-        val rechner2 = rechner.calculateBetter(rechner1)
-        val rechner3 = rechner.calculateWithAusgaben(rechner2)
-        if(rechner3.isNotEmpty()) {
-            val tvGesamtSaldo: TextView = findViewById(R.id.tvGesamtSaldo2)
-            val gesamtSaldo = rechner3.get(0).datum
-            val gesamtSaldoSplitted = gesamtSaldo.split(",")
-            val f =  DecimalFormat("#0.00")
-            tvGesamtSaldo.setText("Gesamt Saldo : ${f.format(gesamtSaldoSplitted[1].toDouble())}")
-        }
-    }
-    fun showCalculateWithAusgaben(){
+
+    fun showCalculateDataInRecyclerView(){
         val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
         val rechner1 = rechner.calculate()
         val rechner2 = rechner.calculateBetter(rechner1)
@@ -92,32 +78,16 @@ class MainActivity : AppCompatActivity() {
         StartRecyclerView(this,recyclerView,rechner3,R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
             null)
     }
-    fun showCalCulateData(){
-        val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
-        val rechner1 = rechner.calculate()
-        StartRecyclerView(this,recyclerView,rechner1,R.layout.show_calculate,"ShowCalculateData",
-        null)
-    }
-    fun showCalCulateDataClickListener(){
-
-            showCalCulateData()
-            updateGesamtSaldo()
-
-    }
     fun showCalCulateDataBetterClickListener(){
         showCalculateBetter.setOnClickListener {
             //showCalCulateDataBetter()
-            showCalculateWithAusgaben()
-            updateGesamtSaldo()
+            showCalculateDataInRecyclerView()
+
         }
     }
-    fun showCalCulateDataBetter(){
-        val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
-        val rechner1 = rechner.calculate()
-        val rechner2 = rechner.calculateBetter(rechner1)
-        StartRecyclerView(this,recyclerView,rechner2,R.layout.show_calculate,"ShowCalculateData",
-        null)
-    }
+
+
+
     fun popUpAlertDialogForSetDataInSQLite(){
         val popUp = PopupAlertDialogForCreateItem(this,add).setAlertDialogForSetUnterkontoOrEinnahme(object : TransferDataFromPopupToSetItem{
             override fun getClick(klick: Int, view: View, alertdialog: AlertDialogMain) {
@@ -138,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(this@MainActivity,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
 
                         }
-                        updateGesamtSaldo()
+                        showCalculateDataInRecyclerView()
                     }
                 })
 
@@ -179,6 +149,9 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
+    
     fun initAllViews(){
         add  =  findViewById(R.id.addItem)
         showItems  =  findViewById(R.id.showList)
