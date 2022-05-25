@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.EinigeChecksFürBessereSicherheit
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
+import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerView
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerViewBinder
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontoInterface
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
-import com.barut.unterkontenverwaltung.sqlite.SQLiteModel
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -27,7 +27,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
     private val input1 : EditText = view.findViewById(R.id.etInput1)
     private val input2 : EditText = view.findViewById(R.id.etInput2)
     private val safe : Button = view.findViewById(R.id.btSaveItems)
-    private lateinit var model : SQLiteModel
+    private lateinit var model : Model
 
 
 
@@ -89,7 +89,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
             } else if (input1.text.contains(",")) {
                 val newInput1 =
                     EinigeChecksFürBessereSicherheit().checkUserPutKommaOrPunkt(input1.text.toString())
-                model = SQLiteModel(
+                model = Model(
                     newInput1,
                     input2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
@@ -99,7 +99,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
                 val newInput1 =
                     EinigeChecksFürBessereSicherheit().checkUserPutKommaOrPunkt(input2.text.toString())
 
-                model = SQLiteModel(
+                model = Model(
                     input1.text.toString(),
                     newInput1,
                     "Tag der erstellung ${dateFormat.format(date)}",
@@ -108,7 +108,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
 
 
             } else {
-                model = SQLiteModel(
+                model = Model(
                     input1.text.toString(),
                     input2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
@@ -124,5 +124,5 @@ class SetItem(private val klick : Int,private val context : Context,private val 
 
 
 interface GetData{
-    fun getData(model: SQLiteModel)
+    fun getData(model: Model)
 }

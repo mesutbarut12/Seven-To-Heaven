@@ -14,16 +14,12 @@ import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.GetData
 import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.TransferDataFromPopupToSetItem
 import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.PopupAlertDialogForCreateItem
 import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.SetItem
-import com.barut.unterkontenverwaltung.recyclerview.RecylcerViewModel
+import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
-import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerView
 import com.barut.unterkontenverwaltung.showitems.ShowItems
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
-import com.barut.unterkontenverwaltung.sqlite.SQLiteModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import java.text.DecimalFormat
-import java.time.LocalDate
 
 
 class MainActivity : AppCompatActivity() {
@@ -68,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         val rechner3 = rechner.calculateWithAusgaben(rechner2)
         if(rechner3.isNotEmpty()) {
             val tvGesamtSaldo: TextView = findViewById(R.id.tvGesamtSaldo2)
-            val gesamtSaldo = rechner3.get(0).date
+            val gesamtSaldo = rechner3.get(0).datum
             val gesamtSaldoSplitted = gesamtSaldo.split(",")
             val f =  DecimalFormat("#0.00")
             tvGesamtSaldo.setText("Gesamt Saldo : ${f.format(gesamtSaldoSplitted[1].toDouble())}")
@@ -85,7 +81,7 @@ class MainActivity : AppCompatActivity() {
             val tvGesamtSaldo: TextView = findViewById(R.id.tvGesamtSaldo2)
             val tvGesamtAusgaben : TextView = findViewById(R.id.tvgesamtAusgaben)
             val tvVerfugbarerSaldo : TextView = findViewById(R.id.tvVerfugbaererSaldo)
-            val gesamtSaldo = rechner3.get(0).date
+            val gesamtSaldo = rechner3.get(0).datum
             val gesamtSaldoSplitted = gesamtSaldo.split(",")
             val f =  DecimalFormat("#0.00")
             val ergebnis = gesamtSaldoSplitted[1].toDouble() - getAusgabenAll.toDouble()
@@ -126,17 +122,17 @@ class MainActivity : AppCompatActivity() {
         val popUp = PopupAlertDialogForCreateItem(this,add).setAlertDialogForSetUnterkontoOrEinnahme(object : TransferDataFromPopupToSetItem{
             override fun getClick(klick: Int, view: View, alertdialog: AlertDialogMain) {
                 SetItem(klick,this@MainActivity,view).getData(object : GetData{
-                    override fun getData(model: SQLiteModel) {
-                        if(model.databaseTyp == "Unterkonto"){
+                    override fun getData(model: Model) {
+                        if(model.databaseType == "Unterkonto"){
                             alertdialog.cancelDialog()
                             sqLiteMainUnterkonto.setData(model)
                             Toast.makeText(this@MainActivity,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
-                        } else if (model.databaseTyp == "Einnahme") {
+                        } else if (model.databaseType == "Einnahme") {
                             alertdialog.cancelDialog()
                             sqLiteMainEinkommen.setData(model)
                             Toast.makeText(this@MainActivity,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
 
-                        } else if(model.databaseTyp == "Ausgabe"){
+                        } else if(model.databaseType == "Ausgabe"){
                             alertdialog.cancelDialog()
                             sqLiteMainAusgabe.setData(model)
                             Toast.makeText(this@MainActivity,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
@@ -162,7 +158,7 @@ class MainActivity : AppCompatActivity() {
             val dataEinkommen = sqLiteMainEinkommen.readData()
             val dataUnterkonto = sqLiteMainUnterkonto.readData()
             val dataAusgabe = sqLiteMainAusgabe.readData()
-            val arraylist : ArrayList<SQLiteModel> = arrayListOf()
+            val arraylist : ArrayList<Model> = arrayListOf()
 
         for(i in dataEinkommen){
             arraylist.add(i)
@@ -174,7 +170,7 @@ class MainActivity : AppCompatActivity() {
                 arraylist.add(i)
         }
 
-            arraylist.sortWith(compareBy({ it.databaseTyp },{it.echtZeitDatum}))
+            arraylist.sortWith(compareBy({ it.databaseType },{it.datum}))
             val showItems = ShowItems(this, recyclerView, arraylist)
             showItems.transformSqlToRecyclerModel()
             showItems.showItems()

@@ -3,22 +3,20 @@ package com.barut.unterkontenverwaltung.showitems
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.R
-import com.barut.unterkontenverwaltung.recyclerview.RecylcerViewModel
+import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
-import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontoInterface
-import com.barut.unterkontenverwaltung.sqlite.SQLiteModel
 
 class ShowItems(private val context : Context,private val recylcerView : RecyclerView
-,private val inhaltSql : ArrayList<SQLiteModel>) {
+,private val inhaltSql : ArrayList<Model>) {
 
-    private lateinit var inhalt : ArrayList<RecylcerViewModel>
-    private lateinit var model : RecylcerViewModel
+    private lateinit var inhalt : ArrayList<Model>
+    private lateinit var model : Model
 
     fun transformSqlToRecyclerModel(){
          inhalt = arrayListOf()
 
         for(i in inhaltSql){
-            model = RecylcerViewModel(i.spaltenName1,i.spaltenName2,i.echtZeitDatum,i.databaseTyp)
+            model = Model(i.spaltenName1,i.spaltenName2,i.datum,i.databaseType,"")
             inhalt.add(model)
         }
     }

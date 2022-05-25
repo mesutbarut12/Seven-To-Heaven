@@ -6,6 +6,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
+import com.barut.unterkontenverwaltung.recyclerview.Model
 
 class SQLiteMain(val context : Context,val DATABASENAME : String,
                  val TABLENAME : String, val spaltenName1 : String, val spaltenName2 : String,
@@ -30,29 +31,29 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
             onCreate(db);
         }
     }
-    fun setData(model : SQLiteModel){
+    fun setData(model : Model){
         val contenValue = ContentValues()
         val db = this.writableDatabase
         contenValue.put(spaltenName1, model.spaltenName1)
         contenValue.put(spaltenName2, model.spaltenName2)
-        contenValue.put(echtZeitDatum,model.echtZeitDatum)
-        contenValue.put(databaseType,model.databaseTyp)
+        contenValue.put(echtZeitDatum,model.datum)
+        contenValue.put(databaseType,model.databaseType)
         db.insert(TABLENAME,null,contenValue)
     }
 
 
     @SuppressLint("Range")
-    fun readData() : ArrayList<SQLiteModel>{
+    fun readData() : ArrayList<Model>{
         val dbLesen = this.readableDatabase
         val selection = "Select * From $TABLENAME"
-        var model : SQLiteModel
-        var arraylist : ArrayList<SQLiteModel> = arrayListOf()
+        var model : Model
+        var arraylist : ArrayList<Model> = arrayListOf()
         val cursor = dbLesen.rawQuery(selection,null)
 
 
         if(cursor.moveToFirst()){
             do {
-                model = SQLiteModel(cursor.getString(cursor.getColumnIndex(spaltenName1)),
+                model = Model(cursor.getString(cursor.getColumnIndex(spaltenName1)),
                     cursor.getString(cursor.getColumnIndex(spaltenName2)),
                     cursor.getString(cursor.getColumnIndex(echtZeitDatum)),
                     cursor.getString(cursor.getColumnIndex(databaseType)),

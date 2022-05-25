@@ -1,15 +1,12 @@
 package com.barut.unterkontenverwaltung.showexistingunterkonten
 
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
-import com.barut.unterkontenverwaltung.recyclerview.RecylcerViewModel
-import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
-import com.barut.unterkontenverwaltung.sqlite.SQLiteModel
+import com.barut.unterkontenverwaltung.recyclerview.Model
 
 class ShowExistingUnterkontenInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val id : String,
-                                                  val inhalt : ArrayList<RecylcerViewModel>,
+                                                  val inhalt : ArrayList<Model>,
                                                   val recyclerView : RecyclerView,
                                                   val showExistingUnterkontenInterface: ShowExistingUnterkontoInterface) {
     val showlist = holder.differntHolder()
@@ -19,7 +16,7 @@ class ShowExistingUnterkontenInRecyclerViewBinder(val holder : RecyclerViewHolde
     fun onStart(){
         if(holder.differntHolder() != null){
             if(id == "ShowExistingUnterkontenItems"){
-                tv.setText(inhalt.get(holder.adapterPosition).spaltenName1Inhalt)
+                tv.setText(inhalt.get(holder.adapterPosition).spaltenName1)
                 currentUnterkontoClick()
 
             }

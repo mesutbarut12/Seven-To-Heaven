@@ -6,13 +6,12 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
-import com.barut.unterkontenverwaltung.recyclerview.RecylcerViewModel
+import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.showitems.ShowItems
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
-import com.barut.unterkontenverwaltung.sqlite.SQLiteModel
 
 class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val id : String,
-                                       val inhalt : ArrayList<RecylcerViewModel>,
+                                       val inhalt : ArrayList<Model>,
                                        val recyclerView : RecyclerView) {
     val sqLiteMainEinkommen = SQLiteMain(holder.itemView.context,"Einkommen","Einkommen",
     "unterkonto","datum","echtZeitDatum","databaseType","id")
@@ -37,9 +36,9 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
                 } else {
                     image.setImageResource(R.drawable.ic_output)
                 }
-                tvspaltenname1.setText(inhalt.get(holder.adapterPosition).spaltenName1Inhalt)
-                tvspaltenname2.setText(inhalt.get(holder.adapterPosition).spaltenName2Inhalt)
-                echtzeitDatum.setText(inhalt.get(holder.adapterPosition).date)
+                tvspaltenname1.setText(inhalt.get(holder.adapterPosition).spaltenName1)
+                tvspaltenname2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
+                echtzeitDatum.setText(inhalt.get(holder.adapterPosition).datum)
                 onDelete(ivDelete)
             }
         } else {
@@ -50,13 +49,13 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
         ivDelete.setOnClickListener {
             if(inhalt.get(holder.adapterPosition).databaseType == "Unterkonto"){
                 sqLiteMainUnterkonto.deleateItem(inhalt.get(holder.adapterPosition)
-                    .spaltenName1Inhalt,inhalt.get(holder.adapterPosition).spaltenName2Inhalt)
+                    .spaltenName1,inhalt.get(holder.adapterPosition).spaltenName2)
             } else if(inhalt.get(holder.adapterPosition).databaseType == "Einnahme"){
                 sqLiteMainEinkommen.deleateItem(inhalt.get(holder.adapterPosition)
-                    .spaltenName1Inhalt,inhalt.get(holder.adapterPosition).spaltenName2Inhalt)
+                    .spaltenName1,inhalt.get(holder.adapterPosition).spaltenName2)
             } else {
                 sqLiteMainAusgabe.deleateItem(inhalt.get(holder.adapterPosition)
-                    .spaltenName1Inhalt,inhalt.get(holder.adapterPosition).spaltenName2Inhalt)
+                    .spaltenName1,inhalt.get(holder.adapterPosition).spaltenName2)
             }
             val updateData = updateData()
             val showItems = ShowItems(holder.itemView.context, recyclerView, updateData)
@@ -65,8 +64,8 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
 
         }
     }
-    private fun updateData() : ArrayList<SQLiteModel>{
-        val arrayList : ArrayList<SQLiteModel> = arrayListOf()
+    private fun updateData() : ArrayList<Model>{
+        val arrayList : ArrayList<Model> = arrayListOf()
         for(i in sqLiteMainEinkommen.readData()){
             arrayList.add(i)
         }
@@ -76,7 +75,7 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
         for(i in sqLiteMainAusgabe.readData()){
             arrayList.add(i)
         }
-        arrayList.sortBy {it.echtZeitDatum}
+        arrayList.sortBy {it.datum}
         return arrayList
     }
 }

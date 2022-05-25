@@ -1,21 +1,14 @@
 package com.barut.unterkontenverwaltung.showcalculatedata
 
-import android.opengl.Visibility
-import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
-import com.barut.unterkontenverwaltung.recyclerview.RecylcerViewModel
+import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontoInterface
 import java.text.DecimalFormat
-import kotlin.math.nextDown
-import kotlin.math.nextUp
-import kotlin.math.roundToInt
-import kotlin.math.roundToLong
 
 class ShowCalculateDataBinding(val holder : RecyclerViewHolderMain, val id : String,
-                               val inhalt : ArrayList<RecylcerViewModel>,
+                               val inhalt : ArrayList<Model>,
                                val recyclerView : RecyclerView,
                                val showExistingUnterkontenInterface: ShowExistingUnterkontoInterface?) {
     fun onStart() {
@@ -23,10 +16,10 @@ class ShowCalculateDataBinding(val holder : RecyclerViewHolderMain, val id : Str
             if (id == "ShowCalculateData") {
                 val showlist = holder.differntHolder()
                 val tv = showlist!!.get(0) as TextView
-                tv.setText("[ Unterkonto : ${inhalt.get(holder.adapterPosition).spaltenName1Inhalt} ]\n" +
-                        "[ Gesamt Summe : ${inhalt.get(holder.adapterPosition).spaltenName2Inhalt} ] \n" +
+                tv.setText("[ Unterkonto : ${inhalt.get(holder.adapterPosition).spaltenName1} ]\n" +
+                        "[ Gesamt Summe : ${inhalt.get(holder.adapterPosition).spaltenName2} ] \n" +
                         "[ Prozent : ${inhalt.get(holder.adapterPosition).databaseType}% ] \n" +
-                        "[ Ergebnis : ${inhalt.get(holder.adapterPosition).date} ]")
+                        "[ Ergebnis : ${inhalt.get(holder.adapterPosition).datum} ]")
 
             }else if(id == "EndShowDataCalculate"){
                 if(holder.adapterPosition == 0){
@@ -38,14 +31,14 @@ class ShowCalculateDataBinding(val holder : RecyclerViewHolderMain, val id : Str
                 val saldoMitAusgaben = showlist!!.get(2) as TextView
                 val saldoUnterkonten = showlist!!.get(3) as TextView
 
-                val data = processDateToTwoDatas(inhalt.get(holder.adapterPosition).date)
+                val data = processDateToTwoDatas(inhalt.get(holder.adapterPosition).datum)
                 val aufrunden = data[0].toDouble()
                 val f =  DecimalFormat("#0.00")
 
 
 
-                unterkonto.setText("Unterkonto : ${inhalt.get(holder.adapterPosition).spaltenName1Inhalt}")
-                prozent.setText("Prozentuale Einteilung :  ${inhalt.get(holder.adapterPosition).spaltenName2Inhalt}%")
+                unterkonto.setText("Unterkonto : ${inhalt.get(holder.adapterPosition).spaltenName1}")
+                prozent.setText("Prozentuale Einteilung :  ${inhalt.get(holder.adapterPosition).spaltenName2}%")
                 saldoMitAusgaben.setText("Saldo mit den Ausgaben gerechnet : ${f.format(inhalt.get(holder.adapterPosition).databaseType.toDouble())}")
                 saldoUnterkonten.setText("Saldo für das Unterkonto: ${f.format(aufrunden)}")
 
