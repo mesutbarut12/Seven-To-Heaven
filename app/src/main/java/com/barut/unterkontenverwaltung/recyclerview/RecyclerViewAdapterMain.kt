@@ -3,8 +3,8 @@ package com.barut.unterkontenverwaltung.recyclerview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.barut.unterkontenverwaltung.showalldatasinRecyclerView.ShowAllDatasInRecyclerViewBinder
-import com.barut.unterkontenverwaltung.showcalculatedata.ShowCalculateDataBinding
+import com.barut.unterkontenverwaltung.binder.ShowAllDatasInRecyclerViewBinder
+import com.barut.unterkontenverwaltung.binder.ShowCalculateDataBinding
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerViewBinder
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontoInterface
 

@@ -1,10 +1,9 @@
-package com.barut.unterkontenverwaltung.showcalculatedata
+package com.barut.unterkontenverwaltung.binder
 
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
 import com.barut.unterkontenverwaltung.recyclerview.Model
-import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontoInterface
 import java.text.DecimalFormat
 
 class ShowCalculateDataBinding(val holder : RecyclerViewHolderMain, val id : String,
