@@ -13,18 +13,7 @@ class ShowCalculateDataBinding(val holder : RecyclerViewHolderMain, val id : Str
                                val showExistingUnterkontenInterface: ShowExistingUnterkontoInterface?) {
     fun onStart() {
         if (holder.differntHolder() != null) {
-            if (id == "ShowCalculateData") {
-                val showlist = holder.differntHolder()
-                val tv = showlist!!.get(0) as TextView
-                tv.setText("[ Unterkonto : ${inhalt.get(holder.adapterPosition).spaltenName1} ]\n" +
-                        "[ Gesamt Summe : ${inhalt.get(holder.adapterPosition).spaltenName2} ] \n" +
-                        "[ Prozent : ${inhalt.get(holder.adapterPosition).databaseType}% ] \n" +
-                        "[ Ergebnis : ${inhalt.get(holder.adapterPosition).datum} ]")
-
-            }else if(id == "EndShowDataCalculate"){
-                if(holder.adapterPosition == 0){
-
-                }
+             if(id == "EndShowDataCalculate"){
                 val showlist = holder.differntHolder()
                 val unterkonto = showlist!!.get(0) as TextView
                 val prozent = showlist!!.get(1) as TextView

@@ -16,7 +16,6 @@ import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.PopupAlertDialog
 import com.barut.unterkontenverwaltung.einnahmeunterkontosetzen.SetItem
 import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
-import com.barut.unterkontenverwaltung.showitems.ShowItems
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.DecimalFormat
@@ -139,19 +138,13 @@ class MainActivity : AppCompatActivity() {
         for(i in dataAusgabe){
                 arraylist.add(i)
         }
-
             arraylist.sortWith(compareBy({ it.databaseType },{it.datum}))
-            val showItems = ShowItems(this, recyclerView, arraylist)
-            showItems.transformSqlToRecyclerModel()
-            showItems.showItems()
-
-
-
-
+            StartRecyclerView(this,recyclerView,
+                arraylist,R.layout.show_items,"ShowItems",null)
     }
 
 
-    
+
     fun initAllViews(){
         add  =  findViewById(R.id.addItem)
         showItems  =  findViewById(R.id.showList)

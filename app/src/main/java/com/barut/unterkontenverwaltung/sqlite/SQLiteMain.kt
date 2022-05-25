@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
 import com.barut.unterkontenverwaltung.recyclerview.Model
 
-class SQLiteMain(val context : Context,val DATABASENAME : String,
+class SQLiteMain(val context : Context,DATABASENAME : String,
                  val TABLENAME : String, val spaltenName1 : String, val spaltenName2 : String,
                  val echtZeitDatum : String,val databaseType : String,val id : String)
     : SQLiteOpenHelper(context,DATABASENAME,null,2) {
@@ -24,13 +24,14 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
                 ")"
         db?.execSQL(createTable)
     }
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         if (oldVersion != newVersion) {
             db?.execSQL("DROP TABLE IF EXISTS " + TABLENAME);
             onCreate(db);
         }
     }
+
+
     fun setData(model : Model){
         val contenValue = ContentValues()
         val db = this.writableDatabase
@@ -40,8 +41,6 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
         contenValue.put(databaseType,model.databaseType)
         db.insert(TABLENAME,null,contenValue)
     }
-
-
     @SuppressLint("Range")
     fun readData() : ArrayList<Model>{
         val dbLesen = this.readableDatabase
@@ -64,7 +63,6 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
 
         return arraylist
     }
-
     fun deleateItem(spaltenName1 : String, spaltenName2 : String){
         val db = this.writableDatabase
         for (unterkontoNameForSchleife in readData()) {
@@ -85,8 +83,5 @@ class SQLiteMain(val context : Context,val DATABASENAME : String,
             }
         }
     }
-    fun deleateTable(){
-        val delete = context.deleteDatabase(DATABASENAME)
 
-    }
 }

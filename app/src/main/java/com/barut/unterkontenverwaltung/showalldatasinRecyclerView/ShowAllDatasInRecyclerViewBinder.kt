@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
 import com.barut.unterkontenverwaltung.recyclerview.Model
-import com.barut.unterkontenverwaltung.showitems.ShowItems
+import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 
 class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val id : String,
@@ -58,9 +58,9 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
                     .spaltenName1,inhalt.get(holder.adapterPosition).spaltenName2)
             }
             val updateData = updateData()
-            val showItems = ShowItems(holder.itemView.context, recyclerView, updateData)
-            showItems.transformSqlToRecyclerModel()
-            showItems.showItems()
+            StartRecyclerView(holder.itemView.context,recyclerView,
+                updateData,R.layout.show_items,"ShowItems",null)
+
 
         }
     }
