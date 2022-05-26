@@ -70,9 +70,9 @@ class MainActivity : AppCompatActivity() {
             val gesamtSaldoSplitted = gesamtSaldo.split(",")
             val f =  DecimalFormat("#0.00")
             val ergebnis = gesamtSaldoSplitted[1].toDouble() - getAusgabenAll.toDouble()
-            tvGesamtSaldo.setText("Gesamt Saldo : ${f.format(gesamtSaldoSplitted[1].toDouble())}")
-            tvGesamtAusgaben.setText("Gesamt Ausgaben : ${f.format(getAusgabenAll.toDouble())}")
-            tvVerfugbarerSaldo.setText("Verfügbarer Saldo : ${f.format(ergebnis)}")
+            tvGesamtSaldo.setText("Gesamt Saldo :\n ${f.format(gesamtSaldoSplitted[1].toDouble())}")
+            tvGesamtAusgaben.setText("Gesamt Ausgaben :\n ${f.format(getAusgabenAll.toDouble())}")
+            tvVerfugbarerSaldo.setText("Verfügbarer Saldo :\n ${f.format(ergebnis)}")
         }
         StartRecyclerView(this,recyclerView,rechner3,R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
             null)
