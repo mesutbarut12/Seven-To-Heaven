@@ -75,10 +75,10 @@ class MainActivity : AppCompatActivity() {
 
 
     fun showCalculateDataInRecyclerView(){
-
-
-        //StartRecyclerView(this,recyclerView,rechner3,R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
-          //  null)
+        var calculate = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
+        var inhalt = calculate.calculateData()
+        StartRecyclerView(this,recyclerView,inhalt,R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
+            null)
     }
     fun showCalCulateDataBetterClickListener(){
         showCalculateBetter.setOnClickListener {

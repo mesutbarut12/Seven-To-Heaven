@@ -16,14 +16,9 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
         var getProzenteGesamt = getProzenteInsgesamt()
 
         val f = DecimalFormat("#0.00")
-
-
-
-
-            return CalculateModel(f.format(gesamtSaldo).toDouble(),f.format(gesamtAusgaben).toDouble(),
+        return CalculateModel(f.format(gesamtSaldo).toDouble(),f.format(gesamtAusgaben).toDouble(),
             f.format(verfugbarerSaldo).toDouble(),f.format(getUnterkontenAnzahl).toDouble(),f.format(getProzenteGesamt).toDouble())
     }
-
     fun getGesamtSaldo() : Double{
         var ergebnis = 0.0
         for(i in geld.readData()){
@@ -55,6 +50,44 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
         return ergebnis
     }
 
+    fun calculateData() : ArrayList<Model> {
+        var arrayList : ArrayList<Model> = arrayListOf()
+        var unterkonten = getUnterkonto()
+        var prozentualeEinteilung = getProzentualeEinteilung()
+        var saldoMitAusgaben = getSaldoMitausgaben()
+        var saldoFürDasUnterkonto = getSaldoFürDasUnterkonto()
+
+
+
+        return arrayList
+
+
+    }
+    fun getUnterkonto() : ArrayList<String>{
+        var arrayList : ArrayList<String> = arrayListOf()
+        for(i in unterkonto.readData()){
+            arrayList.add(i.spaltenName1)
+        }
+        return arrayList
+    }
+    fun getProzentualeEinteilung() : ArrayList<String>{
+        var arrayList : ArrayList<String> = arrayListOf()
+        for(i in unterkonto.readData()){
+            arrayList.add(i.spaltenName2)
+        }
+        return arrayList
+    }
+    fun getSaldoMitausgaben() : ArrayList<String>{
+        var arrayList : ArrayList<String> = arrayListOf()
+        for(i in ausgaben.readData()){
+            arrayList.add(i.spaltenName2)
+        }
+        return arrayList
+    }
+    fun getSaldoFürDasUnterkonto() : ArrayList<String>{
+        var arrayList : ArrayList<String> = arrayListOf()
+        return arrayList
+    }
 
     }
 
