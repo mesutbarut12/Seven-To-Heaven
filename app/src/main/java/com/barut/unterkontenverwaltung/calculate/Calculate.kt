@@ -30,7 +30,8 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
     fun getGesamtAusgaben() : Double {
         var ergebnis = 0.0
         for(i in ausgaben.readData()){
-            ergebnis += i.spaltenName2.toDouble()
+
+            ergebnis += i.spaltenName1.toDouble()
         }
         return ergebnis
     }
@@ -85,6 +86,15 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
     }
     fun getSaldoFürDasUnterkonto() : ArrayList<String>{
         var arrayList : ArrayList<String> = arrayListOf()
+        var ergebnis = 0.0
+        for(y in geld.readData()){
+            for(i in unterkonto.readData()) {
+                ergebnis = (y.spaltenName1.toDouble()/100) * i.spaltenName2.toDouble()
+                println(y.spaltenName1)
+                println(ergebnis)
+                arrayList.add(ergebnis.toString())
+            }
+        }
         return arrayList
     }
 

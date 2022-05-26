@@ -23,8 +23,8 @@ class ShowCalculateDataBinding(val holder : RecyclerViewHolderMain, val id : Str
 
                 unterkonto.setText("Unterkonto : ${inhalt.spaltenName1.get(holder.adapterPosition)}")
                 prozent.setText("Prozentuale Einteilung :  ${inhalt.spaltenName2.get(holder.adapterPosition)}%")
-                //saldoMitAusgaben.setText("Saldo mit den Ausgaben gerechnet : ${inhalt.databaseType.get(holder.adapterPosition)}")
-                //saldoUnterkonten.setText("Saldo für das Unterkonto: ${inhalt.datum.get(holder.adapterPosition)}")
+                saldoMitAusgaben.setText("Saldo mit den Ausgaben gerechnet : ${inhalt.datum.get(holder.adapterPosition)}")
+                saldoUnterkonten.setText("Saldo für das Unterkonto: ${inhalt.databaseType.get(holder.adapterPosition)}")
 
 
 
