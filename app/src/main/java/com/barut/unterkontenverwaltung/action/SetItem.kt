@@ -53,6 +53,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
             input2.setHint("bitte Prozent eingeben!")
             databaseTyp = "Unterkonto"
 
+
         }else if(klick == 3){
             tvDescription1.setText("Ausgabe : ")
             input1.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
@@ -90,42 +91,55 @@ class SetItem(private val klick : Int,private val context : Context,private val 
     }
     fun whenUserKlickSafeButton(getData: GetData) {
 
+        safe.setOnClickListener {
+               if (input1.text.isEmpty() || input2.text.isEmpty()) {
+                    Toast.makeText(context, "Lasse kein Feld leer stehen", Toast.LENGTH_LONG).show()
+
+                } else {
+
+                   val model = checkProzentIsNot100(input2.text.toString())
+                   if(model != null){
+                       getData.getData(model!!)
+                   }
+
+                }
+
+        }
+    }
+
+    fun checkProzentIsNot100(input : String) : Model?{
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
         val date = Date()
 
-        safe.setOnClickListener {
-            if (input1.text.isEmpty() || input2.text.isEmpty()) {
-                Toast.makeText(context, "Lasse kein Feld leer stehen", Toast.LENGTH_LONG).show()
-            } else if (input1.text.contains(",")) {
-                val newInput1 =
-                    EinigeChecksFürBessereSicherheit().checkUserPutKommaOrPunkt(input1.text.toString())
-                model = Model(
-                    newInput1,
-                    input2.text.toString(),
-                    "Tag der erstellung ${dateFormat.format(date)}",
-                    databaseTyp, "")
-                getData.getData(model)
-            } else if (input2.text.contains(",")) {
-                val newInput1 =
-                    EinigeChecksFürBessereSicherheit().checkUserPutKommaOrPunkt(input2.text.toString())
 
-                model = Model(
-                    input1.text.toString(),
-                    newInput1,
-                    "Tag der erstellung ${dateFormat.format(date)}",
-                    databaseTyp,"")
-                getData.getData(model)
-
-
-            } else {
-                model = Model(
-                    input1.text.toString(),
-                    input2.text.toString(),
-                    "Tag der erstellung ${dateFormat.format(date)}",
-                    databaseTyp, "")
-                getData.getData(model)
+        if(klick == 2){
+            var ergebnis = 0.0
+            for(i in dataUnterkonto){
+                ergebnis += i.spaltenName2.toDouble()
             }
+            ergebnis += input.toDouble()
+
+            if(ergebnis > 100.00){
+                Toast.makeText(context,"Dieser schritt wird die 100% grenze überschreiten bitte versuche es erneut!",Toast.LENGTH_LONG).show()
+                return null
+
+            } else{
+                model = Model(
+                    input1.text.toString(),
+                    input2.text.toString(),
+                    "Tag der erstellung ${dateFormat.format(date)}",
+                    databaseTyp, ""
+                )
+            }
+        } else {
+            model = Model(
+                input1.text.toString(),
+                input2.text.toString(),
+                "Tag der erstellung ${dateFormat.format(date)}",
+                databaseTyp, ""
+            )
         }
+        return model
     }
 }
 

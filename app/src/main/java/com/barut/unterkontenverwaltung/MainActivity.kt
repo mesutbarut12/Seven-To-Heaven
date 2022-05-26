@@ -50,12 +50,12 @@ class MainActivity : AppCompatActivity() {
 
         showCalCulateDataBetterClickListener()
         showCalculateDataInRecyclerView()
+        showScollViewData()
 
 
 
     }
-
-    fun showCalculateDataInRecyclerView(){
+    fun showScollViewData(){
         val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
         val rechner1 = rechner.calculate()
         val rechner2 = rechner.calculateBetter(rechner1)
@@ -66,14 +66,32 @@ class MainActivity : AppCompatActivity() {
             val tvGesamtSaldo: TextView = findViewById(R.id.tvGesamtSaldo2)
             val tvGesamtAusgaben : TextView = findViewById(R.id.tvgesamtAusgaben)
             val tvVerfugbarerSaldo : TextView = findViewById(R.id.tvVerfugbaererSaldo)
+            val tvUnterkontenAnzahl : TextView = findViewById(R.id.tvUnterkontenAnzahl)
+            val tvProzentAnzahl : TextView = findViewById(R.id.tvProzentAnzahl)
             val gesamtSaldo = rechner3.get(0).datum
             val gesamtSaldoSplitted = gesamtSaldo.split(",")
             val f =  DecimalFormat("#0.00")
             val ergebnis = gesamtSaldoSplitted[1].toDouble() - getAusgabenAll.toDouble()
-            tvGesamtSaldo.setText("Gesamt Saldo :\n ${f.format(gesamtSaldoSplitted[1].toDouble())}")
-            tvGesamtAusgaben.setText("Gesamt Ausgaben :\n ${f.format(getAusgabenAll.toDouble())}")
-            tvVerfugbarerSaldo.setText("Verfügbarer Saldo :\n ${f.format(ergebnis)}")
+            val unterkontenGröße = rechner.getSizeUnterkonten()
+            val prozentAnzahl = rechner.getProzentAnzahl()
+
+
+            tvGesamtSaldo.setText("Gesamt Saldo :\n ${f.format(gesamtSaldoSplitted[1].toDouble())}€")
+            tvGesamtAusgaben.setText("Gesamt Ausgaben :\n ${f.format(getAusgabenAll.toDouble())}€")
+            tvVerfugbarerSaldo.setText("Verfügbarer Saldo :\n ${f.format(ergebnis)}€")
+            tvUnterkontenAnzahl.setText("Unterkonten Anzahl :\n ${unterkontenGröße}")
+            tvProzentAnzahl.setText("Prozente ins Gesamt :\n $prozentAnzahl%")
         }
+    }
+
+    fun showCalculateDataInRecyclerView(){
+        val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
+        val rechner1 = rechner.calculate()
+        val rechner2 = rechner.calculateBetter(rechner1)
+        val rechner3 = rechner.calculateWithAusgaben(rechner2)
+        val getAusgabenAll = rechner.returnAusgaben()
+
+
         StartRecyclerView(this,recyclerView,rechner3,R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
             null)
     }

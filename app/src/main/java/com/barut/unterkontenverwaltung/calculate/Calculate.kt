@@ -75,4 +75,15 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
 
         return ergebnis.toString()
     }
+    fun getSizeUnterkonten() : Int{
+
+        return unterkonto.readData().size
+    }
+    fun getProzentAnzahl() : String{
+        var ergebnis = 0.0
+        for(i in unterkonto.readData()){
+            ergebnis += i.spaltenName2.toDouble()
+        }
+        return ergebnis.toString()
+    }
     }
