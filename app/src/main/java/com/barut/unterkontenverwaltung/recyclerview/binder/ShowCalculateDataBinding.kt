@@ -4,10 +4,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
 import com.barut.unterkontenverwaltung.recyclerview.Model
+import com.barut.unterkontenverwaltung.recyclerview.NewModel
 import java.text.DecimalFormat
 
 class ShowCalculateDataBinding(val holder : RecyclerViewHolderMain, val id : String,
-                               val inhalt : ArrayList<Model>,
+                               val inhalt : NewModel,
                                val recyclerView : RecyclerView,
                                ) {
     fun onStart() {
@@ -19,28 +20,17 @@ class ShowCalculateDataBinding(val holder : RecyclerViewHolderMain, val id : Str
                 val saldoMitAusgaben = showlist!!.get(2) as TextView
                 val saldoUnterkonten = showlist!!.get(3) as TextView
 
-                val data = processDateToTwoDatas(inhalt.get(holder.adapterPosition).datum)
-                val aufrunden = data[0].toDouble()
-                val f =  DecimalFormat("#0.00")
 
-
-
-                unterkonto.setText("Unterkonto : ${inhalt.get(holder.adapterPosition).spaltenName1}")
-                prozent.setText("Prozentuale Einteilung :  ${inhalt.get(holder.adapterPosition).spaltenName2}%")
-                saldoMitAusgaben.setText("Saldo mit den Ausgaben gerechnet : ${f.format(inhalt.get(holder.adapterPosition).databaseType.toDouble())}")
-                saldoUnterkonten.setText("Saldo für das Unterkonto: ${f.format(aufrunden)}")
+                unterkonto.setText("Unterkonto : ${inhalt.spaltenName1.get(holder.adapterPosition)}")
+                prozent.setText("Prozentuale Einteilung :  ${inhalt.spaltenName2.get(holder.adapterPosition)}%")
+                //saldoMitAusgaben.setText("Saldo mit den Ausgaben gerechnet : ${inhalt.databaseType.get(holder.adapterPosition)}")
+                //saldoUnterkonten.setText("Saldo für das Unterkonto: ${inhalt.datum.get(holder.adapterPosition)}")
 
 
 
             }
         }
     }
-    fun processDateToTwoDatas(data : String) : ArrayList<String>{
-        var arraylist : ArrayList<String> = arrayListOf()
-        val dataSplitted = data.split(",")
-        arraylist.add(dataSplitted[0])
-        arraylist.add(dataSplitted[1])
-        return arraylist
-    }
+
 
 }

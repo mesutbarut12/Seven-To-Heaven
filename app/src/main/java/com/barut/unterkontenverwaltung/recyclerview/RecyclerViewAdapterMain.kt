@@ -10,7 +10,8 @@ import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnter
 
 class RecyclerViewAdapterMain(val inhalt : ArrayList<Model>, val layout : Int, val holderId : String,
                               val recylcerView : RecyclerView,
-                              val showExistingUnterkontoInterface: ShowExistingUnterkontoInterface?)
+                              val showExistingUnterkontoInterface: ShowExistingUnterkontoInterface?,
+                              val newInhalt : NewModel?)
     : RecyclerView.Adapter<RecyclerViewHolderMain>() {
 
 
@@ -28,13 +29,19 @@ class RecyclerViewAdapterMain(val inhalt : ArrayList<Model>, val layout : Int, v
             ShowExistingUnterkontenInRecyclerViewBinder(holder, holderId, inhalt, recylcerView,
                 showExistingUnterkontoInterface!!).onStart()
         } else if(holderId == "EndShowDataCalculate"){
-            ShowCalculateDataBinding(holder,holderId,inhalt,recylcerView)
+            ShowCalculateDataBinding(holder,holderId,newInhalt!!,recylcerView)
                 .onStart()
         }
     }
 
     override fun getItemCount(): Int {
+        if(holderId == "EndShowDataCalculate"){
+            return 1
+        } else {
+            return inhalt.size
+        }
         return inhalt.size
+
     }
 
 

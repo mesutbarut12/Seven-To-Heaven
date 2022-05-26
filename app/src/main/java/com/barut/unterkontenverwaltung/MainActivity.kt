@@ -77,8 +77,9 @@ class MainActivity : AppCompatActivity() {
     fun showCalculateDataInRecyclerView(){
         var calculate = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
         var inhalt = calculate.calculateData()
-        StartRecyclerView(this,recyclerView,inhalt,R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
-            null)
+        StartRecyclerView(this,recyclerView,
+            arrayListOf(),R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
+            null,inhalt!!)
     }
     fun showCalCulateDataBetterClickListener(){
         showCalculateBetter.setOnClickListener {
@@ -147,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         }
             arraylist.sortWith(compareBy({ it.databaseType },{it.datum}))
             StartRecyclerView(this,recyclerView,
-                arraylist,R.layout.show_items,"ShowItems",null)
+                arraylist,R.layout.show_items,"ShowItems",null,null)
     }
 
     fun update(){

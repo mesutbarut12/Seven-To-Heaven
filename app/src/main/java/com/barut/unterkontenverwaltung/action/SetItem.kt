@@ -86,7 +86,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
                     }
                 }
 
-            })
+            },null)
 
     }
     fun whenUserKlickSafeButton(getData: GetData) {

@@ -8,13 +8,14 @@ import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnter
 class StartRecyclerView(
     val context: Context, val recylcerView: RecyclerView
     , val inhaltArrayList: ArrayList<Model>, val layout: Int, holderId: String,
-    val showExistingUnterkontoInterface: ShowExistingUnterkontoInterface?
+    val showExistingUnterkontoInterface: ShowExistingUnterkontoInterface?,
+    val newInhaltArrayList : NewModel?
 ) {
 
 
     init {
         recylcerView.adapter =RecyclerViewAdapterMain(inhaltArrayList,layout,holderId,recylcerView,
-        showExistingUnterkontoInterface)
+        showExistingUnterkontoInterface,newInhaltArrayList)
         recylcerView.layoutManager = LinearLayoutManager(context)
 
     }

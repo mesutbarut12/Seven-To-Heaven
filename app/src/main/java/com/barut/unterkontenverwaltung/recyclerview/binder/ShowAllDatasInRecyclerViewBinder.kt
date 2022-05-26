@@ -59,7 +59,7 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
             }
             val updateData = updateData()
             StartRecyclerView(holder.itemView.context,recyclerView,
-                updateData,R.layout.show_items,"ShowItems",null)
+                updateData,R.layout.show_items,"ShowItems",null,null)
 
 
         }

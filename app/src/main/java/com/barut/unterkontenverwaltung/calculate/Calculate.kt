@@ -1,6 +1,7 @@
 package com.barut.unterkontenverwaltung.calculate
 
 import com.barut.unterkontenverwaltung.recyclerview.Model
+import com.barut.unterkontenverwaltung.recyclerview.NewModel
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 import java.text.DecimalFormat
 
@@ -50,18 +51,16 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
         return ergebnis
     }
 
-    fun calculateData() : ArrayList<Model> {
-        var arrayList : ArrayList<Model> = arrayListOf()
+    fun calculateData() : NewModel {
         var unterkonten = getUnterkonto()
         var prozentualeEinteilung = getProzentualeEinteilung()
         var saldoMitAusgaben = getSaldoMitausgaben()
         var saldoFürDasUnterkonto = getSaldoFürDasUnterkonto()
 
 
-
-        return arrayList
-
-
+        var model = NewModel(unterkonten,prozentualeEinteilung,saldoMitAusgaben,saldoFürDasUnterkonto,
+            arrayListOf())
+        return model
     }
     fun getUnterkonto() : ArrayList<String>{
         var arrayList : ArrayList<String> = arrayListOf()
