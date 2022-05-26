@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         popUpAlertDialogForSetDataInSQLite()
         showItemsInRecyclerViewClickListener()
-        Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe).calculate()
+
 
 
         showCalCulateDataBetterClickListener()
@@ -60,17 +60,20 @@ class MainActivity : AppCompatActivity() {
         val rechner1 = rechner.calculate()
         val rechner2 = rechner.calculateBetter(rechner1)
         val rechner3 = rechner.calculateWithAusgaben(rechner2)
-        val getAusgabenAll = rechner.returnAusgaben()
 
-        if(rechner3.isNotEmpty()) {
+
+        if(rechner1 != null ){
+            val getAusgabenAll = rechner.returnAusgaben()
             val tvGesamtSaldo: TextView = findViewById(R.id.tvGesamtSaldo2)
-            val tvGesamtAusgaben : TextView = findViewById(R.id.tvgesamtAusgaben)
-            val tvVerfugbarerSaldo : TextView = findViewById(R.id.tvVerfugbaererSaldo)
-            val tvUnterkontenAnzahl : TextView = findViewById(R.id.tvUnterkontenAnzahl)
-            val tvProzentAnzahl : TextView = findViewById(R.id.tvProzentAnzahl)
+            val tvGesamtAusgaben: TextView = findViewById(R.id.tvgesamtAusgaben)
+            val tvVerfugbarerSaldo: TextView = findViewById(R.id.tvVerfugbaererSaldo)
+            val tvUnterkontenAnzahl: TextView = findViewById(R.id.tvUnterkontenAnzahl)
+            val tvProzentAnzahl: TextView = findViewById(R.id.tvProzentAnzahl)
             val gesamtSaldo = rechner3.get(0).datum
+
+
             val gesamtSaldoSplitted = gesamtSaldo.split(",")
-            val f =  DecimalFormat("#0.00")
+            val f = DecimalFormat("#0.00")
             val ergebnis = gesamtSaldoSplitted[1].toDouble() - getAusgabenAll.toDouble()
             val unterkontenGröße = rechner.getSizeUnterkonten()
             val prozentAnzahl = rechner.getProzentAnzahl()
@@ -82,14 +85,13 @@ class MainActivity : AppCompatActivity() {
             tvUnterkontenAnzahl.setText("Unterkonten Anzahl :\n ${unterkontenGröße}")
             tvProzentAnzahl.setText("Prozente ins Gesamt :\n $prozentAnzahl%")
         }
-    }
 
+    }
     fun showCalculateDataInRecyclerView(){
         val rechner = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
         val rechner1 = rechner.calculate()
         val rechner2 = rechner.calculateBetter(rechner1)
         val rechner3 = rechner.calculateWithAusgaben(rechner2)
-        val getAusgabenAll = rechner.returnAusgaben()
 
 
         StartRecyclerView(this,recyclerView,rechner3,R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
@@ -97,8 +99,8 @@ class MainActivity : AppCompatActivity() {
     }
     fun showCalCulateDataBetterClickListener(){
         showCalculateBetter.setOnClickListener {
-            //showCalCulateDataBetter()
-            showCalculateDataInRecyclerView()
+            update()
+
 
         }
     }
@@ -114,18 +116,21 @@ class MainActivity : AppCompatActivity() {
                             alertdialog.cancelDialog()
                             sqLiteMainUnterkonto.setData(model)
                             Toast.makeText(this@MainActivity,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
+                            update()
+
                         } else if (model.databaseType == "Einnahme") {
                             alertdialog.cancelDialog()
                             sqLiteMainEinkommen.setData(model)
                             Toast.makeText(this@MainActivity,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
+                            update()
 
                         } else if(model.databaseType == "Ausgabe"){
                             alertdialog.cancelDialog()
                             sqLiteMainAusgabe.setData(model)
                             Toast.makeText(this@MainActivity,"erfolgreich hinzugefügt",Toast.LENGTH_LONG).show()
-
+                            update()
                         }
-                        showCalculateDataInRecyclerView()
+
                     }
                 })
 
@@ -138,6 +143,7 @@ class MainActivity : AppCompatActivity() {
     fun showItemsInRecyclerViewClickListener(){
         showItems.setOnClickListener {
             showItemsInRecyclerView()
+            showScollViewData()
         }
     }
     fun showItemsInRecyclerView(){
@@ -161,6 +167,10 @@ class MainActivity : AppCompatActivity() {
                 arraylist,R.layout.show_items,"ShowItems",null)
     }
 
+    fun update(){
+        showScollViewData()
+        showCalculateDataInRecyclerView()
+    }
 
 
     fun initAllViews(){
