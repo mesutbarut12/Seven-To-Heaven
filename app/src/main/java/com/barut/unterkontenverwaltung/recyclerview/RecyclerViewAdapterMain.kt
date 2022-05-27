@@ -36,7 +36,7 @@ class RecyclerViewAdapterMain(val inhalt : ArrayList<Model>, val layout : Int, v
 
     override fun getItemCount(): Int {
         if(holderId == "EndShowDataCalculate"){
-            return 1
+            return newInhalt!!.spaltenName1.size
         } else {
             return inhalt.size
         }
