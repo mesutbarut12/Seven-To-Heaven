@@ -35,12 +35,14 @@ class RecyclerViewHolderMain(itemView : View,val id : String) : RecyclerView.Vie
         } else if(id == "EndShowDataCalculate"){
             val unterkonto : TextView = itemView.findViewById(R.id.tvUnterkonto)
             val prozent : TextView = itemView.findViewById(R.id.tvProzentualeEinteilung)
-            val saldoMitAusgaben : TextView = itemView.findViewById(R.id.tvGuthabenmitAusgaben)
-            val saldoUnterkonten : TextView = itemView.findViewById(R.id.tvSaldoUnterkonto)
+            val guthaben : TextView = itemView.findViewById(R.id.tvGuthaben)
+            val ausgaben : TextView = itemView.findViewById(R.id.tvAusgaben)
+            val ergebnis : TextView = itemView.findViewById(R.id.tvErgebnis)
             arraylistView.add(unterkonto)
             arraylistView.add(prozent)
-            arraylistView.add(saldoMitAusgaben)
-            arraylistView.add(saldoUnterkonten)
+            arraylistView.add(guthaben)
+            arraylistView.add(ausgaben)
+            arraylistView.add(ergebnis)
             return arraylistView
         } else {
             Toast.makeText(itemView.context,"Fehler beim Laden", Toast.LENGTH_LONG).show()

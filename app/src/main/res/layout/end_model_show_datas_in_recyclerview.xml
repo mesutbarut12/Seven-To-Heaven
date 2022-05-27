@@ -8,16 +8,13 @@
 
     <TextView
         android:id="@+id/tvUnterkonto"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:text="Unterkonto"
-        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvGuthabenmitAusgaben"
-        app:layout_constraintEnd_toStartOf="@+id/tvProzentualeEinteilung"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,86 +22,48 @@
         android:id="@+id/tvProzentualeEinteilung"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:text="Prozentuale einteilung"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tvUnterkonto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
-        app:layout_constraintTop_toTopOf="@+id/tvUnterkonto" />
-
-    <TextView
-        android:id="@+id/tvSaldoUnterkonto"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Prozentuale einteilung"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tvGuthabenmitAusgaben"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvGuthabenmitAusgaben"
-        app:layout_constraintTop_toTopOf="@+id/tvGuthabenmitAusgaben" />
-
-    <TextView
-        android:id="@+id/tvGuthabenmitAusgaben"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Guthaben mit den Ausgaben"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvSaldoUnterkonto"
+        app:layout_constraintEnd_toStartOf="@+id/tvUnterkonto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUnterkonto" />
 
-    <View
-        android:id="@+id/divider"
+    <TextView
+        android:id="@+id/tvAusgaben"
         android:layout_width="0dp"
-        android:layout_height="5dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/black"
+        android:layout_height="wrap_content"
+        android:text="Ausgaben"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvGuthaben"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
+        app:layout_constraintTop_toBottomOf="@+id/tvUnterkonto"
+        app:layout_constraintVertical_bias="0.48000002" />
+
+    <TextView
+        android:id="@+id/tvGuthaben"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Guthaben"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
+        app:layout_constraintTop_toBottomOf="@+id/tvAusgaben" />
+
+    <TextView
+        android:id="@+id/tvErgebnis"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Ergebnis"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/divider5"
-        android:layout_width="0dp"
-        android:layout_height="5dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="2dp"
-        android:layout_height="0dp"
-        android:background="@color/black"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/divider"
-        app:layout_constraintEnd_toStartOf="@+id/tvProzentualeEinteilung"
         app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
-        app:layout_constraintTop_toTopOf="@id/divider5" />
-
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/black"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/tvSaldoUnterkonto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUnterkonto" />
+        app:layout_constraintTop_toBottomOf="@+id/tvGuthaben" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
