@@ -50,6 +50,8 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
             if(inhalt.get(holder.adapterPosition).databaseType == "Unterkonto"){
                 sqLiteMainUnterkonto.deleateItem(inhalt.get(holder.adapterPosition)
                     .spaltenName1,inhalt.get(holder.adapterPosition).spaltenName2)
+               sqLiteMainAusgabe.deleteArgs(inhalt.get(holder.adapterPosition).spaltenName1)
+
             } else if(inhalt.get(holder.adapterPosition).databaseType == "Einnahme"){
                 sqLiteMainEinkommen.deleateItem(inhalt.get(holder.adapterPosition)
                     .spaltenName1,inhalt.get(holder.adapterPosition).spaltenName2)

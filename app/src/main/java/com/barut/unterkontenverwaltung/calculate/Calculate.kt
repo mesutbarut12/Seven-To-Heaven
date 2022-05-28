@@ -64,10 +64,6 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
         var ausrechnenVonSaldoMitAusgaben = ZumAusrechnenVonSaldoMitAusgaben(unterkonten,ausgabenName
         ,ausgaben,saldoFürDasUnterkonto)
 
-        println(unterkonten.size.toString() + "unterkonten")
-        println(prozentualeEinteilung.size.toString() + "prozentualeEinteilung")
-        println(ausgaben.size.toString() + "ausgaben")
-        println(saldoFürDasUnterkonto.size.toString() + "saldoFürDasUnterkonto")
         var model = NewModel(unterkonten,prozentualeEinteilung,ausgaben,saldoFürDasUnterkonto,
             arrayListOf())
         return model
@@ -122,14 +118,12 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
             var ergebnis = 0.0
             for(i in ausgaben.readData()){
                 if(i.spaltenName2 == y.spaltenName1){
-                    println(ergebnis.toString() + " " + i.spaltenName1)
                     ergebnis += i.spaltenName1.toDouble()
 
                 }
             }
             arrayList.add(ergebnis.toString())
         }
-        println(arrayList)
         return arrayList
     }
 
