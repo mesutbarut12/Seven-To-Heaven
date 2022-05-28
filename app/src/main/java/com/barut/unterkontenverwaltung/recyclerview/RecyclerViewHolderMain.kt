@@ -18,11 +18,13 @@ class RecyclerViewHolderMain(itemView : View,val id : String) : RecyclerView.Vie
             val tvspaltenname1 : TextView = itemView.findViewById(R.id.tvShowListSpaltenName1)
             val tvspaltenname2 : TextView = itemView.findViewById(R.id.tvShowListSpaltenName2)
             val tvEchtzeitDatum : TextView = itemView.findViewById(R.id.tvShowListEchtzeitDatum)
+            val ivEdit : ImageView = itemView.findViewById(R.id.ivEdit)
             arraylistView.add(image)
             arraylistView.add(ivDelete)
             arraylistView.add(tvspaltenname1)
             arraylistView.add(tvspaltenname2)
             arraylistView.add(tvEchtzeitDatum)
+            arraylistView.add(ivEdit)
             return arraylistView
         } else if (id == "ShowExistingUnterkontenItems") {
             val tv : TextView = itemView.findViewById(R.id.tv)

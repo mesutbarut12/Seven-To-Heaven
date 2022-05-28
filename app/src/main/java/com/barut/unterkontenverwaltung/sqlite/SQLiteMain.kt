@@ -84,4 +84,20 @@ class SQLiteMain(val context : Context,DATABASENAME : String,
             }
         }
     }
+    fun updateData(unterkontoName : String,model : Model) {
+        val contenValue = ContentValues()
+        val db = this.writableDatabase
+        contenValue.put(spaltenName1, model.spaltenName1)
+        contenValue.put(spaltenName2, model.spaltenName2)
+        contenValue.put(echtZeitDatum,model.datum)
+        contenValue.put(databaseType,model.databaseType)
+
+
+        for (unterkontoNameForSchleife in readData()) {
+            if (unterkontoName == unterkontoNameForSchleife.spaltenName2) {
+                db.update(TABLENAME,contenValue ,this.id + "=" + unterkontoNameForSchleife.id, null)
+
+            }
+        }
+    }
 }

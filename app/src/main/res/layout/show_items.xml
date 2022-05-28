@@ -56,13 +56,23 @@
         android:id="@+id/ivDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/iVShowList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.80"
-        app:layout_constraintStart_toEndOf="@+id/iVShowList"
+        app:layout_constraintEnd_toStartOf="@+id/ivEdit"
         app:layout_constraintTop_toTopOf="@+id/iVShowList"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_delete" />
+
+    <ImageView
+        android:id="@+id/ivEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iVShowList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iVShowList"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_edit" />
 
     <View
         android:id="@+id/divider4"

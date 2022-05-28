@@ -2,11 +2,10 @@ package com.barut.unterkontenverwaltung.recyclerview.binder
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.R
+import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
 import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
@@ -16,6 +15,14 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
                                        val inhalt : ArrayList<Model>,
                                        val recyclerView : RecyclerView) {
 
+
+    private lateinit var image : ImageView
+    private lateinit var ivDelete : ImageView
+    private lateinit var tvspaltenname1 : TextView
+    private lateinit var tvspaltenname2 : TextView
+    private lateinit var echtzeitDatum : TextView
+    private lateinit var ivEdit : ImageView
+
     val sqLiteMainEinkommen = SQLiteMain(holder.itemView.context,"Einkommen","Einkommen",
     "unterkonto","datum","echtZeitDatum","databaseType","id")
     val sqLiteMainUnterkonto = SQLiteMain(holder.itemView.context,"Unterkonto","Unterkonto",
@@ -24,14 +31,10 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
     "unterkonto","ausgabe","datum","databaseType","id")
 
     fun onStart() {
+        init()
         if (holder.differntHolder() != null) {
             if (id == "ShowItems") {
-                val showlist = holder.differntHolder()
-                val image = showlist!!.get(0) as ImageView
-                val ivDelete = showlist!!.get(1) as ImageView
-                val tvspaltenname1 = showlist!!.get(2) as TextView
-                val tvspaltenname2 = showlist!!.get(3) as TextView
-                val echtzeitDatum = showlist!!.get(4) as TextView
+
                 if(inhalt.get(holder.adapterPosition).databaseType == "Unterkonto"){
                     image.setImageResource(R.drawable.ic_unterkonto)
                 } else if(inhalt.get(holder.adapterPosition).databaseType == "Einnahme") {
@@ -43,6 +46,7 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
                 tvspaltenname2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
                 echtzeitDatum.setText(inhalt.get(holder.adapterPosition).datum)
                 onDelete(ivDelete)
+                onEdit(ivEdit)
             }
         } else {
             Toast.makeText(holder.itemView.context,"Fehler beim Laden",Toast.LENGTH_LONG).show()
@@ -112,7 +116,7 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
         for(i in sqLiteMainAusgabe.readData()){
             arrayList.add(i)
         }
-        arrayList.sortBy {it.datum}
+        arrayList.sortWith(compareBy({ it.databaseType },{it.datum}))
         return arrayList
     }
     private fun alertDialog(getClick : AlertDialogUser){
@@ -132,6 +136,31 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
             }
 
         }).create().show()
+    }
+
+    fun onEdit(ivEdit : ImageView){
+        ivEdit.setOnClickListener {
+            val alert = AlertDialogMain(holder.itemView.context,R.layout.edit_items)
+            val view = alert.setLayout()
+            val etEdit1 = view.findViewById<EditText>(R.id.etEdit1)
+            val etEdit2 = view.findViewById<EditText>(R.id.etEdit2)
+            val btEdit = view.findViewById<Button>(R.id.btEdit)
+            alert.createDialog()
+            etEdit1.setText(inhalt.get(holder.adapterPosition).spaltenName1)
+            etEdit2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
+            val model = Model()
+            sqLiteMainAusgabe.updateData(inhalt.get(holder.adapterPosition).spaltenName2,model)
+
+        }
+    }
+    fun init(){
+         val showlist = holder.differntHolder()
+         image = showlist!!.get(0) as ImageView
+         ivDelete = showlist!!.get(1) as ImageView
+         tvspaltenname1 = showlist!!.get(2) as TextView
+         tvspaltenname2 = showlist!!.get(3) as TextView
+         echtzeitDatum = showlist!!.get(4) as TextView
+         ivEdit = showlist!!.get(5) as ImageView
     }
 }
 interface AlertDialogUser{
