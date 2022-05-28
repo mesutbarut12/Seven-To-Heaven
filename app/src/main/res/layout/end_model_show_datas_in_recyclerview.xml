@@ -36,11 +36,10 @@
         android:text="Ausgaben"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvGuthaben"
+        app:layout_constraintBottom_toTopOf="@+id/tvErgebnis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
-        app:layout_constraintTop_toBottomOf="@+id/tvUnterkonto"
-        app:layout_constraintVertical_bias="0.48000002" />
+        app:layout_constraintTop_toBottomOf="@id/tvGuthaben" />
 
     <TextView
         android:id="@+id/tvGuthaben"
@@ -50,20 +49,30 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
-        app:layout_constraintTop_toBottomOf="@+id/tvAusgaben" />
+        app:layout_constraintTop_toBottomOf="@+id/tvUnterkonto" />
 
     <TextView
         android:id="@+id/tvErgebnis"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:text="Ergebnis"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
-        app:layout_constraintTop_toBottomOf="@+id/tvGuthaben" />
+        app:layout_constraintTop_toBottomOf="@+id/tvAusgaben" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/tvErgebnis"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvAusgaben"
+        app:layout_constraintTop_toBottomOf="@+id/tvAusgaben" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

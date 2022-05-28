@@ -20,12 +20,12 @@ class ShowCalculateDataBinding(val holder : RecyclerViewHolderMain, val id : Str
                 val ergebnis = showlist!!.get(4) as TextView
 
 
-               /* unterkonto.setText("${inhalt.spaltenName1.get(holder.adapterPosition)}")
-                prozent.setText("Prozentuale Einteilung :  ${inhalt.spaltenName2.get(holder.adapterPosition)}%")
-                guthaben.setText("Guthaben : ${inhalt.databaseType.get(holder.adapterPosition)}")
-                ausgaben.setText("Ausgaben : ${inhalt.datum.get(holder.adapterPosition)}")
+                 unterkonto.setText("${inhalt.spaltenName1.get(holder.adapterPosition)}")
+                 prozent.setText("Prozentuale Einteilung :  ${inhalt.spaltenName2.get(holder.adapterPosition)}%")
+                 guthaben.setText("Guthaben : ${inhalt.databaseType.get(holder.adapterPosition)}")
+                 ausgaben.setText("Ausgaben : ${inhalt.datum.get(holder.adapterPosition)}")
                  var ergebnis1 =  inhalt.databaseType.get(holder.adapterPosition).toDouble() - inhalt.datum.get(holder.adapterPosition).toDouble()
-                ergebnis.setText("Saldo : ${ergebnis1}")*/
+                 ergebnis.setText("Saldo : ${ergebnis1}")
 
 
 
