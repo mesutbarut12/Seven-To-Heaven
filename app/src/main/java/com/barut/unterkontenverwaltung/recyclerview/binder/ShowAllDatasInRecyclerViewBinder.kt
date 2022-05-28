@@ -10,11 +10,18 @@ import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
 import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val id : String,
                                        val inhalt : ArrayList<Model>,
                                        val recyclerView : RecyclerView) {
 
+
+    private val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
+    private val date = Date()
 
     private lateinit var image : ImageView
     private lateinit var ivDelete : ImageView
@@ -140,16 +147,48 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
 
     fun onEdit(ivEdit : ImageView){
         ivEdit.setOnClickListener {
-            val alert = AlertDialogMain(holder.itemView.context,R.layout.edit_items)
+            val alert = AlertDialogMain(holder.itemView.context,R.layout.add_item)
             val view = alert.setLayout()
-            val etEdit1 = view.findViewById<EditText>(R.id.etEdit1)
-            val etEdit2 = view.findViewById<EditText>(R.id.etEdit2)
-            val btEdit = view.findViewById<Button>(R.id.btEdit)
+            val tvDescription1 = view.findViewById<TextView>(R.id.tvdescription1)
+            val tvDescription2 = view.findViewById<TextView>(R.id.tvdescription2)
+            val etInput1 = view.findViewById<EditText>(R.id.etInput1)
+            val etInput2 = view.findViewById<EditText>(R.id.etInput2)
+            val btEdit = view.findViewById<Button>(R.id.btSaveItems)
             alert.createDialog()
-            etEdit1.setText(inhalt.get(holder.adapterPosition).spaltenName1)
-            etEdit2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
-            val model = Model()
-            sqLiteMainAusgabe.updateData(inhalt.get(holder.adapterPosition).spaltenName2,model)
+
+            if(inhalt.get(holder.adapterPosition).databaseType == "Ausgabe"){
+                tvDescription1.setText("Summe ändern!")
+                tvDescription2.setText("Name ändern!")
+                etInput1.setText(inhalt.get(holder.adapterPosition).spaltenName1)
+                etInput2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
+            }else if(inhalt.get(holder.adapterPosition).databaseType == "Unterkonto"){
+                tvDescription1.setText("Name ändern!")
+                tvDescription2.setText("Prozent ändern!")
+                etInput1.setText(inhalt.get(holder.adapterPosition).spaltenName1)
+                etInput2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
+            }else if(inhalt.get(holder.adapterPosition).databaseType == "Einnahme"){
+                tvDescription1.setText("Summe ändern!")
+                tvDescription2.setText("Datum ändern!")
+                etInput1.setText(inhalt.get(holder.adapterPosition).spaltenName1)
+                etInput2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
+            }
+
+            btEdit.setOnClickListener{
+                val model = Model(etInput1.text.toString(),etInput2.text.toString(),
+                    "Tag der erstellung ${dateFormat.format(date)}",inhalt.get(holder.adapterPosition).databaseType,"")
+                if(inhalt.get(holder.adapterPosition).databaseType == "Ausgabe"){
+                    sqLiteMainAusgabe.updateData(inhalt.get(holder.adapterPosition).spaltenName2,model)
+                    alert.cancelDialog()
+                }else if(inhalt.get(holder.adapterPosition).databaseType == "Unterkonto"){
+                    sqLiteMainUnterkonto.updateData(inhalt.get(holder.adapterPosition).spaltenName2,model)
+                    alert.cancelDialog()
+                }else if(inhalt.get(holder.adapterPosition).databaseType == "Einnahme"){
+                    sqLiteMainEinkommen.updateData(inhalt.get(holder.adapterPosition).spaltenName2,model)
+                    alert.cancelDialog()
+                }
+
+            }
+
 
         }
     }
