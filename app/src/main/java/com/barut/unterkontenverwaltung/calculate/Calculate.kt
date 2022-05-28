@@ -16,9 +16,11 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
         var getUnterkontenAnzahl = getUnterkontenAnzahl()
         var getProzenteGesamt = getProzenteInsgesamt()
 
-        val f = DecimalFormat("#0.00")
-        return CalculateModel(f.format(gesamtSaldo).toDouble(),f.format(gesamtAusgaben).toDouble(),
-            f.format(verfugbarerSaldo).toDouble(),f.format(getUnterkontenAnzahl).toDouble(),f.format(getProzenteGesamt).toDouble())
+        val f = DecimalFormat("#0.0")
+        //return CalculateModel(f.format(gesamtSaldo).toDouble(),f.format(gesamtAusgaben).toDouble(),
+        //    f.format(verfugbarerSaldo).toDouble(),f.format(getUnterkontenAnzahl).toDouble(),f.format(getProzenteGesamt).toDouble())
+
+        return CalculateModel(gesamtSaldo,gesamtAusgaben,verfugbarerSaldo,getUnterkontenAnzahl,getProzenteGesamt)
     }
     fun getGesamtSaldo() : Double{
         var ergebnis = 0.0
@@ -36,9 +38,10 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
         return ergebnis
     }
     fun getVerfugbarerSaldo() : Double{
+        var ergebnis = 0.0
         var gesamtSaldo = getGesamtSaldo()
         var gesamtAusgaben = getGesamtAusgaben()
-        var ergebnis = gesamtSaldo - gesamtAusgaben
+        ergebnis = gesamtSaldo - gesamtAusgaben
         return ergebnis
     }
     fun getUnterkontenAnzahl() : Double {
