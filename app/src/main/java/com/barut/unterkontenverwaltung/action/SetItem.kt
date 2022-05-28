@@ -97,9 +97,10 @@ class SetItem(private val klick : Int,private val context : Context,private val 
 
                 } else {
 
-                   val model = checkProzentIsNot100(input2.text.toString())
-                   if(model != null){
-                       getData.getData(model!!)
+                   val prozentUber100OderNicht = checkProzentIsNot100(input2.text.toString())
+                   val nameExistiertBereitsOderNicht = checkWhenUnterkontoNameDontExists(input1.text.toString())
+                   if(prozentUber100OderNicht != null && nameExistiertBereitsOderNicht != null){
+                       getData.getData(prozentUber100OderNicht!!)
                    }
 
                 }
@@ -107,17 +108,15 @@ class SetItem(private val klick : Int,private val context : Context,private val 
         }
     }
 
-    fun checkProzentIsNot100(input : String) : Model?{
+    fun checkProzentIsNot100(prozentZahl : String) : Model?{
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
         val date = Date()
-
-
         if(klick == 2){
             var ergebnis = 0.0
             for(i in dataUnterkonto){
                 ergebnis += i.spaltenName2.toDouble()
             }
-            ergebnis += input.toDouble()
+            ergebnis += prozentZahl.toDouble()
 
             if(ergebnis > 100.00){
                 Toast.makeText(context,"Dieser schritt wird die 100% grenze überschreiten bitte versuche es erneut!",Toast.LENGTH_LONG).show()
@@ -128,16 +127,34 @@ class SetItem(private val klick : Int,private val context : Context,private val 
                     input1.text.toString(),
                     input2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
-                    databaseTyp, ""
-                )
+                    databaseTyp, "")
             }
         } else {
+
             model = Model(
                 input1.text.toString(),
                 input2.text.toString(),
                 "Tag der erstellung ${dateFormat.format(date)}",
                 databaseTyp, ""
             )
+        }
+        return model
+    }
+    fun checkWhenUnterkontoNameDontExists(input : String) : Model?{
+        val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
+        val date = Date()
+        for(i in dataUnterkonto){
+            println(i.spaltenName1 + " " + input)
+            if(i.spaltenName1 == input){
+                Toast.makeText(context,"Der Name existiert bereits!!",Toast.LENGTH_LONG).show()
+                return null
+            } else {
+                model = Model(
+                    input1.text.toString(),
+                    input2.text.toString(),
+                    "Tag der erstellung ${dateFormat.format(date)}",
+                    databaseTyp, "")
+            }
         }
         return model
     }

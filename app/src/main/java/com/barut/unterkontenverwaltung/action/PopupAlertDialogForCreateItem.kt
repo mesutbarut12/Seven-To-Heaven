@@ -7,7 +7,7 @@ import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class PopupAlertDialogForCreateItem(private val context : Context, val add : FloatingActionButton) {
+class PopupAlertDialogForCreateItem(private val context : Context) {
 
 
 
@@ -26,7 +26,7 @@ class PopupAlertDialogForCreateItem(private val context : Context, val add : Flo
     private lateinit var btAusgabe : Button
 
     fun setAlertDialogForSetUnterkontoOrEinnahme(getclick : TransferDataFromPopupToSetItem){
-        add.setOnClickListener  {
+
 
             val popUpAlertDialog = AlertDialogMain(context, R.layout.popup_alert_dialog_for_create_item)
             val view = popUpAlertDialog.setLayout()
@@ -35,7 +35,7 @@ class PopupAlertDialogForCreateItem(private val context : Context, val add : Flo
             onClickListener(getclick)
 
 
-        }
+
 
     }
 

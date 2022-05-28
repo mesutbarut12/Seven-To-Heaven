@@ -3,6 +3,7 @@ package com.barut.unterkontenverwaltung
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -17,20 +18,20 @@ import com.barut.unterkontenverwaltung.action.SetItem
 import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationBarView
 import java.text.DecimalFormat
 import kotlin.math.roundToInt
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var add : FloatingActionButton
-    private lateinit var showItems : FloatingActionButton
-    private lateinit var showCalculateBetter : FloatingActionButton
     private lateinit var sqLiteMainEinkommen: SQLiteMain
     private lateinit var sqLiteMainUnterkonto: SQLiteMain
     private lateinit var sqLiteMainAusgabe: SQLiteMain
     private lateinit var recyclerView : RecyclerView
+    private lateinit var bottomNavigation : BottomNavigationView
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -44,14 +45,11 @@ class MainActivity : AppCompatActivity() {
         //Plus button wird geklickt! User darf sich aussuchen unterkonto oder Einnahme hinzufügen. je nachdem was er ausgewählt hat
         //wird seine eingaben im unterkonto oder im Einkommen sqlite datenbank gespeichert!
 
-        popUpAlertDialogForSetDataInSQLite()
-        showItemsInRecyclerViewClickListener()
-
-
-
-        showCalCulateDataBetterClickListener()
+        //popUpAlertDialogForSetDataInSQLite()
+        bottomNavigationClickListener()
         showCalculateDataInRecyclerView()
         showScollViewData()
+
 
 
 
@@ -82,18 +80,12 @@ class MainActivity : AppCompatActivity() {
             arrayListOf(),R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
             null,inhalt!!)
     }
-    fun showCalCulateDataBetterClickListener(){
-        showCalculateBetter.setOnClickListener {
-            update()
 
-
-        }
-    }
 
 
 
     fun popUpAlertDialogForSetDataInSQLite(){
-        val popUp = PopupAlertDialogForCreateItem(this,add).setAlertDialogForSetUnterkontoOrEinnahme(object : TransferDataFromPopupToSetItem{
+        val popUp = PopupAlertDialogForCreateItem(this).setAlertDialogForSetUnterkontoOrEinnahme(object : TransferDataFromPopupToSetItem{
             override fun getClick(klick: Int, view: View, alertdialog: AlertDialogMain) {
                 SetItem(klick,this@MainActivity,view,sqLiteMainUnterkonto.readData()).getData(object : GetData{
                     override fun getData(model: Model) {
@@ -125,12 +117,28 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
-    fun showItemsInRecyclerViewClickListener(){
-        showItems.setOnClickListener {
-            showItemsInRecyclerView()
-            showScollViewData()
-        }
+
+    fun bottomNavigationClickListener(){
+        bottomNavigation.setOnItemSelectedListener (object : NavigationBarView.OnItemSelectedListener{
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+               if(item.itemId == R.id.home){
+                    update()
+                   return true
+               } else if(item.itemId == R.id.liste){
+                   update()
+                   showItemsInRecyclerView()
+                   return true
+               } else if(item.itemId == R.id.addItem){
+                   showScollViewData()
+                   popUpAlertDialogForSetDataInSQLite()
+                   return true
+               }
+                return false
+            }
+
+        })
     }
+
     fun showItemsInRecyclerView(){
 
             val dataEinkommen = sqLiteMainEinkommen.readData()
@@ -157,11 +165,7 @@ class MainActivity : AppCompatActivity() {
         showCalculateDataInRecyclerView()
     }
 
-
     fun initAllViews(){
-        add  =  findViewById(R.id.addItem)
-        showItems  =  findViewById(R.id.showList)
-        showCalculateBetter  =  findViewById(R.id.showCalculateBetter)
         sqLiteMainEinkommen = SQLiteMain(this@MainActivity,"Einkommen","Einkommen",
             "unterkonto","datum","echtZeitDatum","databaseType","id")
         sqLiteMainUnterkonto = SQLiteMain(this@MainActivity,"Unterkonto","Unterkonto",
@@ -170,13 +174,15 @@ class MainActivity : AppCompatActivity() {
             "unterkonto","ausgabe","datum","databaseType","id")
 
         recyclerView = findViewById(R.id.recyclerView)
+        bottomNavigation = findViewById(R.id.bottomNavigation)
 
 
     }
-
 
     fun runden(double : Double) : Double{
         var roundOff = (double * 100.0).roundToInt() / 100.0
         return roundOff
     }
+
+
 }
