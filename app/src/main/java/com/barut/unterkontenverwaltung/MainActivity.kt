@@ -19,6 +19,7 @@ import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.DecimalFormat
+import kotlin.math.roundToInt
 
 
 class MainActivity : AppCompatActivity() {
@@ -66,11 +67,11 @@ class MainActivity : AppCompatActivity() {
             val tvProzentAnzahl: TextView = findViewById(R.id.tvProzentAnzahl)
 
 
-            tvGesamtSaldo.setText("Gesamt Saldo :\n ${data.gesamtSaldo}€")
-            tvGesamtAusgaben.setText("Gesamt Ausgaben :\n ${data.gesamtAusgaben}€")
-            tvVerfugbarerSaldo.setText("Verfügbarer Saldo :\n ${data.verfugbarerSaldo}€")
-            tvUnterkontenAnzahl.setText("Unterkonten Anzahl :\n ${data.unterKontenAnzahl}")
-            tvProzentAnzahl.setText("Prozente ins Gesamt :\n ${data.prozenteGesamt}%")
+            tvGesamtSaldo.setText("Gesamt Saldo :\n ${runden(data.gesamtSaldo)}")
+            tvGesamtAusgaben.setText("Gesamt Ausgaben :\n ${runden(data.gesamtAusgaben)}€")
+            tvVerfugbarerSaldo.setText("Verfügbarer Saldo :\n ${runden(data.verfugbarerSaldo)}€")
+            tvUnterkontenAnzahl.setText("Unterkonten Anzahl :\n ${runden(data.unterKontenAnzahl)}")
+            tvProzentAnzahl.setText("Prozente ins Gesamt :\n ${runden(data.prozenteGesamt)}%")
         }
 
 
@@ -174,5 +175,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
+    fun runden(double : Double) : Double{
+        var roundOff = (double * 100.0).roundToInt() / 100.0
+        return roundOff
+    }
 }

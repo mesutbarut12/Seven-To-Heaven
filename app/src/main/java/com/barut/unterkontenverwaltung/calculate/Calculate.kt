@@ -101,8 +101,6 @@ class Calculate(val geld : SQLiteMain, val unterkonto : SQLiteMain,val ausgaben 
     }
     fun getSaldoFürDasUnterkonto() : ArrayList<String>{
         var arrayList : ArrayList<String> = arrayListOf()
-
-
             var ergebnis = 0.0
             for(i in unterkonto.readData()) {
                 ergebnis = (getGesamtSaldo()/100) * i.spaltenName2.toDouble()
