@@ -1,5 +1,7 @@
 package com.barut.unterkontenverwaltung.recyclerview.binder
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -13,6 +15,7 @@ import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val id : String,
                                        val inhalt : ArrayList<Model>,
                                        val recyclerView : RecyclerView) {
+
     val sqLiteMainEinkommen = SQLiteMain(holder.itemView.context,"Einkommen","Einkommen",
     "unterkonto","datum","echtZeitDatum","databaseType","id")
     val sqLiteMainUnterkonto = SQLiteMain(holder.itemView.context,"Unterkonto","Unterkonto",
@@ -48,9 +51,41 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
     private fun onDelete(ivDelete : ImageView){
         ivDelete.setOnClickListener {
             if(inhalt.get(holder.adapterPosition).databaseType == "Unterkonto"){
-                sqLiteMainUnterkonto.deleateItem(inhalt.get(holder.adapterPosition)
-                    .spaltenName1,inhalt.get(holder.adapterPosition).spaltenName2)
-               sqLiteMainAusgabe.deleteArgs(inhalt.get(holder.adapterPosition).spaltenName1)
+                var adapter = holder.adapterPosition
+
+                if(sqLiteMainAusgabe.readData().isNotEmpty()){
+                    for(i in sqLiteMainAusgabe.readData()){
+                        println(i.spaltenName2 + " " + inhalt.get(adapter).spaltenName1)
+                        if(i.spaltenName2 == inhalt.get(adapter).spaltenName1){
+                            alertDialog(object : AlertDialogUser{
+                                override fun getClick(klick: Int) {
+                                    if(klick == 1){
+                                        sqLiteMainAusgabe.deleteArgs(inhalt.get(adapter).spaltenName1)
+                                        sqLiteMainUnterkonto.deleateItem(inhalt.get(adapter)
+                                            .spaltenName1,inhalt.get(adapter).spaltenName2)
+                                    } else if (klick == 2) {
+                                        sqLiteMainUnterkonto.deleateItem(inhalt.get(adapter)
+                                            .spaltenName1,inhalt.get(adapter).spaltenName2)
+                                    }
+                                    val updateData = updateData()
+                                    StartRecyclerView(holder.itemView.context,recyclerView,
+                                        updateData,R.layout.show_items,"ShowItems",null,null)
+
+                                }
+
+                            })
+                        } else {
+                            sqLiteMainUnterkonto.deleateItem(inhalt.get(adapter)
+                                .spaltenName1,inhalt.get(adapter).spaltenName2)
+                        }
+                    }
+                } else {
+                    sqLiteMainUnterkonto.deleateItem(inhalt.get(adapter)
+                        .spaltenName1,inhalt.get(adapter).spaltenName2)
+                }
+
+
+
 
             } else if(inhalt.get(holder.adapterPosition).databaseType == "Einnahme"){
                 sqLiteMainEinkommen.deleateItem(inhalt.get(holder.adapterPosition)
@@ -80,4 +115,25 @@ class ShowAllDatasInRecyclerViewBinder(val holder : RecyclerViewHolderMain, val 
         arrayList.sortBy {it.datum}
         return arrayList
     }
+    private fun alertDialog(getClick : AlertDialogUser){
+        val alert =  AlertDialog.Builder(holder.itemView.context)
+        alert.setTitle("!!!1ACHTUNG!!!")
+        alert.setMessage("Du bist grad dabei ein Unterkonto zu löschen, sollen die damit verbundenen ausgaben" +
+                " mit gelöscht werden?")
+        alert.setPositiveButton("JA",object : DialogInterface.OnClickListener {
+            override fun onClick(p0: DialogInterface?, p1: Int) {
+                getClick.getClick(1)
+                println("Ja geklickt!")
+            }
+
+        }).setNegativeButton("Nein", object : DialogInterface.OnClickListener{
+            override fun onClick(p0: DialogInterface?, p1: Int) {
+                getClick.getClick(2)
+            }
+
+        }).create().show()
+    }
+}
+interface AlertDialogUser{
+    fun getClick(klick : Int)
 }

@@ -1,8 +1,10 @@
 package com.barut.unterkontenverwaltung.sqlite
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Context
+import android.content.DialogInterface
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
@@ -82,5 +84,4 @@ class SQLiteMain(val context : Context,DATABASENAME : String,
             }
         }
     }
-
 }
