@@ -34,12 +34,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation : BottomNavigationView
 
 
+    //731d4936dc48b1b6dd0ae921794b791b3bc8c3d3
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        println("System started")
         //Initalisiert alle views die an die verschiedenne klassen weiter gegeben werden!
         initAllViews()
         //Plus button wird geklickt! User darf sich aussuchen unterkonto oder Einnahme hinzufügen. je nachdem was er ausgewählt hat
