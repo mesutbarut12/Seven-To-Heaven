@@ -11,7 +11,7 @@ import android.widget.Toast
 import com.barut.unterkontenverwaltung.recyclerview.Model
 
 class SQLiteMain(
-    val context: Context, DATABASENAME: String,
+    val context: Context, val DATABASENAME: String,
     val TABLENAME: String, val spaltenName1: String, val spaltenName2: String,
     val echtZeitDatum: String, val databaseType: String, val id: String, val beschreibung: String
 ) : SQLiteOpenHelper(context, DATABASENAME, null, 2) {
@@ -31,8 +31,11 @@ class SQLiteMain(
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         if (oldVersion != newVersion) {
-            db?.execSQL("DROP TABLE IF EXISTS " + TABLENAME);
+            db?.execSQL("DROP TABLE IF EXISTS " + DATABASENAME);
             onCreate(db);
+            println("Aktualisert")
+        }else {
+            println("Nicht aktualisert!")
         }
     }
 
