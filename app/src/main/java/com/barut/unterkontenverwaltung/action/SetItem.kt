@@ -144,7 +144,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
         val date = Date()
         for(i in dataUnterkonto){
-            println(i.spaltenName1 + " " + input)
+
             if(i.spaltenName1 == input){
                 Toast.makeText(context,"Der Name existiert bereits!!",Toast.LENGTH_LONG).show()
                 return null

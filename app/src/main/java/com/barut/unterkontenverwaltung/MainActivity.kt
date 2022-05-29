@@ -71,8 +71,6 @@ class MainActivity : AppCompatActivity() {
             tvUnterkontenAnzahl.setText("Unterkonten Anzahl :\n ${runden(data.unterKontenAnzahl)}")
             tvProzentAnzahl.setText("Prozente ins Gesamt :\n ${runden(data.prozenteGesamt)}%")
         }
-
-
     fun showCalculateDataInRecyclerView(){
         var calculate = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)
         var inhalt = calculate.calculateData()
@@ -80,7 +78,6 @@ class MainActivity : AppCompatActivity() {
             arrayListOf(),R.layout.end_model_show_datas_in_recyclerview,"EndShowDataCalculate",
             null,inhalt!!)
     }
-
 
 
 
