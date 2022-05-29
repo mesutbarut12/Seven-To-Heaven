@@ -14,7 +14,7 @@ class SQLiteMain(
     val context: Context, val DATABASENAME: String,
     val TABLENAME: String, val spaltenName1: String, val spaltenName2: String,
     val echtZeitDatum: String, val databaseType: String, val id: String, val beschreibung: String
-) : SQLiteOpenHelper(context, DATABASENAME, null, 2) {
+) : SQLiteOpenHelper(context, DATABASENAME, null, 3) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         val createTable = "CREATE TABLE " + TABLENAME +
@@ -30,15 +30,10 @@ class SQLiteMain(
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        if (oldVersion != newVersion) {
-            db?.execSQL("DROP TABLE IF EXISTS " + DATABASENAME);
-            onCreate(db);
-            println("Aktualisert")
-        }else {
-            println("Nicht aktualisert!")
+        if (newVersion != oldVersion) {
+            db!!.execSQL("ALTER TABLE $DATABASENAME ADD COLUMN $beschreibung");
         }
     }
-
 
     fun setData(model: Model) {
         val contenValue = ContentValues()
@@ -68,7 +63,8 @@ class SQLiteMain(
                     cursor.getString(cursor.getColumnIndex(echtZeitDatum)),
                     cursor.getString(cursor.getColumnIndex(databaseType)),
                     cursor.getString(cursor.getColumnIndex(id)),
-                    cursor.getString(cursor.getColumnIndex(beschreibung)))
+                    ""
+                )
                 arraylist.add(model)
             } while (cursor.moveToNext())
         }
@@ -104,7 +100,7 @@ class SQLiteMain(
         contenValue.put(spaltenName2, model.spaltenName2)
         contenValue.put(echtZeitDatum, model.datum)
         contenValue.put(databaseType, model.databaseType)
-        contenValue.put(beschreibung,model.beschreibung)
+        contenValue.put(beschreibung, model.beschreibung)
 
 
         for (unterkontoNameForSchleife in readData()) {
