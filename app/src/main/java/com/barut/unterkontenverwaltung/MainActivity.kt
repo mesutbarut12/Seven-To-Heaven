@@ -164,11 +164,11 @@ class MainActivity : AppCompatActivity() {
 
     fun initAllViews(){
         sqLiteMainEinkommen = SQLiteMain(this@MainActivity,"Einkommen","Einkommen",
-            "unterkonto","datum","echtZeitDatum","databaseType","id")
+            "unterkonto","datum","echtZeitDatum","databaseType","id","beschreibung")
         sqLiteMainUnterkonto = SQLiteMain(this@MainActivity,"Unterkonto","Unterkonto",
-            "name","prozent","datum","databaseType","id")
+            "name","prozent","datum","databaseType","id","beschreibung")
         sqLiteMainAusgabe = SQLiteMain(this@MainActivity,"Ausgabe","Ausgabe",
-            "unterkonto","ausgabe","datum","databaseType","id")
+            "unterkonto","ausgabe","datum","databaseType","id","beschreibung")
 
         recyclerView = findViewById(R.id.recyclerView)
         bottomNavigation = findViewById(R.id.bottomNavigation)

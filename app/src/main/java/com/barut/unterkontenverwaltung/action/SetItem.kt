@@ -18,23 +18,26 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SetItem(private val klick : Int,private val context : Context,private val view : View,
-              val dataUnterkonto : ArrayList<Model>)
-{
-    private val tvDescription1 : TextView = view.findViewById(R.id.tvdescription1)
-    private val tvDescription2 : TextView = view.findViewById(R.id.tvdescription2)
-    private val input1 : EditText = view.findViewById(R.id.etInput1)
-    private val input2 : EditText = view.findViewById(R.id.etInput2)
-    private val safe : Button = view.findViewById(R.id.btSaveItems)
-    private lateinit var model : Model
+class SetItem(
+    private val klick: Int, private val context: Context, private val view: View,
+    val dataUnterkonto: ArrayList<Model>
+) {
+    private val tvDescription1: TextView = view.findViewById(R.id.tvdescription1)
+    private val tvDescription2: TextView = view.findViewById(R.id.tvdescription2)
+    private val tvDescription3: TextView = view.findViewById(R.id.tvdescription3)
+    private val input1: EditText = view.findViewById(R.id.etInput1)
+    private val input2: EditText = view.findViewById(R.id.etInput2)
+    private val input3: EditText = view.findViewById(R.id.etInput3)
+    private val safe: Button = view.findViewById(R.id.btSaveItems)
+    private lateinit var model: Model
     var databaseTyp = ""
 
 
     fun getData(getData: GetData) {
 
+        tvDescription3.setText("Bitte gebe deine Beschreibung ein!")
 
-
-        if(klick == 1){
+        if (klick == 1) {
 
             tvDescription1.setText("Einnahme : ")
             input1.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
@@ -44,7 +47,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
             input2.setHint("bitte Datum eingeben!")
             databaseTyp = "Einnahme"
 
-        } else if(klick == 2){
+        } else if (klick == 2) {
 
             tvDescription1.setText("Unterkonto : ")
             input1.setHint("bitte Unterkonto eingeben!")
@@ -54,7 +57,7 @@ class SetItem(private val klick : Int,private val context : Context,private val 
             databaseTyp = "Unterkonto"
 
 
-        }else if(klick == 3){
+        } else if (klick == 3) {
             tvDescription1.setText("Ausgabe : ")
             input1.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             input1.setHint("bitte Ausgabe eingeben!")
@@ -64,70 +67,84 @@ class SetItem(private val klick : Int,private val context : Context,private val 
             createNewAlterDialogForShowUnterkontenWhenKlickAusgabenHinzufugen()
 
         } else {
-            Toast.makeText(context,"Fehler beim Laden",Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Fehler beim Laden", Toast.LENGTH_LONG).show()
         }
         whenUserKlickSafeButton(getData)
     }
 
-    fun createNewAlterDialogForShowUnterkontenWhenKlickAusgabenHinzufugen(){
+    fun createNewAlterDialogForShowUnterkontenWhenKlickAusgabenHinzufugen() {
 
         databaseTyp = "Ausgabe"
-        val alert = AlertDialogMain(context,R.layout.recyclerview_showallexistsunterkonten)
+        val alert = AlertDialogMain(context, R.layout.recyclerview_showallexistsunterkonten)
         val view = alert.setLayout()
-        val recyclerView : RecyclerView = view.findViewById(R.id.rvShowAllExistingUnterkonten)
+        val recyclerView: RecyclerView = view.findViewById(R.id.rvShowAllExistingUnterkonten)
         alert.createDialog()
 
-        StartRecyclerView(context,recyclerView, dataUnterkonto,R.layout.show_existing_unterkonten
-            ,"ShowExistingUnterkontenItems",object : ShowExistingUnterkontoInterface{
+        StartRecyclerView(
+            context,
+            recyclerView,
+            dataUnterkonto,
+            R.layout.show_existing_unterkonten,
+            "ShowExistingUnterkontenItems",
+            object : ShowExistingUnterkontoInterface {
                 override fun showExistingUnterkonto(boolean: Boolean, data: String) {
-                    if(boolean == true) {
+                    if (boolean == true) {
                         input2.setText(data)
                         alert.cancelDialog()
                     }
                 }
 
-            },null)
+            },
+            null
+        )
 
     }
+
     fun whenUserKlickSafeButton(getData: GetData) {
 
         safe.setOnClickListener {
-               if (input1.text.isEmpty() || input2.text.isEmpty()) {
-                    Toast.makeText(context, "Lasse kein Feld leer stehen", Toast.LENGTH_LONG).show()
+            if (input1.text.isEmpty() || input2.text.isEmpty()) {
+                Toast.makeText(context, "Lasse kein Feld leer stehen", Toast.LENGTH_LONG).show()
 
-                } else {
+            } else {
 
-                   val prozentUber100OderNicht = checkProzentIsNot100(input2.text.toString())
-                   val nameExistiertBereitsOderNicht = checkWhenUnterkontoNameDontExists(input1.text.toString())
-                   if(prozentUber100OderNicht != null && nameExistiertBereitsOderNicht != null){
-                       getData.getData(prozentUber100OderNicht!!)
-                   }
-
+                val prozentUber100OderNicht = checkProzentIsNot100(input2.text.toString())
+                val nameExistiertBereitsOderNicht =
+                    checkWhenUnterkontoNameDontExists(input1.text.toString())
+                if (prozentUber100OderNicht != null && nameExistiertBereitsOderNicht != null) {
+                    getData.getData(prozentUber100OderNicht!!)
                 }
+
+            }
 
         }
     }
 
-    fun checkProzentIsNot100(prozentZahl : String) : Model?{
+    fun checkProzentIsNot100(prozentZahl: String): Model? {
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
         val date = Date()
-        if(klick == 2){
+        if (klick == 2) {
             var ergebnis = 0.0
-            for(i in dataUnterkonto){
+            for (i in dataUnterkonto) {
                 ergebnis += i.spaltenName2.toDouble()
             }
             ergebnis += prozentZahl.toDouble()
 
-            if(ergebnis > 100.00){
-                Toast.makeText(context,"Dieser schritt wird die 100% grenze überschreiten bitte versuche es erneut!",Toast.LENGTH_LONG).show()
+            if (ergebnis > 100.00) {
+                Toast.makeText(
+                    context,
+                    "Dieser schritt wird die 100% grenze überschreiten bitte versuche es erneut!",
+                    Toast.LENGTH_LONG
+                ).show()
                 return null
 
-            } else{
+            } else {
                 model = Model(
                     input1.text.toString(),
                     input2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
-                    databaseTyp, "")
+                    databaseTyp, "", input3.text.toString()
+                )
             }
         } else {
 
@@ -135,25 +152,27 @@ class SetItem(private val klick : Int,private val context : Context,private val 
                 input1.text.toString(),
                 input2.text.toString(),
                 "Tag der erstellung ${dateFormat.format(date)}",
-                databaseTyp, ""
+                databaseTyp, "", input3.text.toString()
             )
         }
         return model
     }
-    fun checkWhenUnterkontoNameDontExists(input : String) : Model?{
+
+    fun checkWhenUnterkontoNameDontExists(input: String): Model? {
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
         val date = Date()
-        for(i in dataUnterkonto){
+        for (i in dataUnterkonto) {
 
-            if(i.spaltenName1 == input){
-                Toast.makeText(context,"Der Name existiert bereits!!",Toast.LENGTH_LONG).show()
+            if (i.spaltenName1 == input) {
+                Toast.makeText(context, "Der Name existiert bereits!!", Toast.LENGTH_LONG).show()
                 return null
             } else {
                 model = Model(
                     input1.text.toString(),
                     input2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
-                    databaseTyp, "")
+                    databaseTyp, "", input3.text.toString()
+                )
             }
         }
         return model
@@ -161,8 +180,6 @@ class SetItem(private val klick : Int,private val context : Context,private val 
 }
 
 
-
-
-interface GetData{
+interface GetData {
     fun getData(model: Model)
 }

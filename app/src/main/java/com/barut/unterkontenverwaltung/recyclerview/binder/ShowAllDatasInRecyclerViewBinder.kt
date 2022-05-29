@@ -33,15 +33,15 @@ class ShowAllDatasInRecyclerViewBinder(
 
     val sqLiteMainEinkommen = SQLiteMain(
         holder.itemView.context, "Einkommen", "Einkommen",
-        "unterkonto", "datum", "echtZeitDatum", "databaseType", "id"
+        "unterkonto", "datum", "echtZeitDatum", "databaseType", "id", "beschreibung"
     )
     val sqLiteMainUnterkonto = SQLiteMain(
         holder.itemView.context, "Unterkonto", "Unterkonto",
-        "name", "prozent", "datum", "databaseType", "id"
+        "name", "prozent", "datum", "databaseType", "id", "beschreibung"
     )
     val sqLiteMainAusgabe = SQLiteMain(
         holder.itemView.context, "Ausgabe", "Ausgabe",
-        "unterkonto", "ausgabe", "datum", "databaseType", "id"
+        "unterkonto", "ausgabe", "datum", "databaseType", "id", "beschreibung"
     )
 
     fun onStart() {
@@ -177,11 +177,15 @@ class ShowAllDatasInRecyclerViewBinder(
             val view = alert.setLayout()
             val tvDescription1 = view.findViewById<TextView>(R.id.tvdescription1)
             val tvDescription2 = view.findViewById<TextView>(R.id.tvdescription2)
+            val tvDescription3 = view.findViewById<TextView>(R.id.tvdescription3)
             val etInput1 = view.findViewById<EditText>(R.id.etInput1)
             val etInput2 = view.findViewById<EditText>(R.id.etInput2)
+            val etInput3 = view.findViewById<EditText>(R.id.etInput3)
             val btEdit = view.findViewById<Button>(R.id.btSaveItems)
             alert.createDialog()
 
+            tvDescription3.setText("Beschreibung Ändern!")
+            etInput3.setText(inhalt.get(holder.adapterPosition).beschreibung)
             if (inhalt.get(holder.adapterPosition).databaseType == "Ausgabe") {
                 tvDescription1.setText("Summe ändern!")
                 tvDescription2.setText("Name ändern!")
@@ -205,7 +209,7 @@ class ShowAllDatasInRecyclerViewBinder(
                     etInput2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
                     inhalt.get(holder.adapterPosition).databaseType,
-                    ""
+                    "", etInput3.text.toString()
                 )
 
                 if (inhalt.get(holder.adapterPosition).databaseType == "Ausgabe") {
@@ -219,7 +223,8 @@ class ShowAllDatasInRecyclerViewBinder(
                     val model = checkProzentIsNot100(
                         etInput2.text.toString(),
                         etInput2.text.toString(),
-                        etInput1.text.toString()
+                        etInput1.text.toString(),
+                        etInput3.text.toString()
                     )
                     if (model != null) {
                         sqLiteMainUnterkonto.updateData(
@@ -254,7 +259,7 @@ class ShowAllDatasInRecyclerViewBinder(
 
     fun checkProzentIsNot100(
         prozentZahl: String, etInput1: String,
-        etInput2: String
+        etInput2: String, etInput3: String
     ): Model? {
         var model: Model
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
@@ -287,7 +292,7 @@ class ShowAllDatasInRecyclerViewBinder(
                 etInput1,
                 "Tag der erstellung ${dateFormat.format(date)}",
                 inhalt.get(holder.adapterPosition).databaseType,
-                ""
+                "", etInput3
             )
         }
 

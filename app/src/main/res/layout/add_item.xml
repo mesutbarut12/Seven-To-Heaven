@@ -54,6 +54,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etInput1" />
 
+    <TextView
+        android:id="@+id/tvdescription3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/etInput3"
+        app:layout_constraintEnd_toStartOf="@+id/etInput3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etInput3"
+        android:minLines="2"/>
+
+    <EditText
+        android:id="@+id/etInput3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:inputType="textMultiLine|textPersonName"
+        android:minHeight="48dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btSaveItems"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvdescription3"
+        app:layout_constraintTop_toBottomOf="@+id/etInput2" />
+
     <Button
         android:id="@+id/btSaveItems"
         android:layout_width="match_parent"
@@ -67,6 +96,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etInput2" />
+        app:layout_constraintTop_toBottomOf="@+id/etInput3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
