@@ -63,7 +63,7 @@ class SQLiteMain(
                     cursor.getString(cursor.getColumnIndex(echtZeitDatum)),
                     cursor.getString(cursor.getColumnIndex(databaseType)),
                     cursor.getString(cursor.getColumnIndex(id)),
-                    ""
+                    cursor.getString(cursor.getColumnIndex(beschreibung))
                 )
                 arraylist.add(model)
             } while (cursor.moveToNext())

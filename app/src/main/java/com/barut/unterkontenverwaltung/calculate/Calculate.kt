@@ -142,6 +142,11 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         }
         return arrayList
     }
+    fun getBeschreibungVorhanden() : ArrayList<String>{
+        var arrayList: ArrayList<String> = arrayListOf()
+
+        return arrayList
+    }
 
 }
 

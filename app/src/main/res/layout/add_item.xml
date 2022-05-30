@@ -8,12 +8,15 @@
 
     <TextView
         android:id="@+id/tvdescription2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="TextView"
+        android:inputType="textMultiLine|textPersonName"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/etInput2"
+        app:layout_constraintEnd_toStartOf="@+id/etInput2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etInput2" />
 
@@ -45,12 +48,15 @@
 
     <TextView
         android:id="@+id/tvdescription1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:inputType="textMultiLine|textPersonName"
         android:text="TextView"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/etInput1"
+        app:layout_constraintEnd_toStartOf="@+id/etInput1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etInput1" />
 
@@ -58,14 +64,16 @@
         android:id="@+id/tvdescription3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:inputType="textMultiLine|textPersonName"
+        android:minLines="2"
         android:text="TextView"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/etInput3"
         app:layout_constraintEnd_toStartOf="@+id/etInput3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etInput3"
-        android:minLines="2"/>
+        app:layout_constraintTop_toTopOf="@+id/etInput3" />
 
     <EditText
         android:id="@+id/etInput3"

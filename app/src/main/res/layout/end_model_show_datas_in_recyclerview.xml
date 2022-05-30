@@ -23,10 +23,12 @@
         android:id="@+id/tvProzentualeEinteilung"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:inputType="textMultiLine|textPersonName"
         android:text="Prozentuale einteilung"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/tvUnterkonto"
+        app:layout_constraintEnd_toStartOf="@+id/tvGuthaben"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUnterkonto" />
 
@@ -66,6 +68,7 @@
         app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
         app:layout_constraintTop_toBottomOf="@+id/tvAusgaben" />
 
+
     <View
         android:id="@+id/divider"
         android:layout_width="0dp"
@@ -75,5 +78,90 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvAusgaben"
         app:layout_constraintTop_toBottomOf="@+id/tvAusgaben" />
+
+    <View
+        android:id="@+id/divider19"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="@+id/tvProzentualeEinteilung"
+        app:layout_constraintStart_toStartOf="@+id/tvProzentualeEinteilung"
+        app:layout_constraintTop_toBottomOf="@+id/tvProzentualeEinteilung" />
+
+    <View
+        android:id="@+id/divider20"
+        android:layout_width="1dp"
+        android:layout_height="32dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="@+id/divider19"
+        app:layout_constraintTop_toTopOf="@+id/divider19" />
+
+    <View
+        android:id="@+id/divider21"
+        android:layout_width="1dp"
+        android:layout_height="32dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintStart_toStartOf="@+id/divider19"
+        app:layout_constraintTop_toTopOf="@+id/divider19" />
+
+    <View
+        android:id="@+id/divider23"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/divider25"
+        app:layout_constraintEnd_toStartOf="@+id/divider26"
+        app:layout_constraintStart_toEndOf="@+id/divider21"
+        app:layout_constraintTop_toTopOf="@+id/divider19" />
+
+    <View
+        android:id="@+id/divider26"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/listDivider"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/divider25"
+        app:layout_constraintEnd_toStartOf="@+id/divider20"
+        app:layout_constraintStart_toEndOf="@+id/divider21"
+        app:layout_constraintTop_toTopOf="@+id/divider19"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/divider24"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/divider25"
+        app:layout_constraintEnd_toEndOf="@+id/divider20"
+        app:layout_constraintStart_toEndOf="@+id/divider26"
+        app:layout_constraintTop_toTopOf="@+id/divider19" />
+
+    <View
+        android:id="@+id/divider22"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/divider25"
+        app:layout_constraintEnd_toEndOf="@+id/divider20"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/divider21" />
+
+    <View
+        android:id="@+id/divider25"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/divider20"
+        app:layout_constraintStart_toStartOf="@+id/divider21"
+        app:layout_constraintTop_toBottomOf="@+id/divider20" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
