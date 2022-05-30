@@ -87,6 +87,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/divider26"
         app:layout_constraintEnd_toEndOf="@+id/tvProzentualeEinteilung"
         app:layout_constraintStart_toStartOf="@+id/tvProzentualeEinteilung"
         app:layout_constraintTop_toBottomOf="@+id/tvProzentualeEinteilung" />
@@ -94,16 +95,18 @@
     <View
         android:id="@+id/divider20"
         android:layout_width="1dp"
-        android:layout_height="32dp"
+        android:layout_height="0dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/divider25"
         app:layout_constraintEnd_toEndOf="@+id/divider19"
         app:layout_constraintTop_toTopOf="@+id/divider19" />
 
     <View
         android:id="@+id/divider21"
         android:layout_width="1dp"
-        android:layout_height="32dp"
+        android:layout_height="0dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@id/divider26"
         app:layout_constraintStart_toStartOf="@+id/divider19"
         app:layout_constraintTop_toTopOf="@+id/divider19" />
 
@@ -185,7 +188,7 @@
         app:layout_constraintEnd_toEndOf="@+id/divider19"
         app:layout_constraintStart_toEndOf="@+id/divider26"
         app:layout_constraintTop_toTopOf="@+id/divider19"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
