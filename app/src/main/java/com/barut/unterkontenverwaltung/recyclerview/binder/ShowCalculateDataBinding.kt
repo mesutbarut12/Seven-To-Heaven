@@ -21,9 +21,8 @@ class ShowCalculateDataBinding(
                 val guthaben = showlist!!.get(2) as TextView
                 val ausgaben = showlist!!.get(3) as TextView
                 val ergebnis = showlist!!.get(4) as TextView
-                val beschreibungEinnahme = showlist!!.get(5) as TextView
-                val beschreibungAusgabe = showlist!!.get(6) as TextView
-                val beschreibungUnterkonto = showlist!!.get(7) as TextView
+                val beschreibungAusgabe = showlist!!.get(5) as TextView
+                val beschreibungUnterkonto = showlist!!.get(6) as TextView
 
                 val f = DecimalFormat("#0.0")
                 unterkonto.setText("${inhalt.spaltenName1.get(holder.adapterPosition)}")
@@ -54,7 +53,6 @@ class ShowCalculateDataBinding(
                     ).toDouble()
                 ergebnis.setText("Saldo : ${runden(ergebnis1)}")
 
-                beschreibungEinnahme.setText("X")
                 beschreibungAusgabe.setText("X")
                 beschreibungUnterkonto.setText("X")
                 println("---------------------------")
@@ -67,11 +65,7 @@ class ShowCalculateDataBinding(
                         beschreibungUnterkonto.setText("✓")
                     } else if (i == "ausgabe") {
                         beschreibungAusgabe.setText("✓")
-                    } else if (i == "einnahme") {
-                        beschreibungEinnahme.setText("✓")
-                    } else if (i == "eLeer") {
-                        beschreibungEinnahme.setText("X")
-                    } else if (i == "aLeer") {
+                    }  else if (i == "aLeer") {
                         beschreibungAusgabe.setText("X")
                     } else if (i == "uLeer") {
                         beschreibungUnterkonto.setText("X")

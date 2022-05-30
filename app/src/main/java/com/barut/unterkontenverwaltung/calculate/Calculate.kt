@@ -13,7 +13,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         var verfugbarerSaldo = getVerfugbarerSaldo()
         var getUnterkontenAnzahl = getUnterkontenAnzahl()
         var getProzenteGesamt = getProzenteInsgesamt()
-
+        var getBeschreibung = getBeschreibungVorhandenMainActivity()
 
         //val f = DecimalFormat("#0.0")
         //return CalculateModel(f.format(gesamtSaldo).toDouble(),f.format(gesamtAusgaben).toDouble(),
@@ -24,7 +24,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
             gesamtAusgaben,
             verfugbarerSaldo,
             getUnterkontenAnzahl,
-            getProzenteGesamt
+            getProzenteGesamt,getBeschreibung
         )
     }
 
@@ -65,6 +65,35 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
             ergebnis += i.spaltenName2.toDouble()
         }
         return ergebnis
+    }
+
+    fun getBeschreibungVorhandenMainActivity() : String{
+        var beschreibungVorhanden = 0
+        var beschreibungNichtVorhanden = 0
+
+        for (i in geld.readData()){
+            if(i != null) {
+                if (i.beschreibung.isNotEmpty()) {
+                    beschreibungVorhanden += 1
+                } else {
+                    beschreibungNichtVorhanden += 1
+                }
+            } else {
+                return " "
+            }
+        }
+
+
+        if(beschreibungVorhanden > 0 && beschreibungNichtVorhanden == 0){
+            return "✓"
+        } else if(beschreibungVorhanden == 0 && beschreibungNichtVorhanden > 0 ){
+            return "X"
+        } else if(beschreibungVorhanden > 0 && beschreibungNichtVorhanden > 0 ){
+            return "O"
+        } else if(beschreibungVorhanden == 0 && beschreibungNichtVorhanden == 0){
+            return "X"
+        }
+        return "Fehler"
     }
 
 
@@ -162,17 +191,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
 
             }
         }
-        for (i in geld.readData()) {
-            if(i.beschreibung.isNotEmpty()){
-                arrayList.add("einnahme")
-                println("Einnahme Nicht leer")
 
-            } else {
-                arrayList.add("eLeer")
-                println("Einnahme Leer")
-
-            }
-        }
 
         return arrayList
     }
@@ -181,5 +200,5 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
 
 data class CalculateModel(
     val gesamtSaldo: Double, val gesamtAusgaben: Double, val verfugbarerSaldo: Double,
-    val unterKontenAnzahl: Double, val prozenteGesamt: Double
+    val unterKontenAnzahl: Double, val prozenteGesamt: Double,val beschreibungVorhandenODerNicht : String
 )

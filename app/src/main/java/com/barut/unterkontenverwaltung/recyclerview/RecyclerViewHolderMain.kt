@@ -40,7 +40,6 @@ class RecyclerViewHolderMain(itemView: View, val id: String) : RecyclerView.View
             val guthaben: TextView = itemView.findViewById(R.id.tvGuthaben)
             val ausgaben: TextView = itemView.findViewById(R.id.tvAusgaben)
             val ergebnis: TextView = itemView.findViewById(R.id.tvErgebnis)
-            val beschreibungEinnahme: TextView = itemView.findViewById(R.id.tvBEinnahme)
             val beschreibungAusgabe: TextView = itemView.findViewById(R.id.tvBAusgabe)
             val beschreibungUnterkonto: TextView = itemView.findViewById(R.id.tvBUnterkonto)
             arraylistView.add(unterkonto)
@@ -48,7 +47,6 @@ class RecyclerViewHolderMain(itemView: View, val id: String) : RecyclerView.View
             arraylistView.add(guthaben)
             arraylistView.add(ausgaben)
             arraylistView.add(ergebnis)
-            arraylistView.add(beschreibungEinnahme)
             arraylistView.add(beschreibungAusgabe)
             arraylistView.add(beschreibungUnterkonto)
             return arraylistView

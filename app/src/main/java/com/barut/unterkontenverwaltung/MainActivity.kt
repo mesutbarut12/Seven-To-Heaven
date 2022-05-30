@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
             val tvVerfugbarerSaldo: TextView = findViewById(R.id.tvVerfugbaererSaldo)
             val tvUnterkontenAnzahl: TextView = findViewById(R.id.tvUnterkontenAnzahl)
             val tvProzentAnzahl: TextView = findViewById(R.id.tvProzentAnzahl)
+            val tvBeschreibung : TextView = findViewById(R.id.tvBeschreibung)
 
 
             tvGesamtSaldo.setText("Gesamt Saldo :\n ${runden(data.gesamtSaldo)}")
@@ -70,6 +71,7 @@ class MainActivity : AppCompatActivity() {
             tvVerfugbarerSaldo.setText("Verfügbarer Saldo :\n ${runden(data.verfugbarerSaldo)}€")
             tvUnterkontenAnzahl.setText("Unterkonten Anzahl :\n ${runden(data.unterKontenAnzahl)}")
             tvProzentAnzahl.setText("Prozente ins Gesamt :\n ${runden(data.prozenteGesamt)}%")
+            tvBeschreibung.setText("Beschreibung Vorhanden " + data.beschreibungVorhandenODerNicht)
         }
     fun showCalculateDataInRecyclerView(){
         var calculate = Calculate(sqLiteMainEinkommen,sqLiteMainUnterkonto,sqLiteMainAusgabe)

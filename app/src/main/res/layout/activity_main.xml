@@ -43,6 +43,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
+
             <TextView
                 android:id="@+id/tvGesamtSaldo2"
                 android:layout_width="wrap_content"
@@ -60,6 +61,7 @@
                 android:text="Gesamt Ausgaben :"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tvUnterkontenAnzahl"
                 android:layout_width="wrap_content"
@@ -68,12 +70,23 @@
                 android:text="Unterkonten Anzahl: "
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tvProzentAnzahl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Prozente Gesamt: "
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvBeschreibung"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:text="Beschreibung Vorhanden :"
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
