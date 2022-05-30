@@ -1,7 +1,6 @@
 package com.barut.unterkontenverwaltung.calculate
 
 import com.barut.unterkontenverwaltung.recyclerview.NewModel
-import com.barut.unterkontenverwaltung.recyclerview.ZumAusrechnenVonSaldoMitAusgaben
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 
 class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: SQLiteMain) {
@@ -28,6 +27,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
             getProzenteGesamt
         )
     }
+
     fun getGesamtSaldo(): Double {
         var ergebnis = 0.0
         for (i in geld.readData()) {
@@ -37,6 +37,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
 
         return ergebnis
     }
+
     fun getGesamtAusgaben(): Double {
         var ergebnis = 0.0
         for (i in ausgaben.readData()) {
@@ -45,6 +46,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         }
         return ergebnis
     }
+
     fun getVerfugbarerSaldo(): Double {
         var ergebnis = 0.0
         var gesamtSaldo = getGesamtSaldo()
@@ -52,9 +54,11 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         ergebnis = gesamtSaldo - gesamtAusgaben
         return ergebnis
     }
+
     fun getUnterkontenAnzahl(): Double {
         return unterkonto.readData().size.toDouble()
     }
+
     fun getProzenteInsgesamt(): Double {
         var ergebnis = 0.0
         for (i in unterkonto.readData()) {
@@ -69,20 +73,18 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         var ausgabenName = getAusgabenName()
         var prozentualeEinteilung = getProzentualeEinteilung()
         var saldoFürDasUnterkonto = getSaldoFürDasUnterkonto()
-        var saldoMitAusgaben = getSaldoMitausgaben()
         var ausgaben = getAusgaben()
+        var beschreibungVorhandenOderNicht = getBeschreibungVorhanden()
 
 
-        var ausrechnenVonSaldoMitAusgaben = ZumAusrechnenVonSaldoMitAusgaben(
-            unterkonten, ausgabenName, ausgaben, saldoFürDasUnterkonto
-        )
 
         var model = NewModel(
             unterkonten, prozentualeEinteilung, ausgaben, saldoFürDasUnterkonto,
-            arrayListOf()
+            beschreibungVorhandenOderNicht
         )
         return model
     }
+
     fun getUnterkonto(): ArrayList<String> {
         var arrayList: ArrayList<String> = arrayListOf()
         for (i in unterkonto.readData()) {
@@ -92,6 +94,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         }
         return arrayList
     }
+
     fun getProzentualeEinteilung(): ArrayList<String> {
         var arrayList: ArrayList<String> = arrayListOf()
         for (i in unterkonto.readData()) {
@@ -99,16 +102,9 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         }
         return arrayList
     }
-    fun getSaldoMitausgaben(): ArrayList<String> {
-        var arrayList: ArrayList<String> = arrayListOf()
-        var ergebnis = 0.0
-        var saldoFürUnterkonto = getSaldoFürDasUnterkonto()
-        var ausgaben = getAusgabenName()
 
 
 
-        return arrayList
-    }
     fun getSaldoFürDasUnterkonto(): ArrayList<String> {
         var arrayList: ArrayList<String> = arrayListOf()
         var ergebnis = 0.0
@@ -119,6 +115,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
 
         return arrayList
     }
+
     fun getAusgabenName(): List<String> {
         var setList: MutableSet<String>
         setList = mutableSetOf()
@@ -128,6 +125,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
 
         return setList.toList()
     }
+
     fun getAusgaben(): ArrayList<String> {
         var arrayList: ArrayList<String> = arrayListOf()
         for (y in unterkonto.readData()) {
@@ -142,8 +140,30 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         }
         return arrayList
     }
-    fun getBeschreibungVorhanden() : ArrayList<String>{
+
+    fun getBeschreibungVorhanden(): ArrayList<String> {
         var arrayList: ArrayList<String> = arrayListOf()
+        for (i in unterkonto.readData()) {
+            if(i.beschreibung.isNotEmpty()){
+                arrayList.add("unterkonto,nicht leer")
+            } else {
+                arrayList.add("unterkonto,leer")
+            }
+        }
+        for (i in ausgaben.readData()) {
+            if(i.beschreibung.isNotEmpty()){
+                arrayList.add("ausgaben,nicht leer")
+            } else {
+                arrayList.add("ausgaben,leer")
+            }
+        }
+        for (i in unterkonto.readData()) {
+            if(i.beschreibung.isNotEmpty()){
+                arrayList.add("unterkonto,nicht leer")
+            } else {
+                arrayList.add("unterkonto,leer")
+            }
+        }
 
         return arrayList
     }

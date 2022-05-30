@@ -20,6 +20,9 @@ class ShowCalculateDataBinding(val holder : RecyclerViewHolderMain, val id : Str
                 val guthaben = showlist!!.get(2) as TextView
                 val ausgaben = showlist!!.get(3) as TextView
                 val ergebnis = showlist!!.get(4) as TextView
+                val beschreibungEinnahme = showlist!!.get(5) as TextView
+                val beschreibungAusgabe = showlist!!.get(6) as TextView
+                val beschreibungUnterkonto = showlist!!.get(7) as TextView
 
                  val f = DecimalFormat("#0.0")
                  unterkonto.setText("${inhalt.spaltenName1.get(holder.adapterPosition)}")
@@ -28,6 +31,9 @@ class ShowCalculateDataBinding(val holder : RecyclerViewHolderMain, val id : Str
                  ausgaben.setText("Ausgaben : ${runden(inhalt.datum.get(holder.adapterPosition).toDouble())}")
                  var ergebnis1 =  inhalt.databaseType.get(holder.adapterPosition).toDouble() - inhalt.datum.get(holder.adapterPosition).toDouble()
                  ergebnis.setText("Saldo : ${runden(ergebnis1)}")
+                 beschreibungEinnahme.setText("X")
+                 beschreibungAusgabe.setText("X")
+                 beschreibungUnterkonto.setText("X")
 
 
 

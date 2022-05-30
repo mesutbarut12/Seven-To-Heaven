@@ -163,5 +163,73 @@
         app:layout_constraintStart_toStartOf="@+id/divider21"
         app:layout_constraintTop_toBottomOf="@+id/divider20" />
 
+    <TextView
+        android:id="@+id/tvBAusgabe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/divider26"
+        app:layout_constraintEnd_toStartOf="@+id/divider23"
+        app:layout_constraintStart_toEndOf="@+id/divider21"
+        app:layout_constraintTop_toBottomOf="@+id/divider22" />
+
+    <TextView
+        android:id="@+id/tvBAusgabe2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/divider22"
+        app:layout_constraintEnd_toStartOf="@+id/divider23"
+        app:layout_constraintStart_toEndOf="@+id/divider21"
+        app:layout_constraintTop_toTopOf="@+id/divider19" />
+
+    <TextView
+        android:id="@+id/tvBUnterkonto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="U"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/divider26"
+        app:layout_constraintEnd_toStartOf="@+id/divider24"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/divider23"
+        app:layout_constraintTop_toBottomOf="@+id/divider22" />
+    <TextView
+        android:id="@+id/tvBUnterkonto2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="U"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/divider22"
+        app:layout_constraintEnd_toStartOf="@+id/divider24"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/divider23"
+        app:layout_constraintTop_toTopOf="@+id/divider19" />
+
+    <TextView
+        android:id="@+id/tvBEinnahme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/divider26"
+        app:layout_constraintEnd_toStartOf="@+id/divider20"
+        app:layout_constraintStart_toEndOf="@+id/divider24"
+        app:layout_constraintTop_toBottomOf="@+id/divider22"
+        app:layout_constraintVertical_bias="0.5" />
+    <TextView
+        android:id="@+id/tvBEinnahme2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/divider22"
+        app:layout_constraintEnd_toStartOf="@+id/divider20"
+        app:layout_constraintStart_toEndOf="@+id/divider24"
+        app:layout_constraintTop_toTopOf="@+id/divider19"
+        app:layout_constraintVertical_bias="0.5" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
