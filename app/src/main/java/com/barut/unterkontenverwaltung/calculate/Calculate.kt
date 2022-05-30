@@ -145,23 +145,32 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         var arrayList: ArrayList<String> = arrayListOf()
         for (i in unterkonto.readData()) {
             if(i.beschreibung.isNotEmpty()){
-                arrayList.add("unterkonto,nicht leer")
+                arrayList.add("unterkonto")
+                println("Unterkonto Nicht leer")
             } else {
-                arrayList.add("unterkonto,leer")
+                arrayList.add("uLeer")
+                println("Unterkonto Leer")
             }
         }
         for (i in ausgaben.readData()) {
             if(i.beschreibung.isNotEmpty()){
-                arrayList.add("ausgaben,nicht leer")
+                arrayList.add("ausgabe")
+                println("Ausgaben Nicht leer")
             } else {
-                arrayList.add("ausgaben,leer")
+                arrayList.add("aLeer")
+                println("Ausgaben Leer")
+
             }
         }
-        for (i in unterkonto.readData()) {
+        for (i in geld.readData()) {
             if(i.beschreibung.isNotEmpty()){
-                arrayList.add("unterkonto,nicht leer")
+                arrayList.add("einnahme")
+                println("Einnahme Nicht leer")
+
             } else {
-                arrayList.add("unterkonto,leer")
+                arrayList.add("eLeer")
+                println("Einnahme Leer")
+
             }
         }
 
