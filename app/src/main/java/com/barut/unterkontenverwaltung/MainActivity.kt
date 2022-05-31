@@ -75,11 +75,12 @@ class MainActivity : AppCompatActivity() {
 
     fun showCalculateDataInRecyclerView() {
         var calculate = Calculate(sqLiteMainEinkommen, sqLiteMainUnterkonto, sqLiteMainAusgabe)
-        var inhalt = calculate.calculateData()
+        var newinhalt = calculate.calculateData()
+        val inhalt = getInhalt()
         StartRecyclerView(
             this, recyclerView,
-            arrayListOf(), R.layout.end_model_show_datas_in_recyclerview, "EndShowDataCalculate",
-            null, inhalt!!
+            inhalt, R.layout.end_model_show_datas_in_recyclerview, "EndShowDataCalculate",
+            null, newinhalt!!
         )
     }
 
@@ -158,12 +159,14 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
-
-    fun showItemsInRecyclerView() {
+    fun getInhalt() : ArrayList<Model>{
 
         val dataEinkommen = sqLiteMainEinkommen.readData()
         val dataUnterkonto = sqLiteMainUnterkonto.readData()
         val dataAusgabe = sqLiteMainAusgabe.readData()
+
+
+
         val arraylist: ArrayList<Model> = arrayListOf()
 
         for (i in dataEinkommen) {
@@ -176,6 +179,12 @@ class MainActivity : AppCompatActivity() {
             arraylist.add(i)
         }
         arraylist.sortWith(compareBy({ it.databaseType }, { it.datum }))
+        return arraylist
+    }
+
+    fun showItemsInRecyclerView() {
+
+       val arraylist = getInhalt()
         StartRecyclerView(
             this, recyclerView,
             arraylist, R.layout.show_items, "ShowItems", null, null

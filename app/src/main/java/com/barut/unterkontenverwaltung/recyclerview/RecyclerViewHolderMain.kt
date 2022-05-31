@@ -30,10 +30,6 @@ class RecyclerViewHolderMain(itemView: View, val id: String) : RecyclerView.View
             val tv: TextView = itemView.findViewById(R.id.tv)
             arraylistView.add(tv)
             return arraylistView
-        } else if (id == "ShowCalculateData") {
-            val tv: TextView = itemView.findViewById(R.id.tvShowCalculateUnterkonto)
-            arraylistView.add(tv)
-            return arraylistView
         } else if (id == "EndShowDataCalculate") {
             val unterkonto: TextView = itemView.findViewById(R.id.tvUnterkonto)
             val prozent: TextView = itemView.findViewById(R.id.tvProzentualeEinteilung)
