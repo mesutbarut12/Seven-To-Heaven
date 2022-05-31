@@ -17,7 +17,7 @@ import kotlin.math.roundToInt
 class ShowCalculateDataBinding(
     val holder: RecyclerViewHolderMain, val id: String,
     val newInhalt: NewModel,
-    val recyclerView: RecyclerView,val inhalt : ArrayList<Model>
+    val recyclerView: RecyclerView, val inhalt: ArrayList<Model>
 ) {
     fun onStart() {
         if (holder.differntHolder() != null) {
@@ -56,7 +56,8 @@ class ShowCalculateDataBinding(
                     }"
                 )
                 var ergebnis1 =
-                    newInhalt.databaseType.get(holder.adapterPosition).toDouble() - newInhalt.datum.get(
+                    newInhalt.databaseType.get(holder.adapterPosition)
+                        .toDouble() - newInhalt.datum.get(
                         holder.adapterPosition
                     ).toDouble()
                 ergebnis.setText("Saldo : ${runden(ergebnis1)}")
@@ -89,40 +90,128 @@ class ShowCalculateDataBinding(
     fun longClickListener() {
         holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
             override fun onLongClick(p0: View?): Boolean {
-
                 val alert = initAlertDialog()
                 val view = getViewAlertDialog(alert)
                 val viewPager2 = initViewPager(view)
-                val tablayout = initTabLayout(view)
-                createViewPager(viewPager2)
+                createViewPager(viewPager2, getDataForTabLayout2(0))
                 alert.createDialog()
-
-
-
+                tabLayoutSelectedListener(view, viewPager2)
                 return true
             }
 
         })
     }
-    fun initAlertDialog() : AlertDialogMain{
+
+    fun tabLayoutSelectedListener(view: View, viewPager2: ViewPager2) {
+        val tablayout = initTabLayout(view)
+        val tablayout2 = initTabLayout2(view)
+        codeForTabLayout2(tablayout2,viewPager2)
+
+        tablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                codeForTabLayout2(tablayout2,viewPager2)
+                println("onTabSelected")
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                codeForTabLayout2(tablayout2,viewPager2)
+                println("onTabUnselected")
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                codeForTabLayout2(tablayout2,viewPager2)
+                println("codeForTabLayout2")
+
+            }
+
+        })
+    }
+
+    fun initAlertDialog(): AlertDialogMain {
         val alert =
             AlertDialogMain(holder.itemView.context, R.layout.item_click_long_listener)
         return alert
     }
-    fun getViewAlertDialog(alert : AlertDialogMain) : View{
+
+    fun getViewAlertDialog(alert: AlertDialogMain): View {
         val view = alert.setLayout()
         return view
     }
-    fun initViewPager(view : View) : ViewPager2{
-        val viewpager2 : ViewPager2 = view.findViewById(R.id.viewpager2)
+
+    fun initViewPager(view: View): ViewPager2 {
+        val viewpager2: ViewPager2 = view.findViewById(R.id.viewpager2)
         return viewpager2
     }
-    fun initTabLayout(view : View) : TabLayout{
+
+    fun initTabLayout(view: View): TabLayout {
         val tablayout = view.findViewById<TabLayout>(R.id.tabLayout)
         return tablayout
     }
-    fun createViewPager(viewPager2: ViewPager2){
-        val adapter = ViewPage2Adapter(inhalt)
+
+    fun initTabLayout2(view: View): TabLayout {
+        val tablayout = view.findViewById<TabLayout>(R.id.tabLayout2)
+        return tablayout
+    }
+
+    fun createViewPager(viewPager2: ViewPager2, inhalt1: ArrayList<Model>) {
+        val adapter = ViewPage2Adapter(inhalt1)
         viewPager2.adapter = adapter
     }
+
+    fun getDataForTabLayout2(position: Int): ArrayList<Model> {
+        val arrayList: ArrayList<Model> = arrayListOf()
+        for (i in inhalt) {
+            if (position == 0) {
+                if (i.databaseType == "Unterkonto") {
+                    arrayList.add(i)
+                }
+            } else if (position == 1) {
+                if (i.databaseType == "Einkommen") {
+                    arrayList.add(i)
+                }
+            } else if (position == 2) {
+                if (i.databaseType == "Ausgabe") {
+                    arrayList.add(i)
+                }
+            }
+        }
+        return arrayList
+    }
+
+    fun codeForTabLayout2(tablayout2 : TabLayout,viewPager2: ViewPager2){
+
+
+                tablayout2.getTabAt(0)?.setText("Unterkonto")
+                tablayout2.getTabAt(1)?.setText("Einkommen")
+                tablayout2.getTabAt(2)?.setText("Ausgabe")
+                tablayout2.addOnTabSelectedListener(object :
+                    TabLayout.OnTabSelectedListener {
+                    override fun onTabSelected(tab1: TabLayout.Tab?) {
+                        if (tab1 != null) {
+                            if (tab1.position == 0) {
+                                createViewPager(viewPager2, getDataForTabLayout2(0))
+
+                            } else if (tab1.position == 1) {
+                                createViewPager(viewPager2, getDataForTabLayout2(1))
+
+                            } else if (tab1.position == 2) {
+                                createViewPager(viewPager2, getDataForTabLayout2(2))
+
+
+                            }
+                        }
+                    }
+
+                    override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                    }
+
+                    override fun onTabReselected(tab: TabLayout.Tab?) {
+                    }
+                })
+
+            }
+
+
 }
