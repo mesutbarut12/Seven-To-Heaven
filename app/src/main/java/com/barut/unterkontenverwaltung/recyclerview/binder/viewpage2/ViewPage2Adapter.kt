@@ -28,16 +28,25 @@ class ViewPage2Adapter(val inhalt: ArrayList<Model>) : RecyclerView.Adapter<View
 
         if (inhalt.get(position).beschreibung.isEmpty()) {
             tvBeschreibungViewPager.setText("Keine Beschreibung Vorhanden")
-
         } else {
             tvBeschreibungViewPager.setText(inhalt.get(position).beschreibung)
-
         }
-        tvDatabaseTypViewpager.setText(inhalt.get(position).databaseType)
+        val wert = checkWelchesUnterkonto(position)
+        tvDatabaseTypViewpager.setText(wert)
     }
 
     override fun getItemCount(): Int {
-        println(inhalt.size)
         return inhalt.size
+    }
+
+    fun checkWelchesUnterkonto (position : Int) : String{
+        if(inhalt.get(position).databaseType == "Ausgabe"){
+            return inhalt.get(position).spaltenName2
+        } else if(inhalt.get(position).databaseType == "Einnahme"){
+            return "Demnächste Verfügbar!"
+        } else if(inhalt.get(position).databaseType == "Unterkonto"){
+            return inhalt.get(position).spaltenName1
+        }
+        return " "
     }
 }

@@ -103,29 +103,8 @@ class ShowCalculateDataBinding(
     }
 
     fun tabLayoutSelectedListener(view: View, viewPager2: ViewPager2) {
-        val tablayout = initTabLayout(view)
         val tablayout2 = initTabLayout2(view)
         codeForTabLayout2(tablayout2,viewPager2)
-
-        tablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                codeForTabLayout2(tablayout2,viewPager2)
-                println("onTabSelected")
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                codeForTabLayout2(tablayout2,viewPager2)
-                println("onTabUnselected")
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                codeForTabLayout2(tablayout2,viewPager2)
-                println("codeForTabLayout2")
-
-            }
-
-        })
     }
 
     fun initAlertDialog(): AlertDialogMain {
@@ -142,11 +121,6 @@ class ShowCalculateDataBinding(
     fun initViewPager(view: View): ViewPager2 {
         val viewpager2: ViewPager2 = view.findViewById(R.id.viewpager2)
         return viewpager2
-    }
-
-    fun initTabLayout(view: View): TabLayout {
-        val tablayout = view.findViewById<TabLayout>(R.id.tabLayout)
-        return tablayout
     }
 
     fun initTabLayout2(view: View): TabLayout {
