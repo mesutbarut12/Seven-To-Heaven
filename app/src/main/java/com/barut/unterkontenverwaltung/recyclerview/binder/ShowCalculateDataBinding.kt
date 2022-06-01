@@ -167,7 +167,7 @@ class ShowCalculateDataBinding(
                     arrayList.add(i)
                 }
             } else if (position == 1) {
-                if (i.databaseType == "Einkommen") {
+                if (i.databaseType == "Einnahme") {
                     arrayList.add(i)
                 }
             } else if (position == 2) {

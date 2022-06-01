@@ -1,13 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="@drawable/decoration">
+    app:cardUseCompatPadding="true"
+    app:cardElevation="6dp"
+    app:cardCornerRadius="6dp"
 
-    <TextView
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <View
+            android:id="@+id/dividerOben"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvUnterkonto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <View
+            android:id="@+id/dividerUnten"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tvErgebnis"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <View
+            android:id="@+id/dividerRechts"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toTopOf="@id/dividerOben"
+            app:layout_constraintBottom_toBottomOf="@id/dividerUnten"
+            app:layout_constraintEnd_toEndOf="@id/dividerOben"/>
+
+        <View
+            android:id="@+id/dividerLinks"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/dividerUnten"
+            app:layout_constraintStart_toStartOf="@id/dividerUnten"
+            app:layout_constraintTop_toTopOf="@id/dividerOben" />
+
+        <TextView
         android:id="@+id/tvUnterkonto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,8 +74,9 @@
         android:text="Prozentuale einteilung"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:paddingLeft="2dp"
         app:layout_constraintEnd_toStartOf="@+id/tvGuthaben"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/dividerLinks"
         app:layout_constraintTop_toBottomOf="@+id/tvUnterkonto" />
 
     <TextView
@@ -191,4 +238,7 @@
         app:layout_constraintVertical_bias="0.5" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
