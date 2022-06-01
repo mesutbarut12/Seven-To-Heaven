@@ -57,20 +57,20 @@ class MainActivity : AppCompatActivity() {
         var calculate = Calculate(sqLiteMainEinkommen, sqLiteMainUnterkonto, sqLiteMainAusgabe)
         var data = calculate.calculate()
 
-        val tvGesamtSaldo: TextView = findViewById(R.id.tvGesamtSaldo2)
-        val tvGesamtAusgaben: TextView = findViewById(R.id.tvgesamtAusgaben)
-        val tvVerfugbarerSaldo: TextView = findViewById(R.id.tvVerfugbaererSaldo)
-        val tvUnterkontenAnzahl: TextView = findViewById(R.id.tvUnterkontenAnzahl)
-        val tvProzentAnzahl: TextView = findViewById(R.id.tvProzentAnzahl)
-        val tvBeschreibung: TextView = findViewById(R.id.tvBeschreibung)
+        val tvGesamtSaldo: TextView = findViewById(R.id.tvGesamtSaldo2Ausgabe)
+        val tvGesamtAusgaben: TextView = findViewById(R.id.tvgesamtAusgabenAusgabe)
+        val tvVerfugbarerSaldo: TextView = findViewById(R.id.tvVerfugbaererSaldoAusgabe)
+        val tvUnterkontenAnzahl: TextView = findViewById(R.id.tvUnterkontenAnzahlAusgabe)
+        val tvProzentAnzahl: TextView = findViewById(R.id.tvProzentAnzahlAusgabe)
+        val tvBeschreibung: TextView = findViewById(R.id.tvBeschreibungAusgabe)
 
 
-        tvGesamtSaldo.setText("Gesamt Saldo :\n ${runden(data.gesamtSaldo)}")
-        tvGesamtAusgaben.setText("Gesamt Ausgaben :\n ${runden(data.gesamtAusgaben)}€")
-        tvVerfugbarerSaldo.setText("Verfügbarer Saldo :\n ${runden(data.verfugbarerSaldo)}€")
-        tvUnterkontenAnzahl.setText("Unterkonten Anzahl :\n ${runden(data.unterKontenAnzahl)}")
-        tvProzentAnzahl.setText("Prozente ins Gesamt :\n ${runden(data.prozenteGesamt)}%")
-        tvBeschreibung.setText("Beschreibung Vorhanden " + data.beschreibungVorhandenODerNicht)
+        tvGesamtSaldo.setText("${runden(data.gesamtSaldo)}€")
+        tvGesamtAusgaben.setText("${runden(data.gesamtAusgaben)}€")
+        tvVerfugbarerSaldo.setText("${runden(data.verfugbarerSaldo)}€")
+        tvUnterkontenAnzahl.setText("${runden(data.unterKontenAnzahl)}")
+        tvProzentAnzahl.setText("${runden(data.prozenteGesamt)}%")
+        tvBeschreibung.setText(data.beschreibungVorhandenODerNicht)
     }
 
     fun showCalculateDataInRecyclerView() {
@@ -159,12 +159,12 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
-    fun getInhalt() : ArrayList<Model>{
+
+    fun getInhalt(): ArrayList<Model> {
 
         val dataEinkommen = sqLiteMainEinkommen.readData()
         val dataUnterkonto = sqLiteMainUnterkonto.readData()
         val dataAusgabe = sqLiteMainAusgabe.readData()
-
 
 
         val arraylist: ArrayList<Model> = arrayListOf()
@@ -184,7 +184,7 @@ class MainActivity : AppCompatActivity() {
 
     fun showItemsInRecyclerView() {
 
-       val arraylist = getInhalt()
+        val arraylist = getInhalt()
         StartRecyclerView(
             this, recyclerView,
             arraylist, R.layout.show_items, "ShowItems", null, null

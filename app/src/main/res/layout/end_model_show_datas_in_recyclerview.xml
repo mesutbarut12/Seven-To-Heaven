@@ -1,244 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardUseCompatPadding="true"
-    app:cardElevation="6dp"
-    app:cardCornerRadius="6dp"
+    android:layout_marginBottom="10dp">
 
-
-    >
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="6dp"
+        app:cardUseCompatPadding="true">
 
-        <View
-            android:id="@+id/dividerOben"
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:background="@color/black"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvUnterkonto"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-        <View
-            android:id="@+id/dividerUnten"
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:background="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvErgebnis"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-        <View
-            android:id="@+id/dividerRechts"
-            android:layout_width="2dp"
-            android:layout_height="0dp"
-            android:background="@color/black"
-            app:layout_constraintTop_toTopOf="@id/dividerOben"
-            app:layout_constraintBottom_toBottomOf="@id/dividerUnten"
-            app:layout_constraintEnd_toEndOf="@id/dividerOben"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <View
-            android:id="@+id/dividerLinks"
-            android:layout_width="2dp"
-            android:layout_height="0dp"
-            android:background="@color/black"
-            app:layout_constraintBottom_toBottomOf="@id/dividerUnten"
-            app:layout_constraintStart_toStartOf="@id/dividerUnten"
-            app:layout_constraintTop_toTopOf="@id/dividerOben" />
-
-        <TextView
-        android:id="@+id/tvUnterkonto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Unterkonto"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvProzentualeEinteilung"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:inputType="textMultiLine|textPersonName"
-        android:text="Prozentuale einteilung"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:paddingLeft="2dp"
-        app:layout_constraintEnd_toStartOf="@+id/tvGuthaben"
-        app:layout_constraintStart_toStartOf="@id/dividerLinks"
-        app:layout_constraintTop_toBottomOf="@+id/tvUnterkonto" />
-
-    <TextView
-        android:id="@+id/tvAusgaben"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Ausgaben"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvErgebnis"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
-        app:layout_constraintTop_toBottomOf="@id/tvGuthaben" />
-
-    <TextView
-        android:id="@+id/tvGuthaben"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Guthaben"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
-        app:layout_constraintTop_toBottomOf="@+id/tvUnterkonto" />
-
-    <TextView
-        android:id="@+id/tvErgebnis"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Ergebnis"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
-        app:layout_constraintTop_toBottomOf="@+id/tvAusgaben" />
+            <TextView
+                android:id="@+id/tvUnterkonto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Unterkonto"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/cardViewUebersicht"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/tvErgebnis"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvAusgaben"
-        app:layout_constraintTop_toBottomOf="@+id/tvAusgaben" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewUebersicht"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toTopOf="@+id/cardView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvUnterkonto">
 
-    <View
-        android:id="@+id/divider19"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/divider26"
-        app:layout_constraintEnd_toEndOf="@+id/tvProzentualeEinteilung"
-        app:layout_constraintStart_toStartOf="@+id/tvProzentualeEinteilung"
-        app:layout_constraintTop_toBottomOf="@+id/tvProzentualeEinteilung" />
-
-    <View
-        android:id="@+id/divider20"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="@+id/divider25"
-        app:layout_constraintEnd_toEndOf="@+id/divider19"
-        app:layout_constraintTop_toTopOf="@+id/divider19" />
-
-    <View
-        android:id="@+id/divider21"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="@id/divider26"
-        app:layout_constraintStart_toStartOf="@+id/divider19"
-        app:layout_constraintTop_toTopOf="@+id/divider19" />
-
-    <View
-        android:id="@+id/divider26"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="?android:attr/listDivider"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/divider25"
-        app:layout_constraintEnd_toStartOf="@+id/divider20"
-        app:layout_constraintStart_toEndOf="@+id/divider21"
-        app:layout_constraintTop_toTopOf="@+id/divider19"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <View
-        android:id="@+id/divider22"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="16dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="@+id/divider25"
-        app:layout_constraintEnd_toEndOf="@+id/divider20"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/divider21" />
-
-    <View
-        android:id="@+id/divider25"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="8dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/divider20"
-        app:layout_constraintStart_toStartOf="@+id/divider21"
-        app:layout_constraintTop_toBottomOf="@+id/divider20" />
-
-    <TextView
-        android:id="@+id/tvBAusgabe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="A"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/divider26"
-        app:layout_constraintEnd_toStartOf="@+id/divider26"
-        app:layout_constraintStart_toStartOf="@+id/divider19"
-        app:layout_constraintTop_toBottomOf="@+id/divider22" />
-
-    <TextView
-        android:id="@+id/tvBAusgabe2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="A"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/divider22"
-        app:layout_constraintEnd_toStartOf="@+id/divider26"
-        app:layout_constraintStart_toStartOf="@+id/divider19"
-        app:layout_constraintTop_toTopOf="@+id/divider19" />
-
-    <TextView
-        android:id="@+id/tvBUnterkonto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="U"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/divider26"
-        app:layout_constraintEnd_toEndOf="@+id/divider19"
-        app:layout_constraintStart_toEndOf="@+id/divider26"
-        app:layout_constraintTop_toBottomOf="@+id/divider22"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/tvBUnterkonto2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="U"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/divider22"
-        app:layout_constraintEnd_toEndOf="@+id/divider19"
-        app:layout_constraintStart_toEndOf="@+id/divider26"
-        app:layout_constraintTop_toTopOf="@+id/divider19"
-        app:layout_constraintVertical_bias="0.5" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
 
+                    <TextView
+                        android:id="@+id/tvProzentualeEinteilung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:inputType="textMultiLine|textPersonName"
+                        android:text="Prozentuale einteilung :"
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/tvAusgaben"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ausgaben"
 
-</androidx.cardview.widget.CardView>
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tvGuthaben"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Guthaben"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tvErgebnis"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="Ergebnis"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/cardView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardViewUebersicht">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Beschreibung :"
+                        android:textSize="20sp"></TextView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:textAlignment="center">
+
+                        <TextView
+                            android:id="@+id/tvBAusgabe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ausgabe : "
+                            android:textSize="20sp"
+
+
+                            />
+
+                        <TextView
+                            android:id="@+id/tvBAusgabe2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="X"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvBUnterkonto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Unterkonto : "
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvBUnterkonto2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="X"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
