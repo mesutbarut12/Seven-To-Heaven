@@ -15,13 +15,13 @@ import com.barut.unterkontenverwaltung.action.GetData
 import com.barut.unterkontenverwaltung.action.TransferDataFromPopupToSetItem
 import com.barut.unterkontenverwaltung.action.PopupAlertDialogForCreateItem
 import com.barut.unterkontenverwaltung.action.SetItem
+import com.barut.unterkontenverwaltung.json.Json
+import com.barut.unterkontenverwaltung.json.MapModelForJson
 import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationBarView
-import java.text.DecimalFormat
 import kotlin.math.roundToInt
 
 
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationClickListener()
         showCalculateDataInRecyclerView()
         showScollViewData()
-
+        Json()
 
     }
 
