@@ -20,10 +20,17 @@ class Json {
         ausgabe.set("beschreibung","test")
         ausgabe.set("databaseType","test")
         val unterkonto: HashMap<String, String> = hashMapOf()
+        unterkonto.set("id","test")
+        unterkonto.set("name","test")
+        unterkonto.set("prozent","test")
+        unterkonto.set("datum","test")
+        unterkonto.set("beschreibung","test")
+        unterkonto.set("databaseType","test")
 
         val uebersichtUnterkonten: HashMap<String, HashMap<String, String>> = hashMapOf()
         uebersichtUnterkonten.set("Einkauf", einkauf)
         uebersichtUnterkonten.set("Ausgabe",ausgabe)
+        uebersichtUnterkonten.set("Unterkonto",unterkonto)
 
         val json = Gson()
         println(json.toJson(uebersichtUnterkonten))
