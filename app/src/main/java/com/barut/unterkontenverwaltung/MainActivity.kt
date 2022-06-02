@@ -15,7 +15,6 @@ import com.barut.unterkontenverwaltung.action.GetData
 import com.barut.unterkontenverwaltung.action.TransferDataFromPopupToSetItem
 import com.barut.unterkontenverwaltung.action.PopupAlertDialogForCreateItem
 import com.barut.unterkontenverwaltung.action.SetItem
-import com.barut.unterkontenverwaltung.json.CreateTextFile
 import com.barut.unterkontenverwaltung.json.Json
 import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
@@ -49,8 +48,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationClickListener()
         showCalculateDataInRecyclerView()
         showScollViewData()
-        Json()
-        CreateTextFile().writeFile("Test","hallo",this)
+        Json(sqLiteMainEinkommen.readData(), arrayListOf(), arrayListOf())
 
     }
 
