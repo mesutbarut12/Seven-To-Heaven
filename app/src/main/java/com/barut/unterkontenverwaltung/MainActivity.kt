@@ -21,6 +21,9 @@ import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 import kotlin.math.roundToInt
 
 
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sqLiteMainEinkommen: SQLiteMain
     private lateinit var sqLiteMainUnterkonto: SQLiteMain
     private lateinit var sqLiteMainAusgabe: SQLiteMain
+    private lateinit var sqLiteUserId: SQLiteMain
     private lateinit var recyclerView: RecyclerView
     private lateinit var bottomNavigation: BottomNavigationView
 
@@ -48,8 +52,9 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationClickListener()
         showCalculateDataInRecyclerView()
         showScollViewData()
-        Json(sqLiteMainEinkommen.readData(), arrayListOf(), arrayListOf())
-
+        giveUserId()
+        //deleteUserId()
+       saveDataInFirestore()
     }
 
     fun showScollViewData() {
@@ -208,6 +213,11 @@ class MainActivity : AppCompatActivity() {
             this@MainActivity, "Ausgabe", "Ausgabe",
             "unterkonto", "ausgabe", "datum", "databaseType", "id", "beschreibung"
         )
+        sqLiteUserId = SQLiteMain(
+            this@MainActivity, "UserId", "UserId",
+            "userId", "nichtbenutzt1", "nichtbenutzt2", "nichtbenutzt3", "id", "nichtbenutzt4"
+        )
+
 
         recyclerView = findViewById(R.id.recyclerView)
         bottomNavigation = findViewById(R.id.bottomNavigation)
@@ -221,4 +231,36 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    fun giveUserId() {
+        val userId = UUID.randomUUID()
+        if (sqLiteUserId.readData().isEmpty()) {
+            sqLiteUserId.setData(
+                Model(
+                    userId.toString(), "", "", "", "", ""
+                )
+            )
+        }
+
+    }
+    fun deleteUserId() {
+        for (i in sqLiteUserId.readData()) {
+            sqLiteUserId.deleateItem(i.spaltenName1,"")
+        }
+    }
+    fun getUserId() : String{
+        for(i in sqLiteUserId.readData()){
+            return i.spaltenName1
+        }
+        return "Fehler"
+    }
+
+    fun saveDataInFirestore(){
+        val save = Json(getUserId())
+        val hashMap : HashMap<String,ArrayList<Model>> = hashMapOf()
+        hashMap.set("Einkommen" , sqLiteMainEinkommen.readData())
+        hashMap.set("Ausgabe" , sqLiteMainAusgabe.readData())
+        hashMap.set("Unterkonto" , sqLiteMainUnterkonto.readData())
+
+        save.save(hashMap)
+    }
 }
