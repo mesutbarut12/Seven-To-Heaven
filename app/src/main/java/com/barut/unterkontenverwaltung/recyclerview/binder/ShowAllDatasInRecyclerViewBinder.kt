@@ -51,13 +51,20 @@ class ShowAllDatasInRecyclerViewBinder(
 
                 if (inhalt.get(holder.adapterPosition).databaseType == "Unterkonto") {
                     image.setImageResource(R.drawable.ic_unterkonto)
+                    tvspaltenname2.setText(inhalt.get(holder.adapterPosition).spaltenName2+ "%")
+                    tvspaltenname1.setText(inhalt.get(holder.adapterPosition).spaltenName1)
                 } else if (inhalt.get(holder.adapterPosition).databaseType == "Einnahme") {
                     image.setImageResource(R.drawable.ic_input)
+                    tvspaltenname2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
+                    tvspaltenname1.setText(inhalt.get(holder.adapterPosition).spaltenName1+"€")
+
                 } else {
                     image.setImageResource(R.drawable.ic_output)
+                    tvspaltenname1.setText(inhalt.get(holder.adapterPosition).spaltenName1+"€")
+                    tvspaltenname2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
+
                 }
-                tvspaltenname1.setText(inhalt.get(holder.adapterPosition).spaltenName1)
-                tvspaltenname2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
+
                 echtzeitDatum.setText(inhalt.get(holder.adapterPosition).datum)
                 onDelete(ivDelete)
                 onEdit(ivEdit)
