@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -15,6 +16,7 @@ import com.barut.unterkontenverwaltung.action.GetData
 import com.barut.unterkontenverwaltung.action.TransferDataFromPopupToSetItem
 import com.barut.unterkontenverwaltung.action.PopupAlertDialogForCreateItem
 import com.barut.unterkontenverwaltung.action.SetItem
+import com.barut.unterkontenverwaltung.json.DataFinish
 import com.barut.unterkontenverwaltung.json.Json
 import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sqLiteUserId: SQLiteMain
     private lateinit var recyclerView: RecyclerView
     private lateinit var bottomNavigation: BottomNavigationView
+    private lateinit var json: Json
 
 
     //731d4936dc48b1b6dd0ae921794b791b3bc8c3d3
@@ -42,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         //Initalisiert alle views die an die verschiedenne klassen weiter gegeben werden!
         initAllViews()
@@ -53,8 +57,8 @@ class MainActivity : AppCompatActivity() {
         showCalculateDataInRecyclerView()
         showScollViewData()
         giveUserId()
-        //deleteUserId()
-       saveDataInFirestore()
+
+
     }
 
     fun showScollViewData() {
@@ -157,6 +161,12 @@ class MainActivity : AppCompatActivity() {
                     showScollViewData()
                     popUpAlertDialogForSetDataInSQLite()
                     return true
+                } else if (item.itemId == R.id.datenSpeichern) {
+                    saveDataInFirestore()
+                    return true
+                } else if (item.itemId == R.id.datenUpdate) {
+                    getDataFromFirebase()
+                    return true
                 }
                 return false
             }
@@ -221,7 +231,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         bottomNavigation = findViewById(R.id.bottomNavigation)
-
+        json = Json(this, sqLiteMainEinkommen, sqLiteMainAusgabe, sqLiteMainUnterkonto)
 
     }
 
@@ -242,25 +252,53 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     fun deleteUserId() {
         for (i in sqLiteUserId.readData()) {
-            sqLiteUserId.deleateItem(i.spaltenName1,"")
+            sqLiteUserId.deleateItem(i.spaltenName1, "")
         }
     }
-    fun getUserId() : String{
-        for(i in sqLiteUserId.readData()){
+
+    fun getUserId(): String {
+        for (i in sqLiteUserId.readData()) {
             return i.spaltenName1
         }
         return "Fehler"
     }
 
-    fun saveDataInFirestore(){
-        val save = Json(getUserId())
-        val hashMap : HashMap<String,ArrayList<Model>> = hashMapOf()
-        hashMap.set("Einkommen" , sqLiteMainEinkommen.readData())
-        hashMap.set("Ausgabe" , sqLiteMainAusgabe.readData())
-        hashMap.set("Unterkonto" , sqLiteMainUnterkonto.readData())
+    fun saveDataInFirestore() {
+        val hashMap: HashMap<String, ArrayList<Model>> = hashMapOf()
+        hashMap.set("Einkommen", sqLiteMainEinkommen.readData())
+        hashMap.set("Ausgabe", sqLiteMainAusgabe.readData())
+        hashMap.set("Unterkonto", sqLiteMainUnterkonto.readData())
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        json.save(hashMap, getUserId(),object : DataFinish{
+            override fun finish(boolean: Boolean) {
+                if(boolean == true){
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    Toast.makeText(this@MainActivity, "Daten Erfolgreich Gespeichert!", Toast.LENGTH_LONG).show()
+                }
+            }
 
-        save.save(hashMap)
+        })
+
+    }
+
+    fun getDataFromFirebase() {
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        json.getData(getUserId(), object : DataFinish{
+            override fun finish(boolean: Boolean) {
+                if(boolean == true){
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    Toast.makeText(this@MainActivity,
+                        "Daten Erfolgreich übernommen!", Toast.LENGTH_LONG).show()
+
+                }
+            }
+        })
     }
 }
