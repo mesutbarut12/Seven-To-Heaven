@@ -1,5 +1,6 @@
 package com.barut.unterkontenverwaltung
 
+import android.content.DialogInterface
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.calculate.Calculate
@@ -162,10 +164,40 @@ class MainActivity : AppCompatActivity() {
                     popUpAlertDialogForSetDataInSQLite()
                     return true
                 } else if (item.itemId == R.id.datenSpeichern) {
-                    saveDataInFirestore()
+                    setAlertDialogForSaveAndGetFirebase("Speichern?", "Möchten Du " +
+                            "die jetzigen Daten speichern?", object : AlertDialogClick {
+                        override fun onClickListener(boolean: Boolean) {
+                            if (boolean == true) {
+                                saveDataInFirestore()
+
+                            } else if (boolean == false) {
+                                Toast.makeText(
+                                    this@MainActivity, "Erfolgreich abgebrochen",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    })
                     return true
                 } else if (item.itemId == R.id.datenUpdate) {
-                    getDataFromFirebase()
+                    setAlertDialogForSaveAndGetFirebase(
+                        "Daten ziehen?",
+                        "Möchten Du " +
+                                "wirklich den letzten speicher ziehen? ",
+                        object : AlertDialogClick{
+                            override fun onClickListener(boolean: Boolean) {
+                                if(boolean == true){
+                                    getDataFromFirebase()
+
+                                } else if(boolean == false){
+                                    Toast.makeText(
+                                        this@MainActivity, "Erfolgreich abgebrochen",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
+                    )
                     return true
                 }
                 return false
@@ -273,12 +305,17 @@ class MainActivity : AppCompatActivity() {
         hashMap.set("Unterkonto", sqLiteMainUnterkonto.readData())
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-        json.save(hashMap, getUserId(),object : DataFinish{
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        )
+        json.save(hashMap, getUserId(), object : DataFinish {
             override fun finish(boolean: Boolean) {
-                if(boolean == true){
+                if (boolean == true) {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                    Toast.makeText(this@MainActivity, "Daten Erfolgreich Gespeichert!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Daten Erfolgreich Gespeichert!",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 
@@ -289,16 +326,41 @@ class MainActivity : AppCompatActivity() {
     fun getDataFromFirebase() {
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-        json.getData(getUserId(), object : DataFinish{
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        )
+        json.getData(getUserId(), object : DataFinish {
             override fun finish(boolean: Boolean) {
-                if(boolean == true){
+                if (boolean == true) {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                    Toast.makeText(this@MainActivity,
-                        "Daten Erfolgreich übernommen!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Daten Erfolgreich übernommen!", Toast.LENGTH_LONG
+                    ).show()
 
                 }
             }
         })
+    }
+
+    fun setAlertDialogForSaveAndGetFirebase(
+        titel: String,
+        message: String,
+        alertDialogClick: AlertDialogClick
+    ) {
+        val alert = AlertDialog.Builder(this)
+        alert.setTitle(titel)
+        alert.setMessage(message)
+        alert.setPositiveButton("BESTÄTIGEN", object : DialogInterface.OnClickListener {
+            override fun onClick(p0: DialogInterface?, p1: Int) {
+                alertDialogClick.onClickListener(true)
+            }
+        }).setNegativeButton("Abbrechen", object : DialogInterface.OnClickListener {
+            override fun onClick(p0: DialogInterface?, p1: Int) {
+                alertDialogClick.onClickListener(false)
+            }
+        })
+        alert.create().show()
+
+
     }
 }
