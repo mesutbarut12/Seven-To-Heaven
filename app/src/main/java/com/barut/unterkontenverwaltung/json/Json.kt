@@ -42,7 +42,6 @@ class Json(
                         for (i in document.data!!) {
                             val y = i.value as ArrayList<Map<String, String>>
                             y.forEach {
-                                //println(it)
                                 if (it["databaseType"] == "Einnahme") {
                                     model = Model(
                                         it["spaltenName1"].toString(),
@@ -70,7 +69,6 @@ class Json(
                                     datafinsih.finish(true)
 
                                 } else if (it["databaseType"] == "Unterkonto") {
-                                    println(it)
                                     model = Model(
                                         it["spaltenName1"].toString(),
                                         it["spaltenName2"].toString(),

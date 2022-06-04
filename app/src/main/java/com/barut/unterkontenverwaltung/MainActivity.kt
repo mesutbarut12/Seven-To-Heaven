@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -184,12 +186,28 @@ class MainActivity : AppCompatActivity() {
                         "Daten ziehen?",
                         "Möchten Du " +
                                 "wirklich den letzten speicher ziehen? ",
-                        object : AlertDialogClick{
+                        object : AlertDialogClick {
                             override fun onClickListener(boolean: Boolean) {
-                                if(boolean == true){
-                                    getDataFromFirebase()
-
-                                } else if(boolean == false){
+                                if (boolean == true) {
+                                    val alert = AlertDialogMain(this@MainActivity,R.layout.
+                                    daten_ziehen)
+                                    val view = alert.setLayout()
+                                    val buttonMeine = view.findViewById<Button>(R.id.datenZiehenMeine)
+                                    val buttonId = view.findViewById<Button>(R.id.datenId)
+                                    val etId = view.findViewById<EditText>(R.id.editTextId)
+                                    buttonMeine.setOnClickListener {
+                                        getDataFromFirebase("")
+                                        alert.cancelDialog()
+                                    }
+                                    buttonId.setOnClickListener {
+                                        if(etId.text.isNotEmpty()){
+                                            val userId = etId.text.toString()
+                                            getDataFromFirebase(userId)
+                                            alert.cancelDialog()
+                                        }
+                                    }
+                                    alert.createDialog()
+                                } else if (boolean == false) {
                                     Toast.makeText(
                                         this@MainActivity, "Erfolgreich abgebrochen",
                                         Toast.LENGTH_SHORT
@@ -323,12 +341,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getDataFromFirebase() {
+    fun getDataFromFirebase(userId : String) {
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-        )
-        json.getData(getUserId(), object : DataFinish {
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        var getUserId = getUserId()
+        if(userId.isNotEmpty()){
+            getUserId = userId
+        }
+        println(userId)
+        json.getData(getUserId, object : DataFinish {
             override fun finish(boolean: Boolean) {
                 if (boolean == true) {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
