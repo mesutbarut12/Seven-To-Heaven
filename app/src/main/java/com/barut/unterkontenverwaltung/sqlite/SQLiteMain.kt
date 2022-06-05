@@ -12,7 +12,7 @@ class SQLiteMain(
     val TABLENAME: String, val spaltenName1: String, val spaltenName2: String,
     val echtZeitDatum: String, val databaseType: String, val id: String, val beschreibung: String,
     val userInputDatum: String
-) : SQLiteOpenHelper(context, DATABASENAME, null, 4) {
+) : SQLiteOpenHelper(context, DATABASENAME, null, 5) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         val createTable = "CREATE TABLE " + TABLENAME +
@@ -31,7 +31,12 @@ class SQLiteMain(
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         if (newVersion != oldVersion) {
-            db!!.execSQL("ALTER TABLE $DATABASENAME ADD COLUMN $userInputDatum");
+            println("upgrde")
+            //db!!.execSQL("ALTER TABLE $DATABASENAME ADD COLUMN $userInputDatum");
+            if(DATABASENAME == "Einkommen"){
+                println("Einkommen")
+                //db!!.execSQL("ALTER TABLE $DATABASENAME RENAME COLUMN datum TO leer")
+            }
         }
     }
 
@@ -65,8 +70,8 @@ class SQLiteMain(
                     cursor.getString(cursor.getColumnIndex(databaseType)),
                     cursor.getString(cursor.getColumnIndex(id)),
                     cursor.getString(cursor.getColumnIndex(beschreibung)),
-                    cursor.getString(cursor.getColumnIndex(userInputDatum))
-                )
+                    "")
+
                 arraylist.add(model)
             } while (cursor.moveToNext())
         }
