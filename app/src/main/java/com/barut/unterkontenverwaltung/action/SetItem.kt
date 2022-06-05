@@ -117,7 +117,7 @@ class SetItem(
     fun whenUserKlickSafeButton(getData: GetData) {
 
         safe.setOnClickListener {
-            if (input1.text.isEmpty() || input2.text.isEmpty()) {
+            if (input1.text.isEmpty() || input2.text.isEmpty() || input4.text.isEmpty()) {
                 Toast.makeText(context, "Lasse kein Feld leer stehen", Toast.LENGTH_LONG).show()
 
             } else {
