@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.barut.unterkontenverwaltung.DatePickerClass
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
@@ -188,14 +189,22 @@ class ShowAllDatasInRecyclerViewBinder(
             val tvDescription1 = view.findViewById<TextView>(R.id.tvdescription1)
             val tvDescription2 = view.findViewById<TextView>(R.id.tvdescription2)
             val tvDescription3 = view.findViewById<TextView>(R.id.tvdescription3)
+            val tvDescription4 = view.findViewById<TextView>(R.id.tvdescription4)
             val etInput1 = view.findViewById<EditText>(R.id.etInput1)
             val etInput2 = view.findViewById<EditText>(R.id.etInput2)
             val etInput3 = view.findViewById<EditText>(R.id.etInput3)
+            val etInput4 = view.findViewById<EditText>(R.id.etInput4)
             val btEdit = view.findViewById<Button>(R.id.btSaveItems)
             alert.createDialog()
 
             tvDescription3.setText("Beschreibung Ändern!")
             etInput3.setText(inhalt.get(holder.adapterPosition).beschreibung)
+            tvDescription4.setText("Datum ändern!")
+            etInput4.setText(inhalt.get(holder.adapterPosition).userInputDatum)
+            etInput4.setOnClickListener {
+                var datePickerClass = DatePickerClass(holder.itemView.context,etInput4)
+                datePickerClass.initDatePicker()
+            }
             if (inhalt.get(holder.adapterPosition).databaseType == "Ausgabe") {
                 tvDescription1.setText("Summe ändern!")
                 tvDescription2.setText("Name ändern!")
@@ -219,7 +228,8 @@ class ShowAllDatasInRecyclerViewBinder(
                     etInput2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
                     inhalt.get(holder.adapterPosition).databaseType,
-                    "", etInput3.text.toString(),"")
+                    "", etInput3.text.toString()
+                    ,etInput4.text.toString())
 
                 if (inhalt.get(holder.adapterPosition).databaseType == "Ausgabe") {
                     sqLiteMainAusgabe.updateData(
@@ -233,7 +243,8 @@ class ShowAllDatasInRecyclerViewBinder(
                         etInput2.text.toString(),
                         etInput2.text.toString(),
                         etInput1.text.toString(),
-                        etInput3.text.toString()
+                        etInput3.text.toString(),
+                        etInput4.text.toString()
                     )
                     if (model != null) {
                         sqLiteMainUnterkonto.updateData(
@@ -268,15 +279,13 @@ class ShowAllDatasInRecyclerViewBinder(
 
     fun checkProzentIsNot100(
         prozentZahl: String, etInput1: String,
-        etInput2: String, etInput3: String
+        etInput2: String, etInput3: String,etInput4 : String
     ): Model? {
         var model: Model
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
         val date = Date()
 
         var ergebnis = prozentZahl.toDouble()
-        println(prozentZahl + " Prozentzahl")
-        println(holder.adapterPosition.toString() + " Adapter Position")
         for (i in inhalt) {
             if (i.databaseType == "Unterkonto") {
                 if (i.spaltenName2 == inhalt.get(holder.adapterPosition).spaltenName2) {
@@ -302,7 +311,8 @@ class ShowAllDatasInRecyclerViewBinder(
                 "Tag der erstellung ${dateFormat.format(date)}",
                 inhalt.get(holder.adapterPosition).databaseType,
                 "", etInput3,
-                "")
+                etInput4)
+            println(etInput4)
         }
 
         return model

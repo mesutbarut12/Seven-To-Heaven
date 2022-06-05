@@ -12,11 +12,11 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewScrollView"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
         tools:listitem="@layout/end_model_show_datas_in_recyclerview">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -25,12 +25,11 @@
         android:id="@+id/cardViewScrollView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintVertical_bias="0.0">
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
@@ -47,190 +46,195 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardElevation="6dp"
-                    app:cardUseCompatPadding="true"
                     app:cardCornerRadius="6dp"
-                    >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="5dp">
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true">
 
-                    <TextView
-                        android:id="@+id/tvVerfugbaererSaldo"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Verfügbarer Saldo"
-                        android:textSize="16sp" />
+                        android:layout_margin="5dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvVerfugbaererSaldoAusgabe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:text="Leer"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvVerfugbaererSaldo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Verfügbarer Saldo"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvVerfugbaererSaldoAusgabe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:text="Leer"
+                            android:textSize="16sp" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardElevation="6dp"
-                    app:cardUseCompatPadding="true"
                     app:cardCornerRadius="6dp"
-                    >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="5dp">
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true">
 
-                    <TextView
-                        android:id="@+id/tvGesamtSaldo2"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Gesamt Saldo"
-                        android:textSize="16sp" />
+                        android:layout_margin="5dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvGesamtSaldo2Ausgabe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:text="Leer "
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvGesamtSaldo2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Gesamt Saldo"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvGesamtSaldo2Ausgabe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:text="Leer "
+                            android:textSize="16sp" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardElevation="6dp"
-                    app:cardUseCompatPadding="true"
                     app:cardCornerRadius="6dp"
-                    >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="5dp">
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true">
 
-                    <TextView
-                        android:id="@+id/tvgesamtAusgaben"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Gesamt Ausgaben"
-                        android:textSize="16sp" />
+                        android:layout_margin="5dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvgesamtAusgabenAusgabe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:text="Leer"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvgesamtAusgaben"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Gesamt Ausgaben"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvgesamtAusgabenAusgabe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:text="Leer"
+                            android:textSize="16sp" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardElevation="6dp"
-                    app:cardUseCompatPadding="true"
                     app:cardCornerRadius="6dp"
-                    >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="5dp">
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true">
 
-                    <TextView
-                        android:id="@+id/tvUnterkontenAnzahl"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Unterkonten Anzahl"
-                        android:textSize="16sp" />
+                        android:layout_margin="5dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvUnterkontenAnzahlAusgabe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:text="Leer"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvUnterkontenAnzahl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Unterkonten Anzahl"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvUnterkontenAnzahlAusgabe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:text="Leer"
+                            android:textSize="16sp" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardElevation="6dp"
-                    app:cardUseCompatPadding="true"
                     app:cardCornerRadius="6dp"
-                    >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="5dp">
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true">
 
-                    <TextView
-                        android:id="@+id/tvProzentAnzahl"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Prozente Gesamt"
-                        android:textSize="16sp" />
+                        android:layout_margin="5dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvProzentAnzahlAusgabe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:text="Leer"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvProzentAnzahl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Prozente Gesamt"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvProzentAnzahlAusgabe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:text="Leer"
+                            android:textSize="16sp" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardElevation="6dp"
-                    app:cardUseCompatPadding="true"
                     app:cardCornerRadius="6dp"
-                    >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="5dp">
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true">
 
-                    <TextView
-                        android:id="@+id/tvBeschreibung"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_weight="1"
-                        android:text="Beschreibung Vorhanden :"
-                        android:textSize="16sp" />
+                        android:layout_margin="5dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvBeschreibungAusgabe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:layout_weight="1"
-                        android:text="Leer"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvBeschreibung"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            android:text="Beschreibung Vorhanden :"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvBeschreibungAusgabe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            android:text="Leer"
+                            android:textSize="16sp" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
@@ -253,5 +257,36 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerView"
         app:menu="@menu/bottom_navigation"
         />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewScrollView">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 Tag" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 Woche" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 Monat" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 jahr" />
+    </com.google.android.material.tabs.TabLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
