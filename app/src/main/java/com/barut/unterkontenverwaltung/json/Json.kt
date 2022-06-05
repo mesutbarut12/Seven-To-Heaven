@@ -16,7 +16,7 @@ class Json(
 
     private val db = Firebase.firestore
     private lateinit var model: Model
-    fun save(inhalt: HashMap<String, ArrayList<Model>>, userId: String,datafinsih : DataFinish) {
+    fun save(inhalt: HashMap<String, ArrayList<Model>>, userId: String, datafinsih: DataFinish) {
 
         db.collection("Speicher").document(userId).set(inhalt)
             .addOnSuccessListener {
@@ -29,7 +29,7 @@ class Json(
         userId: String,
         datafinsih: DataFinish
 
-        ) {
+    ) {
 
         val getDb = db.collection("Speicher").document(userId)
         getDb.get()
@@ -90,26 +90,47 @@ class Json(
                     }
                 }
 
-                }
             }
+    }
 
-        fun deleteDataBaseValue(databaseType: String) {
-            if (databaseType == "Einkommen") {
-                for (i in einkommen.readData()) {
-                    einkommen.deleateItem(i.spaltenName1, i.spaltenName2)
-                }
-            } else if (databaseType == "Ausgabe") {
-                for (i in ausgabe.readData()) {
-                    ausgabe.deleateItem(i.spaltenName1, i.spaltenName2)
-                }
-            } else if (databaseType == "Unterkonto") {
-                for (i in unterkonto.readData()) {
-                    unterkonto.deleateItem(i.spaltenName1, i.spaltenName2)
-                }
+    fun deleteDataBaseValue(databaseType: String) {
+        if (databaseType == "Einkommen") {
+            for (i in einkommen.readData()) {
+                einkommen.deleateItem(i.spaltenName1, i.spaltenName2)
+            }
+        } else if (databaseType == "Ausgabe") {
+            for (i in ausgabe.readData()) {
+                ausgabe.deleateItem(i.spaltenName1, i.spaltenName2)
+            }
+        } else if (databaseType == "Unterkonto") {
+            for (i in unterkonto.readData()) {
+                unterkonto.deleateItem(i.spaltenName1, i.spaltenName2)
             }
         }
+    }
+
+    fun userIdIsExists(userId : String,userIDExistsInterface: UserIDExistsInterface){
+        var zahl = 0
+        db.collection("Speicher").get().addOnSuccessListener {
+            it.forEach {
+                if (userId == it.id) {
+                    zahl = 1
+                }
+            }
+            if(zahl == 1){
+                userIDExistsInterface.getData(true)
+            } else if(zahl == 0){
+                userIDExistsInterface.getData(false)
+            }
+        }
+
+    }
 }
-interface DataFinish{
+
+interface DataFinish {
     fun finish(boolean: Boolean)
+}
+interface UserIDExistsInterface{
+    fun getData(boolean: Boolean)
 }
 

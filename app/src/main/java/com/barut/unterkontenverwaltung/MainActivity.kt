@@ -22,6 +22,7 @@ import com.barut.unterkontenverwaltung.action.PopupAlertDialogForCreateItem
 import com.barut.unterkontenverwaltung.action.SetItem
 import com.barut.unterkontenverwaltung.json.DataFinish
 import com.barut.unterkontenverwaltung.json.Json
+import com.barut.unterkontenverwaltung.json.UserIDExistsInterface
 import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
@@ -189,10 +190,12 @@ class MainActivity : AppCompatActivity() {
                         object : AlertDialogClick {
                             override fun onClickListener(boolean: Boolean) {
                                 if (boolean == true) {
-                                    val alert = AlertDialogMain(this@MainActivity,R.layout.
-                                    daten_ziehen)
+                                    val alert = AlertDialogMain(
+                                        this@MainActivity, R.layout.daten_ziehen
+                                    )
                                     val view = alert.setLayout()
-                                    val buttonMeine = view.findViewById<Button>(R.id.datenZiehenMeine)
+                                    val buttonMeine =
+                                        view.findViewById<Button>(R.id.datenZiehenMeine)
                                     val buttonId = view.findViewById<Button>(R.id.datenId)
                                     val etId = view.findViewById<EditText>(R.id.editTextId)
                                     buttonMeine.setOnClickListener {
@@ -200,7 +203,7 @@ class MainActivity : AppCompatActivity() {
                                         alert.cancelDialog()
                                     }
                                     buttonId.setOnClickListener {
-                                        if(etId.text.isNotEmpty()){
+                                        if (etId.text.isNotEmpty()) {
                                             val userId = etId.text.toString()
                                             getDataFromFirebase(userId)
                                             alert.cancelDialog()
@@ -341,27 +344,43 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getDataFromFirebase(userId : String) {
-        getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    fun getDataFromFirebase(userId: String) {
         var getUserId = getUserId()
-        if(userId.isNotEmpty()){
+
+        if (userId.isNotEmpty()) {
             getUserId = userId
         }
-        println(userId)
-        json.getData(getUserId, object : DataFinish {
-            override fun finish(boolean: Boolean) {
+
+        println(getUserId)
+        json.userIdIsExists(getUserId, object : UserIDExistsInterface {
+            override fun getData(boolean: Boolean) {
                 if (boolean == true) {
-                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    getWindow().setFlags(
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                    )
+                    json.getData(getUserId, object : DataFinish {
+                        override fun finish(boolean: Boolean) {
+                            if (boolean == true) {
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "Daten Erfolgreich übernommen!", Toast.LENGTH_LONG
+                                ).show()
+
+                            }
+                        }
+                    })
+
+                } else {
                     Toast.makeText(
                         this@MainActivity,
-                        "Daten Erfolgreich übernommen!", Toast.LENGTH_LONG
+                        "Die Id gibt es nicht!", Toast.LENGTH_LONG
                     ).show()
-
                 }
             }
         })
+
     }
 
     fun setAlertDialogForSaveAndGetFirebase(
