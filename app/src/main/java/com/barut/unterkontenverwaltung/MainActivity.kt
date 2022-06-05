@@ -194,20 +194,18 @@ class MainActivity : AppCompatActivity() {
                                         this@MainActivity, R.layout.daten_ziehen
                                     )
                                     val view = alert.setLayout()
-                                    val buttonMeine =
-                                        view.findViewById<Button>(R.id.datenZiehenMeine)
                                     val buttonId = view.findViewById<Button>(R.id.datenId)
+                                    val buttonIdEigene = view.findViewById<Button>(R.id.datenIdeigene)
                                     val etId = view.findViewById<EditText>(R.id.editTextId)
-                                    buttonMeine.setOnClickListener {
-                                        getDataFromFirebase("")
-                                        alert.cancelDialog()
-                                    }
                                     buttonId.setOnClickListener {
                                         if (etId.text.isNotEmpty()) {
                                             val userId = etId.text.toString()
                                             getDataFromFirebase(userId)
                                             alert.cancelDialog()
                                         }
+                                    }
+                                    buttonIdEigene.setOnClickListener {
+                                        etId.setText(getUserId())
                                     }
                                     alert.createDialog()
                                 } else if (boolean == false) {
@@ -368,6 +366,10 @@ class MainActivity : AppCompatActivity() {
                                     "Daten Erfolgreich übernommen!", Toast.LENGTH_LONG
                                 ).show()
 
+                            } else {
+                                Toast.makeText(this@MainActivity, "Die datei ist leer", Toast.LENGTH_LONG)
+                                    .show()
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             }
                         }
                     })
@@ -404,4 +406,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
 }

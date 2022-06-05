@@ -1,6 +1,7 @@
 package com.barut.unterkontenverwaltung.json
 
 import android.content.Context
+import android.view.WindowManager
 import android.widget.Toast
 import com.barut.unterkontenverwaltung.recyclerview.Model
 import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
@@ -30,63 +31,74 @@ class Json(
         datafinsih: DataFinish
 
     ) {
-
+        var zahl = 0
         val getDb = db.collection("Speicher").document(userId)
         getDb.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
                     if (document.data != null) {
+                        println("Document Data")
                         deleteDataBaseValue("Einkommen")
                         deleteDataBaseValue("Ausgabe")
                         deleteDataBaseValue("Unterkonto")
                         for (i in document.data!!) {
+                            println("Document Data2")
                             val y = i.value as ArrayList<Map<String, String>>
-                            y.forEach {
-                                if (it["databaseType"] == "Einnahme") {
-                                    model = Model(
-                                        it["spaltenName1"].toString(),
-                                        it["spaltenName2"].toString(),
-                                        it["datum"].toString(),
-                                        it["databaseType"].toString(),
-                                        it["id"].toString(),
-                                        it["beschreibung"].toString()
-                                    )
+                            println(y)
+                            if (y.isNotEmpty()) {
+                                y.forEach {
+                                    println("For Each")
 
-                                    einkommen.setData(model)
-                                    datafinsih.finish(true)
+                                    if (it["databaseType"] == "Einnahme") {
+                                        model = Model(
+                                            it["spaltenName1"].toString(),
+                                            it["spaltenName2"].toString(),
+                                            it["datum"].toString(),
+                                            it["databaseType"].toString(),
+                                            it["id"].toString(),
+                                            it["beschreibung"].toString()
+                                        )
 
-                                } else if (it["databaseType"] == "Ausgabe") {
-                                    model = Model(
-                                        it["spaltenName1"].toString(),
-                                        it["spaltenName2"].toString(),
-                                        it["datum"].toString(),
-                                        it["databaseType"].toString(),
-                                        it["id"].toString(),
-                                        it["beschreibung"].toString()
-                                    )
+                                        einkommen.setData(model)
+                                        datafinsih.finish(true)
 
-                                    ausgabe.setData(model)
-                                    datafinsih.finish(true)
+                                    } else if (it["databaseType"] == "Ausgabe") {
+                                        model = Model(
+                                            it["spaltenName1"].toString(),
+                                            it["spaltenName2"].toString(),
+                                            it["datum"].toString(),
+                                            it["databaseType"].toString(),
+                                            it["id"].toString(),
+                                            it["beschreibung"].toString()
+                                        )
 
-                                } else if (it["databaseType"] == "Unterkonto") {
-                                    model = Model(
-                                        it["spaltenName1"].toString(),
-                                        it["spaltenName2"].toString(),
-                                        it["datum"].toString(),
-                                        it["databaseType"].toString(),
-                                        it["id"].toString(),
-                                        it["beschreibung"].toString()
-                                    )
+                                        ausgabe.setData(model)
+                                        datafinsih.finish(true)
 
-                                    unterkonto.setData(model)
-                                    datafinsih.finish(true)
+                                    } else if (it["databaseType"] == "Unterkonto") {
+                                        model = Model(
+                                            it["spaltenName1"].toString(),
+                                            it["spaltenName2"].toString(),
+                                            it["datum"].toString(),
+                                            it["databaseType"].toString(),
+                                            it["id"].toString(),
+                                            it["beschreibung"].toString()
+                                        )
+
+                                        unterkonto.setData(model)
+                                        datafinsih.finish(true)
+
+                                    }
+
 
                                 }
-
-
+                            } else {
+                                zahl += 1
+                                if (zahl == 3) {
+                                    datafinsih.finish(false)
+                                }
                             }
                         }
-
                     }
                 }
 
@@ -109,7 +121,7 @@ class Json(
         }
     }
 
-    fun userIdIsExists(userId : String,userIDExistsInterface: UserIDExistsInterface){
+    fun userIdIsExists(userId: String, userIDExistsInterface: UserIDExistsInterface) {
         var zahl = 0
         db.collection("Speicher").get().addOnSuccessListener {
             it.forEach {
@@ -117,9 +129,9 @@ class Json(
                     zahl = 1
                 }
             }
-            if(zahl == 1){
+            if (zahl == 1) {
                 userIDExistsInterface.getData(true)
-            } else if(zahl == 0){
+            } else if (zahl == 0) {
                 userIDExistsInterface.getData(false)
             }
         }
@@ -130,7 +142,8 @@ class Json(
 interface DataFinish {
     fun finish(boolean: Boolean)
 }
-interface UserIDExistsInterface{
+
+interface UserIDExistsInterface {
     fun getData(boolean: Boolean)
 }
 
