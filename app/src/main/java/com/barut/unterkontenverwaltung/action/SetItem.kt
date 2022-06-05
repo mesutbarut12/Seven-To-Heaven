@@ -157,8 +157,9 @@ class SetItem(
                     input1.text.toString(),
                     input2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
-                    databaseTyp, "", input3.text.toString()
-                )
+                    databaseTyp, "", input3.text.toString(),
+                    input4.text.toString()
+                    )
             }
         } else {
 
@@ -166,7 +167,8 @@ class SetItem(
                 input1.text.toString(),
                 input2.text.toString(),
                 "Tag der erstellung ${dateFormat.format(date)}",
-                databaseTyp, "", input3.text.toString()
+                databaseTyp, "", input3.text.toString(),
+                input4.text.toString()
             )
         }
         return model
@@ -185,7 +187,8 @@ class SetItem(
                     input1.text.toString(),
                     input2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
-                    databaseTyp, "", input3.text.toString()
+                    databaseTyp, "", input3.text.toString(),
+                    input4.text.toString()
                 )
             }
         }

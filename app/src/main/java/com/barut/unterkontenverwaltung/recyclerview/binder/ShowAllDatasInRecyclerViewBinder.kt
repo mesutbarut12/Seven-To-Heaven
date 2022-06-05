@@ -33,15 +33,18 @@ class ShowAllDatasInRecyclerViewBinder(
 
     val sqLiteMainEinkommen = SQLiteMain(
         holder.itemView.context, "Einkommen", "Einkommen",
-        "unterkonto", "datum", "echtZeitDatum", "databaseType", "id", "beschreibung"
+        "unterkonto", "leer", "echtZeitDatum", "databaseType", "id",
+        "beschreibung","userInputDatum"
     )
     val sqLiteMainUnterkonto = SQLiteMain(
         holder.itemView.context, "Unterkonto", "Unterkonto",
-        "name", "prozent", "datum", "databaseType", "id", "beschreibung"
+        "name", "prozent", "datum", "databaseType", "id",
+        "beschreibung","userInputDatum"
     )
     val sqLiteMainAusgabe = SQLiteMain(
         holder.itemView.context, "Ausgabe", "Ausgabe",
-        "unterkonto", "ausgabe", "datum", "databaseType", "id", "beschreibung"
+        "unterkonto", "ausgabe", "datum", "databaseType", "id",
+        "beschreibung","userInputDatum"
     )
 
     fun onStart() {
@@ -65,7 +68,7 @@ class ShowAllDatasInRecyclerViewBinder(
 
                 }
 
-                echtzeitDatum.setText(inhalt.get(holder.adapterPosition).datum)
+                echtzeitDatum.setText(inhalt.get(holder.adapterPosition).echtZeitDatum)
                 onDelete(ivDelete)
                 onEdit(ivEdit)
             }
@@ -153,7 +156,7 @@ class ShowAllDatasInRecyclerViewBinder(
         for (i in sqLiteMainAusgabe.readData()) {
             arrayList.add(i)
         }
-        arrayList.sortWith(compareBy({ it.databaseType }, { it.datum }))
+        arrayList.sortWith(compareBy({ it.databaseType }, { it.echtZeitDatum }))
         return arrayList
     }
 
@@ -216,8 +219,7 @@ class ShowAllDatasInRecyclerViewBinder(
                     etInput2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
                     inhalt.get(holder.adapterPosition).databaseType,
-                    "", etInput3.text.toString()
-                )
+                    "", etInput3.text.toString(),"")
 
                 if (inhalt.get(holder.adapterPosition).databaseType == "Ausgabe") {
                     sqLiteMainAusgabe.updateData(
@@ -299,8 +301,8 @@ class ShowAllDatasInRecyclerViewBinder(
                 etInput1,
                 "Tag der erstellung ${dateFormat.format(date)}",
                 inhalt.get(holder.adapterPosition).databaseType,
-                "", etInput3
-            )
+                "", etInput3,
+                "")
         }
 
         return model

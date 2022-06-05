@@ -56,7 +56,8 @@ class Json(
                                             it["datum"].toString(),
                                             it["databaseType"].toString(),
                                             it["id"].toString(),
-                                            it["beschreibung"].toString()
+                                            it["beschreibung"].toString(),
+                                            it["userInputDatum"].toString()
                                         )
 
                                         einkommen.setData(model)
@@ -69,7 +70,8 @@ class Json(
                                             it["datum"].toString(),
                                             it["databaseType"].toString(),
                                             it["id"].toString(),
-                                            it["beschreibung"].toString()
+                                            it["beschreibung"].toString(),
+                                            it["userInputDatum"].toString()
                                         )
 
                                         ausgabe.setData(model)
@@ -82,7 +84,8 @@ class Json(
                                             it["datum"].toString(),
                                             it["databaseType"].toString(),
                                             it["id"].toString(),
-                                            it["beschreibung"].toString()
+                                            it["beschreibung"].toString(),
+                                            it["userInputDatum"].toString()
                                         )
 
                                         unterkonto.setData(model)

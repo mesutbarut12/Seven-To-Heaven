@@ -1,20 +1,18 @@
 package com.barut.unterkontenverwaltung.sqlite
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Context
-import android.content.DialogInterface
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.widget.Toast
 import com.barut.unterkontenverwaltung.recyclerview.Model
 
 class SQLiteMain(
     val context: Context, val DATABASENAME: String,
     val TABLENAME: String, val spaltenName1: String, val spaltenName2: String,
-    val echtZeitDatum: String, val databaseType: String, val id: String, val beschreibung: String
-) : SQLiteOpenHelper(context, DATABASENAME, null, 3) {
+    val echtZeitDatum: String, val databaseType: String, val id: String, val beschreibung: String,
+    val userInputDatum: String
+) : SQLiteOpenHelper(context, DATABASENAME, null, 4) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         val createTable = "CREATE TABLE " + TABLENAME +
@@ -24,14 +22,16 @@ class SQLiteMain(
                 spaltenName2 + " VARCHAR " + "," +
                 echtZeitDatum + " VARCHAR " + "," +
                 beschreibung + " VARCHAR " + "," +
+                userInputDatum + " VARCHAR " + "," +
                 databaseType + " VARCHAR" +
+
                 ")"
         db?.execSQL(createTable)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         if (newVersion != oldVersion) {
-            db!!.execSQL("ALTER TABLE $DATABASENAME ADD COLUMN $beschreibung");
+            db!!.execSQL("ALTER TABLE $DATABASENAME ADD COLUMN $userInputDatum");
         }
     }
 
@@ -40,9 +40,10 @@ class SQLiteMain(
         val db = this.writableDatabase
         contenValue.put(spaltenName1, model.spaltenName1)
         contenValue.put(spaltenName2, model.spaltenName2)
-        contenValue.put(echtZeitDatum, model.datum)
+        contenValue.put(echtZeitDatum, model.echtZeitDatum)
         contenValue.put(databaseType, model.databaseType)
         contenValue.put(beschreibung, model.beschreibung)
+        contenValue.put(userInputDatum, model.userInputDatum)
         db.insert(TABLENAME, null, contenValue)
     }
 
@@ -63,7 +64,8 @@ class SQLiteMain(
                     cursor.getString(cursor.getColumnIndex(echtZeitDatum)),
                     cursor.getString(cursor.getColumnIndex(databaseType)),
                     cursor.getString(cursor.getColumnIndex(id)),
-                    cursor.getString(cursor.getColumnIndex(beschreibung))
+                    cursor.getString(cursor.getColumnIndex(beschreibung)),
+                    cursor.getString(cursor.getColumnIndex(userInputDatum))
                 )
                 arraylist.add(model)
             } while (cursor.moveToNext())
@@ -98,7 +100,7 @@ class SQLiteMain(
         val db = this.writableDatabase
         contenValue.put(spaltenName1, model.spaltenName1)
         contenValue.put(spaltenName2, model.spaltenName2)
-        contenValue.put(echtZeitDatum, model.datum)
+        contenValue.put(echtZeitDatum, model.echtZeitDatum)
         contenValue.put(databaseType, model.databaseType)
         contenValue.put(beschreibung, model.beschreibung)
 

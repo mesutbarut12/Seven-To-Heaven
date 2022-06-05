@@ -194,7 +194,8 @@ class MainActivity : AppCompatActivity() {
                                     )
                                     val view = alert.setLayout()
                                     val buttonId = view.findViewById<Button>(R.id.datenId)
-                                    val buttonIdEigene = view.findViewById<Button>(R.id.datenIdeigene)
+                                    val buttonIdEigene =
+                                        view.findViewById<Button>(R.id.datenIdeigene)
                                     val etId = view.findViewById<EditText>(R.id.editTextId)
                                     buttonId.setOnClickListener {
                                         if (etId.text.isNotEmpty()) {
@@ -242,7 +243,7 @@ class MainActivity : AppCompatActivity() {
         for (i in dataAusgabe) {
             arraylist.add(i)
         }
-        arraylist.sortWith(compareBy({ it.databaseType }, { it.datum }))
+        arraylist.sortWith(compareBy({ it.databaseType }, { it.echtZeitDatum }))
         return arraylist
     }
 
@@ -263,19 +264,23 @@ class MainActivity : AppCompatActivity() {
     fun initAllViews() {
         sqLiteMainEinkommen = SQLiteMain(
             this@MainActivity, "Einkommen", "Einkommen",
-            "unterkonto", "datum", "echtZeitDatum", "databaseType", "id", "beschreibung"
+            "unterkonto", "leer", "echtZeitDatum", "databaseType", "id",
+            "beschreibung","userInputDatum"
         )
         sqLiteMainUnterkonto = SQLiteMain(
             this@MainActivity, "Unterkonto", "Unterkonto",
-            "name", "prozent", "datum", "databaseType", "id", "beschreibung"
+            "name", "prozent", "datum", "databaseType", "id",
+            "beschreibung","userInputDatum"
         )
         sqLiteMainAusgabe = SQLiteMain(
             this@MainActivity, "Ausgabe", "Ausgabe",
-            "unterkonto", "ausgabe", "datum", "databaseType", "id", "beschreibung"
+            "unterkonto", "ausgabe", "datum", "databaseType", "id",
+            "beschreibung","userInputDatum"
         )
         sqLiteUserId = SQLiteMain(
             this@MainActivity, "UserId", "UserId",
-            "userId", "nichtbenutzt1", "nichtbenutzt2", "nichtbenutzt3", "id", "nichtbenutzt4"
+            "userId", "nichtbenutzt1", "nichtbenutzt2", "nichtbenutzt3",
+            "id", "nichtbenutzt4","nichtbenutz5"
         )
 
 
@@ -296,7 +301,8 @@ class MainActivity : AppCompatActivity() {
         if (sqLiteUserId.readData().isEmpty()) {
             sqLiteUserId.setData(
                 Model(
-                    userId.toString(), "", "", "", "", ""
+                    userId.toString(), "", "", "", "", "",
+                    ""
                 )
             )
         }
@@ -366,7 +372,11 @@ class MainActivity : AppCompatActivity() {
                                 ).show()
 
                             } else {
-                                Toast.makeText(this@MainActivity, "Die datei ist leer", Toast.LENGTH_LONG)
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "Die datei ist leer",
+                                    Toast.LENGTH_LONG
+                                )
                                     .show()
                                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             }
