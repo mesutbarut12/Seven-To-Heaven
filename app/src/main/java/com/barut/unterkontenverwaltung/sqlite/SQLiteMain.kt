@@ -32,10 +32,10 @@ class SQLiteMain(
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         if (newVersion != oldVersion) {
             println("upgrde")
-            //db!!.execSQL("ALTER TABLE $DATABASENAME ADD COLUMN $userInputDatum");
+            db!!.execSQL("ALTER TABLE $DATABASENAME ADD COLUMN $userInputDatum");
             if(DATABASENAME == "Einkommen"){
                 println("Einkommen")
-                //db!!.execSQL("ALTER TABLE $DATABASENAME RENAME COLUMN datum TO leer")
+                db!!.execSQL("ALTER TABLE $DATABASENAME RENAME COLUMN datum TO leer")
             }
         }
     }
