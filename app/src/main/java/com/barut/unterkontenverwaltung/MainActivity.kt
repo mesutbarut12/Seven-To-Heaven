@@ -16,7 +16,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.calculate.Calculate
-import com.barut.unterkontenverwaltung.action.GetData
 import com.barut.unterkontenverwaltung.action.TransferDataFromPopupToSetItem
 import com.barut.unterkontenverwaltung.action.PopupAlertDialogForCreateItem
 import com.barut.unterkontenverwaltung.action.SetItem
@@ -108,7 +107,7 @@ class MainActivity : AppCompatActivity() {
                         this@MainActivity,
                         view,
                         sqLiteMainUnterkonto.readData()
-                    ).getData(object : GetData {
+                    ).getData(object : SetItem.GetData {
                         override fun getData(model: Model) {
                             if (model.databaseType == "Unterkonto") {
                                 alertdialog.cancelDialog()
