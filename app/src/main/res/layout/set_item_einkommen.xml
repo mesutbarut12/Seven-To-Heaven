@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/setItemEinkommenEinkommenTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Einkommen : "
+        app:layout_constraintBottom_toBottomOf="@+id/setItemEinkommenEinkommenEt"
+        app:layout_constraintEnd_toStartOf="@+id/setItemEinkommenEinkommenEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/setItemEinkommenEinkommenEt" />
+
+    <EditText
+        android:id="@+id/setItemEinkommenEinkommenEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Einkommen eingeben"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/setItemEinkommenDatumEt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/setItemEinkommenDatumTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Datum : "
+        app:layout_constraintBottom_toBottomOf="@+id/setItemEinkommenDatumEt"
+        app:layout_constraintEnd_toStartOf="@+id/setItemEinkommenDatumEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/setItemEinkommenDatumEt" />
+
+    <TextView
+        android:id="@+id/setItemEinkommenBeschreibungTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="D"
+        android:text="Beschreibung : "
+        app:layout_constraintBottom_toBottomOf="@+id/setItemEinkommenBeschreibungEt"
+        app:layout_constraintEnd_toStartOf="@+id/setItemEinkommenBeschreibungEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/setItemEinkommenBeschreibungEt" />
+
+    <EditText
+        android:id="@+id/setItemEinkommenDatumEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="Datum wählen"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/setItemEinkommenBeschreibungEt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setItemEinkommenEinkommenEt" />
+
+    <EditText
+        android:id="@+id/setItemEinkommenBeschreibungEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Beschreibung eingeben."
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/setItemEinkommenSpeichern"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setItemEinkommenDatumEt" />
+
+    <Button
+        android:id="@+id/setItemEinkommenSpeichern"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Speichern"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/setItemEinkommenBeschreibungEt"
+        app:layout_constraintStart_toStartOf="@+id/setItemEinkommenBeschreibungTv"
+        app:layout_constraintTop_toBottomOf="@+id/setItemEinkommenBeschreibungEt" />
+</androidx.constraintlayout.widget.ConstraintLayout>

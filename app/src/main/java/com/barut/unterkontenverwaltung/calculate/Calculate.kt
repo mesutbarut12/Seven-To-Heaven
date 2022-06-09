@@ -1,9 +1,9 @@
 package com.barut.unterkontenverwaltung.calculate
 
 import com.barut.unterkontenverwaltung.recyclerview.NewModel
-import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
+import com.barut.unterkontenverwaltung.sqlite.SQliteUnterkonto
 
-class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: SQLiteMain) {
+class Calculate(val geld: SQliteUnterkonto, val unterkonto: SQliteUnterkonto, val ausgaben: SQliteUnterkonto) {
 
 
     fun calculate(): CalculateModel {
@@ -31,7 +31,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
     fun getGesamtSaldo(): Double {
         var ergebnis = 0.0
         for (i in geld.readData()) {
-            ergebnis += i.spaltenName1.toDouble()
+            ergebnis += i.name.toDouble()
 
         }
 
@@ -42,7 +42,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         var ergebnis = 0.0
         for (i in ausgaben.readData()) {
 
-            ergebnis += i.spaltenName1.toDouble()
+            ergebnis += i.name.toDouble()
         }
         return ergebnis
     }
@@ -62,7 +62,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
     fun getProzenteInsgesamt(): Double {
         var ergebnis = 0.0
         for (i in unterkonto.readData()) {
-            ergebnis += i.spaltenName2.toDouble()
+            ergebnis += i.prozent.toDouble()
         }
         return ergebnis
     }
@@ -117,7 +117,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
     fun getUnterkonto(): ArrayList<String> {
         var arrayList: ArrayList<String> = arrayListOf()
         for (i in unterkonto.readData()) {
-            arrayList.add(i.spaltenName1)
+            arrayList.add(i.name)
 
 
         }
@@ -127,7 +127,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
     fun getProzentualeEinteilung(): ArrayList<String> {
         var arrayList: ArrayList<String> = arrayListOf()
         for (i in unterkonto.readData()) {
-            arrayList.add(i.spaltenName2)
+            arrayList.add(i.prozent)
         }
         return arrayList
     }
@@ -138,7 +138,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         var arrayList: ArrayList<String> = arrayListOf()
         var ergebnis = 0.0
         for (i in unterkonto.readData()) {
-            ergebnis = (getGesamtSaldo() / 100) * i.spaltenName2.toDouble()
+            ergebnis = (getGesamtSaldo() / 100) * i.prozent.toDouble()
             arrayList.add(ergebnis.toString())
         }
 
@@ -149,7 +149,7 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         var setList: MutableSet<String>
         setList = mutableSetOf()
         for (i in ausgaben.readData()) {
-            setList.add(i.spaltenName2)
+            setList.add(i.prozent)
         }
 
         return setList.toList()
@@ -160,8 +160,8 @@ class Calculate(val geld: SQLiteMain, val unterkonto: SQLiteMain, val ausgaben: 
         for (y in unterkonto.readData()) {
             var ergebnis = 0.0
             for (i in ausgaben.readData()) {
-                if (i.spaltenName2 == y.spaltenName1) {
-                    ergebnis += i.spaltenName1.toDouble()
+                if (i.prozent == y.name) {
+                    ergebnis += i.name.toDouble()
 
                 }
             }

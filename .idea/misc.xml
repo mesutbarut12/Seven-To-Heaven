@@ -17,10 +17,17 @@
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/edit_items.xml" value="0.3043859649122807" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/end_model_show_datas_in_recyclerview.xml" value="0.47347994825355755" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/item_click_long_listener.xml" value="0.3043859649122807" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/popup_alert_dialog_add_item.xml" value="0.16359649122807018" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/popup_alert_dialog_einkommen.xml" value="0.33" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/popup_alert_dialog_einnahme.xml" value="0.30526315789473685" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/popup_alert_dialog_for_3_moeglichkeiten.xml" value="0.30526315789473685" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/popup_alert_dialog_for_create_item.xml" value="0.33" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/recyclerview_showallexistsunterkonten.xml" value="0.31431159420289856" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/row_viewpager2.xml" value="0.3043859649122807" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/set_item.xml" value="0.31431159420289856" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/set_item_ausgaben.xml" value="0.3043859649122807" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/set_item_einkommen.xml" value="0.3043859649122807" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/set_item_unterkonto.xml" value="0.3043859649122807" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/show_calculate.xml" value="0.5" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/show_existing_unterkonten.xml" value="0.31431159420289856" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/show_items.xml" value="0.391025641025641" />

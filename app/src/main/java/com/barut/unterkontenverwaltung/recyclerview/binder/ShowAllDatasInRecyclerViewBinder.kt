@@ -8,9 +8,9 @@ import com.barut.unterkontenverwaltung.DatePickerClass
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
-import com.barut.unterkontenverwaltung.recyclerview.Model
+import com.barut.unterkontenverwaltung.recyclerview.UnterkontoModel
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
-import com.barut.unterkontenverwaltung.sqlite.SQLiteMain
+import com.barut.unterkontenverwaltung.sqlite.SQliteUnterkonto
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,7 +18,7 @@ import kotlin.collections.ArrayList
 
 class ShowAllDatasInRecyclerViewBinder(
     val holder: RecyclerViewHolderMain, val id: String,
-    val inhalt: ArrayList<Model>,
+    val inhalt: ArrayList<UnterkontoModel>,
     val recyclerView: RecyclerView
 ) {
 
@@ -32,20 +32,20 @@ class ShowAllDatasInRecyclerViewBinder(
     private lateinit var echtzeitDatum: TextView
     private lateinit var ivEdit: ImageView
 
-    val sqLiteMainEinkommen = SQLiteMain(
+    val sqLiteMainEinkommen = SQliteUnterkonto(
         holder.itemView.context, "Einkommen", "Einkommen",
         "unterkonto", "leer", "echtZeitDatum", "databaseType", "id",
-        "beschreibung","userInputDatum"
+        "beschreibung"
     )
-    val sqLiteMainUnterkonto = SQLiteMain(
+    val sqLiteMainUnterkonto = SQliteUnterkonto(
         holder.itemView.context, "Unterkonto", "Unterkonto",
         "name", "prozent", "datum", "databaseType", "id",
-        "beschreibung","userInputDatum"
+        "beschreibung"
     )
-    val sqLiteMainAusgabe = SQLiteMain(
+    val sqLiteMainAusgabe = SQliteUnterkonto(
         holder.itemView.context, "Ausgabe", "Ausgabe",
         "unterkonto", "ausgabe", "datum", "databaseType", "id",
-        "beschreibung","userInputDatum"
+        "beschreibung"
     )
 
     fun onStart() {
@@ -55,21 +55,21 @@ class ShowAllDatasInRecyclerViewBinder(
 
                 if (inhalt.get(holder.adapterPosition).databaseType == "Unterkonto") {
                     image.setImageResource(R.drawable.ic_unterkonto)
-                    tvspaltenname2.setText(inhalt.get(holder.adapterPosition).spaltenName2 + "%")
-                    tvspaltenname1.setText(inhalt.get(holder.adapterPosition).spaltenName1)
+                    tvspaltenname2.setText(inhalt.get(holder.adapterPosition).prozent + "%")
+                    tvspaltenname1.setText(inhalt.get(holder.adapterPosition).name)
                 } else if (inhalt.get(holder.adapterPosition).databaseType == "Einnahme") {
                     image.setImageResource(R.drawable.ic_input)
-                    tvspaltenname2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
-                    tvspaltenname1.setText(inhalt.get(holder.adapterPosition).spaltenName1 + "€")
+                    tvspaltenname2.setText(inhalt.get(holder.adapterPosition).prozent)
+                    tvspaltenname1.setText(inhalt.get(holder.adapterPosition).name + "€")
 
                 } else {
                     image.setImageResource(R.drawable.ic_output)
-                    tvspaltenname1.setText(inhalt.get(holder.adapterPosition).spaltenName1 + "€")
-                    tvspaltenname2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
+                    tvspaltenname1.setText(inhalt.get(holder.adapterPosition).name + "€")
+                    tvspaltenname2.setText(inhalt.get(holder.adapterPosition).prozent)
 
                 }
 
-                echtzeitDatum.setText(inhalt.get(holder.adapterPosition).echtZeitDatum)
+                echtzeitDatum.setText(inhalt.get(holder.adapterPosition).datum)
                 onDelete(ivDelete)
                 onEdit(ivEdit)
             }
@@ -86,19 +86,19 @@ class ShowAllDatasInRecyclerViewBinder(
                 if (sqLiteMainAusgabe.readData().isNotEmpty()) {
                     for (i in sqLiteMainAusgabe.readData()) {
 
-                        if (i.spaltenName2 == inhalt.get(adapter).spaltenName1) {
+                        if (i.prozent == inhalt.get(adapter).name) {
                             alertDialog(object : AlertDialogUser {
                                 override fun getClick(klick: Int) {
                                     if (klick == 1) {
-                                        sqLiteMainAusgabe.deleteArgs(inhalt.get(adapter).spaltenName1)
+                                        sqLiteMainAusgabe.deleteArgs(inhalt.get(adapter).name)
                                         sqLiteMainUnterkonto.deleateItem(
                                             inhalt.get(adapter)
-                                                .spaltenName1, inhalt.get(adapter).spaltenName2
+                                                .name, inhalt.get(adapter).prozent
                                         )
                                     } else if (klick == 2) {
                                         sqLiteMainUnterkonto.deleateItem(
                                             inhalt.get(adapter)
-                                                .spaltenName1, inhalt.get(adapter).spaltenName2
+                                                .name, inhalt.get(adapter).prozent
                                         )
                                     }
                                     val updateData = updateData()
@@ -113,14 +113,14 @@ class ShowAllDatasInRecyclerViewBinder(
                         } else {
                             sqLiteMainUnterkonto.deleateItem(
                                 inhalt.get(adapter)
-                                    .spaltenName1, inhalt.get(adapter).spaltenName2
+                                    .name, inhalt.get(adapter).prozent
                             )
                         }
                     }
                 } else {
                     sqLiteMainUnterkonto.deleateItem(
                         inhalt.get(adapter)
-                            .spaltenName1, inhalt.get(adapter).spaltenName2
+                            .name, inhalt.get(adapter).prozent
                     )
                 }
 
@@ -128,12 +128,12 @@ class ShowAllDatasInRecyclerViewBinder(
             } else if (inhalt.get(holder.adapterPosition).databaseType == "Einnahme") {
                 sqLiteMainEinkommen.deleateItem(
                     inhalt.get(holder.adapterPosition)
-                        .spaltenName1, inhalt.get(holder.adapterPosition).spaltenName2
+                        .name, inhalt.get(holder.adapterPosition).prozent
                 )
             } else {
                 sqLiteMainAusgabe.deleateItem(
                     inhalt.get(holder.adapterPosition)
-                        .spaltenName1, inhalt.get(holder.adapterPosition).spaltenName2
+                        .name, inhalt.get(holder.adapterPosition).prozent
                 )
             }
             val updateData = updateData()
@@ -146,8 +146,8 @@ class ShowAllDatasInRecyclerViewBinder(
         }
     }
 
-    private fun updateData(): ArrayList<Model> {
-        val arrayList: ArrayList<Model> = arrayListOf()
+    private fun updateData(): ArrayList<UnterkontoModel> {
+        val arrayList: ArrayList<UnterkontoModel> = arrayListOf()
         for (i in sqLiteMainEinkommen.readData()) {
             arrayList.add(i)
         }
@@ -157,13 +157,13 @@ class ShowAllDatasInRecyclerViewBinder(
         for (i in sqLiteMainAusgabe.readData()) {
             arrayList.add(i)
         }
-        arrayList.sortWith(compareBy({ it.databaseType }, { it.echtZeitDatum }))
+        arrayList.sortWith(compareBy({ it.databaseType }, { it.datum }))
         return arrayList
     }
 
     private fun alertDialog(getClick: AlertDialogUser) {
         val alert = AlertDialog.Builder(holder.itemView.context)
-        alert.setTitle("!!!1ACHTUNG!!!")
+        alert.setTitle("!!!ACHTUNG!!!")
         alert.setMessage(
             "Du bist grad dabei ein Unterkonto zu löschen, sollen die damit verbundenen ausgaben" +
                     " mit gelöscht werden?"
@@ -183,24 +183,23 @@ class ShowAllDatasInRecyclerViewBinder(
     }
 
     fun onEdit(ivEdit: ImageView) {
-        ivEdit.setOnClickListener {
-            val alert = AlertDialogMain(holder.itemView.context, R.layout.add_item)
+       /* ivEdit.setOnClickListener {
+            val alert = AlertDialogMain(holder.itemView.context, R.layout.popup_alert_dialog_add_item)
             val view = alert.setLayout()
             val tvDescription1 = view.findViewById<TextView>(R.id.tvdescription1)
-            val tvDescription2 = view.findViewById<TextView>(R.id.tvdescription2)
-            val tvDescription3 = view.findViewById<TextView>(R.id.tvdescription3)
+            val tvDescription2 = view.findViewById<TextView>(R.id.tvPopUpAlertDatum)
+            val tvDescription3 = view.findViewById<TextView>(R.id.tvPopUpAlertBeschreibung)
             val tvDescription4 = view.findViewById<TextView>(R.id.tvdescription4)
-            val etInput1 = view.findViewById<EditText>(R.id.etInput1)
-            val etInput2 = view.findViewById<EditText>(R.id.etInput2)
-            val etInput3 = view.findViewById<EditText>(R.id.etInput3)
+            val etInput1 = view.findViewById<EditText>(R.id.etPopUpAlertDialogSumme)
+            val etInput2 = view.findViewById<EditText>(R.id.etPopUpAlertDialogDatum)
+            val etInput3 = view.findViewById<EditText>(R.id.etPopUpAlertDialogBeschreibung)
             val etInput4 = view.findViewById<EditText>(R.id.etInput4)
-            val btEdit = view.findViewById<Button>(R.id.btSaveItems)
+            val btEdit = view.findViewById<Button>(R.id.btSaveItemEinnahme)
             alert.createDialog()
 
             tvDescription3.setText("Beschreibung Ändern!")
             etInput3.setText(inhalt.get(holder.adapterPosition).beschreibung)
             tvDescription4.setText("Datum ändern!")
-            etInput4.setText(inhalt.get(holder.adapterPosition).userInputDatum)
             etInput4.setOnClickListener {
                 var datePickerClass = DatePickerClass(holder.itemView.context,etInput4)
                 datePickerClass.initDatePicker()
@@ -208,32 +207,32 @@ class ShowAllDatasInRecyclerViewBinder(
             if (inhalt.get(holder.adapterPosition).databaseType == "Ausgabe") {
                 tvDescription1.setText("Summe ändern!")
                 tvDescription2.setText("Name ändern!")
-                etInput1.setText(inhalt.get(holder.adapterPosition).spaltenName1)
-                etInput2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
+                etInput1.setText(inhalt.get(holder.adapterPosition).name)
+                etInput2.setText(inhalt.get(holder.adapterPosition).prozent)
             } else if (inhalt.get(holder.adapterPosition).databaseType == "Unterkonto") {
                 tvDescription1.setText("Name ändern!")
                 tvDescription2.setText("Prozent ändern!")
-                etInput1.setText(inhalt.get(holder.adapterPosition).spaltenName1)
-                etInput2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
+                etInput1.setText(inhalt.get(holder.adapterPosition).name)
+                etInput2.setText(inhalt.get(holder.adapterPosition).prozent)
             } else if (inhalt.get(holder.adapterPosition).databaseType == "Einnahme") {
                 tvDescription1.setText("Summe ändern!")
                 tvDescription2.setText("Datum ändern!")
-                etInput1.setText(inhalt.get(holder.adapterPosition).spaltenName1)
-                etInput2.setText(inhalt.get(holder.adapterPosition).spaltenName2)
+                etInput1.setText(inhalt.get(holder.adapterPosition).name)
+                etInput2.setText(inhalt.get(holder.adapterPosition).prozent)
             }
 
             btEdit.setOnClickListener {
-                val model = Model(
+                val model = UnterkontoModel(
                     etInput1.text.toString(),
                     etInput2.text.toString(),
                     "Tag der erstellung ${dateFormat.format(date)}",
                     inhalt.get(holder.adapterPosition).databaseType,
                     "", etInput3.text.toString()
-                    ,etInput4.text.toString())
+                )
 
                 if (inhalt.get(holder.adapterPosition).databaseType == "Ausgabe") {
                     sqLiteMainAusgabe.updateData(
-                        inhalt.get(holder.adapterPosition).spaltenName2,
+                        inhalt.get(holder.adapterPosition).prozent,
                         model
                     )
                     alert.cancelDialog()
@@ -248,14 +247,14 @@ class ShowAllDatasInRecyclerViewBinder(
                     )
                     if (model != null) {
                         sqLiteMainUnterkonto.updateData(
-                            inhalt.get(holder.adapterPosition).spaltenName2,
+                            inhalt.get(holder.adapterPosition).prozent,
                             model
                         )
                     }
                     alert.cancelDialog()
                 } else if (inhalt.get(holder.adapterPosition).databaseType == "Einnahme") {
                     sqLiteMainEinkommen.updateData(
-                        inhalt.get(holder.adapterPosition).spaltenName2,
+                        inhalt.get(holder.adapterPosition).prozent,
                         model
                     )
                     alert.cancelDialog()
@@ -265,6 +264,8 @@ class ShowAllDatasInRecyclerViewBinder(
 
 
         }
+
+        */
     }
 
     fun init() {
@@ -280,19 +281,19 @@ class ShowAllDatasInRecyclerViewBinder(
     fun checkProzentIsNot100(
         prozentZahl: String, etInput1: String,
         etInput2: String, etInput3: String,etInput4 : String
-    ): Model? {
-        var model: Model
+    ): UnterkontoModel? {
+        var model: UnterkontoModel
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")
         val date = Date()
 
         var ergebnis = prozentZahl.toDouble()
         for (i in inhalt) {
             if (i.databaseType == "Unterkonto") {
-                if (i.spaltenName2 == inhalt.get(holder.adapterPosition).spaltenName2) {
+                if (i.prozent == inhalt.get(holder.adapterPosition).prozent) {
 
                 } else {
-                    println(i.spaltenName2 + " Unterkonten Prozent!")
-                    ergebnis += i.spaltenName2.toDouble()
+                    println(i.prozent + " Unterkonten Prozent!")
+                    ergebnis += i.prozent.toDouble()
                 }
             }
         }
@@ -305,13 +306,13 @@ class ShowAllDatasInRecyclerViewBinder(
             return null
 
         } else {
-            model = Model(
+            model = UnterkontoModel(
                 etInput2,
                 etInput1,
                 "Tag der erstellung ${dateFormat.format(date)}",
                 inhalt.get(holder.adapterPosition).databaseType,
                 "", etInput3,
-                etInput4)
+            )
             println(etInput4)
         }
 

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
-import com.barut.unterkontenverwaltung.recyclerview.Model
+import com.barut.unterkontenverwaltung.recyclerview.UnterkontoModel
 import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
 import com.barut.unterkontenverwaltung.recyclerview.NewModel
 import com.barut.unterkontenverwaltung.recyclerview.binder.viewpage2.ViewPage2Adapter
@@ -17,7 +17,7 @@ import kotlin.math.roundToInt
 class ShowCalculateDataBinding(
     val holder: RecyclerViewHolderMain, val id: String,
     val newInhalt: NewModel,
-    val recyclerView: RecyclerView, val inhalt: ArrayList<Model>
+    val recyclerView: RecyclerView, val inhalt: ArrayList<UnterkontoModel>
 ) {
     fun onStart() {
         if (holder.differntHolder() != null) {
@@ -128,13 +128,13 @@ class ShowCalculateDataBinding(
         return tablayout
     }
 
-    fun createViewPager(viewPager2: ViewPager2, inhalt1: ArrayList<Model>) {
+    fun createViewPager(viewPager2: ViewPager2, inhalt1: ArrayList<UnterkontoModel>) {
         val adapter = ViewPage2Adapter(inhalt1)
         viewPager2.adapter = adapter
     }
 
-    fun getDataForTabLayout2(position: Int): ArrayList<Model> {
-        val arrayList: ArrayList<Model> = arrayListOf()
+    fun getDataForTabLayout2(position: Int): ArrayList<UnterkontoModel> {
+        val arrayList: ArrayList<UnterkontoModel> = arrayListOf()
         for (i in inhalt) {
             if (position == 0) {
                 if (i.databaseType == "Unterkonto") {

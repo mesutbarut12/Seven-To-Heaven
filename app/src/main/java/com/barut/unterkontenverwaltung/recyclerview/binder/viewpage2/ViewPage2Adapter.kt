@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.R
-import com.barut.unterkontenverwaltung.recyclerview.Model
+import com.barut.unterkontenverwaltung.recyclerview.UnterkontoModel
 
-class ViewPage2Adapter(val inhalt: ArrayList<Model>) : RecyclerView.Adapter<ViewPage2Holder>() {
+class ViewPage2Adapter(val inhalt: ArrayList<UnterkontoModel>) : RecyclerView.Adapter<ViewPage2Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPage2Holder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -41,11 +41,11 @@ class ViewPage2Adapter(val inhalt: ArrayList<Model>) : RecyclerView.Adapter<View
 
     fun checkWelchesUnterkonto (position : Int) : String{
         if(inhalt.get(position).databaseType == "Ausgabe"){
-            return inhalt.get(position).spaltenName2
+            return inhalt.get(position).prozent
         } else if(inhalt.get(position).databaseType == "Einnahme"){
             return "Demnächste Verfügbar!"
         } else if(inhalt.get(position).databaseType == "Unterkonto"){
-            return inhalt.get(position).spaltenName1
+            return inhalt.get(position).name
         }
         return " "
     }

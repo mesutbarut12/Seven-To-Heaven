@@ -8,7 +8,7 @@ import com.barut.unterkontenverwaltung.recyclerview.binder.ShowCalculateDataBind
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontenInRecyclerViewBinder
 import com.barut.unterkontenverwaltung.showexistingunterkonten.ShowExistingUnterkontoInterface
 
-class RecyclerViewAdapterMain(val inhalt : ArrayList<Model>, val layout : Int, val holderId : String,
+class RecyclerViewAdapterMain(val inhalt : ArrayList<UnterkontoModel>, val layout : Int, val holderId : String,
                               val recylcerView : RecyclerView,
                               val showExistingUnterkontoInterface: ShowExistingUnterkontoInterface?,
                               val newInhalt : NewModel?)
