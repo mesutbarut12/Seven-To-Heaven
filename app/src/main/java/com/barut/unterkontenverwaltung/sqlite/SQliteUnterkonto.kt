@@ -11,7 +11,7 @@ class SQliteUnterkonto(
     val context: Context, val DATABASENAME: String,
     val TABLENAME: String, val name: String, val prozent: String,
     val datum: String, val databaseType: String, val id: String, val beschreibung: String,
-    ) : SQLiteOpenHelper(context, DATABASENAME, null, 1) {
+    ) : SQLiteOpenHelper(context, DATABASENAME, null, 7) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         val createTable = "CREATE TABLE " + TABLENAME +
@@ -30,8 +30,18 @@ class SQliteUnterkonto(
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         if (newVersion != oldVersion) {
             println("upgrde")
-            //db!!.execSQL("ALTER TABLE $DATABASENAME ADD COLUMN ${userInputDatum}")
-            //db!!.execSQL("ALTER TABLE $DATABASENAME RENAME COLUMN datum TO leer")
+            db!!.execSQL("DROP TABLE IF EXISTS $TABLENAME;")
+            val createTable = "CREATE TABLE " + TABLENAME +
+                    "(" +
+                    id + " INTEGER PRIMARY KEY," +
+                    name + " VARCHAR " + "," +
+                    prozent + " VARCHAR " + "," +
+                    datum + " VARCHAR " + "," +
+                    beschreibung + " VARCHAR " + "," +
+                    databaseType + " VARCHAR" +
+
+                    ")"
+            db!!.execSQL("$createTable")
 
         }
     }

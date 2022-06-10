@@ -10,7 +10,7 @@ data class EinkommenModel(
     val datum: String, val databaseType: String, val id: String, val beschreibung: String,
 )
 data class AusgabenModel(
-    val name: String, val summe: String,
+    val unterkonto: String, val summe: String,
     val datum: String, val databaseType: String, val id: String, val beschreibung: String,
 )
 data class UserIdModel(

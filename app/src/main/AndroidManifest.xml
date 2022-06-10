@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnterkontenVerwaltung">
         <activity
+            android:name=".itemlist.ItemList"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

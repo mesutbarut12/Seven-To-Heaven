@@ -4,9 +4,7 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
-import com.barut.unterkontenverwaltung.DatePickerClass
 import com.barut.unterkontenverwaltung.R
-import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
 import com.barut.unterkontenverwaltung.recyclerview.UnterkontoModel
 import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
@@ -104,7 +102,8 @@ class ShowAllDatasInRecyclerViewBinder(
                                     val updateData = updateData()
                                     StartRecyclerView(
                                         holder.itemView.context, recyclerView,
-                                        updateData, R.layout.show_items, "ShowItems", null, null
+                                        updateData, R.layout.activity_item_list, "ShowItems", null,
+                                        null
                                     )
 
                                 }
@@ -139,7 +138,8 @@ class ShowAllDatasInRecyclerViewBinder(
             val updateData = updateData()
             StartRecyclerView(
                 holder.itemView.context, recyclerView,
-                updateData, R.layout.show_items, "ShowItems", null, null
+                updateData, R.layout.activity_item_list, "ShowItems", null,
+                null
             )
 
 
@@ -183,89 +183,89 @@ class ShowAllDatasInRecyclerViewBinder(
     }
 
     fun onEdit(ivEdit: ImageView) {
-       /* ivEdit.setOnClickListener {
-            val alert = AlertDialogMain(holder.itemView.context, R.layout.popup_alert_dialog_add_item)
-            val view = alert.setLayout()
-            val tvDescription1 = view.findViewById<TextView>(R.id.tvdescription1)
-            val tvDescription2 = view.findViewById<TextView>(R.id.tvPopUpAlertDatum)
-            val tvDescription3 = view.findViewById<TextView>(R.id.tvPopUpAlertBeschreibung)
-            val tvDescription4 = view.findViewById<TextView>(R.id.tvdescription4)
-            val etInput1 = view.findViewById<EditText>(R.id.etPopUpAlertDialogSumme)
-            val etInput2 = view.findViewById<EditText>(R.id.etPopUpAlertDialogDatum)
-            val etInput3 = view.findViewById<EditText>(R.id.etPopUpAlertDialogBeschreibung)
-            val etInput4 = view.findViewById<EditText>(R.id.etInput4)
-            val btEdit = view.findViewById<Button>(R.id.btSaveItemEinnahme)
-            alert.createDialog()
+        /* ivEdit.setOnClickListener {
+             val alert = AlertDialogMain(holder.itemView.context, R.layout.popup_alert_dialog_add_item)
+             val view = alert.setLayout()
+             val tvDescription1 = view.findViewById<TextView>(R.id.tvdescription1)
+             val tvDescription2 = view.findViewById<TextView>(R.id.tvPopUpAlertDatum)
+             val tvDescription3 = view.findViewById<TextView>(R.id.tvPopUpAlertBeschreibung)
+             val tvDescription4 = view.findViewById<TextView>(R.id.tvdescription4)
+             val etInput1 = view.findViewById<EditText>(R.id.etPopUpAlertDialogSumme)
+             val etInput2 = view.findViewById<EditText>(R.id.etPopUpAlertDialogDatum)
+             val etInput3 = view.findViewById<EditText>(R.id.etPopUpAlertDialogBeschreibung)
+             val etInput4 = view.findViewById<EditText>(R.id.etInput4)
+             val btEdit = view.findViewById<Button>(R.id.btSaveItemEinnahme)
+             alert.createDialog()
 
-            tvDescription3.setText("Beschreibung Ändern!")
-            etInput3.setText(inhalt.get(holder.adapterPosition).beschreibung)
-            tvDescription4.setText("Datum ändern!")
-            etInput4.setOnClickListener {
-                var datePickerClass = DatePickerClass(holder.itemView.context,etInput4)
-                datePickerClass.initDatePicker()
-            }
-            if (inhalt.get(holder.adapterPosition).databaseType == "Ausgabe") {
-                tvDescription1.setText("Summe ändern!")
-                tvDescription2.setText("Name ändern!")
-                etInput1.setText(inhalt.get(holder.adapterPosition).name)
-                etInput2.setText(inhalt.get(holder.adapterPosition).prozent)
-            } else if (inhalt.get(holder.adapterPosition).databaseType == "Unterkonto") {
-                tvDescription1.setText("Name ändern!")
-                tvDescription2.setText("Prozent ändern!")
-                etInput1.setText(inhalt.get(holder.adapterPosition).name)
-                etInput2.setText(inhalt.get(holder.adapterPosition).prozent)
-            } else if (inhalt.get(holder.adapterPosition).databaseType == "Einnahme") {
-                tvDescription1.setText("Summe ändern!")
-                tvDescription2.setText("Datum ändern!")
-                etInput1.setText(inhalt.get(holder.adapterPosition).name)
-                etInput2.setText(inhalt.get(holder.adapterPosition).prozent)
-            }
+             tvDescription3.setText("Beschreibung Ändern!")
+             etInput3.setText(inhalt.get(holder.adapterPosition).beschreibung)
+             tvDescription4.setText("Datum ändern!")
+             etInput4.setOnClickListener {
+                 var datePickerClass = DatePickerClass(holder.itemView.context,etInput4)
+                 datePickerClass.initDatePicker()
+             }
+             if (inhalt.get(holder.adapterPosition).databaseType == "Ausgabe") {
+                 tvDescription1.setText("Summe ändern!")
+                 tvDescription2.setText("Name ändern!")
+                 etInput1.setText(inhalt.get(holder.adapterPosition).name)
+                 etInput2.setText(inhalt.get(holder.adapterPosition).prozent)
+             } else if (inhalt.get(holder.adapterPosition).databaseType == "Unterkonto") {
+                 tvDescription1.setText("Name ändern!")
+                 tvDescription2.setText("Prozent ändern!")
+                 etInput1.setText(inhalt.get(holder.adapterPosition).name)
+                 etInput2.setText(inhalt.get(holder.adapterPosition).prozent)
+             } else if (inhalt.get(holder.adapterPosition).databaseType == "Einnahme") {
+                 tvDescription1.setText("Summe ändern!")
+                 tvDescription2.setText("Datum ändern!")
+                 etInput1.setText(inhalt.get(holder.adapterPosition).name)
+                 etInput2.setText(inhalt.get(holder.adapterPosition).prozent)
+             }
 
-            btEdit.setOnClickListener {
-                val model = UnterkontoModel(
-                    etInput1.text.toString(),
-                    etInput2.text.toString(),
-                    "Tag der erstellung ${dateFormat.format(date)}",
-                    inhalt.get(holder.adapterPosition).databaseType,
-                    "", etInput3.text.toString()
-                )
+             btEdit.setOnClickListener {
+                 val model = UnterkontoModel(
+                     etInput1.text.toString(),
+                     etInput2.text.toString(),
+                     "Tag der erstellung ${dateFormat.format(date)}",
+                     inhalt.get(holder.adapterPosition).databaseType,
+                     "", etInput3.text.toString()
+                 )
 
-                if (inhalt.get(holder.adapterPosition).databaseType == "Ausgabe") {
-                    sqLiteMainAusgabe.updateData(
-                        inhalt.get(holder.adapterPosition).prozent,
-                        model
-                    )
-                    alert.cancelDialog()
-                } else if (inhalt.get(holder.adapterPosition).databaseType == "Unterkonto") {
+                 if (inhalt.get(holder.adapterPosition).databaseType == "Ausgabe") {
+                     sqLiteMainAusgabe.updateData(
+                         inhalt.get(holder.adapterPosition).prozent,
+                         model
+                     )
+                     alert.cancelDialog()
+                 } else if (inhalt.get(holder.adapterPosition).databaseType == "Unterkonto") {
 
-                    val model = checkProzentIsNot100(
-                        etInput2.text.toString(),
-                        etInput2.text.toString(),
-                        etInput1.text.toString(),
-                        etInput3.text.toString(),
-                        etInput4.text.toString()
-                    )
-                    if (model != null) {
-                        sqLiteMainUnterkonto.updateData(
-                            inhalt.get(holder.adapterPosition).prozent,
-                            model
-                        )
-                    }
-                    alert.cancelDialog()
-                } else if (inhalt.get(holder.adapterPosition).databaseType == "Einnahme") {
-                    sqLiteMainEinkommen.updateData(
-                        inhalt.get(holder.adapterPosition).prozent,
-                        model
-                    )
-                    alert.cancelDialog()
-                }
+                     val model = checkProzentIsNot100(
+                         etInput2.text.toString(),
+                         etInput2.text.toString(),
+                         etInput1.text.toString(),
+                         etInput3.text.toString(),
+                         etInput4.text.toString()
+                     )
+                     if (model != null) {
+                         sqLiteMainUnterkonto.updateData(
+                             inhalt.get(holder.adapterPosition).prozent,
+                             model
+                         )
+                     }
+                     alert.cancelDialog()
+                 } else if (inhalt.get(holder.adapterPosition).databaseType == "Einnahme") {
+                     sqLiteMainEinkommen.updateData(
+                         inhalt.get(holder.adapterPosition).prozent,
+                         model
+                     )
+                     alert.cancelDialog()
+                 }
 
-            }
+             }
 
 
-        }
+         }
 
-        */
+         */
     }
 
     fun init() {
@@ -280,7 +280,7 @@ class ShowAllDatasInRecyclerViewBinder(
 
     fun checkProzentIsNot100(
         prozentZahl: String, etInput1: String,
-        etInput2: String, etInput3: String,etInput4 : String
+        etInput2: String, etInput3: String, etInput4: String
     ): UnterkontoModel? {
         var model: UnterkontoModel
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yy ")

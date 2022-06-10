@@ -13,3 +13,6 @@ interface DataTransferPopUp {
 interface DataTransferBottomNavigation {
     fun getData(klick : Int)
 }
+interface DataTransferShowUnterkontoBinder{
+    fun getData(name : String)
+}

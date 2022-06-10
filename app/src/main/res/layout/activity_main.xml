@@ -65,7 +65,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/tvVerfugbaererSaldoAusgabe"
+                            android:id="@+id/amVerfugbarerSaldo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -97,7 +97,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/tvGesamtSaldo2Ausgabe"
+                            android:id="@+id/amGesamtSaldo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -129,7 +129,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/tvgesamtAusgabenAusgabe"
+                            android:id="@+id/amGesamtAusgaben"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -161,7 +161,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/tvUnterkontenAnzahlAusgabe"
+                            android:id="@+id/amunterkontoAnzahl"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -193,7 +193,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/tvProzentAnzahlAusgabe"
+                            android:id="@+id/amprozentAnzahl"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -222,11 +222,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_weight="1"
-                            android:text="Beschreibung Vorhanden :"
+                            android:text="Beschreibung :"
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/tvBeschreibungAusgabe"
+                            android:id="@+id/ambeschreibungVorhanden"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"

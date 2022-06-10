@@ -1,7 +1,7 @@
 package com.barut.unterkontenverwaltung.bottomnavigation.additem
 
 import android.content.Context
-import com.barut.unterkontenverwaltung.bottomnavigation.additem.connecter.Connecter
+import com.barut.unterkontenverwaltung.bottomnavigation.additem.popup.connecter.Connecter
 import com.barut.unterkontenverwaltung.bottomnavigation.additem.popup.PopUpAlertDialog
 
 class Starter(val context : Context) {

@@ -11,7 +11,7 @@ class SQliteEinkommen(
     val context: Context, val DATABASENAME: String,
     val TABLENAME: String, val summe: String, val datum: String,
     val databaseType: String, val id: String, val beschreibung: String,
-) : SQLiteOpenHelper(context, DATABASENAME, null, 1) {
+) : SQLiteOpenHelper(context, DATABASENAME, null, 7) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         val createTable = "CREATE TABLE " + TABLENAME +
@@ -28,9 +28,7 @@ class SQliteEinkommen(
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         if (newVersion != oldVersion) {
-            println("upgrde")
-            //db!!.execSQL("ALTER TABLE $DATABASENAME ADD COLUMN ${userInputDatum}")
-            //db!!.execSQL("ALTER TABLE $DATABASENAME RENAME COLUMN datum TO leer")
+
 
         }
     }
@@ -71,7 +69,7 @@ class SQliteEinkommen(
         return arraylist
     }
 
-    fun deleateItem(model : EinkommenModel) {
+    fun deleateItem(model: EinkommenModel) {
         val db = this.writableDatabase
         for (einkommen in readData()) {
 

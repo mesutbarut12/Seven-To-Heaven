@@ -27,8 +27,10 @@ class RecyclerViewHolderMain(itemView: View, val id: String) : RecyclerView.View
             arraylistView.add(ivEdit)
             return arraylistView
         } else if (id == "ShowExistingUnterkontenItems") {
-            val tv: TextView = itemView.findViewById(R.id.tv)
+            val tv: TextView = itemView.findViewById(R.id.setItemRowName)
+            val tvGuthaben : TextView = itemView.findViewById(R.id.setItemRowDiffernz)
             arraylistView.add(tv)
+            arraylistView.add(tvGuthaben)
             return arraylistView
         } else if (id == "EndShowDataCalculate") {
             val unterkonto: TextView = itemView.findViewById(R.id.tvUnterkonto)

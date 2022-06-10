@@ -9,12 +9,11 @@ import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.recyclerview.UnterkontoModel
 import com.barut.unterkontenverwaltung.recyclerview.RecyclerViewHolderMain
 import com.barut.unterkontenverwaltung.recyclerview.NewModel
-import com.barut.unterkontenverwaltung.recyclerview.binder.viewpage2.ViewPage2Adapter
 import com.google.android.material.tabs.TabLayout
 import java.text.DecimalFormat
 import kotlin.math.roundToInt
 
-class ShowCalculateDataBinding(
+class CalculateBinder(
     val holder: RecyclerViewHolderMain, val id: String,
     val newInhalt: NewModel,
     val recyclerView: RecyclerView, val inhalt: ArrayList<UnterkontoModel>
@@ -22,7 +21,6 @@ class ShowCalculateDataBinding(
     fun onStart() {
         if (holder.differntHolder() != null) {
             if (id == "EndShowDataCalculate") {
-                longClickListener()
                 val showlist = holder.differntHolder()
                 val unterkonto = showlist!!.get(0) as TextView
                 val prozent = showlist!!.get(1) as TextView
@@ -87,51 +85,20 @@ class ShowCalculateDataBinding(
         return roundOff
     }
 
-    fun longClickListener() {
-        holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
-            override fun onLongClick(p0: View?): Boolean {
-                val alert = initAlertDialog()
-                val view = getViewAlertDialog(alert)
-                val viewPager2 = initViewPager(view)
-                createViewPager(viewPager2, getDataForTabLayout2(0))
-                alert.createDialog()
-                tabLayoutSelectedListener(view, viewPager2)
-                return true
-            }
 
-        })
-    }
 
-    fun tabLayoutSelectedListener(view: View, viewPager2: ViewPager2) {
-        val tablayout2 = initTabLayout2(view)
-        codeForTabLayout2(tablayout2,viewPager2)
-    }
 
-    fun initAlertDialog(): AlertDialogMain {
-        val alert =
-            AlertDialogMain(holder.itemView.context, R.layout.item_click_long_listener)
-        return alert
-    }
+
 
     fun getViewAlertDialog(alert: AlertDialogMain): View {
         val view = alert.setLayout()
         return view
     }
 
-    fun initViewPager(view: View): ViewPager2 {
-        val viewpager2: ViewPager2 = view.findViewById(R.id.viewpager2)
-        return viewpager2
-    }
 
-    fun initTabLayout2(view: View): TabLayout {
-        val tablayout = view.findViewById<TabLayout>(R.id.tabLayout2)
-        return tablayout
-    }
 
-    fun createViewPager(viewPager2: ViewPager2, inhalt1: ArrayList<UnterkontoModel>) {
-        val adapter = ViewPage2Adapter(inhalt1)
-        viewPager2.adapter = adapter
-    }
+
+
 
     fun getDataForTabLayout2(position: Int): ArrayList<UnterkontoModel> {
         val arrayList: ArrayList<UnterkontoModel> = arrayListOf()
@@ -153,39 +120,7 @@ class ShowCalculateDataBinding(
         return arrayList
     }
 
-    fun codeForTabLayout2(tablayout2 : TabLayout,viewPager2: ViewPager2){
 
-
-                tablayout2.getTabAt(0)?.setText("Unterkonto")
-                tablayout2.getTabAt(1)?.setText("Einkommen")
-                tablayout2.getTabAt(2)?.setText("Ausgabe")
-                tablayout2.addOnTabSelectedListener(object :
-                    TabLayout.OnTabSelectedListener {
-                    override fun onTabSelected(tab1: TabLayout.Tab?) {
-                        if (tab1 != null) {
-                            if (tab1.position == 0) {
-                                createViewPager(viewPager2, getDataForTabLayout2(0))
-
-                            } else if (tab1.position == 1) {
-                                createViewPager(viewPager2, getDataForTabLayout2(1))
-
-                            } else if (tab1.position == 2) {
-                                createViewPager(viewPager2, getDataForTabLayout2(2))
-
-
-                            }
-                        }
-                    }
-
-                    override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-                    }
-
-                    override fun onTabReselected(tab: TabLayout.Tab?) {
-                    }
-                })
-
-            }
 
 
 }

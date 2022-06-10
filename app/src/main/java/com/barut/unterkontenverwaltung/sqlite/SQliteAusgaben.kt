@@ -38,7 +38,7 @@ class SQliteAusgaben(
         val contenValue = ContentValues()
         val db = this.writableDatabase
         println(model.summe)
-        contenValue.put(name, model.name)
+        contenValue.put(name, model.unterkonto)
         contenValue.put(summe, model.summe)
         contenValue.put(datum, model.datum)
         contenValue.put(databaseType, model.databaseType)

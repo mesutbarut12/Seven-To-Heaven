@@ -8,6 +8,7 @@
     app:cardElevation="6dp"
     app:cardCornerRadius="10dp"
     app:cardUseCompatPadding="true"
+    tools:context=".itemlist.ItemList"
     >
 
 
