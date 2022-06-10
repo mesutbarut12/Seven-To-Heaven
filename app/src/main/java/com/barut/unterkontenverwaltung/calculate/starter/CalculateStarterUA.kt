@@ -45,4 +45,8 @@ class CalculateStarter(
         prozenteGesamt.setText(calculateUebersichtsAnzeige.uAProzenteGesamt())
         beschreibungVorhanden.setText(calculateUebersichtsAnzeige.uABeschreibungVorhanden())
     }
+
+    fun update(){
+        initUebersichtsAnzeige()
+    }
 }

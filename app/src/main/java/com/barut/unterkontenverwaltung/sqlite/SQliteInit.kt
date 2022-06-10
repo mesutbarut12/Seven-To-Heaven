@@ -4,6 +4,14 @@ import android.content.Context
 
 class SQliteInit(val context: Context) {
 
+    fun init(){
+        unterkonto()
+        einnahme()
+        ausgabe()
+        userId()
+        sqlCalculate()
+    }
+
     fun unterkonto(): SQliteUnterkonto {
 
         var unterkonto = SQliteUnterkonto(
@@ -33,6 +41,12 @@ class SQliteInit(val context: Context) {
         var userId = SQliteUserID(context, "UserID", "userId", "id")
 
         return userId
+    }
+    fun sqlCalculate() : SQliteCalculate {
+        var calculate = SQliteCalculate(context,"Calculate","calculate",
+        "unterkonto","prozent","ausgaben","guthaben","ergebnis",
+        "id")
+        return calculate
     }
 
 

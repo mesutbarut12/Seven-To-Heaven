@@ -11,7 +11,6 @@ import com.barut.unterkontenverwaltung.DatePickerClass
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.recyclerview.AusgabenModel
-import com.barut.unterkontenverwaltung.recyclerview.StartRecyclerView
 import com.barut.unterkontenverwaltung.sqlite.SQliteInit
 
 class SetItemAusgaben(val view: View, val context: Context,val alertDialogMain: AlertDialogMain) {
@@ -75,14 +74,14 @@ class SetItemAusgaben(val view: View, val context: Context,val alertDialogMain: 
     fun clickUnterkonto() {
         etUnterkonto.setOnClickListener {
             val view1 = alert.setLayout()
-           StartRecyclerView(
+           /*StartRecyclerView(
                 context,
                 view1.findViewById(R.id.setItemRecyclerViewUnterkonten),
                 sqliteInit.unterkonto().readData(),
                 R.layout.set_item_unterkonten_row,
                 "ShowExistingUnterkontenItems",
-                null, dataTransferInterface()
-            )
+                 dataTransferInterface()
+            )*/
             alert.createDialog()
         }
     }
