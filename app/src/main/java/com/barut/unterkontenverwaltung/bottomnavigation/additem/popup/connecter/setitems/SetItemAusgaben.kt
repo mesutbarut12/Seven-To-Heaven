@@ -90,15 +90,12 @@ class SetItemAusgaben(
         var guthaben = calculateHauptAnzeige.hAGuthaben()
 
         for (i in guthaben) {
-            println(i + " Guthaben")
             var unterkonto = i.split(".")[1]
             var guthaben = i.split(".")[0].toDouble()
             var ergebnis = 0.0
             for (z in sqliteInit.ausgabe().readData()) {
-                println(z.unterkonto + " Ausgaben")
                 if (unterkonto == z.unterkonto ) {
                     ergebnis = guthaben - z.summe.toDouble()
-                    println(ergebnis.toString() + " Ergebnis")
 
                 }
             }

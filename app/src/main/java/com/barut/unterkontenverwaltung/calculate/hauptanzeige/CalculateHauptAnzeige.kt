@@ -3,6 +3,7 @@ package com.barut.unterkontenverwaltung.calculate.hauptanzeige
 import android.content.Context
 import com.barut.unterkontenverwaltung.calculate.uebersichtsanzeige.CalculateUebersichtsAnzeige
 import com.barut.unterkontenverwaltung.recyclerview.CalculateSqlModel
+import com.barut.unterkontenverwaltung.recyclerview.alleunterkonten.AURecyclerViewModel
 import com.barut.unterkontenverwaltung.sqlite.*
 import java.text.DecimalFormat
 
@@ -90,27 +91,29 @@ class CalculateHauptAnzeige(private val context: Context) {
     }
 
     fun hAErgebnis(): ArrayList<String> {
-        var arrayAusgabe: ArrayList<String> = arrayListOf()
-        var ergebnisStringAusgabe = ""
+        val arraylistName: ArrayList<String> = arrayListOf()
+        val arraylistSumme: ArrayList<String> = arrayListOf()
 
-        var guthaben = hAGuthaben()
 
-        //Ausgaben raus filtern!
-        for (i in unterkonto.readData()) {
+         var guthaben = hAGuthaben()
+
+        for (i in guthaben) {
+            var unterkonto = i.split(".")[1]
+            var guthaben = i.split(".")[0].toDouble()
             var ergebnis = 0.0
-            for (y in ausgabe.readData()) {
-                if (i.name == y.unterkonto) {
-                    ergebnis += y.summe.toDouble()
+            for (z in sQliteInit.ausgabe().readData()) {
+                if (unterkonto == z.unterkonto ) {
+                    ergebnis = guthaben - z.summe.toDouble()
+                    println(ergebnis)
 
                 }
-                ergebnisStringAusgabe = dec.format(ergebnis)
-                arrayAusgabe.add(ergebnisStringAusgabe)
             }
-
+            var ergebnisString = dec.format(ergebnis)
+            arraylistSumme.add(ergebnisString + "." +  unterkonto)
+            arraylistName.add(unterkonto)
 
         }
-
-        return arrayListOf()
+        return arraylistSumme
     }
 
     fun setDataInDataBase() {
@@ -119,7 +122,7 @@ class CalculateHauptAnzeige(private val context: Context) {
         println(hAProzentEinteilung() + " Prozent Einteilung")
         println(hAAusgaben() + " Ausgaben")
         println(hAGuthaben() + " Guthaben")
-        println(hAErgebnis() + " Ergebnis")
+        //println(hAErgebnis() + " Ergebnis")
 
         println("--------------------------")
 
@@ -128,8 +131,8 @@ class CalculateHauptAnzeige(private val context: Context) {
 
             var model = CalculateSqlModel(
                 hAunterkontoName().get(i),
-                hAProzentEinteilung().get(i), "",
-                hAGuthaben().get(i), "", ""
+                hAProzentEinteilung().get(i), hAAusgaben().get(i),
+                hAGuthaben().get(i), hAErgebnis().get(i), ""
             )
             sqlCalculate.setData(model)
 

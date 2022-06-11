@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         calculateHA()
     }
 
+    //Anzeige Oben
+    //Übersichts Anzeige
     fun calculateUA() {
         var arrayList = arrayListOf<View>(
             findViewById(R.id.amVerfugbarerSaldo),
@@ -35,11 +37,11 @@ class MainActivity : AppCompatActivity() {
         )
         CalculateStarter(this, arrayList).initUebersichtsAnzeige()
     }
-
+    //Haupt Anzeige Mitte
     fun calculateHA() {
         var calculateHauptAnzeige = CalculateHauptAnzeige(this)
         calculateHauptAnzeige.init()
-        //calculateHauptAnzeige.setDataInDataBase()
+        calculateHauptAnzeige.setDataInDataBase()
 
 
     }
