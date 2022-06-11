@@ -73,7 +73,7 @@ class CalculateHauptAnzeige(private val context: Context) {
                 }
             }
             ergebnisString = dec.format(ergebnis)
-            array.add(ergebnisString)
+            array.add(ergebnisString +"." + y.name )
         }
         return array
     }
@@ -91,26 +91,27 @@ class CalculateHauptAnzeige(private val context: Context) {
     }
 
     fun hAErgebnis(): ArrayList<String> {
-        val arraylistName: ArrayList<String> = arrayListOf()
         val arraylistSumme: ArrayList<String> = arrayListOf()
 
 
-         var guthaben = hAGuthaben()
+        var guthaben = hAGuthaben()
+        var ausgaben = hAAusgaben()
 
         for (i in guthaben) {
-            var unterkonto = i.split(".")[1]
-            var guthaben = i.split(".")[0].toDouble()
-            var ergebnis = 0.0
-            for (z in sQliteInit.ausgabe().readData()) {
-                if (unterkonto == z.unterkonto ) {
-                    ergebnis = guthaben - z.summe.toDouble()
-                    println(ergebnis)
-
+            var unterkontoG = i.split(".")[1]
+            var guthabenG = i.split(".")[0].toDouble()
+            for (y in ausgaben) {
+                var unterkontoA = y.split(".")[1]
+                var guthabenA = y.split(".")[0].toDouble()
+                if(unterkontoA == unterkontoG){
+                    guthabenG -= guthabenA
                 }
+
             }
+            var ergebnis = guthabenG
             var ergebnisString = dec.format(ergebnis)
-            arraylistSumme.add(ergebnisString + "." +  unterkonto)
-            arraylistName.add(unterkonto)
+            arraylistSumme.add(ergebnisString + "." + unterkontoG)
+
 
         }
         return arraylistSumme

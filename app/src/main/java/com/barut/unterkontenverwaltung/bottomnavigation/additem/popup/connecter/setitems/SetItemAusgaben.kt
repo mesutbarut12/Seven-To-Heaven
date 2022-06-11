@@ -81,30 +81,21 @@ class SetItemAusgaben(
     }
 
     fun getUnterkontoAndSumme(): AURecyclerViewModel {
-        val arraylistName: ArrayList<String> = arrayListOf()
-        val arraylistSumme: ArrayList<String> = arrayListOf()
+        var arraylistName : ArrayList<String> = arrayListOf()
+        var arraylistSumme : ArrayList<String> = arrayListOf()
         val model: AURecyclerViewModel
 
         var calculateHauptAnzeige = CalculateHauptAnzeige(context)
         calculateHauptAnzeige.init()
-        var guthaben = calculateHauptAnzeige.hAGuthaben()
+        var ergebnis = calculateHauptAnzeige.hAErgebnis()
 
-        for (i in guthaben) {
-            var unterkonto = i.split(".")[1]
-            var guthaben = i.split(".")[0].toDouble()
-            var ergebnis = 0.0
-            for (z in sqliteInit.ausgabe().readData()) {
-                if (unterkonto == z.unterkonto ) {
-                    ergebnis = guthaben - z.summe.toDouble()
-
-                }
-            }
-            arraylistSumme.add(ergebnis.toString())
-            arraylistName.add(unterkonto)
-
+        for(i in ergebnis){
+            var ergebnisName = i.split(".")[1]
+            var ergebnisSumme = i.split(".")[0]
+            arraylistName.add(ergebnisName)
+            arraylistSumme.add(ergebnisSumme)
         }
-        model = AURecyclerViewModel(arraylistName, arraylistSumme)
-
+        model = AURecyclerViewModel(arraylistName,arraylistSumme)
         return model
     }
 
@@ -119,8 +110,10 @@ class SetItemAusgaben(
                 )
                 alert.createDialog()
             } else {
-                Toast.makeText(context,"Du hast keine verfügbaren Unterkonten!",
-                Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context, "Du hast keine verfügbaren Unterkonten!",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
