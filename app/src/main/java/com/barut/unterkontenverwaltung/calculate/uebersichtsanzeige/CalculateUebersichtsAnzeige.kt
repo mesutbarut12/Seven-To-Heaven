@@ -25,12 +25,12 @@ class CalculateUebersichtsAnzeige(private val context: Context) {
 
     fun init() {
         initSqlite()
-        println(uAGesamtSaldo())
+       /* println(uAGesamtSaldo())
         println(uAGesamtAusgaben())
         println(uAUnterkontoAnzahl())
         println(uAProzenteGesamt())
         println(uABeschreibungVorhanden())
-
+*/
 
     }
 
@@ -89,7 +89,7 @@ class CalculateUebersichtsAnzeige(private val context: Context) {
                 ergebnis += 1
             }
         }
-        if (ergebnis == sizeEinnahmen) {
+        if (ergebnis == sizeEinnahmen && ergebnis != 0) {
             return "✓"
         }
         return "X"

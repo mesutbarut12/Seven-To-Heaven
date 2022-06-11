@@ -3,7 +3,6 @@ package com.barut.unterkontenverwaltung.calculate.hauptanzeige
 import android.content.Context
 import com.barut.unterkontenverwaltung.calculate.uebersichtsanzeige.CalculateUebersichtsAnzeige
 import com.barut.unterkontenverwaltung.recyclerview.CalculateSqlModel
-import com.barut.unterkontenverwaltung.recyclerview.hauptanzeige.HAHauptAnzeigeModel
 import com.barut.unterkontenverwaltung.sqlite.*
 import java.text.DecimalFormat
 
@@ -29,10 +28,16 @@ class CalculateHauptAnzeige(private val context: Context) {
         calculateUebersichtsAnzeige.init()
     }
 
-    fun init(): HAHauptAnzeigeModel? {
+    fun init() {
         initAny()
+        println("--------------------------")
+        println(hAunterkontoName() + " Unterkonto Name")
+        println(hAProzentEinteilung() + " Prozent Einteilung")
+        println(hAAusgaben() + " Ausgaben")
+        println(hAGuthaben() + " Guthaben")
+        println(hAErgebnis() + " Ergebnis")
 
-        return null
+        println("--------------------------")
     }
 
     fun hAunterkontoName(): ArrayList<String> {
@@ -59,9 +64,13 @@ class CalculateHauptAnzeige(private val context: Context) {
     fun hAAusgaben(): ArrayList<String> {
         var array: ArrayList<String> = arrayListOf()
         var ergebnisString = ""
-        var ergebnis = 0.0
-        for(i in 0..unterkonto.readData().size-1){
-            ergebnis = hAGuthaben().get(i).toDouble() - hAAusgaben().get(i).toDouble()
+        for (y in sQliteInit.unterkonto().readData()) {
+            var ergebnis = 0.0
+            for (i in sQliteInit.ausgabe().readData()) {
+                if (i.unterkonto == y.name) {
+                    ergebnis += i.summe.toDouble()
+                }
+            }
             ergebnisString = dec.format(ergebnis)
             array.add(ergebnisString)
         }
@@ -74,7 +83,7 @@ class CalculateHauptAnzeige(private val context: Context) {
         for (i in unterkonto.readData()) {
             var ergebnis = (gesamtSaldo.toDouble() / 100.0) * i.prozent.toDouble()
             var ergenisString = dec.format(ergebnis)
-            array.add(ergenisString)
+            array.add(ergenisString + "." + i.name)
         }
         return array
 
@@ -83,6 +92,8 @@ class CalculateHauptAnzeige(private val context: Context) {
     fun hAErgebnis(): ArrayList<String> {
         var arrayAusgabe: ArrayList<String> = arrayListOf()
         var ergebnisStringAusgabe = ""
+
+        var guthaben = hAGuthaben()
 
         //Ausgaben raus filtern!
         for (i in unterkonto.readData()) {
@@ -109,10 +120,11 @@ class CalculateHauptAnzeige(private val context: Context) {
         println(hAAusgaben() + " Ausgaben")
         println(hAGuthaben() + " Guthaben")
         println(hAErgebnis() + " Ergebnis")
+
         println("--------------------------")
 
         context.deleteDatabase("Calculate")
-        for (i in 0..hAunterkontoName().size-1) {
+        for (i in 0..hAunterkontoName().size - 1) {
 
             var model = CalculateSqlModel(
                 hAunterkontoName().get(i),

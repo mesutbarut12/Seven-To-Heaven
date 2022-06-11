@@ -8,9 +8,7 @@ import androidx.annotation.RequiresApi
 import com.barut.unterkontenverwaltung.bottomnavigation.BottomNavigation
 import com.barut.unterkontenverwaltung.calculate.hauptanzeige.CalculateHauptAnzeige
 import com.barut.unterkontenverwaltung.calculate.starter.CalculateStarter
-import com.barut.unterkontenverwaltung.recyclerview.UserIdModel
-import com.barut.unterkontenverwaltung.recyclerview.hauptanzeige.HAStartRecyclerView
-import com.barut.unterkontenverwaltung.sqlite.SQliteInit
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,8 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        BottomNavigation().init(findViewById(R.id.bottomNavigation), this)
+        bottomNavigation()
 
         calculateUA()
         calculateHA()
@@ -42,15 +39,30 @@ class MainActivity : AppCompatActivity() {
     fun calculateHA() {
         var calculateHauptAnzeige = CalculateHauptAnzeige(this)
         calculateHauptAnzeige.init()
-        calculateHauptAnzeige.setDataInDataBase()
-        /*HAStartRecyclerView(
-                findViewById(R.id.recyclerView),
-                this,calculateHauptAnzeige.init()!!
-            )
-             */
+        //calculateHauptAnzeige.setDataInDataBase()
+
 
     }
 
 
+
+    //Bottom Navigation
+    fun update(){
+        calculateUA()
+    }
+    fun bottomNavigation(){
+        BottomNavigation().init(findViewById(R.id.bottomNavigation), this,bottomNavigationInterface())
+    }
+    fun bottomNavigationInterface() : DataTransferUserAddedItem{
+        var data = object : DataTransferUserAddedItem{
+            override fun data(addedItem: Boolean) {
+                if(addedItem == true){
+                    update()
+                }
+            }
+        }
+        return data
+    }
+    //Bis hier hin Bottom Navigation
 
 }

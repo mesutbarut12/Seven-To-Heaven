@@ -5,13 +5,15 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.barut.unterkontenverwaltung.DataTransferUserAddedItem
 import com.barut.unterkontenverwaltung.DatePickerClass
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.recyclerview.EinkommenModel
 import com.barut.unterkontenverwaltung.sqlite.SQliteInit
 
-class SetItemEinkommen( view: View, val context: Context,val alertDialogMain: AlertDialogMain) {
+class SetItemEinkommen( view: View, val context: Context,val alertDialogMain: AlertDialogMain,
+private val dataTransferUserAddedItem: DataTransferUserAddedItem) {
 
     //Hier wird reguliert was der User einzugeben hat
     // und es werden eventuelle fehler ausgeschlossen
@@ -50,6 +52,7 @@ class SetItemEinkommen( view: View, val context: Context,val alertDialogMain: Al
                 model = EinkommenModel(einkommen,datum,"einkommen","",beschreibung)
                 sqliteInit.einnahme().setData(model)
                 alertDialogMain.cancelDialog()
+                dataTransferUserAddedItem.data(true)
             } else {
                 Toast.makeText(context,"Lasse Einkommen und Datum nicht leer.",Toast.LENGTH_SHORT).show()
             }

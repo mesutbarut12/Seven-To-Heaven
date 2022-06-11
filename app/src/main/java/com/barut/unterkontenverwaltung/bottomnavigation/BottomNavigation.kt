@@ -2,6 +2,7 @@ package com.barut.unterkontenverwaltung.bottomnavigation
 
 import android.content.Context
 import android.view.MenuItem
+import com.barut.unterkontenverwaltung.DataTransferUserAddedItem
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.bottomnavigation.additem.Starter
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,7 +17,7 @@ class BottomNavigation {
 
     fun init(
         bottomNavigationView: BottomNavigationView,
-         context : Context
+         context : Context,dataTransferUserAddedItem: DataTransferUserAddedItem
     ) {
         bottomNavigationView.setOnItemSelectedListener(object :
             NavigationBarView.OnItemSelectedListener {
@@ -25,7 +26,7 @@ class BottomNavigation {
 
 
                 } else if (item.itemId == R.id.addItem) {
-                   var starter = Starter(context)
+                   var starter = Starter(context,dataTransferUserAddedItem)
                     starter.init()
                 }
                 return false

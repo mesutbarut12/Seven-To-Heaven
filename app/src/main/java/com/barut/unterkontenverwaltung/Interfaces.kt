@@ -16,3 +16,6 @@ interface DataTransferBottomNavigation {
 interface DataTransferShowUnterkontoBinder{
     fun getData(name : String)
 }
+interface DataTransferUserAddedItem{
+    fun data(addedItem: Boolean)
+}
