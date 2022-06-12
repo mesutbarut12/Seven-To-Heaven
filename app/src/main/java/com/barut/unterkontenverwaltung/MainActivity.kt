@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity() {
                 "UAGesamdSaldo").init()
         StartUALongClick(this,findViewById(R.id.uALCVerfugbarerSaldo),
             "UAVerfügbarerSaldo").init()
+        StartUALongClick(this,findViewById(R.id.uALCGesamtAusgaben),
+            "UAGesamtAusgaben").init()
     }
     fun calculateUA() {
         var arrayList = arrayListOf<View>(
@@ -52,7 +54,9 @@ class MainActivity : AppCompatActivity() {
         var calculateHauptAnzeige = CalculateHauptAnzeige(this)
         calculateHauptAnzeige.init()
         var data = calculateHauptAnzeige.setDataInDataBase()
-        HAStartRecyclerView(findViewById(R.id.recyclerView),this,data!!)
+        if (data != null) {
+            HAStartRecyclerView(findViewById(R.id.recyclerView), this, data!!)
+        }
     }
 
 

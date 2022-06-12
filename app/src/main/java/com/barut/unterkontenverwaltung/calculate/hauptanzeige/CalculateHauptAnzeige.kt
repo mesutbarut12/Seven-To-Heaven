@@ -1,6 +1,7 @@
 package com.barut.unterkontenverwaltung.calculate.hauptanzeige
 
 import android.content.Context
+import android.widget.Toast
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.calculate.CalculateUebersichtsAnzeige
 import com.barut.unterkontenverwaltung.allgemein.sqlite.*
 import com.barut.unterkontenverwaltung.recyclerview.CalculateSqlModel
@@ -37,9 +38,10 @@ class CalculateHauptAnzeige(private val context: Context) {
         println(hAAusgaben() + " Ausgaben")
         println(hAGuthaben() + " Guthaben")
         println(hAErgebnis() + " Ergebnis")
-
         println("--------------------------")
+
     }
+
 
     fun hAunterkontoName(): ArrayList<String> {
         var array: ArrayList<String> = arrayListOf()
@@ -121,22 +123,24 @@ class CalculateHauptAnzeige(private val context: Context) {
         var modelHA: HAHauptAnzeigeModel
 
         context.deleteDatabase("Calculate")
-        for (i in 0..hAunterkontoName().size - 1) {
+        if (hAunterkontoName().isNotEmpty()) {
+            for (i in 0..hAunterkontoName().size - 1) {
 
-            var model = CalculateSqlModel(
-                hAunterkontoName().get(i),
-                hAProzentEinteilung().get(i), hAAusgaben().get(i),
-                hAGuthaben().get(i), hAErgebnis().get(i), ""
-            )
-            modelHA = HAHauptAnzeigeModel(
-                hAunterkontoName(),
-                hAProzentEinteilung(), hAAusgaben(),
-                hAGuthaben(), hAErgebnis(),
-            )
+                var model = CalculateSqlModel(
+                    hAunterkontoName().get(i),
+                    hAProzentEinteilung().get(i), hAAusgaben().get(i),
+                    hAGuthaben().get(i), hAErgebnis().get(i), ""
+                )
+                modelHA = HAHauptAnzeigeModel(
+                    hAunterkontoName(),
+                    hAProzentEinteilung(), hAAusgaben(),
+                    hAGuthaben(), hAErgebnis(),
+                )
 
-            sqlCalculate.setData(model)
-            return modelHA
+                sqlCalculate.setData(model)
+                return modelHA
 
+            }
         }
 
         return null

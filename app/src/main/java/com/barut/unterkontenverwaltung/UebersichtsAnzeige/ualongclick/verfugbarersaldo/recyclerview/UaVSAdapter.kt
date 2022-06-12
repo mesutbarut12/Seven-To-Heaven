@@ -19,6 +19,7 @@ class UaVSAdapter(private val inhalt: ArrayList<UaVSModel>) : RecyclerView.Adapt
         holder.ausgabe.setText("${inhalt.get(holder.adapterPosition).ausgabe}")
         holder.datum.setText("${inhalt.get(holder.adapterPosition).datum}")
         holder.beschreibung.setText("${inhalt.get(holder.adapterPosition).beschreibung}")
+        holder.ergebnis.setText("${inhalt.get(holder.adapterPosition).ergebnis}")
         clickArrowDropDown(holder)
     }
 

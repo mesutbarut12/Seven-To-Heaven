@@ -13,14 +13,17 @@ class UALCGesamtSaldo(private val clickArea : LinearLayout, private val context 
 
     private var sqlInit = SQliteInit(context)
 
-    fun init(){
-        clickArea.setOnLongClickListener(object : View.OnLongClickListener{
-            override fun onLongClick(p0: View?): Boolean {
-                startRecyclerView()
+    fun init() {
 
-                return false
-            }
-        })
+            clickArea.setOnLongClickListener(object : View.OnLongClickListener {
+                override fun onLongClick(p0: View?): Boolean {
+                    if (getData().isNotEmpty()) {
+                        startRecyclerView()
+                    }
+                    return false
+                }
+            })
+
     }
 
 
@@ -33,7 +36,8 @@ class UALCGesamtSaldo(private val clickArea : LinearLayout, private val context 
     fun getData() : ArrayList<UaGSModel>{
         var arrayList : ArrayList<UaGSModel> = arrayListOf()
         for(i in sqlInit.einnahme().readData()){
-            var model = UaGSModel(i.summe,i.datum,i.databaseType,i.id,i.beschreibung)
+            var model = UaGSModel(i.summe.toDouble().toString()
+                ,i.datum,i.databaseType,i.id,i.beschreibung)
             arrayList.add(model)
         }
         return arrayList

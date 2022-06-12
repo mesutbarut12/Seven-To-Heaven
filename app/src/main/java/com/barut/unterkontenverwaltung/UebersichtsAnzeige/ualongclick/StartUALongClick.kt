@@ -2,6 +2,7 @@ package com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick
 
 import android.content.Context
 import android.widget.LinearLayout
+import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtausgaben.verbindenundstarten.UALCGesamtAusgaben
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtsaldo.verbindenundstarten.UALCGesamtSaldo
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.verfugbarersaldo.verbindenundstarten.UaVSLongClick
 
@@ -13,6 +14,8 @@ private val key : String) {
             UALCGesamtSaldo(clickArea, context).init()
         } else if(key == "UAVerfügbarerSaldo") {
             UaVSLongClick(clickArea, context).init()
+        } else if(key == "UAGesamtAusgaben"){
+            UALCGesamtAusgaben(clickArea,context).init()
         }
     }
 }
