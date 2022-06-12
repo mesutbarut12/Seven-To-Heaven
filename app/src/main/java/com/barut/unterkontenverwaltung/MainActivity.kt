@@ -5,11 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
-import com.barut.unterkontenverwaltung.bottomnavigation.BottomNavigation
+import com.barut.unterkontenverwaltung.UebersichtsAnzeige.calculate.CalculateStarter
+import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.StartUALongClick
+import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.BottomNavigation
 import com.barut.unterkontenverwaltung.calculate.hauptanzeige.CalculateHauptAnzeige
-import com.barut.unterkontenverwaltung.calculate.starter.CalculateStarter
 import com.barut.unterkontenverwaltung.recyclerview.hauptanzeige.HAStartRecyclerView
-import com.barut.unterkontenverwaltung.ualongclick.UALCVefugbarerSaldo
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,16 +19,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        UALCVefugbarerSaldo(findViewById(R.id.uALCGesamtSaldo),this).init()
 
         bottomNavigation()
 
-        calculateUA()
+        startUA()
         calculateHA()
     }
 
     //Anzeige Oben
     //Übersichts Anzeige
+
+    fun startUA(){
+        calculateUA()
+        StartUALongClick(this,findViewById(R.id.uALCGesamtSaldo),"" +
+                "UAGesamdSaldo").init()
+        StartUALongClick(this,findViewById(R.id.uALCVerfugbarerSaldo),
+            "UAVerfügbarerSaldo").init()
+    }
     fun calculateUA() {
         var arrayList = arrayListOf<View>(
             findViewById(R.id.amVerfugbarerSaldo),

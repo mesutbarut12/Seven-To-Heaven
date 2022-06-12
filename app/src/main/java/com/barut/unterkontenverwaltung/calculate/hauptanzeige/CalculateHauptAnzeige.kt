@@ -1,11 +1,10 @@
 package com.barut.unterkontenverwaltung.calculate.hauptanzeige
 
 import android.content.Context
-import com.barut.unterkontenverwaltung.calculate.uebersichtsanzeige.CalculateUebersichtsAnzeige
+import com.barut.unterkontenverwaltung.UebersichtsAnzeige.calculate.CalculateUebersichtsAnzeige
+import com.barut.unterkontenverwaltung.allgemein.sqlite.*
 import com.barut.unterkontenverwaltung.recyclerview.CalculateSqlModel
-import com.barut.unterkontenverwaltung.recyclerview.alleunterkonten.AURecyclerViewModel
 import com.barut.unterkontenverwaltung.recyclerview.hauptanzeige.HAHauptAnzeigeModel
-import com.barut.unterkontenverwaltung.sqlite.*
 import java.text.DecimalFormat
 
 class CalculateHauptAnzeige(private val context: Context) {

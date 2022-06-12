@@ -2,7 +2,7 @@ package com.barut.unterkontenverwaltung.save
 
 import android.content.Context
 import com.barut.unterkontenverwaltung.recyclerview.UnterkontoModel
-import com.barut.unterkontenverwaltung.sqlite.SQliteUnterkonto
+import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteUnterkonto
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
