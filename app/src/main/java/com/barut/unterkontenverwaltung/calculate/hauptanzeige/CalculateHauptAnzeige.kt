@@ -4,6 +4,7 @@ import android.content.Context
 import com.barut.unterkontenverwaltung.calculate.uebersichtsanzeige.CalculateUebersichtsAnzeige
 import com.barut.unterkontenverwaltung.recyclerview.CalculateSqlModel
 import com.barut.unterkontenverwaltung.recyclerview.alleunterkonten.AURecyclerViewModel
+import com.barut.unterkontenverwaltung.recyclerview.hauptanzeige.HAHauptAnzeigeModel
 import com.barut.unterkontenverwaltung.sqlite.*
 import java.text.DecimalFormat
 
@@ -73,7 +74,7 @@ class CalculateHauptAnzeige(private val context: Context) {
                 }
             }
             ergebnisString = dec.format(ergebnis)
-            array.add(ergebnisString +"." + y.name )
+            array.add(ergebnisString + "." + y.name)
         }
         return array
     }
@@ -103,7 +104,7 @@ class CalculateHauptAnzeige(private val context: Context) {
             for (y in ausgaben) {
                 var unterkontoA = y.split(".")[1]
                 var guthabenA = y.split(".")[0].toDouble()
-                if(unterkontoA == unterkontoG){
+                if (unterkontoA == unterkontoG) {
                     guthabenG -= guthabenA
                 }
 
@@ -117,15 +118,8 @@ class CalculateHauptAnzeige(private val context: Context) {
         return arraylistSumme
     }
 
-    fun setDataInDataBase() {
-        println("--------------------------")
-        println(hAunterkontoName() + " Unterkonto Name")
-        println(hAProzentEinteilung() + " Prozent Einteilung")
-        println(hAAusgaben() + " Ausgaben")
-        println(hAGuthaben() + " Guthaben")
-        //println(hAErgebnis() + " Ergebnis")
-
-        println("--------------------------")
+    fun setDataInDataBase(): HAHauptAnzeigeModel? {
+        var modelHA: HAHauptAnzeigeModel
 
         context.deleteDatabase("Calculate")
         for (i in 0..hAunterkontoName().size - 1) {
@@ -135,10 +129,18 @@ class CalculateHauptAnzeige(private val context: Context) {
                 hAProzentEinteilung().get(i), hAAusgaben().get(i),
                 hAGuthaben().get(i), hAErgebnis().get(i), ""
             )
+            modelHA = HAHauptAnzeigeModel(
+                hAunterkontoName(),
+                hAProzentEinteilung(), hAAusgaben(),
+                hAGuthaben(), hAErgebnis(),
+            )
+
             sqlCalculate.setData(model)
+            return modelHA
 
         }
 
+        return null
     }
 
 }

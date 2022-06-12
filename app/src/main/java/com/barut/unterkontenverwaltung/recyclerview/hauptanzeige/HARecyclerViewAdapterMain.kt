@@ -17,18 +17,19 @@ class HARecyclerViewAdapterMain(
 
     override fun onBindViewHolder(holder: HARecyclerViewHolderMain, position: Int) {
         holder.unterkonto.setText(inhalt.hAunterkontoName!!.get(holder.adapterPosition))
-        holder.prozent.setText("${inhalt.hAProzentEinteilung!!.get(holder.adapterPosition)}%")
-        holder.ausgaben.setText("${inhalt.hAAusgaben!!.get(holder.adapterPosition)}€")
-        holder.guthaben.setText("${inhalt.hAGuthaben!!.get(holder.adapterPosition)}€")
-        //holder.ergebnis.setText("${inhalt.hAErgebnis!!.get(holder.adapterPosition)}€")
+        holder.prozent.setText("Prozent : ${getValue(inhalt.hAProzentEinteilung!!.get(holder.adapterPosition))}%")
+        holder.ausgaben.setText("Ausgabe : ${getValue(inhalt.hAAusgaben!!.get(holder.adapterPosition))}€")
+        holder.guthaben.setText("Guthaben : ${getValue(inhalt.hAGuthaben!!.get(holder.adapterPosition))}€")
+        holder.ergebnis.setText("Ergebnis : ${getValue(inhalt.hAErgebnis!!.get(holder.adapterPosition))}€")
     }
 
     override fun getItemCount(): Int {
-
         return inhalt.hAunterkontoName!!.size
     }
 
-
+    fun getValue(value: String): String {
+        return value.split(".")[0]
+    }
 }
 
 

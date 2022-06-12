@@ -8,7 +8,7 @@ import androidx.annotation.RequiresApi
 import com.barut.unterkontenverwaltung.bottomnavigation.BottomNavigation
 import com.barut.unterkontenverwaltung.calculate.hauptanzeige.CalculateHauptAnzeige
 import com.barut.unterkontenverwaltung.calculate.starter.CalculateStarter
-
+import com.barut.unterkontenverwaltung.recyclerview.hauptanzeige.HAStartRecyclerView
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,9 +41,8 @@ class MainActivity : AppCompatActivity() {
     fun calculateHA() {
         var calculateHauptAnzeige = CalculateHauptAnzeige(this)
         calculateHauptAnzeige.init()
-        calculateHauptAnzeige.setDataInDataBase()
-
-
+        var data = calculateHauptAnzeige.setDataInDataBase()
+        HAStartRecyclerView(findViewById(R.id.recyclerView),this,data!!)
     }
 
 
