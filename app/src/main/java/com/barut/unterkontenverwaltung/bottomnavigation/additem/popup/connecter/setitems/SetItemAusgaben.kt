@@ -12,7 +12,6 @@ import com.barut.unterkontenverwaltung.DatePickerClass
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.calculate.hauptanzeige.CalculateHauptAnzeige
-import com.barut.unterkontenverwaltung.calculate.uebersichtsanzeige.CalculateUebersichtsAnzeige
 import com.barut.unterkontenverwaltung.recyclerview.AusgabenModel
 import com.barut.unterkontenverwaltung.recyclerview.alleunterkonten.AURecyclerViewModel
 import com.barut.unterkontenverwaltung.recyclerview.alleunterkonten.AUStartRecyclerView
@@ -102,7 +101,7 @@ class SetItemAusgaben(
     fun clickUnterkonto() {
         etUnterkonto.setOnClickListener {
             if (getUnterkontoAndSumme().unterkonto.isNotEmpty()) {
-                val view1 = alert.setLayout()
+                val view1 = alert.inflateLayout()
                 AUStartRecyclerView(
                     view1.findViewById(R.id.setItemRecyclerViewUnterkonten),
                     context,

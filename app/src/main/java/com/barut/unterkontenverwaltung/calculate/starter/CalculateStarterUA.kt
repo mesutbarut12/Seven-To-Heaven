@@ -28,7 +28,6 @@ class CalculateStarter(
         gesamtAusgaben = arrayList[2] as TextView
         unterkontoAnzahl = arrayList[3] as TextView
         prozenteGesamt = arrayList[4] as TextView
-        beschreibungVorhanden = arrayList[5] as TextView
     }
     fun initCalculate(){
         calculateUebersichtsAnzeige = CalculateUebersichtsAnzeige(context)
@@ -38,12 +37,11 @@ class CalculateStarter(
     fun initUebersichtsAnzeige() {
         initViews()
         initCalculate()
-        verfugbarerSaldo.setText(calculateUebersichtsAnzeige.uAVerfügbarerSaldo())
-        gesamtSaldo.setText(calculateUebersichtsAnzeige.uAGesamtSaldo())
-        gesamtAusgaben.setText(calculateUebersichtsAnzeige.uAGesamtAusgaben())
+        verfugbarerSaldo.setText("${calculateUebersichtsAnzeige.uAVerfügbarerSaldo()}€")
+        gesamtSaldo.setText("${calculateUebersichtsAnzeige.uAGesamtSaldo()}€")
+        gesamtAusgaben.setText("${calculateUebersichtsAnzeige.uAGesamtAusgaben()}€")
         unterkontoAnzahl.setText(calculateUebersichtsAnzeige.uAUnterkontoAnzahl())
-        prozenteGesamt.setText(calculateUebersichtsAnzeige.uAProzenteGesamt())
-        beschreibungVorhanden.setText(calculateUebersichtsAnzeige.uABeschreibungVorhanden())
+        prozenteGesamt.setText("${calculateUebersichtsAnzeige.uAProzenteGesamt()}%")
     }
 
     fun update(){

@@ -29,7 +29,7 @@ class PopUpAlertDialog(private val context : Context) {
 
 
             val popUpAlertDialog = AlertDialogMain(context, R.layout.popup_alert_dialog_for_3_moeglichkeiten)
-            val view = popUpAlertDialog.setLayout()
+            val view = popUpAlertDialog.inflateLayout()
             popUpAlertDialog.createDialog()
             initViews(view)
 
@@ -44,19 +44,19 @@ class PopUpAlertDialog(private val context : Context) {
 
         btEinnahme.setOnClickListener {
             val addItem = AlertDialogMain(context,R.layout.set_item_einkommen)
-            val view = addItem.setLayout()
+            val view = addItem.inflateLayout()
             addItem.createDialog()
             getclick.getData(1, view,addItem)
         }
         btUnterkonto.setOnClickListener {
             val addItem = AlertDialogMain(context,R.layout.set_item_unterkonto)
-            val view = addItem.setLayout()
+            val view = addItem.inflateLayout()
             addItem.createDialog()
             getclick.getData(2,view,addItem)
         }
         btAusgabe.setOnClickListener {
             val addItem = AlertDialogMain(context,R.layout.set_item_ausgaben)
-            val view = addItem.setLayout()
+            val view = addItem.inflateLayout()
             addItem.createDialog()
             getclick.getData(3,view,addItem)
         }

@@ -9,6 +9,7 @@ import com.barut.unterkontenverwaltung.bottomnavigation.BottomNavigation
 import com.barut.unterkontenverwaltung.calculate.hauptanzeige.CalculateHauptAnzeige
 import com.barut.unterkontenverwaltung.calculate.starter.CalculateStarter
 import com.barut.unterkontenverwaltung.recyclerview.hauptanzeige.HAStartRecyclerView
+import com.barut.unterkontenverwaltung.ualongclick.UALCVefugbarerSaldo
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        UALCVefugbarerSaldo(findViewById(R.id.uALCGesamtSaldo),this).init()
 
         bottomNavigation()
 
@@ -33,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.amGesamtAusgaben),
             findViewById(R.id.amunterkontoAnzahl),
             findViewById(R.id.amprozentAnzahl),
-            findViewById(R.id.ambeschreibungVorhanden)
+
         )
         CalculateStarter(this, arrayList).initUebersichtsAnzeige()
     }
