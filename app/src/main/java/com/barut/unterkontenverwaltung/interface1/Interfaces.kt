@@ -19,3 +19,6 @@ interface DataTransferShowUnterkontoBinder{
 interface DataTransferUserAddedItem{
     fun data(addedItem: Boolean)
 }
+interface DataTransferEinkommenOderAusgabe{
+    fun data(wahl : Int)
+}

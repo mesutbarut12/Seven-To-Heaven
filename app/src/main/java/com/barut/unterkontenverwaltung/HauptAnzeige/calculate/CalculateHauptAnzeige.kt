@@ -1,7 +1,6 @@
-package com.barut.unterkontenverwaltung.calculate.hauptanzeige
+package com.barut.unterkontenverwaltung.HauptAnzeige.calculate
 
 import android.content.Context
-import android.widget.Toast
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.calculate.CalculateUebersichtsAnzeige
 import com.barut.unterkontenverwaltung.allgemein.sqlite.*
 import com.barut.unterkontenverwaltung.recyclerview.CalculateSqlModel

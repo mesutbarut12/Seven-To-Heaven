@@ -1,8 +1,10 @@
 package com.barut.unterkontenverwaltung.recyclerview.hauptanzeige
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.barut.unterkontenverwaltung.HauptAnzeige.longclick.popup.HAPopUp
 
 class HARecyclerViewAdapterMain(
     val inhalt: HAHauptAnzeigeModel, val layout: Int,
@@ -21,6 +23,7 @@ class HARecyclerViewAdapterMain(
         holder.ausgaben.setText("Ausgabe : ${getValue(inhalt.hAAusgaben!!.get(holder.adapterPosition))}€")
         holder.guthaben.setText("Guthaben : ${getValue(inhalt.hAGuthaben!!.get(holder.adapterPosition))}€")
         holder.ergebnis.setText("Ergebnis : ${getValue(inhalt.hAErgebnis!!.get(holder.adapterPosition))}€")
+        longClick(holder)
     }
 
     override fun getItemCount(): Int {
@@ -29,6 +32,14 @@ class HARecyclerViewAdapterMain(
 
     fun getValue(value: String): String {
         return value.split(".")[0]
+    }
+    fun longClick(holder : HARecyclerViewHolderMain){
+        holder.itemView.setOnLongClickListener(object : View.OnLongClickListener{
+            override fun onLongClick(p0: View?): Boolean {
+                HAPopUp(holder.itemView.context,holder,inhalt).init()
+                return false
+            }
+        })
     }
 }
 
