@@ -5,12 +5,14 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.barut.unterkontenverwaltung.R
+import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtsaldo.recyclerview.UAUAStarter
 import com.barut.unterkontenverwaltung.allgemein.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtsaldo.recyclerview.UaGSStartRecyclerView
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtsaldo.recyclerview.UaGSModel
+import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.unterkontoanzahl.recyclerview.UAUAModel
 import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteInit
 
-class UALCGesamtSaldo(private val clickArea: LinearLayout, private val context: Context) {
+class UALCUnterkontoAnzahl(private val clickArea: LinearLayout, private val context: Context) {
 
     private var sqlInit = SQliteInit(context)
 
@@ -21,8 +23,11 @@ class UALCGesamtSaldo(private val clickArea: LinearLayout, private val context: 
                 if (getData().isNotEmpty()) {
                     startRecyclerView()
                 } else {
-                    Toast.makeText(context, "Du verfügst über keinen Saldo!", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(
+                        context,
+                        "Du verfügst über keine Unterkonten",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 return false
             }
@@ -38,11 +43,11 @@ class UALCGesamtSaldo(private val clickArea: LinearLayout, private val context: 
         return view
     }
 
-    fun getData(): ArrayList<UaGSModel> {
-        var arrayList: ArrayList<UaGSModel> = arrayListOf()
-        for (i in sqlInit.einnahme().readData()) {
-            var model = UaGSModel(
-                i.summe.toDouble().toString(), i.datum, i.databaseType, i.id, i.beschreibung
+    fun getData(): ArrayList<UAUAModel> {
+        var arrayList: ArrayList<UAUAModel> = arrayListOf()
+        for (i in sqlInit.unterkonto().readData()) {
+            var model = UAUAModel(
+                i.name, i.datum, i.beschreibung, i.prozent
             )
             arrayList.add(model)
         }
@@ -50,7 +55,7 @@ class UALCGesamtSaldo(private val clickArea: LinearLayout, private val context: 
     }
 
     fun startRecyclerView() {
-        UaGSStartRecyclerView(
+        UAUAStarter(
             createAlertDialogGetView().findViewById(R.id.ua_recyclerview_longclick), context,
             getData()
         )

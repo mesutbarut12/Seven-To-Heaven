@@ -4,18 +4,26 @@ import android.content.Context
 import android.widget.LinearLayout
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtausgaben.verbindenundstarten.UALCGesamtAusgaben
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtsaldo.verbindenundstarten.UALCGesamtSaldo
+import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtsaldo.verbindenundstarten.UALCProzenteGesamt
+import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtsaldo.verbindenundstarten.UALCUnterkontoAnzahl
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.verfugbarersaldo.verbindenundstarten.UaVSLongClick
 
-class StartUALongClick(private val context: Context,private val clickArea : LinearLayout,
-private val key : String) {
+class StartUALongClick(
+    private val context: Context, private val clickArea: LinearLayout,
+    private val key: String
+) {
 
-    fun init(){
-        if(key == "UAGesamdSaldo") {
+    fun init() {
+        if (key == "UAGesamdSaldo") {
             UALCGesamtSaldo(clickArea, context).init()
-        } else if(key == "UAVerfügbarerSaldo") {
+        } else if (key == "UAVerfügbarerSaldo") {
             UaVSLongClick(clickArea, context).init()
-        } else if(key == "UAGesamtAusgaben"){
-            UALCGesamtAusgaben(clickArea,context).init()
+        } else if (key == "UAGesamtAusgaben") {
+            UALCGesamtAusgaben(clickArea, context).init()
+        } else if (key == "UAUnterkontoAnzahl") {
+            UALCUnterkontoAnzahl(clickArea, context).init()
+        } else if(key == "UAProzenteGesamt"){
+            UALCProzenteGesamt(clickArea,context).init()
         }
     }
 }

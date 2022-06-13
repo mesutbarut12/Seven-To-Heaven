@@ -31,12 +31,19 @@ class MainActivity : AppCompatActivity() {
 
     fun startUA(){
         calculateUA()
+        longClick()
+    }
+    fun longClick(){
         StartUALongClick(this,findViewById(R.id.uALCGesamtSaldo),"" +
                 "UAGesamdSaldo").init()
         StartUALongClick(this,findViewById(R.id.uALCVerfugbarerSaldo),
             "UAVerfügbarerSaldo").init()
         StartUALongClick(this,findViewById(R.id.uALCGesamtAusgaben),
             "UAGesamtAusgaben").init()
+        StartUALongClick(this,findViewById(R.id.uALCUnterkontoAnzahl),
+            "UAUnterkontoAnzahl").init()
+        StartUALongClick(this,findViewById(R.id.uALCProzenteGesamt),
+            "UAProzenteGesamt").init()
     }
     fun calculateUA() {
         var arrayList = arrayListOf<View>(

@@ -155,7 +155,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:id="@+id/uALCUnterkontoAnzahl">
 
                         <TextView
                             android:id="@+id/tvUnterkontenAnzahl"
@@ -187,7 +188,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:id="@+id/uALCProzenteGesamt">
 
                         <TextView
                             android:id="@+id/tvProzentAnzahl"

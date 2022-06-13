@@ -3,13 +3,14 @@ package com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtaus
 import android.content.Context
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtausgaben.recyclerview.UAGAModel
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtsaldo.recyclerview.UAGAStarter
 import com.barut.unterkontenverwaltung.allgemein.alertdialog.AlertDialogMain
 import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteInit
 
-class UALCGesamtAusgaben(private val clickArea : LinearLayout, private val context : Context) {
+class UALCGesamtAusgaben(private val clickArea: LinearLayout, private val context: Context) {
 
     private var sqlInit = SQliteInit(context)
 
@@ -19,30 +20,37 @@ class UALCGesamtAusgaben(private val clickArea : LinearLayout, private val conte
             override fun onLongClick(p0: View?): Boolean {
                 if (getData().isNotEmpty()) {
                     startRecyclerView()
+                } else {
+                    Toast.makeText(context, "Du verfügst über keine Ausgaben", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 return false
             }
         })
 
     }
-    fun getData() : ArrayList<UAGAModel>{
-        var arrayList : ArrayList<UAGAModel> = arrayListOf()
-        var model : UAGAModel
-        for(i in sqlInit.ausgabe().readData()){
-            model = UAGAModel(i.unterkonto,i.datum,i.summe.toDouble().toString(),i.beschreibung)
+
+    fun getData(): ArrayList<UAGAModel> {
+        var arrayList: ArrayList<UAGAModel> = arrayListOf()
+        var model: UAGAModel
+        for (i in sqlInit.ausgabe().readData()) {
+            model = UAGAModel(i.unterkonto, i.datum, i.summe.toDouble().toString(), i.beschreibung)
             arrayList.add(model)
         }
         return arrayList
     }
 
-    fun createAlertDialogGetView() : View{
+    fun createAlertDialogGetView(): View {
         var alert = AlertDialogMain(context, R.layout.ua_recyclerview)
         var view = alert.inflateLayout()
         alert.createDialog()
         return view
     }
-    fun startRecyclerView(){
-        UAGAStarter(createAlertDialogGetView().findViewById(R.id.ua_recyclerview_longclick),context,
-            getData())
+
+    fun startRecyclerView() {
+        UAGAStarter(
+            createAlertDialogGetView().findViewById(R.id.ua_recyclerview_longclick), context,
+            getData()
+        )
     }
 }
