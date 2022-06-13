@@ -8,8 +8,10 @@ import com.barut.unterkontenverwaltung.R
 
 class UaVSAdapter(private val inhalt: ArrayList<UaVSModel>) : RecyclerView.Adapter<UaVSHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UaVSHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.ua_vs_row,parent,
-        false)
+        var view = LayoutInflater.from(parent.context).inflate(
+            R.layout.ua_vs_row, parent,
+            false
+        )
         return UaVSHolder(view)
     }
 
@@ -20,6 +22,7 @@ class UaVSAdapter(private val inhalt: ArrayList<UaVSModel>) : RecyclerView.Adapt
         holder.datum.setText("${inhalt.get(holder.adapterPosition).datum}")
         holder.beschreibung.setText("${inhalt.get(holder.adapterPosition).beschreibung}")
         holder.ergebnis.setText("${inhalt.get(holder.adapterPosition).ergebnis}")
+        holder.id.setText("${inhalt.get(holder.adapterPosition).id}")
         clickArrowDropDown(holder)
     }
 

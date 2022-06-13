@@ -1,6 +1,7 @@
 package com.barut.unterkontenverwaltung.HauptAnzeige.longclick.popup.recyclerview
 
 import android.content.Context
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -9,6 +10,12 @@ val inhalt : ArrayList<HAModel>) {
 
 
     fun init(){
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayoutManager.VERTICAL
+            )
+        )
         recyclerView.adapter = HAAdapter(inhalt)
         recyclerView.layoutManager = LinearLayoutManager(context)
         println(inhalt)

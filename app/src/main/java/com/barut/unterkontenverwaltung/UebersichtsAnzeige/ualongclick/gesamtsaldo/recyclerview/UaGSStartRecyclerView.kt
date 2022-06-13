@@ -1,6 +1,7 @@
 package com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.gesamtsaldo.recyclerview
 
 import android.content.Context
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -14,6 +15,12 @@ class UaGSStartRecyclerView(
 
 
     init {
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayoutManager.VERTICAL
+            )
+        )
         recyclerView.adapter = UaGSRecyclerViewAdapter(
             inhhalt
         )

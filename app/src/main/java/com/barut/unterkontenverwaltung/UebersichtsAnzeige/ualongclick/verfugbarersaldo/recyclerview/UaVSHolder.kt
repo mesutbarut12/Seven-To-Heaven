@@ -12,4 +12,5 @@ class UaVSHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val datum : TextView = itemView.findViewById(R.id.ua_vs_Datum)
     val beschreibung : TextView = itemView.findViewById(R.id.ua_vs_beschreibung)
     val ergebnis : TextView = itemView.findViewById(R.id.ua_vs_ergebnis)
+    val id : TextView = itemView.findViewById(R.id.ua_vs_id)
 }

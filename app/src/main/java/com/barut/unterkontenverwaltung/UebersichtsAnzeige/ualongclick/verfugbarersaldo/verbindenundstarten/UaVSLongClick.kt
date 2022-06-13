@@ -52,6 +52,7 @@ class UaVSLongClick(private val clickArea: LinearLayout, private val context: Co
                 i.unterkonto,
                 i.datum,
                 i.beschreibung,
+                i.id,
                 ergebnis.toString()
             )
             arrayList.add(model)

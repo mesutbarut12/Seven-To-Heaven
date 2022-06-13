@@ -35,13 +35,15 @@ class HAPopUp(private val context: Context, private val holder : HARecyclerViewH
         return view
     }
     fun setUnterkontoNameUndGesamtSumme(view : View){
-        val name : TextView = view.findViewById(R.id.ha_name)
-        val gSumme : TextView = view.findViewById(R.id.ha_gesamtsumme)
-        val calculateUebersichtsAnzeige = CalculateUebersichtsAnzeige(context)
-        calculateUebersichtsAnzeige.init()
-        val gs = calculateUebersichtsAnzeige.uAGesamtSaldo()
+        val name : TextView = view.findViewById(R.id.ha_name1)
+        val erstelltAm : TextView = view.findViewById(R.id.ha_erstelltam1)
+
         name.setText(inhalt.hAunterkontoName!!.get(holder.adapterPosition))
-        gSumme.setText("Gesamt Summe : $gs")
+        for(i in sqliteinit.unterkonto().readData()){
+            if(i.name == inhalt.hAunterkontoName!!.get(holder.adapterPosition))
+            erstelltAm.setText(i.datum)
+
+        }
     }
     fun auswahlInput(view : View) : DataTransferEinkommenOderAusgabe{
         val auswahl = object : DataTransferEinkommenOderAusgabe{
@@ -69,7 +71,7 @@ class HAPopUp(private val context: Context, private val holder : HARecyclerViewH
                 var ergebnis = 0.0
                 if (inhalt.hAunterkontoName!!.get(holder.adapterPosition) == i.name) {
                     ergebnis = (y.summe.toDouble() / 100) * i.prozent.toDouble()
-                    model = HAModel(i.prozent, ergebnis.toString(),y.datum)
+                    model = HAModel(i.prozent, ergebnis.toString(),y.datum,y.summe,y.id)
                     array.add(model)
                 }
             }

@@ -15,7 +15,9 @@ class HAAdapter(val inhalt : ArrayList<HAModel>) : RecyclerView.Adapter<HAHolder
     override fun onBindViewHolder(holder: HAHolder, position: Int) {
         holder.prozent.setText("${inhalt.get(holder.adapterPosition).prozent}%")
         holder.ergebnis.setText("${inhalt.get(holder.adapterPosition).ergebnis}€")
-        holder.datum.setText("${inhalt.get(holder.adapterPosition).datum}€")
+        holder.datum.setText("${inhalt.get(holder.adapterPosition).datum}")
+        holder.einnahme.setText("${inhalt.get(holder.adapterPosition).einnahme}€")
+        holder.id.setText("${inhalt.get(holder.adapterPosition).id}")
     }
 
     override fun getItemCount(): Int {
