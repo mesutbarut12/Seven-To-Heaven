@@ -1,31 +1,37 @@
 package com.barut.unterkontenverwaltung.save
 
 import android.content.Context
+import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteAusgaben
+import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteEinkommen
 import com.barut.unterkontenverwaltung.recyclerview.UnterkontoModel
 import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteUnterkonto
+import com.barut.unterkontenverwaltung.recyclerview.AusgabenModel
+import com.barut.unterkontenverwaltung.recyclerview.EinkommenModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class SaveAndPut(
-    val context: Context, val einkommen: SQliteUnterkonto,
-    val ausgabe: SQliteUnterkonto,
+    val context: Context, val einkommen: SQliteEinkommen,
+    val ausgabe: SQliteAusgaben,
     val unterkonto: SQliteUnterkonto
 ) {
 
     private val db = Firebase.firestore
-    private lateinit var model: UnterkontoModel
-    fun save(inhalt: HashMap<String, ArrayList<UnterkontoModel>>, userId: String, datafinsih: DataFinish) {
+
+    fun save(inhalt:  SaveModel, userId: String, datafinsih: DataFinish?) {
 
         db.collection("Speicher").document(userId).set(inhalt)
             .addOnSuccessListener {
-                datafinsih.finish(true)
+                if (datafinsih != null) {
+                    datafinsih!!.finish(true)
+                }
             }
 
     }
 
     fun getData(
         userId: String,
-        datafinsih: DataFinish
+        datafinsih: DataFinish?
 
     ) {
         var zahl = 0
@@ -46,24 +52,25 @@ class SaveAndPut(
                                 y.forEach {
                                     println("For Each")
 
-                                    if (it["databaseType"] == "Einnahme") {
-                                        model = UnterkontoModel(
-                                            it["spaltenName1"].toString(),
-                                            it["spaltenName2"].toString(),
+                                    if (it["databaseType"] == "einkommen") {
+                                        val model = EinkommenModel(
+                                            it["summe"].toString(),
                                             it["datum"].toString(),
                                             it["databaseType"].toString(),
                                             it["id"].toString(),
                                             it["beschreibung"].toString(),
 
+
                                         )
 
                                         einkommen.setData(model)
-                                        datafinsih.finish(true)
-
-                                    } else if (it["databaseType"] == "Ausgabe") {
-                                        model = UnterkontoModel(
-                                            it["spaltenName1"].toString(),
-                                            it["spaltenName2"].toString(),
+                                        if(datafinsih != null) {
+                                            datafinsih!!.finish(true)
+                                        }
+                                    } else if (it["databaseType"] == "ausgabe") {
+                                        val model = AusgabenModel(
+                                            it["unterkonto"].toString(),
+                                            it["summe"].toString(),
                                             it["datum"].toString(),
                                             it["databaseType"].toString(),
                                             it["id"].toString(),
@@ -72,12 +79,13 @@ class SaveAndPut(
                                         )
 
                                         ausgabe.setData(model)
-                                        datafinsih.finish(true)
-
-                                    } else if (it["databaseType"] == "Unterkonto") {
-                                        model = UnterkontoModel(
-                                            it["spaltenName1"].toString(),
-                                            it["spaltenName2"].toString(),
+                                        if(datafinsih != null) {
+                                            datafinsih!!.finish(true)
+                                        }
+                                    } else if (it["databaseType"] == "unterkonto") {
+                                        val model = UnterkontoModel(
+                                            it["name"].toString(),
+                                            it["prozent"].toString(),
                                             it["datum"].toString(),
                                             it["databaseType"].toString(),
                                             it["id"].toString(),
@@ -86,7 +94,9 @@ class SaveAndPut(
                                         )
 
                                         unterkonto.setData(model)
-                                        datafinsih.finish(true)
+                                        if(datafinsih != null) {
+                                            datafinsih!!.finish(true)
+                                        }
 
                                     }
 
@@ -95,7 +105,9 @@ class SaveAndPut(
                             } else {
                                 zahl += 1
                                 if (zahl == 3) {
-                                    datafinsih.finish(false)
+                                    if(datafinsih != null) {
+                                        datafinsih!!.finish(true)
+                                    }
                                 }
                             }
                         }
@@ -108,15 +120,18 @@ class SaveAndPut(
     fun deleteDataBaseValue(databaseType: String) {
         if (databaseType == "Einkommen") {
             for (i in einkommen.readData()) {
-                einkommen.deleateItem(i.name, i.prozent)
+                val model = EinkommenModel(i.summe,i.datum,i.databaseType,i.id,i.beschreibung)
+                einkommen.deleateItem(model)
             }
         } else if (databaseType == "Ausgabe") {
             for (i in ausgabe.readData()) {
-                ausgabe.deleateItem(i.name, i.prozent)
+                val model = AusgabenModel(i.unterkonto,i.summe,i.datum,i.databaseType,i.id,i.beschreibung)
+                ausgabe.deleateItem(model)
             }
         } else if (databaseType == "Unterkonto") {
             for (i in unterkonto.readData()) {
-                unterkonto.deleateItem(i.name, i.prozent)
+                val model = UnterkontoModel(i.name,i.prozent,i.datum,i.databaseType,i.id,i.beschreibung)
+                unterkonto.deleateItem(model)
             }
         }
     }

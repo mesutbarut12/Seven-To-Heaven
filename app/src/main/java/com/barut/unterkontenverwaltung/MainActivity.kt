@@ -70,10 +70,11 @@ class MainActivity : AppCompatActivity() {
 
     //Bottom Navigation
     fun update(){
-        calculateUA()
+        startUA()
+        calculateHA()
     }
     fun bottomNavigation(){
-        BottomNavigation().init(findViewById(R.id.bottomNavigation), this,bottomNavigationInterface())
+        BottomNavigation(this).init(findViewById(R.id.bottomNavigation), this,bottomNavigationInterface())
     }
     fun bottomNavigationInterface() : DataTransferUserAddedItem{
         var data = object : DataTransferUserAddedItem{

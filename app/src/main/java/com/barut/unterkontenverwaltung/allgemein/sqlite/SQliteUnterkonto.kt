@@ -84,26 +84,19 @@ class SQliteUnterkonto(
         return arraylist
     }
 
-    fun deleateItem(spaltenName1: String, spaltenName2: String) {
+    fun deleateItem(model : UnterkontoModel) {
         val db = this.writableDatabase
-        for (unterkontoNameForSchleife in readData()) {
+        for (unterkono in readData()) {
 
-            if (spaltenName1 == unterkontoNameForSchleife.name && spaltenName2 == unterkontoNameForSchleife.prozent) {
-                db.delete(TABLENAME, this.id + "=" + unterkontoNameForSchleife.id, null)
+            if (unterkono.name == model.name && unterkono.id == model.id &&
+                    unterkono.datum == model.datum && unterkono.beschreibung == model.beschreibung) {
+                db.delete(TABLENAME, this.id + "=" + unterkono.id, null)
 
             }
         }
     }
 
-    fun deleteArgs(unterkontoName: String) {
-        val db = this.writableDatabase
-        for (unterkontoNameForSchleife in readData()) {
-            if (unterkontoName == unterkontoNameForSchleife.prozent) {
-                db.delete(TABLENAME, this.id + "=" + unterkontoNameForSchleife.id, null)
 
-            }
-        }
-    }
 
     fun updateData(unterkontoName: String, model: UnterkontoModel) {
         val contenValue = ContentValues()
