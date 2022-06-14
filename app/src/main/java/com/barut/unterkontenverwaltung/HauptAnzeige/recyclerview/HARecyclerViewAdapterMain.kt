@@ -34,10 +34,10 @@ class HARecyclerViewAdapterMain(
         return value.split(".")[0]
     }
     fun longClick(holder : HARecyclerViewHolderMain){
-        holder.itemView.setOnLongClickListener(object : View.OnLongClickListener{
-            override fun onLongClick(p0: View?): Boolean {
+        holder.itemView.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?){
                 HAPopUp(holder.itemView.context,holder,inhalt).init()
-                return false
+
             }
         })
     }
