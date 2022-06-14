@@ -45,10 +45,10 @@ class BottomNavigation(val context: Context) {
                         getDataForSave.getEinnahme(), getDataForSave.getAusgaben()
                     )
 
-                    saveAndPut.save(model, "test", null)
+                    saveAndPut.save(model,  null)
                 }
                 else if(item.itemId == R.id.datenZiehen){
-                    saveAndPut.getData("test",null)
+                    saveAndPut.getData(null)
                 }
                 return false
             }

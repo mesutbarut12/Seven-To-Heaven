@@ -5,6 +5,7 @@ import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteAusgaben
 import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteEinkommen
 import com.barut.unterkontenverwaltung.recyclerview.UnterkontoModel
 import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteUnterkonto
+import com.barut.unterkontenverwaltung.mainactivity.userId.UserID
 import com.barut.unterkontenverwaltung.recyclerview.AusgabenModel
 import com.barut.unterkontenverwaltung.recyclerview.EinkommenModel
 import com.google.firebase.firestore.ktx.firestore
@@ -17,10 +18,11 @@ class SaveAndPut(
 ) {
 
     private val db = Firebase.firestore
+    private val getUserId = UserID(context).getUserId()
 
-    fun save(inhalt:  SaveModel, userId: String, datafinsih: DataFinish?) {
+    fun save(inhalt:  SaveModel, datafinsih: DataFinish?) {
 
-        db.collection("Speicher").document(userId).set(inhalt)
+        db.collection("Speicher").document(getUserId).set(inhalt)
             .addOnSuccessListener {
                 if (datafinsih != null) {
                     datafinsih!!.finish(true)
@@ -30,12 +32,11 @@ class SaveAndPut(
     }
 
     fun getData(
-        userId: String,
         datafinsih: DataFinish?
 
     ) {
         var zahl = 0
-        val getDb = db.collection("Speicher").document(userId)
+        val getDb = db.collection("Speicher").document(getUserId)
         getDb.get()
             .addOnSuccessListener { document ->
                 if (document != null) {

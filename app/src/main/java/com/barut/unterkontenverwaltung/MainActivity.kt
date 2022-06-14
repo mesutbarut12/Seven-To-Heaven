@@ -9,6 +9,7 @@ import com.barut.unterkontenverwaltung.UebersichtsAnzeige.calculate.CalculateSta
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.StartUALongClick
 import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.BottomNavigation
 import com.barut.unterkontenverwaltung.HauptAnzeige.calculate.CalculateHauptAnzeige
+import com.barut.unterkontenverwaltung.mainactivity.userId.UserID
 import com.barut.unterkontenverwaltung.recyclerview.hauptanzeige.HAStartRecyclerView
 
 
@@ -22,9 +23,9 @@ class MainActivity : AppCompatActivity() {
 
 
         bottomNavigation()
-
         startUA()
         calculateHA()
+        UserID(this).init()
     }
 
     //Anzeige Oben
