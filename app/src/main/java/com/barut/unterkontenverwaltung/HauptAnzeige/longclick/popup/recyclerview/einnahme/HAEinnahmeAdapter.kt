@@ -1,18 +1,18 @@
-package com.barut.unterkontenverwaltung.HauptAnzeige.longclick.popup.recyclerview
+package com.barut.unterkontenverwaltung.HauptAnzeige.longclick.popup.recyclerview.einnahme
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.R
 
-class HAAdapter(val inhalt : ArrayList<HAModel>) : RecyclerView.Adapter<HAHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HAHolder {
+class HAEinnahmeAdapter(val inhalt : ArrayList<HAEinnahmeModel>) : RecyclerView.Adapter<HAStarterHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HAStarterHolder {
         val view = LayoutInflater.from(parent.context).
                 inflate(R.layout.ha_einnahme_row,parent,false)
-        return HAHolder(view)
+        return HAStarterHolder(view)
     }
 
-    override fun onBindViewHolder(holder: HAHolder, position: Int) {
+    override fun onBindViewHolder(holder: HAStarterHolder, position: Int) {
         holder.prozent.setText("${inhalt.get(holder.adapterPosition).prozent}%")
         holder.ergebnis.setText("${inhalt.get(holder.adapterPosition).ergebnis}€")
         holder.datum.setText("${inhalt.get(holder.adapterPosition).datum}")

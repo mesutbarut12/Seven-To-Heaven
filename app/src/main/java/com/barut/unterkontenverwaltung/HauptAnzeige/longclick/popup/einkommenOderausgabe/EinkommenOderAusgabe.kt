@@ -11,7 +11,6 @@ class EinkommenOderAusgabe(private val view : View,
     fun init(){
         val tabLayout : TabLayout = view.findViewById(R.id.ha_tabLayout)
         if(tabLayout.getTabAt(0)!!.position == 0){
-            println("hallo1")
             dataTransferEinkommenOderAusgabe.data(0)
         }
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
@@ -33,10 +32,8 @@ class EinkommenOderAusgabe(private val view : View,
     fun auswahl(tab : TabLayout.Tab?){
         if(tab!!.position == 0){
             dataTransferEinkommenOderAusgabe.data(0)
-            println("auswahl einkommen")
         } else if(tab!!.position == 1){
             dataTransferEinkommenOderAusgabe.data(1)
-            println("auswahl ausgabe")
         }
     }
 }
