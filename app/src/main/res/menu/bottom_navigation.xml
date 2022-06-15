@@ -6,11 +6,6 @@
     <item android:id="@+id/addItem"
         android:title="add"
         android:icon="@drawable/ic_add"></item>
-    <item android:id="@+id/datenSpeichern"
-        android:title="Speichern"
-        android:icon="@drawable/ic_save"></item>
-    <item android:id="@+id/datenZiehen"
-        android:title="Ziehen"
-        android:icon="@drawable/ic_update"></item>
+
 
 </menu>

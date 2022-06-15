@@ -3,6 +3,9 @@ package com.barut.unterkontenverwaltung
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -12,6 +15,7 @@ import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.BottomNavig
 import com.barut.unterkontenverwaltung.HauptAnzeige.calculate.CalculateHauptAnzeige
 import com.barut.unterkontenverwaltung.mainactivity.userId.UserID
 import com.barut.unterkontenverwaltung.HauptAnzeige.recyclerview.HAStartRecyclerView
+import com.barut.unterkontenverwaltung.mainactivity.FloatingAction
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,10 +26,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setUserId()
-        bottomNavigation()
         startUA()
         calculateHA()
         swipeRefreshLayout()
+        floatingActionBar()
+    }
+
+    fun floatingActionBar(){
+        FloatingAction(this,findViewById(R.id.fAbAdd),object : DataTransferUserAddedItem{
+            override fun data(addedItem: Boolean) {
+                update()
+            }
+        }).init()
 
     }
 
@@ -86,32 +98,34 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //Bottom Navigation
     fun update() {
         startUA()
         calculateHA()
     }
 
-    fun bottomNavigation() {
-        BottomNavigation(this).init(
-            findViewById(R.id.bottomNavigation),
-            this,
-            bottomNavigationInterface()
-        )
+
+    //Menu
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_leiste, menu)
+        return true
     }
 
-    fun bottomNavigationInterface(): DataTransferUserAddedItem {
-        var data = object : DataTransferUserAddedItem {
-            override fun data(addedItem: Boolean) {
-                if (addedItem == true) {
-                    update()
-                }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.datenSpeichern -> {
+                BottomNavigation(this).datenSpeichern()
+                true
             }
+            R.id.datenZiehen -> {
+                BottomNavigation(this).datenZiehen()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        return data
     }
-    //Bis hier hin Bottom Navigation
-
+    // Menu bis hier hin
 
     fun swipeRefreshLayout() {
         val swipe = findViewById<SwipeRefreshLayout>(R.id.swipe)
@@ -121,4 +135,5 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 }
