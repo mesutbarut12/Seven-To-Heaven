@@ -22,6 +22,10 @@
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/ha_recyclerview.xml" value="0.67" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/ha_row.xml" value="0.3043859649122807" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/item_click_long_listener.xml" value="0.3043859649122807" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/item_delete.xml" value="0.30526315789473685" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/item_delete_ausgabe_row.xml" value="0.67" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/item_delete_row.xml" value="0.5" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/item_delete_unterkonto_row.xml" value="0.30526315789473685" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/popup_alert_dialog_add_item.xml" value="0.16359649122807018" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/popup_alert_dialog_einkommen.xml" value="0.33" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/layout/popup_alert_dialog_einnahme.xml" value="0.30526315789473685" />

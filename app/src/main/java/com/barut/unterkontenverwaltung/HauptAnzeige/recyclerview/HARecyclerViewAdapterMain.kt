@@ -1,10 +1,11 @@
-package com.barut.unterkontenverwaltung.recyclerview.hauptanzeige
+package com.barut.unterkontenverwaltung.HauptAnzeige.recyclerview
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.HauptAnzeige.longclick.popup.HAPopUp
+import com.barut.unterkontenverwaltung.HauptAnzeige.longclickdeleteitem.HALCDelete
 
 class HARecyclerViewAdapterMain(
     val inhalt: HAHauptAnzeigeModel, val layout: Int,
@@ -23,6 +24,7 @@ class HARecyclerViewAdapterMain(
         holder.ausgaben.setText("Ausgabe : ${getValue(inhalt.hAAusgaben!!.get(holder.adapterPosition))}€")
         holder.guthaben.setText("Guthaben : ${getValue(inhalt.hAGuthaben!!.get(holder.adapterPosition))}€")
         holder.ergebnis.setText("Ergebnis : ${getValue(inhalt.hAErgebnis!!.get(holder.adapterPosition))}€")
+        onClick(holder)
         longClick(holder)
     }
 
@@ -33,11 +35,20 @@ class HARecyclerViewAdapterMain(
     fun getValue(value: String): String {
         return value.split(".")[0]
     }
-    fun longClick(holder : HARecyclerViewHolderMain){
+    fun onClick(holder : HARecyclerViewHolderMain){
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?){
                 HAPopUp(holder.itemView.context,holder,inhalt).init()
 
+            }
+        })
+    }
+    fun longClick(holder : HARecyclerViewHolderMain){
+        holder.itemView.setOnLongClickListener(object : View.OnLongClickListener{
+            override fun onLongClick(p0: View?): Boolean {
+                println("long Click")
+                HALCDelete(holder.itemView.context,holder).init()
+                return false
             }
         })
     }

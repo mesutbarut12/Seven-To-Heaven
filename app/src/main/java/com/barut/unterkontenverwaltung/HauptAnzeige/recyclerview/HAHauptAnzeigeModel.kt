@@ -1,4 +1,4 @@
-package com.barut.unterkontenverwaltung.recyclerview.hauptanzeige
+package com.barut.unterkontenverwaltung.HauptAnzeige.recyclerview
 
 data class HAHauptAnzeigeModel(
     var hAunterkontoName: ArrayList<String>?,

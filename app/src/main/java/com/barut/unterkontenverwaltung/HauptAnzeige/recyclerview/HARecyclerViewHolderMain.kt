@@ -1,4 +1,4 @@
-package com.barut.unterkontenverwaltung.recyclerview.hauptanzeige
+package com.barut.unterkontenverwaltung.HauptAnzeige.recyclerview
 
 import android.view.View
 import android.widget.ImageView

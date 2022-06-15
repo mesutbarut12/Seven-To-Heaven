@@ -10,7 +10,7 @@ import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.StartUALon
 import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.BottomNavigation
 import com.barut.unterkontenverwaltung.HauptAnzeige.calculate.CalculateHauptAnzeige
 import com.barut.unterkontenverwaltung.mainactivity.userId.UserID
-import com.barut.unterkontenverwaltung.recyclerview.hauptanzeige.HAStartRecyclerView
+import com.barut.unterkontenverwaltung.HauptAnzeige.recyclerview.HAStartRecyclerView
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,12 +20,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
+        setUserId()
         bottomNavigation()
         startUA()
         calculateHA()
-        UserID(this).init()
+
+    }
+
+    private fun setUserId() {
+        var userid = UserID(this)
+        userid.init()
+        userid.getUserId()
     }
 
     //Anzeige Oben

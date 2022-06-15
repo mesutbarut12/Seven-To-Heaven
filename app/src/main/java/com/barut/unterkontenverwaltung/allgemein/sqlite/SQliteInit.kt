@@ -4,13 +4,7 @@ import android.content.Context
 
 class SQliteInit(val context: Context) {
 
-    fun init(){
-        unterkonto()
-        einnahme()
-        ausgabe()
-        userId()
-        sqlCalculate()
-    }
+
 
     fun unterkonto(): SQliteUnterkonto {
 

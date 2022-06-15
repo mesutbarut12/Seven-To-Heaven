@@ -12,11 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnterkontenVerwaltung">
         <activity
-            android:name=".itemlist.ItemList"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="Seven To Heaven">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

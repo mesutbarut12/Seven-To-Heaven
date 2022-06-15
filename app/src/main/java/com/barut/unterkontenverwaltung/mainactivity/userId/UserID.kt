@@ -11,10 +11,10 @@ class UserID(private val context: Context) {
     val uuid = UUID.randomUUID()
 
     fun init() {
-        if(sQliteInit.userId().readData().isEmpty()) {
-            val model = UserIdModel(uuid.toString())
-            sQliteInit.userId().setData(model)
-        }
+            if(sQliteInit.userId().readData().isEmpty()) {
+                val model = UserIdModel(uuid.toString())
+                sQliteInit.userId().setData(model)
+            }
 
     }
     fun getUserId() : String {
@@ -22,7 +22,6 @@ class UserID(private val context: Context) {
         if(sQliteInit.userId().readData().isNotEmpty()) {
             for (i in sQliteInit.userId().readData()) {
                 id = i.id
-                return id
             }
         }
         return id

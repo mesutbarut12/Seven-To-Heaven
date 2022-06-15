@@ -8,8 +8,10 @@ import com.google.android.material.tabs.TabLayout
 class EinkommenOderAusgabe(private val view : View,
                            private val dataTransferEinkommenOderAusgabe: DataTransferEinkommenOderAusgabe) {
 
+    val tabLayout : TabLayout = view.findViewById(R.id.ha_tabLayout)
+
     fun init(){
-        val tabLayout : TabLayout = view.findViewById(R.id.ha_tabLayout)
+
         if(tabLayout.getTabAt(0)!!.position == 0){
             dataTransferEinkommenOderAusgabe.data(0)
         }
@@ -35,5 +37,9 @@ class EinkommenOderAusgabe(private val view : View,
         } else if(tab!!.position == 1){
             dataTransferEinkommenOderAusgabe.data(1)
         }
+    }
+    fun setTabLayoutEinkommen(){
+        tabLayout.getTabAt(0)!!.select()
+        dataTransferEinkommenOderAusgabe.data(0)
     }
 }

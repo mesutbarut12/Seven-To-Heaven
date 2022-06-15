@@ -1,9 +1,8 @@
-package com.barut.unterkontenverwaltung.recyclerview.hauptanzeige
+package com.barut.unterkontenverwaltung.HauptAnzeige.recyclerview
 
 import android.content.Context
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.R
 
@@ -17,8 +16,7 @@ class HAStartRecyclerView(
 
 
     init {
-        val itemTouchHelper = ItemTouchHelper(HARecylerViewSwipe(context))
-        itemTouchHelper.attachToRecyclerView(recyclerView)
+
         recyclerView.adapter = HARecyclerViewAdapterMain(
             inhhalt, R.layout.end_model_show_datas_in_recyclerview
         )

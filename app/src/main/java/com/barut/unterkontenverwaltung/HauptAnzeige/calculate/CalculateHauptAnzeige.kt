@@ -4,7 +4,7 @@ import android.content.Context
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.calculate.CalculateUebersichtsAnzeige
 import com.barut.unterkontenverwaltung.allgemein.sqlite.*
 import com.barut.unterkontenverwaltung.recyclerview.CalculateSqlModel
-import com.barut.unterkontenverwaltung.recyclerview.hauptanzeige.HAHauptAnzeigeModel
+import com.barut.unterkontenverwaltung.HauptAnzeige.recyclerview.HAHauptAnzeigeModel
 import java.text.DecimalFormat
 
 class CalculateHauptAnzeige(private val context: Context) {

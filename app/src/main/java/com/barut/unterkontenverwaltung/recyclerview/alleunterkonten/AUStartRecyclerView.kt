@@ -4,9 +4,6 @@ import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.DataTransferShowUnterkontoBinder
-import com.barut.unterkontenverwaltung.R
-import com.barut.unterkontenverwaltung.recyclerview.hauptanzeige.HAHauptAnzeigeModel
-import com.barut.unterkontenverwaltung.recyclerview.hauptanzeige.HARecyclerViewAdapterMain
 
 class AUStartRecyclerView(
     private val recyclerView: RecyclerView,
