@@ -3,9 +3,10 @@ package com.barut.unterkontenverwaltung.HauptAnzeige.longclickdeleteitem
 import android.content.Context
 import android.view.View
 import com.barut.unterkontenverwaltung.HauptAnzeige.longclickdeleteitem.recyclerview.ausgabe.HALCDModelAusgabe
-import com.barut.unterkontenverwaltung.HauptAnzeige.longclickdeleteitem.recyclerview.unterkonto.HALCDModelEinnahme
+import com.barut.unterkontenverwaltung.HauptAnzeige.longclickdeleteitem.recyclerview.einnahme.HALCDEinnahmeModel
+import com.barut.unterkontenverwaltung.HauptAnzeige.longclickdeleteitem.recyclerview.unterkonto.HALCDEinnahmeStarter
 import com.barut.unterkontenverwaltung.HauptAnzeige.longclickdeleteitem.recyclerview.unterkonto.HALCDModelUnterkonto
-import com.barut.unterkontenverwaltung.HauptAnzeige.longclickdeleteitem.recyclerview.unterkonto.HALCDStarter
+import com.barut.unterkontenverwaltung.HauptAnzeige.longclickdeleteitem.recyclerview.unterkonto.HALCDUnterkontoStarter
 import com.barut.unterkontenverwaltung.HauptAnzeige.longclickdeleteitem.recyclerview.unterkonto.HALCDStarterAusgabe
 import com.barut.unterkontenverwaltung.HauptAnzeige.recyclerview.HARecyclerViewHolderMain
 import com.barut.unterkontenverwaltung.R
@@ -41,11 +42,11 @@ class HALCDelete(
         return arrayList
     }
 
-    fun getEinnahmen(): ArrayList<HALCDModelEinnahme> {
-        var arrayList: ArrayList<HALCDModelEinnahme> = arrayListOf()
-        var model: HALCDModelEinnahme
+    fun getEinnahmen(): ArrayList<HALCDEinnahmeModel> {
+        var arrayList: ArrayList<HALCDEinnahmeModel> = arrayListOf()
+        var model: HALCDEinnahmeModel
         for (i in sQliteInit.einnahme().readData()) {
-            model = HALCDModelEinnahme(i.datum, i.summe, i.beschreibung, i.id)
+            model = HALCDEinnahmeModel(i.datum, i.summe, i.beschreibung, i.id)
             arrayList.add(model)
         }
         return arrayList
@@ -82,13 +83,13 @@ class HALCDelete(
 
     fun itemSelected(pos: Int,view : View) {
         if(pos == 0){
-            //HALCDStarter(view.findViewById(R.id.item_delete_recyclerview), context, getEinnahmen())
+            HALCDEinnahmeStarter(view.findViewById(R.id.item_delete_recyclerview), context, getEinnahmen())
 
         } else if(pos == 1){
             HALCDStarterAusgabe(view.findViewById(R.id.item_delete_recyclerview), context,getAusgaben())
 
         }else if(pos == 2){
-            HALCDStarter(view.findViewById(R.id.item_delete_recyclerview), context, getUnterkonten())
+            HALCDUnterkontoStarter(view.findViewById(R.id.item_delete_recyclerview), context, getUnterkonten())
 
         }
     }

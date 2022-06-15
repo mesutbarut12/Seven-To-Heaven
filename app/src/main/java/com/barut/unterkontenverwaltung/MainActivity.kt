@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.calculate.CalculateStarter
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.StartUALongClick
 import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.BottomNavigation
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation()
         startUA()
         calculateHA()
+        swipeRefreshLayout()
 
     }
 
@@ -35,22 +37,34 @@ class MainActivity : AppCompatActivity() {
 
     //Anzeige Oben
     //Übersichts Anzeige
-    fun startUA(){
+    fun startUA() {
         calculateUA()
         longClick()
     }
-    fun longClick(){
-        StartUALongClick(this,findViewById(R.id.uALCGesamtSaldo),"" +
-                "UAGesamdSaldo").init()
-        StartUALongClick(this,findViewById(R.id.uALCVerfugbarerSaldo),
-            "UAVerfügbarerSaldo").init()
-        StartUALongClick(this,findViewById(R.id.uALCGesamtAusgaben),
-            "UAGesamtAusgaben").init()
-        StartUALongClick(this,findViewById(R.id.uALCUnterkontoAnzahl),
-            "UAUnterkontoAnzahl").init()
-        StartUALongClick(this,findViewById(R.id.uALCProzenteGesamt),
-            "UAProzenteGesamt").init()
+
+    fun longClick() {
+        StartUALongClick(
+            this, findViewById(R.id.uALCGesamtSaldo), "" +
+                    "UAGesamdSaldo"
+        ).init()
+        StartUALongClick(
+            this, findViewById(R.id.uALCVerfugbarerSaldo),
+            "UAVerfügbarerSaldo"
+        ).init()
+        StartUALongClick(
+            this, findViewById(R.id.uALCGesamtAusgaben),
+            "UAGesamtAusgaben"
+        ).init()
+        StartUALongClick(
+            this, findViewById(R.id.uALCUnterkontoAnzahl),
+            "UAUnterkontoAnzahl"
+        ).init()
+        StartUALongClick(
+            this, findViewById(R.id.uALCProzenteGesamt),
+            "UAProzenteGesamt"
+        ).init()
     }
+
     fun calculateUA() {
         var arrayList = arrayListOf<View>(
             findViewById(R.id.amVerfugbarerSaldo),
@@ -59,33 +73,37 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.amunterkontoAnzahl),
             findViewById(R.id.amprozentAnzahl),
 
-        )
+            )
         CalculateStarter(this, arrayList).initUebersichtsAnzeige()
     }
+
     //Haupt Anzeige Mitte
     fun calculateHA() {
         var calculateHauptAnzeige = CalculateHauptAnzeige(this)
         calculateHauptAnzeige.init()
-        var data = calculateHauptAnzeige.setDataInDataBase()
-        if (data != null) {
-            HAStartRecyclerView(findViewById(R.id.recyclerView), this, data!!)
-        }
+        var data = calculateHauptAnzeige.setData()
+        HAStartRecyclerView(findViewById(R.id.recyclerView), this, data!!)
     }
-
 
 
     //Bottom Navigation
-    fun update(){
+    fun update() {
         startUA()
         calculateHA()
     }
-    fun bottomNavigation(){
-        BottomNavigation(this).init(findViewById(R.id.bottomNavigation), this,bottomNavigationInterface())
+
+    fun bottomNavigation() {
+        BottomNavigation(this).init(
+            findViewById(R.id.bottomNavigation),
+            this,
+            bottomNavigationInterface()
+        )
     }
-    fun bottomNavigationInterface() : DataTransferUserAddedItem{
-        var data = object : DataTransferUserAddedItem{
+
+    fun bottomNavigationInterface(): DataTransferUserAddedItem {
+        var data = object : DataTransferUserAddedItem {
             override fun data(addedItem: Boolean) {
-                if(addedItem == true){
+                if (addedItem == true) {
                     update()
                 }
             }
@@ -94,4 +112,13 @@ class MainActivity : AppCompatActivity() {
     }
     //Bis hier hin Bottom Navigation
 
+
+    fun swipeRefreshLayout() {
+        val swipe = findViewById<SwipeRefreshLayout>(R.id.swipe)
+        swipe.setOnRefreshListener {
+            update()
+            swipe.isRefreshing = false
+        }
+
+    }
 }

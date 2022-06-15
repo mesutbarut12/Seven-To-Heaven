@@ -118,31 +118,18 @@ class CalculateHauptAnzeige(private val context: Context) {
         return arraylistSumme
     }
 
-    fun setDataInDataBase(): HAHauptAnzeigeModel? {
+    fun setData(): HAHauptAnzeigeModel? {
         var modelHA: HAHauptAnzeigeModel
 
-        context.deleteDatabase("Calculate")
-        if (hAunterkontoName().isNotEmpty()) {
-            for (i in 0..hAunterkontoName().size - 1) {
 
-                var model = CalculateSqlModel(
-                    hAunterkontoName().get(i),
-                    hAProzentEinteilung().get(i), hAAusgaben().get(i),
-                    hAGuthaben().get(i), hAErgebnis().get(i), ""
-                )
-                modelHA = HAHauptAnzeigeModel(
-                    hAunterkontoName(),
-                    hAProzentEinteilung(), hAAusgaben(),
-                    hAGuthaben(), hAErgebnis(),
-                )
+        modelHA = HAHauptAnzeigeModel(
+            hAunterkontoName(),
+            hAProzentEinteilung(), hAAusgaben(),
+            hAGuthaben(), hAErgebnis(),
+        )
 
-                sqlCalculate.setData(model)
-                return modelHA
+        return modelHA
 
-            }
-        }
-
-        return null
     }
 
 }
