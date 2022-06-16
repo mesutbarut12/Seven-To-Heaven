@@ -1,4 +1,4 @@
-package com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.additem.popup
+package com.barut.unterkontenverwaltung.mainactivity.itemsetzen.additem.popup
 
 import android.content.Context
 import android.view.View

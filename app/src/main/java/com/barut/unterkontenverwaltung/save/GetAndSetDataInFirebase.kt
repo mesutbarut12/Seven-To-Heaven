@@ -1,4 +1,4 @@
-package com.barut.unterkontenverwaltung.mainactivity.bottomnavigation
+package com.barut.unterkontenverwaltung.save
 
 import android.content.Context
 import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteInit
@@ -7,7 +7,7 @@ import com.barut.unterkontenverwaltung.save.SaveAndPut
 import com.barut.unterkontenverwaltung.save.SaveModel
 
 
-class BottomNavigation(val context: Context) {
+class GetAndSetDataInFirebase(val context: Context) {
 
 
     //Die Klasse Starter startet den  Pop Up Alert Dialog

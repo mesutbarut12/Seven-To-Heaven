@@ -11,11 +11,11 @@ import androidx.annotation.RequiresApi
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.calculate.CalculateStarter
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.ualongclick.StartUALongClick
-import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.BottomNavigation
+import com.barut.unterkontenverwaltung.save.GetAndSetDataInFirebase
 import com.barut.unterkontenverwaltung.HauptAnzeige.calculate.CalculateHauptAnzeige
 import com.barut.unterkontenverwaltung.mainactivity.userId.UserID
 import com.barut.unterkontenverwaltung.HauptAnzeige.recyclerview.HAStartRecyclerView
-import com.barut.unterkontenverwaltung.mainactivity.FloatingAction
+import com.barut.unterkontenverwaltung.mainactivity.itemsetzen.FloatingAction
 
 
 class MainActivity : AppCompatActivity() {
@@ -115,11 +115,11 @@ class MainActivity : AppCompatActivity() {
         // Handle item selection
         return when (item.itemId) {
             R.id.datenSpeichern -> {
-                BottomNavigation(this).datenSpeichern()
+                GetAndSetDataInFirebase(this).datenSpeichern()
                 true
             }
             R.id.datenZiehen -> {
-                BottomNavigation(this).datenZiehen()
+                GetAndSetDataInFirebase(this).datenZiehen()
                 true
             }
             else -> super.onOptionsItemSelected(item)

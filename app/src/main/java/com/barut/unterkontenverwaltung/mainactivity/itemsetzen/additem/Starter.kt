@@ -1,9 +1,9 @@
-package com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.additem
+package com.barut.unterkontenverwaltung.mainactivity.itemsetzen.additem
 
 import android.content.Context
 import com.barut.unterkontenverwaltung.DataTransferUserAddedItem
-import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.additem.popup.connecter.Connecter
-import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.additem.popup.PopUpAlertDialog
+import com.barut.unterkontenverwaltung.mainactivity.itemsetzen.additem.popup.connecter.Connecter
+import com.barut.unterkontenverwaltung.mainactivity.itemsetzen.additem.popup.PopUpAlertDialog
 
 class Starter(val context : Context,private val dataTransferUserAddedItem: DataTransferUserAddedItem){
     private lateinit var popUpAlertDialog: PopUpAlertDialog

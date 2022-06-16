@@ -31,13 +31,13 @@ class CalculateHauptAnzeige(private val context: Context) {
 
     fun init() {
         initAny()
-        println("--------------------------")
+        /*println("--------------------------")
         println(hAunterkontoName() + " Unterkonto Name")
         println(hAProzentEinteilung() + " Prozent Einteilung")
         println(hAAusgaben() + " Ausgaben")
         println(hAGuthaben() + " Guthaben")
         println(hAErgebnis() + " Ergebnis")
-        println("--------------------------")
+        println("--------------------------")*/
 
     }
 
@@ -56,7 +56,8 @@ class CalculateHauptAnzeige(private val context: Context) {
 
         for (i in unterkonto.readData()) {
             ergebnisstring = dec.format(i.prozent.toDouble())
-            array.add(ergebnisstring)
+            var gecheckt = checkHasComma(ergebnisstring)
+            array.add(gecheckt)
         }
 
         return array
@@ -70,11 +71,13 @@ class CalculateHauptAnzeige(private val context: Context) {
             var ergebnis = 0.0
             for (i in sQliteInit.ausgabe().readData()) {
                 if (i.unterkonto == y.name) {
-                    ergebnis += i.summe.toDouble()
+                    var gecheckt = i.summe
+                    ergebnis += gecheckt.toDouble()
                 }
             }
             ergebnisString = dec.format(ergebnis)
-            array.add(ergebnisString + "." + y.name)
+            var gecheckt = checkHasComma(ergebnisString)
+            array.add(gecheckt + "." + y.name)
         }
         return array
     }
@@ -85,7 +88,8 @@ class CalculateHauptAnzeige(private val context: Context) {
         for (i in unterkonto.readData()) {
             var ergebnis = (gesamtSaldo.toDouble() / 100.0) * i.prozent.toDouble()
             var ergenisString = dec.format(ergebnis)
-            array.add(ergenisString + "." + i.name)
+            var gecheckt = checkHasComma(ergenisString)
+            array.add(gecheckt + "." + i.name)
         }
         return array
 
@@ -98,6 +102,7 @@ class CalculateHauptAnzeige(private val context: Context) {
         var guthaben = hAGuthaben()
         var ausgaben = hAAusgaben()
 
+
         for (i in guthaben) {
             var unterkontoG = i.split(".")[1]
             var guthabenG = i.split(".")[0].toDouble()
@@ -105,13 +110,17 @@ class CalculateHauptAnzeige(private val context: Context) {
                 var unterkontoA = y.split(".")[1]
                 var guthabenA = y.split(".")[0].toDouble()
                 if (unterkontoA == unterkontoG) {
-                    guthabenG -= guthabenA
+                    var checkGuthabeng = checkHasComma(guthabenG.toString()).toDouble()
+                    var checkGuthabenA = checkHasComma(guthabenA.toString()).toDouble()
+                    checkGuthabeng -= guthabenA
                 }
 
             }
             var ergebnis = guthabenG
             var ergebnisString = dec.format(ergebnis)
-            arraylistSumme.add(ergebnisString + "." + unterkontoG)
+            var gecheckt = checkHasComma(ergebnisString)
+
+            arraylistSumme.add(gecheckt + "." + unterkontoG)
 
 
         }
@@ -131,5 +140,10 @@ class CalculateHauptAnzeige(private val context: Context) {
         return modelHA
 
     }
-
+    fun checkHasComma(zahl : String) : String{
+        if(zahl.contains(",")){
+            return zahl.replace(",",".")
+        }
+        return zahl
+    }
 }

@@ -1,8 +1,8 @@
-package com.barut.unterkontenverwaltung.mainactivity
+package com.barut.unterkontenverwaltung.mainactivity.itemsetzen
 
 import android.content.Context
 import com.barut.unterkontenverwaltung.DataTransferUserAddedItem
-import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.additem.Starter
+import com.barut.unterkontenverwaltung.mainactivity.itemsetzen.additem.Starter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class FloatingAction(val context: Context ,val floatingAction: FloatingActionButton,

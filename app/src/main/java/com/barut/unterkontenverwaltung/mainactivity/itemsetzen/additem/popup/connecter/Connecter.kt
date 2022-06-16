@@ -1,13 +1,13 @@
-package com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.additem.popup.connecter
+package com.barut.unterkontenverwaltung.mainactivity.itemsetzen.additem.popup.connecter
 
 import android.content.Context
 import android.view.View
 import com.barut.unterkontenverwaltung.DataTransferPopUp
 import com.barut.unterkontenverwaltung.DataTransferUserAddedItem
-import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.additem.popup.PopUpAlertDialog
-import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.additem.popup.connecter.setitems.SetItemAusgaben
-import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.additem.popup.connecter.setitems.SetItemEinkommen
-import com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.additem.popup.connecter.setitems.SetItemUnterkonto
+import com.barut.unterkontenverwaltung.mainactivity.itemsetzen.additem.popup.PopUpAlertDialog
+import com.barut.unterkontenverwaltung.mainactivity.itemsetzen.additem.popup.connecter.setitems.SetItemAusgaben
+import com.barut.unterkontenverwaltung.mainactivity.itemsetzen.additem.popup.connecter.setitems.SetItemEinkommen
+import com.barut.unterkontenverwaltung.mainactivity.itemsetzen.additem.popup.connecter.setitems.SetItemUnterkonto
 import com.barut.unterkontenverwaltung.allgemein.alertdialog.AlertDialogMain
 
 class Connecter(private val popUpAlertDialog: PopUpAlertDialog, private val context: Context,

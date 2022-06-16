@@ -1,4 +1,4 @@
-package com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.additem.popup.connecter.setitems
+package com.barut.unterkontenverwaltung.mainactivity.itemsetzen.additem.popup.connecter.setitems
 
 import android.content.Context
 import android.view.View
@@ -49,6 +49,7 @@ class SetItemEinkommen(view: View, val context: Context, val alertDialogMain: Al
             var beschreibung = etBeschreibung.text.toString()
             var datum = etDatum.text.toString()
             if (datum.isNotEmpty() && einkommen.isNotEmpty()) {
+                println(einkommen)
                 model = EinkommenModel(einkommen,datum,"einkommen","",beschreibung)
                 sqliteInit.einnahme().setData(model)
                 alertDialogMain.cancelDialog()

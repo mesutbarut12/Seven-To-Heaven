@@ -39,7 +39,8 @@ class CalculateUebersichtsAnzeige(private val context: Context) {
         var ergebnisString = ""
         ergebnis = uAGesamtSaldo().toDouble() - uAGesamtAusgaben().toDouble()
         ergebnisString = dec.format(ergebnis)
-        return ergebnisString
+        var checked = checkHasComma(ergebnisString)
+        return checked
     }
 
     fun uAGesamtSaldo(): String {
@@ -49,7 +50,8 @@ class CalculateUebersichtsAnzeige(private val context: Context) {
             ergebnis += i.summe.toDouble()
         }
         ergebnisString = dec.format(ergebnis)
-        return ergebnisString
+        var checked = checkHasComma(ergebnisString)
+        return checked
     }
 
     fun uAGesamtAusgaben(): String {
@@ -59,12 +61,12 @@ class CalculateUebersichtsAnzeige(private val context: Context) {
             ergebnis += i.summe.toDouble()
         }
         ergebnisString = dec.format(ergebnis)
-        return ergebnisString
+        var checked = checkHasComma(ergebnisString)
+        return checked
     }
 
     fun uAUnterkontoAnzahl(): String {
         var ergebnis = 0
-        var ergebnisString = ""
         ergebnis = unterkonto.readData().size
         return "$ergebnis"
     }
@@ -78,7 +80,8 @@ class CalculateUebersichtsAnzeige(private val context: Context) {
             ergebnis += i.prozent.toDouble()
         }
         ergebnisString = dec.format(ergebnis)
-        return ergebnisString
+        var checked = checkHasComma(ergebnisString)
+        return checked
     }
 
     fun uABeschreibungVorhanden(): String {
@@ -93,6 +96,15 @@ class CalculateUebersichtsAnzeige(private val context: Context) {
             return "✓"
         }
         return "X"
+    }
+
+    fun checkHasComma(zahl : String) : String{
+        var newzahl = ""
+        if(zahl.contains(",")){
+             newzahl = zahl.replace(",",".")
+            return newzahl
+        }
+        return zahl
     }
 
 

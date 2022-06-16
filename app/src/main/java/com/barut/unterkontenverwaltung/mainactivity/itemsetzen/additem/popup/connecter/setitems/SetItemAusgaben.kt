@@ -1,4 +1,4 @@
-package com.barut.unterkontenverwaltung.mainactivity.bottomnavigation.additem.popup.connecter.setitems
+package com.barut.unterkontenverwaltung.mainactivity.itemsetzen.additem.popup.connecter.setitems
 
 import android.content.Context
 import android.view.View
