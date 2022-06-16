@@ -113,13 +113,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
+        val swipe = findViewById<SwipeRefreshLayout>(R.id.swipe)
         return when (item.itemId) {
             R.id.datenSpeichern -> {
-                GetAndSetDataInFirebase(this).datenSpeichern()
+                GetAndSetDataInFirebase(this).datenSpeichern(window,swipe)
                 true
             }
             R.id.datenZiehen -> {
-                GetAndSetDataInFirebase(this).datenZiehen()
+                GetAndSetDataInFirebase(this).datenZiehen(window,swipe)
                 true
             }
             else -> super.onOptionsItemSelected(item)
