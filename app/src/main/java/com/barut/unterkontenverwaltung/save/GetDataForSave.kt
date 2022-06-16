@@ -10,6 +10,7 @@ class GetDataForSave(val context: Context) {
 
     val sqlinit = SQliteInit(context)
 
+
     fun getUnterkonto() : ArrayList<UnterkontoModel>{
         var model : UnterkontoModel
         var arrayList : ArrayList<UnterkontoModel> = arrayListOf()

@@ -6,6 +6,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteInit
+import com.barut.unterkontenverwaltung.mainactivity.userId.UserID
 import com.barut.unterkontenverwaltung.save.GetDataForSave
 import com.barut.unterkontenverwaltung.save.SaveAndPut
 import com.barut.unterkontenverwaltung.save.SaveModel
@@ -21,12 +22,11 @@ class GetAndSetDataInFirebase(val context: Context) {
         sqlinit.ausgabe(),
         sqlinit.unterkonto()
     )
+    private val getUserId = UserID(context).getUserId()
 
 
-
-
-    fun datenSpeichern(window : Window,swipe : SwipeRefreshLayout) {
-        swipeRefreshing(true,swipe)
+    fun datenSpeichern(window: Window, swipe: SwipeRefreshLayout) {
+        swipeRefreshing(true, swipe)
         windowsNotTouchable(window)
         val getDataForSave = GetDataForSave(context)
         val model = SaveModel(
@@ -34,39 +34,57 @@ class GetAndSetDataInFirebase(val context: Context) {
             getDataForSave.getEinnahme(), getDataForSave.getAusgaben()
         )
 
-        saveAndPut.save(model, object : DataFinish{
+        saveAndPut.save(model, object : DataFinish {
             override fun finish(boolean: Boolean) {
-                if(boolean == true){
+                if (boolean == true) {
                     windowsTouchable(window)
-                    swipeRefreshing(false,swipe)
-                    Toast.makeText(context,"Daten erfolgreich gespeichert!",Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-    }
-    fun datenZiehen(window: Window,swipe: SwipeRefreshLayout){
-        windowsNotTouchable(window)
-        swipeRefreshing(true,swipe)
-        saveAndPut.getData(object : DataFinish{
-            override fun finish(boolean: Boolean) {
-                if(boolean == true){
-                    windowsTouchable(window)
-                    swipeRefreshing(false,swipe)
-                    Toast.makeText(context,"Daten erfolgreich gezogen!",Toast.LENGTH_SHORT).show()
+                    swipeRefreshing(false, swipe)
+                    Toast.makeText(context, "Daten erfolgreich gespeichert!", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         })
     }
 
-    fun windowsNotTouchable(window : Window){
-        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    fun datenZiehen(window: Window, swipe: SwipeRefreshLayout) {
+        saveAndPut.userIdIsExists(getUserId, object : UserIDExistsInterface {
+            override fun getData(boolean: Boolean) {
+                if (boolean == true) {
+                    windowsNotTouchable(window)
+                    swipeRefreshing(true, swipe)
+                    saveAndPut.getData(object : DataFinish {
+                        override fun finish(boolean: Boolean) {
+                            if (boolean == true) {
+                                windowsTouchable(window)
+                                swipeRefreshing(false, swipe)
+                                Toast.makeText(context, "Daten erfolgreich gezogen!", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    })
+                } else if (boolean == false) {
+                    Toast.makeText(
+                        context,
+                        "Du muss vorher speichern um daten zu ziehen!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
     }
-    fun windowsTouchable(window: Window){
+
+    fun windowsNotTouchable(window: Window) {
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        );
+    }
+
+    fun windowsTouchable(window: Window) {
         window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
     }
-    fun swipeRefreshing(value : Boolean,swipe: SwipeRefreshLayout){
+
+    fun swipeRefreshing(value: Boolean, swipe: SwipeRefreshLayout) {
         swipe.isRefreshing = value
     }
 }
