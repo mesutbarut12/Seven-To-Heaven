@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/drawable/attach_money-48px.xml" value="0.2245" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/drawable/button_runden.xml" value="0.206" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/drawable/decoration.xml" value="0.255" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/drawable/ic_add.xml" value="0.2245" />
+        <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/drawable/ic_click.xml" value="0.2245" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/drawable/ic_home.xml" value="0.255" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/drawable/ic_home2.xml" value="0.255" />
         <entry key="..\:/Users/mesut/Desktop/Android App/UnterkontenVerwaltung/app/src/main/res/drawable/ic_input.xml" value="0.254" />

@@ -65,7 +65,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:inputType="text"
                         android:text="Prozentuale einteilung :"
                         android:textAlignment="center"
                         android:textSize="16sp" />
@@ -93,8 +92,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:text="Ergebnis"
-                        android:textSize="16sp"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -103,11 +102,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:tint="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/tvUnterkonto"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
                 app:layout_constraintTop_toTopOf="@+id/tvUnterkonto"
-                app:srcCompat="@drawable/ic_arrow_drop_down" />
+                app:srcCompat="@drawable/ic_click" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
