@@ -19,6 +19,7 @@ class HARecyclerViewAdapterMain(
     }
 
     override fun onBindViewHolder(holder: HARecyclerViewHolderMain, position: Int) {
+        println(getValue(inhalt.hAGuthaben!!.get(holder.adapterPosition)))
         holder.unterkonto.setText(inhalt.hAunterkontoName!!.get(holder.adapterPosition))
         holder.prozent.setText("Prozent : ${getValue(inhalt.hAProzentEinteilung!!.get(holder.adapterPosition))}%")
         holder.ausgaben.setText("Ausgabe : ${getValue(inhalt.hAAusgaben!!.get(holder.adapterPosition))}€")

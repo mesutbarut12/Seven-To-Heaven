@@ -62,36 +62,39 @@
 
                     <TextView
                         android:id="@+id/tvProzentualeEinteilung"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:inputType="textMultiLine|textPersonName"
+                        android:inputType="text"
                         android:text="Prozentuale einteilung :"
                         android:textAlignment="center"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvAusgaben"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Ausgaben"
 
-                        android:textSize="20sp" />
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvGuthaben"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Guthaben"
-                        android:textSize="20sp" />
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvErgebnis"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:text="Ergebnis"
-                        android:textSize="20sp" />
+                        android:textSize="16sp"
+                        android:textAlignment="center" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
