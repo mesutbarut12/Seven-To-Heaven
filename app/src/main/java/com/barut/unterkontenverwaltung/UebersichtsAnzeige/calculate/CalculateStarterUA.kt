@@ -12,6 +12,7 @@ private lateinit var gesamtAusgaben : TextView
 private lateinit var unterkontoAnzahl : TextView
 private lateinit var prozenteGesamt : TextView
 private lateinit var beschreibungVorhanden : TextView
+private lateinit var eDirekt : TextView
 
 private lateinit var calculateUebersichtsAnzeige : CalculateUebersichtsAnzeige
 
@@ -28,6 +29,7 @@ class CalculateStarter(
         gesamtAusgaben = arrayList[2] as TextView
         unterkontoAnzahl = arrayList[3] as TextView
         prozenteGesamt = arrayList[4] as TextView
+        eDirekt = arrayList[5] as TextView
     }
     fun initCalculate(){
         calculateUebersichtsAnzeige = CalculateUebersichtsAnzeige(context)
@@ -42,6 +44,7 @@ class CalculateStarter(
         gesamtAusgaben.setText("${calculateUebersichtsAnzeige.uAGesamtAusgaben()}€")
         unterkontoAnzahl.setText(calculateUebersichtsAnzeige.uAUnterkontoAnzahl())
         prozenteGesamt.setText("${calculateUebersichtsAnzeige.uAProzenteGesamt()}%")
+        eDirekt.setText("${calculateUebersichtsAnzeige.eDirekt()}€")
     }
 
     fun update(){

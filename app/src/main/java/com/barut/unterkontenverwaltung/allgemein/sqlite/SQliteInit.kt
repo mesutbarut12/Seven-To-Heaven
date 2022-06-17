@@ -22,10 +22,11 @@ class SQliteInit(val context: Context) {
         )
         return einkommen
     }
-    fun eDirekt(): SQLiteEDirektHinzufugen {
-        var eDirekt = SQLiteEDirektHinzufugen(
+    fun eDirekt(): SQLiteEDirekt {
+        var eDirekt = SQLiteEDirekt(
             context, "EDirekt", "edirekt", "summe",
-            "datum", "databaseType", "id", "beschreibung"
+            "datum", "databaseType", "id", "beschreibung",
+            "unterkonto"
         )
         return eDirekt
     }

@@ -20,8 +20,8 @@ class GetAndSetDataInFirebase(val context: Context) {
         context,
         sqlinit.einnahme(),
         sqlinit.ausgabe(),
-        sqlinit.unterkonto()
-    )
+        sqlinit.unterkonto(),
+    sqlinit.eDirekt())
     private val getUserId = UserID(context).getUserId()
 
 
@@ -31,7 +31,9 @@ class GetAndSetDataInFirebase(val context: Context) {
         val getDataForSave = GetDataForSave(context)
         val model = SaveModel(
             getDataForSave.getUnterkonto(),
-            getDataForSave.getEinnahme(), getDataForSave.getAusgaben()
+            getDataForSave.getEinnahme(),
+            getDataForSave.getAusgaben(),
+            getDataForSave.getEDirekt()
         )
 
         saveAndPut.save(model, object : DataFinish {

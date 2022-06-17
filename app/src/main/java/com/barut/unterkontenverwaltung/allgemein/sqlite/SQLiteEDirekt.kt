@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.barut.unterkontenverwaltung.recyclerview.EDirektModel
 
-class SQLiteEDirektHinzufugen(
+class SQLiteEDirekt(
     val context: Context, val DATABASENAME: String,
     val TABLENAME: String, val summe: String, val datum: String,
-    val databaseType: String, val id: String, val beschreibung: String,
+    val databaseType: String, val id: String, val beschreibung: String,val unterkonto : String
 ) : SQLiteOpenHelper(context, DATABASENAME, null, 7) {
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -19,6 +19,7 @@ class SQLiteEDirektHinzufugen(
                 id + " INTEGER PRIMARY KEY," +
                 summe + " VARCHAR " + "," +
                 datum + " VARCHAR " + "," +
+                unterkonto + " VARCHAR " + "," +
                 beschreibung + " VARCHAR " + "," +
                 databaseType + " VARCHAR" +
 
@@ -40,6 +41,7 @@ class SQLiteEDirektHinzufugen(
         contenValue.put(datum, model.datum)
         contenValue.put(databaseType, model.databaseType)
         contenValue.put(beschreibung, model.beschreibung)
+        contenValue.put(unterkonto,model.unterkonto)
         db.insert(TABLENAME, null, contenValue)
     }
 
@@ -60,6 +62,7 @@ class SQLiteEDirektHinzufugen(
                     cursor.getString(cursor.getColumnIndex(databaseType)),
                     cursor.getString(cursor.getColumnIndex(id)),
                     cursor.getString(cursor.getColumnIndex(beschreibung)),
+                    cursor.getString(cursor.getColumnIndex(unterkonto))
                 )
 
                 arraylist.add(model)
@@ -71,10 +74,11 @@ class SQLiteEDirektHinzufugen(
 
     fun deleateItem(model: EDirektModel) {
         val db = this.writableDatabase
-        for (einkommen in readData()) {
+        for (eDirekt in readData()) {
 
-            if (einkommen.id == model.id && einkommen.databaseType == model.databaseType && einkommen.summe == model.summe) {
-                db.delete(TABLENAME, this.id + "=" + einkommen.id, null)
+            if (eDirekt.id == model.id && eDirekt.databaseType == model.databaseType
+                && eDirekt.summe == model.summe && eDirekt.unterkonto == model.unterkonto) {
+                db.delete(TABLENAME, this.id + "=" + eDirekt.id, null)
 
             }
         }
@@ -88,16 +92,17 @@ class SQLiteEDirektHinzufugen(
         contenValue.put(datum, model.datum)
         contenValue.put(databaseType, model.databaseType)
         contenValue.put(beschreibung, model.beschreibung)
+        contenValue.put(unterkonto,model.unterkonto)
 
 
-        for (einkommen in readData()) {
-            if (model.summe == einkommen.summe && model.databaseType == einkommen.databaseType &&
-                model.id == einkommen.id
+        for (eDirekt in readData()) {
+            if (model.summe == eDirekt.summe && model.databaseType == eDirekt.databaseType &&
+                model.id == eDirekt.id
             ) {
                 db.update(
                     TABLENAME,
                     contenValue,
-                    this.id + "=" + einkommen.id,
+                    this.id + "=" + eDirekt.id,
                     null
                 )
 

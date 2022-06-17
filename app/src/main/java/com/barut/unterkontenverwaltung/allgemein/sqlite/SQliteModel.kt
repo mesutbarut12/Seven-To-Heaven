@@ -12,6 +12,7 @@ data class EinkommenModel(
 data class EDirektModel(
     val summe: String,
     val datum: String, val databaseType: String, val id: String, val beschreibung: String,
+    val unterkonto: String
 )
 data class AusgabenModel(
     val unterkonto: String, val summe: String,

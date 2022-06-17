@@ -3,6 +3,7 @@ package com.barut.unterkontenverwaltung.save
 import android.content.Context
 import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteInit
 import com.barut.unterkontenverwaltung.recyclerview.AusgabenModel
+import com.barut.unterkontenverwaltung.recyclerview.EDirektModel
 import com.barut.unterkontenverwaltung.recyclerview.EinkommenModel
 import com.barut.unterkontenverwaltung.recyclerview.UnterkontoModel
 
@@ -34,6 +35,15 @@ class GetDataForSave(val context: Context) {
         var arrayList : ArrayList<AusgabenModel> = arrayListOf()
         for(i in sqlinit.ausgabe().readData()){
             model = AusgabenModel(i.unterkonto,i.summe,i.datum,i.databaseType,i.id,i.beschreibung)
+            arrayList.add(model)
+        }
+        return arrayList
+    }
+    fun getEDirekt() : ArrayList<EDirektModel>{
+        var model : EDirektModel
+        var arrayList : ArrayList<EDirektModel> = arrayListOf()
+        for(i in sqlinit.eDirekt().readData()){
+            model = EDirektModel(i.summe,i.datum,i.databaseType,i.id,i.beschreibung,i.unterkonto)
             arrayList.add(model)
         }
         return arrayList

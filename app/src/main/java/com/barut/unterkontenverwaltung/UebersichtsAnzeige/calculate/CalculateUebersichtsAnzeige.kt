@@ -33,6 +33,20 @@ class CalculateUebersichtsAnzeige(private val context: Context) {
 */
 
     }
+    fun eDirekt() : String{
+        var ergebnis = 0.0
+        var ergebnisString = ""
+        if(sQliteInit.eDirekt().readData().isEmpty()){
+            return ergebnis.toString()
+        } else {
+            for(i in sQliteInit.eDirekt().readData()){
+                ergebnis += i.summe.toDouble()
+            }
+        }
+        ergebnisString = dec.format(ergebnis)
+        var gecheckt = checkHasComma(ergebnisString)
+        return gecheckt
+    }
 
     fun uAVerfügbarerSaldo() : String {
         var ergebnis = 0.0
@@ -49,6 +63,8 @@ class CalculateUebersichtsAnzeige(private val context: Context) {
         for (i in einnahme.readData()) {
             ergebnis += i.summe.toDouble()
         }
+        var edirekt = eDirekt()
+        ergebnis += edirekt.toDouble()
         ergebnisString = dec.format(ergebnis)
         var checked = checkHasComma(ergebnisString)
         return checked

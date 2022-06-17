@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
         floatingActionBar()
     }
 
-    fun floatingActionBar(){
-        FloatingAction(this,findViewById(R.id.fAbAdd),object : DataTransferUserAddedItem{
+    fun floatingActionBar() {
+        FloatingAction(this, findViewById(R.id.fAbAdd), object : DataTransferUserAddedItem {
             override fun data(addedItem: Boolean) {
                 update()
             }
@@ -84,6 +84,7 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.amGesamtAusgaben),
             findViewById(R.id.amunterkontoAnzahl),
             findViewById(R.id.amprozentAnzahl),
+            findViewById(R.id.amEdirekt)
 
             )
         CalculateStarter(this, arrayList).initUebersichtsAnzeige()
@@ -116,11 +117,11 @@ class MainActivity : AppCompatActivity() {
         val swipe = findViewById<SwipeRefreshLayout>(R.id.swipe)
         return when (item.itemId) {
             R.id.datenSpeichern -> {
-                GetAndSetDataInFirebase(this).datenSpeichern(window,swipe)
+                GetAndSetDataInFirebase(this).datenSpeichern(window, swipe)
                 true
             }
             R.id.datenZiehen -> {
-                GetAndSetDataInFirebase(this).datenZiehen(window,swipe)
+                GetAndSetDataInFirebase(this).datenZiehen(window, swipe)
                 true
             }
             else -> super.onOptionsItemSelected(item)

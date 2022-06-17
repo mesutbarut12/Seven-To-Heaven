@@ -84,7 +84,8 @@ class HARecyclerViewAdapterMain(
                 if(etEinkommen.text.toString().isNotEmpty() && etDatum.text.toString().isNotEmpty()){
                     alert.cancelDialog()
                     val model = EDirektModel(etEinkommen.text.toString(),
-                    etDatum.text.toString(),"eDirekt","",etBeschreibung.text.toString())
+                    etDatum.text.toString(),"eDirekt","",etBeschreibung.text.toString(),
+                    inhalt.hAunterkontoName!!.get(holder.adapterPosition))
                     sQliteInit.eDirekt().setData(model)
                 }
             }

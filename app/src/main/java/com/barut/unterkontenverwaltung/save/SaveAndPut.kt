@@ -1,12 +1,14 @@
 package com.barut.unterkontenverwaltung.save
 
 import android.content.Context
+import com.barut.unterkontenverwaltung.allgemein.sqlite.SQLiteEDirekt
 import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteAusgaben
 import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteEinkommen
 import com.barut.unterkontenverwaltung.recyclerview.UnterkontoModel
 import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteUnterkonto
 import com.barut.unterkontenverwaltung.mainactivity.userId.UserID
 import com.barut.unterkontenverwaltung.recyclerview.AusgabenModel
+import com.barut.unterkontenverwaltung.recyclerview.EDirektModel
 import com.barut.unterkontenverwaltung.recyclerview.EinkommenModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -14,7 +16,8 @@ import com.google.firebase.ktx.Firebase
 class SaveAndPut(
     val context: Context, val einkommen: SQliteEinkommen,
     val ausgabe: SQliteAusgaben,
-    val unterkonto: SQliteUnterkonto
+    val unterkonto: SQliteUnterkonto,
+    val edirekt : SQLiteEDirekt
 ) {
 
     private val db = Firebase.firestore
@@ -41,17 +44,15 @@ class SaveAndPut(
             .addOnSuccessListener { document ->
                 if (document != null) {
                     if (document.data != null) {
-                        println("Document Data")
                         deleteDataBaseValue("Einkommen")
                         deleteDataBaseValue("Ausgabe")
                         deleteDataBaseValue("Unterkonto")
+                        deleteDataBaseValue("EDirekt")
                         for (i in document.data!!) {
-                            println("Document Data2")
                             val y = i.value as ArrayList<Map<String, String>>
                             println(y)
                             if (y.isNotEmpty()) {
                                 y.forEach {
-                                    println("For Each")
 
                                     if (it["databaseType"] == "einkommen") {
                                         val model = EinkommenModel(
@@ -96,6 +97,21 @@ class SaveAndPut(
 
                                         unterkonto.setData(model)
                                         if(datafinsih != null) {
+                                            datafinsih!!.finish(true)
+                                        }
+
+                                    } else if(it["databaseType"] == "eDirekt"){
+                                        val model = EDirektModel(
+                                            it["summe"].toString(),
+                                            it["datum"].toString(),
+                                            it["databaseType"].toString(),
+                                            it["id"].toString(),
+                                            it["beschreibung"].toString(),
+                                            it["unterkonto"].toString()
+
+                                            )
+                                        edirekt.setData(model)
+                                        if(datafinsih != null){
                                             datafinsih!!.finish(true)
                                         }
 
