@@ -22,6 +22,13 @@ class SQliteInit(val context: Context) {
         )
         return einkommen
     }
+    fun eDirekt(): SQLiteEDirektHinzufugen {
+        var eDirekt = SQLiteEDirektHinzufugen(
+            context, "EDirekt", "edirekt", "summe",
+            "datum", "databaseType", "id", "beschreibung"
+        )
+        return eDirekt
+    }
 
     fun ausgabe(): SQliteAusgaben {
         var ausgabe = SQliteAusgaben(

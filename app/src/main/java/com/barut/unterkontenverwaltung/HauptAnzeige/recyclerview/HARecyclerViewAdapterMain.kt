@@ -3,10 +3,17 @@ package com.barut.unterkontenverwaltung.HauptAnzeige.recyclerview
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.HauptAnzeige.longclick.popup.HAPopUp
 import com.barut.unterkontenverwaltung.HauptAnzeige.longclickdeleteitem.HALCDelete
+import com.barut.unterkontenverwaltung.R
+import com.barut.unterkontenverwaltung.allgemein.DatePickerClass
+import com.barut.unterkontenverwaltung.allgemein.alertdialog.AlertDialogMain
+import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteInit
+import com.barut.unterkontenverwaltung.recyclerview.EDirektModel
 
 class HARecyclerViewAdapterMain(
     val inhalt: HAHauptAnzeigeModel, val layout: Int,
@@ -57,6 +64,31 @@ class HARecyclerViewAdapterMain(
     }
     fun clickMenu(holder: HARecyclerViewHolderMain){
         holder.menuImage.setOnClickListener {
+            val sQliteInit = SQliteInit(holder.itemView.context)
+            sQliteInit.eDirekt()
+            val alert = AlertDialogMain(holder.itemView.context, R.layout.set_item_einkommen)
+            val view = alert.inflateLayout()
+            val etEinkommen = view.findViewById<EditText>(R.id.setItemEinkommenEinkommenEt)
+            val etDatum = view.findViewById<EditText>(R.id.setItemEinkommenDatumEt)
+            val etBeschreibung = view.findViewById<EditText>(R.id.setItemEinkommenBeschreibungEt)
+            val etSpeichern = view.findViewById<Button>(R.id.setItemEinkommenSpeichern)
+            val datepicker = DatePickerClass(holder.itemView.context,etDatum)
+
+            etDatum.setText(datepicker.getTodaysDate())
+            etDatum.setOnClickListener {
+                datepicker.initDatePicker()
+            }
+
+
+            etSpeichern.setOnClickListener {
+                if(etEinkommen.text.toString().isNotEmpty() && etDatum.text.toString().isNotEmpty()){
+                    alert.cancelDialog()
+                    val model = EDirektModel(etEinkommen.text.toString(),
+                    etDatum.text.toString(),"eDirekt","",etBeschreibung.text.toString())
+                    sQliteInit.eDirekt().setData(model)
+                }
+            }
+            alert.createDialog()
             Toast.makeText(holder.itemView.context,"Demnächst verfügbar",Toast.LENGTH_SHORT).show()
         }
     }
