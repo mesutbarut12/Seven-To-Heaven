@@ -2,6 +2,7 @@ package com.barut.unterkontenverwaltung.HauptAnzeige.MenuPopUp.uebersicht.recycl
 
 import android.content.Context
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -10,6 +11,7 @@ class HAEinnahmeStarter(private val recyclerView: RecyclerView, private val cont
 
 
     fun init(){
+
         recyclerView.addItemDecoration(
             DividerItemDecoration(
                 context,

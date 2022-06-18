@@ -84,20 +84,15 @@ class HAPopUp(
 
         if (sqliteinit.einnahme().readData().isNotEmpty()) {
             for (y in sqliteinit.einnahme().readData()) {
-                for (i in sqliteinit.unterkonto().readData()) {
-                    var ergebnis = 0.0
-                    if (inhalt.hAunterkontoName!!.get(holder.adapterPosition) == i.name) {
-                        ergebnis = (y.summe.toDouble() / 100) * i.prozent.toDouble()
-                        model =
-                            HAEinnahmeModel(i.prozent, ergebnis.toString(), y.datum, y.summe, y.id)
+                        model = HAEinnahmeModel(y.datum,y.summe,y.id,y.beschreibung)
                         array.add(model)
                     }
-                }
-            }
-        } else {
+
+            } else {
             Toast.makeText(context, "Nicht genügend Daten vorhanden!", Toast.LENGTH_SHORT).show()
 
         }
+
 
         return array
     }
