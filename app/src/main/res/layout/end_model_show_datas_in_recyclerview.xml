@@ -102,12 +102,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:tint="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/tvUnterkonto"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvUnterkonto"
                 app:layout_constraintTop_toTopOf="@+id/tvUnterkonto"
-                app:srcCompat="@drawable/ic_click" />
+                app:srcCompat="@drawable/ic_menu_3punkte"
+                app:tint="@color/black" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

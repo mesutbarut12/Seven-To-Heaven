@@ -1,6 +1,7 @@
 package com.barut.unterkontenverwaltung.HauptAnzeige.recyclerview
 
 import android.content.Context
+import android.view.ContextMenu
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +11,7 @@ import com.barut.unterkontenverwaltung.R
 class HAStartRecyclerView(
     private val recyclerView: RecyclerView,
     private val context: Context,
-    private val inhhalt : HAHauptAnzeigeModel
+    private val inhhalt : HAHauptAnzeigeModel,
 
 ) {
 

@@ -3,10 +3,8 @@ package com.barut.unterkontenverwaltung
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
+import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.barut.unterkontenverwaltung.UebersichtsAnzeige.calculate.CalculateStarter
@@ -30,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         calculateHA()
         swipeRefreshLayout()
         floatingActionBar()
+
+
     }
 
     fun floatingActionBar() {
@@ -137,5 +137,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
 }
