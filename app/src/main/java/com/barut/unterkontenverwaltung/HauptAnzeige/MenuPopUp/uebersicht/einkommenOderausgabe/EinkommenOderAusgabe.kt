@@ -36,10 +36,11 @@ class EinkommenOderAusgabe(private val view : View,
             dataTransferEinkommenOderAusgabe.data(0)
         } else if(tab!!.position == 1){
             dataTransferEinkommenOderAusgabe.data(1)
+        } else if(tab!!.position == 2){
+            dataTransferEinkommenOderAusgabe.data(2)
+        } else if(tab!!.position == 3){
+            dataTransferEinkommenOderAusgabe.data(3)
         }
     }
-    fun setTabLayoutEinkommen(){
-        tabLayout.getTabAt(0)!!.select()
-        dataTransferEinkommenOderAusgabe.data(0)
-    }
+
 }

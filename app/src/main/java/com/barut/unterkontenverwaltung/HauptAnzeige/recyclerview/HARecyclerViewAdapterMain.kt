@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.barut.unterkontenverwaltung.HauptAnzeige.MenuPopUp.HAPopUp
-import com.barut.unterkontenverwaltung.HauptAnzeige.MenuPopUp.delete.HALCDelete
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.allgemein.DatePickerClass
 import com.barut.unterkontenverwaltung.allgemein.alertdialog.AlertDialogMain
@@ -55,10 +54,6 @@ class HARecyclerViewAdapterMain(
                     }
                     else if(item!!.itemId == R.id.menu_uebersicht){
                         HAPopUp(holder.itemView.context,holder,inhalt).init()
-                    } else if(item!!.itemId == R.id.menu_item_loeschen){
-                        HALCDelete(holder.itemView.context,holder).init()
-                        Toast.makeText(it.context,"Zum löschen Item nach links wischen",Toast.LENGTH_LONG)
-                            .show()
                     }
                     return false
                 }

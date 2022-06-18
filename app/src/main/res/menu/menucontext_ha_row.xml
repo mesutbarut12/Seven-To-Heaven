@@ -7,8 +7,6 @@
     <item
     android:id="@+id/menu_uebersicht"
     android:title="Übersicht"></item>
-    <item
-    android:id="@+id/menu_item_loeschen"
-    android:title="Item Löschen"></item>
+
 
 </menu>

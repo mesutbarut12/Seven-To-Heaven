@@ -4,11 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.barut.unterkontenverwaltung.DataTransferPopUpDelete
 import com.barut.unterkontenverwaltung.R
 import com.barut.unterkontenverwaltung.allgemein.sqlite.SQliteInit
 import com.barut.unterkontenverwaltung.recyclerview.AusgabenModel
 
-class HAAusgabeAdapter(val inhalt: ArrayList<HAAusgabeModel>) :
+class HAAusgabeAdapter(
+    val inhalt: ArrayList<HAAusgabeModel>,
+    val dataTransferPopUpDelete: DataTransferPopUpDelete
+) :
     RecyclerView.Adapter<HAAusgabeHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HAAusgabeHolder {
         val view =
@@ -45,6 +49,7 @@ class HAAusgabeAdapter(val inhalt: ArrayList<HAAusgabeModel>) :
                         i.beschreibung
                     )
                     sqlinit.ausgabe().deleateItem(model)
+                    dataTransferPopUpDelete.data(1)
                 }
             }
             inhalt.removeAt(pos)

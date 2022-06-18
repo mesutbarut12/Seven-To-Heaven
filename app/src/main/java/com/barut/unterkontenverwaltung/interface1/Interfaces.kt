@@ -22,3 +22,6 @@ interface DataTransferUserAddedItem{
 interface DataTransferEinkommenOderAusgabe{
     fun data(wahl : Int)
 }
+interface DataTransferPopUpDelete{
+    fun data(delete : Int)
+}
