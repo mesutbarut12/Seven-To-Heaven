@@ -22,10 +22,8 @@ class HAAusgabeAdapter(
 
     override fun onBindViewHolder(holder: HAAusgabeHolder, position: Int) {
         holder.datum.setText(inhalt.get(holder.adapterPosition).datum)
-        holder.guthaben.setText(inhalt.get(holder.adapterPosition).guthaben + "€")
         holder.ausgabe.setText(inhalt.get(holder.adapterPosition).ausgabe + "€")
-        holder.ergebnis.setText(inhalt.get(holder.adapterPosition).ergebnis + "€")
-        holder.id.setText(inhalt.get(holder.adapterPosition).id)
+        holder.unterkonto.setText(inhalt.get(holder.adapterPosition).unterkonto)
         delete(holder)
     }
 

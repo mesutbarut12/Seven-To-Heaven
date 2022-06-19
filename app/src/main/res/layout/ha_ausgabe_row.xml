@@ -9,50 +9,28 @@
         android:id="@+id/textView21"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Datum"
         app:layout_constraintBottom_toTopOf="@+id/ha_ausgabe_datum"
-        app:layout_constraintEnd_toStartOf="@+id/textView24"
-        app:layout_constraintStart_toEndOf="@+id/ha_ausgabe_id"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/ha_ausgabe_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="1"
-        app:layout_constraintBottom_toBottomOf="@+id/ha_ausgabe_datum"
-        app:layout_constraintEnd_toStartOf="@+id/textView21"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView21" />
-
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Guthaben"
-        app:layout_constraintBottom_toBottomOf="@+id/textView21"
         app:layout_constraintEnd_toStartOf="@+id/textView25"
-        app:layout_constraintStart_toEndOf="@+id/textView21"
-        app:layout_constraintTop_toTopOf="@+id/textView21" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView25"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Ausgabe"
-        app:layout_constraintBottom_toBottomOf="@+id/textView24"
+        app:layout_constraintBottom_toBottomOf="@+id/textView21"
         app:layout_constraintEnd_toStartOf="@+id/textView26"
-        app:layout_constraintStart_toEndOf="@+id/textView24"
-        app:layout_constraintTop_toTopOf="@+id/textView24" />
+        app:layout_constraintStart_toEndOf="@+id/textView21"
+        app:layout_constraintTop_toTopOf="@+id/textView21" />
 
     <TextView
         android:id="@+id/textView26"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Ergebnis"
+        android:text="Unterkonto"
         app:layout_constraintBottom_toBottomOf="@+id/textView25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView25"
@@ -70,27 +48,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
     <TextView
-        android:id="@+id/ha_ausgabe_guthaben"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/ha_ausgabe_datum"
-        app:layout_constraintEnd_toEndOf="@+id/textView24"
-        app:layout_constraintStart_toEndOf="@+id/textView21"
-        app:layout_constraintTop_toTopOf="@+id/ha_ausgabe_datum" />
-
-    <TextView
         android:id="@+id/ha_ausgabe_ausgabe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/ha_ausgabe_guthaben"
+        app:layout_constraintBottom_toBottomOf="@+id/ha_ausgabe_datum"
         app:layout_constraintEnd_toEndOf="@+id/textView25"
-        app:layout_constraintStart_toEndOf="@+id/textView24"
-        app:layout_constraintTop_toTopOf="@+id/ha_ausgabe_guthaben" />
+        app:layout_constraintStart_toEndOf="@+id/ha_ausgabe_datum"
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
     <TextView
-        android:id="@+id/ha_ausgabe_ergebnis"
+        android:id="@+id/ha_ausgabe_unterkonto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -103,7 +71,7 @@
         android:id="@+id/ha_ausgabe_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/ha_ausgabe_ergebnis"
+        app:layout_constraintBottom_toBottomOf="@+id/ha_ausgabe_unterkonto"
         app:layout_constraintEnd_toEndOf="@+id/textView26"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView25"

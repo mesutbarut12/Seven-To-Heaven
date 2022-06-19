@@ -100,33 +100,11 @@ class HAPopUp(
 
     fun getDataAusgaben(): ArrayList<HAAusgabeModel> {
         var arraylist: ArrayList<HAAusgabeModel> = arrayListOf()
-        var calculateHauptAnzeige = CalculateUebersichtsAnzeige(context)
-        calculateHauptAnzeige.init()
-        var gSaldo = calculateHauptAnzeige.uAGesamtSaldo()
-        var model: HAAusgabeModel
-        var guthaben = 0.0
-        if (sqliteinit.unterkonto().readData().isNotEmpty() && sqliteinit.ausgabe().readData()
-                .isNotEmpty()
-        ) {
-            for (i in sqliteinit.unterkonto().readData()) {
-                if (i.name == inhalt.hAunterkontoName!!.get(holder.adapterPosition)) {
-                    guthaben = (gSaldo.toDouble() / 100.0) * i.prozent.toDouble()
-                    for (y in sqliteinit.ausgabe().readData()) {
-                        if (y.unterkonto == inhalt.hAunterkontoName!!.get(holder.adapterPosition)) {
-                            guthaben -= y.summe.toDouble()
-                            model = HAAusgabeModel(
-                                y.datum, (guthaben + y.summe.toDouble()).toString(),
-                                y.summe, guthaben.toString(), y.id
-                            )
-                            arraylist.add(model)
-                        }
-                    }
-                }
-            }
-        } else {
-            Toast.makeText(context, "Keine Ausgaben!", Toast.LENGTH_SHORT).show()
+        var model : HAAusgabeModel
+        for(i in sqliteinit.ausgabe().readData()){
+            model = HAAusgabeModel(i.datum,i.summe,i.unterkonto,i.id)
+            arraylist.add(model)
         }
-
         return arraylist
     }
 
