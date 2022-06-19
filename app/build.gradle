@@ -9,11 +9,11 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.barut.SevenToHeavenTest"
+        applicationId "com.barut.SevenToHeaven"
         minSdk 22
         targetSdk 32
-        versionCode 12
-        versionName "1.12"
+        versionCode 14
+        versionName "1.14"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -78,7 +78,7 @@ class CalculateHauptAnzeige(private val context: Context) {
             }
             ergebnisString = dec.format(ergebnis)
             var gecheckt = checkHasComma(ergebnisString)
-            array.add(gecheckt + "." + y.name)
+            array.add(gecheckt + " " + y.name)
         }
         return array
     }
@@ -92,11 +92,11 @@ class CalculateHauptAnzeige(private val context: Context) {
 
 
         for (i in guthaben) {
-            var unterkontoG = i.split(".")[1]
-            var guthabenG = i.split(".")[0].toDouble()
+            var unterkontoG = i.split(" ")[1]
+            var guthabenG = i.split(" ")[0].toDouble()
             for (y in ausgaben) {
-                var unterkontoA = y.split(".")[1]
-                var guthabenA = y.split(".")[0].toDouble()
+                var unterkontoA = y.split(" ")[1]
+                var guthabenA = y.split(" ")[0].toDouble()
                 println(unterkontoA + " " + unterkontoG)
                 if (unterkontoA == unterkontoG) {
                     guthabenG-= guthabenA
@@ -107,7 +107,7 @@ class CalculateHauptAnzeige(private val context: Context) {
             var ergebnisString = dec.format(ergebnis)
             var gecheckt = checkHasComma(ergebnisString)
 
-            arraylistSumme.add(gecheckt + "." + unterkontoG)
+            arraylistSumme.add(gecheckt + " " + unterkontoG)
 
 
         }
@@ -141,7 +141,7 @@ class CalculateHauptAnzeige(private val context: Context) {
             var ergebnis = (gesamtSaldoOhneEDirekt().toDouble() / 100.0) * i.prozent.toDouble()
             var ergenisString = dec.format(ergebnis)
             var gecheckt = checkHasComma(ergenisString)
-            array.add(gecheckt + "." + i.name)
+            array.add(gecheckt + " " + i.name)
 
         }
         return array
@@ -165,13 +165,13 @@ class CalculateHauptAnzeige(private val context: Context) {
         for (y in haGuthaben()) {
             ergebnis = 0.0
             for (i in eDirekt.readData()) {
-                if (i.unterkonto == y.split(".")[1]) {
+                if (i.unterkonto == y.split(" ")[1]) {
                     ergebnis += i.summe.toDouble()
                 }
             }
             ergebnisString = dec.format(ergebnis)
             var gecheckt = checkHasComma(ergebnisString)
-            arrayList.add(gecheckt + "." + y.split(".")[1])
+            arrayList.add(gecheckt + " " + y.split(" ")[1])
 
         }
 
@@ -186,16 +186,16 @@ class CalculateHauptAnzeige(private val context: Context) {
         var edirekt = getEDirekt()
         for (i in guthaben) {
             ergebnis = 0.0
-            ergebnis = i.split(".")[0].toDouble()
+            ergebnis = i.split(" ")[0].toDouble()
             if (edirekt.isNotEmpty()) {
                 for (y in edirekt) {
-                    if (i.split(".")[1] == y.split(".")[1]) {
-                        ergebnis += y.split(".")[0].toDouble()
+                    if (i.split(" ")[1] == y.split(" ")[1]) {
+                        ergebnis += y.split(" ")[0].toDouble()
                     }
                 }
                 ergebnisString = dec.format(ergebnis)
                 var gecheckt = checkHasComma(ergebnisString)
-                array.add(gecheckt+"."+i.split(".")[1])
+                array.add(gecheckt+" "+i.split(" ")[1])
             } else {
                 return guthaben
             }

@@ -89,10 +89,11 @@ class SetItemAusgaben(
         var ergebnis = calculateHauptAnzeige.hAErgebnis()
 
         for(i in ergebnis){
-            var ergebnisName = i.split(".")[1]
-            var ergebnisSumme = i.split(".")[0]
+            var ergebnisName = i.split(" ")[1]
+            var ergebnisSumme = i.split(" ")[0]
             arraylistName.add(ergebnisName)
             arraylistSumme.add(ergebnisSumme)
+
         }
         model = AURecyclerViewModel(arraylistName,arraylistSumme)
         return model

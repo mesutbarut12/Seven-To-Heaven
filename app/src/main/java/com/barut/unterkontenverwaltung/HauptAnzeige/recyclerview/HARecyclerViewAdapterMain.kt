@@ -39,7 +39,7 @@ class HARecyclerViewAdapterMain(
     }
 
     fun getValue(value: String): String {
-        return value.split(".")[0]
+        return value.split(" ")[0]
     }
 
 
