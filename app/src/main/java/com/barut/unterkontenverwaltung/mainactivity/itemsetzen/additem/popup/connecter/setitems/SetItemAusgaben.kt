@@ -71,7 +71,7 @@ class SetItemAusgaben(
             } else {
                 Toast.makeText(
                     context,
-                    "Lasse Einkommen Datum und Unterkonto nicht leer.",
+                    "Lasse Ausgabe Datum und Unterkonto nicht leer.",
                     Toast.LENGTH_SHORT
                 ).show()
 

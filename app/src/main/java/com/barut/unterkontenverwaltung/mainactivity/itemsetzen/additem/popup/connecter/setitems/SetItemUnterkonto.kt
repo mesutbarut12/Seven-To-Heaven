@@ -59,7 +59,8 @@ class SetItemUnterkonto(
 
             initViewsToString()
             var unterkontoVorhanden = unterkontoVorhanden()
-            var prozentSumme = prozentSumme()
+            if(prozent.isNotEmpty()) {
+                var prozentSumme = prozentSumme()
 
             if (datum.isNotEmpty() && unterkontoName.isNotEmpty() && prozent.isNotEmpty() &&
                 unterkontoVorhanden == false && prozentSumme == false
@@ -71,7 +72,7 @@ class SetItemUnterkonto(
                 sQliteInit.unterkonto().setData(model)
                 alertDialogMain.cancelDialog()
                 dataTransferUserAddedItem.data(true)
-
+            }
             } else {
                 Toast.makeText(
                     context,
