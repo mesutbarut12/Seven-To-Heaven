@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/ha_tabLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/ha_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52"
-        app:tabMode="scrollable">
+        app:tabMode="scrollable"
+        >
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -38,69 +36,12 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <TextView
-        android:id="@+id/ha_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Unterkonto"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/ha_name1"
-        app:layout_constraintEnd_toStartOf="@+id/ha_erstelltam"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ha_tabLayout" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ha_recyclerview"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ha_name1" />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
 
-    <TextView
-        android:id="@+id/ha_erstelltam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Erstellt am"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/ha_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toEndOf="@+id/ha_name"
-        app:layout_constraintTop_toTopOf="@+id/ha_name" />
+        />
 
-    <TextView
-        android:id="@+id/ha_name1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/ha_recyclerview"
-        app:layout_constraintEnd_toEndOf="@+id/ha_name"
-        app:layout_constraintStart_toStartOf="@+id/ha_name"
-        app:layout_constraintTop_toBottomOf="@+id/ha_name" />
-
-    <TextView
-        android:id="@+id/ha_erstelltam1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/ha_recyclerview"
-        app:layout_constraintEnd_toEndOf="@+id/ha_erstelltam"
-        app:layout_constraintStart_toStartOf="@+id/ha_erstelltam"
-        app:layout_constraintTop_toBottomOf="@+id/ha_erstelltam" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/ha_recyclerview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ha_name1" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

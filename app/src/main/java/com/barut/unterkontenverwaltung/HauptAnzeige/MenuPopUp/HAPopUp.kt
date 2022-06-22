@@ -33,7 +33,7 @@ class HAPopUp(
         val view = createAlertAndGetView()
         var einkommenOderAusgabe = EinkommenOderAusgabe(view, auswahlInput(view))
         einkommenOderAusgabe.init()
-        setUnterkontoNameUndGesamtSumme(view)
+
     }
 
     fun createAlertAndGetView(): View {
@@ -43,17 +43,7 @@ class HAPopUp(
         return view
     }
 
-    fun setUnterkontoNameUndGesamtSumme(view: View) {
-        val name: TextView = view.findViewById(R.id.ha_name1)
-        val erstelltAm: TextView = view.findViewById(R.id.ha_erstelltam1)
 
-        name.setText(inhalt.hAunterkontoName!!.get(holder.adapterPosition))
-        for (i in sqliteinit.unterkonto().readData()) {
-            if (i.name == inhalt.hAunterkontoName!!.get(holder.adapterPosition))
-                erstelltAm.setText(i.datum)
-
-        }
-    }
 
     fun auswahlInput(view: View): DataTransferEinkommenOderAusgabe {
         val auswahl = object : DataTransferEinkommenOderAusgabe {
