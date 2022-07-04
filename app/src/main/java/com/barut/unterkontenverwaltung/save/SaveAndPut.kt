@@ -50,7 +50,6 @@ class SaveAndPut(
                         deleteDataBaseValue("EDirekt")
                         for (i in document.data!!) {
                             val y = i.value as ArrayList<Map<String, String>>
-                            println(y)
                             if (y.isNotEmpty()) {
                                 y.forEach {
 
